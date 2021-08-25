@@ -208,7 +208,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
-  cancancan (~> 3.3.0)
+  cancancan (= 3.3.0)
   capybara (>= 3.26)
   jbuilder (~> 2.7)
   listen (~> 3.3)
