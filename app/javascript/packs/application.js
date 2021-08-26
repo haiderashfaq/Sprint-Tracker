@@ -20,3 +20,4 @@ document.addEventListener("turbolinks:load", function() {
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+global.$ = global.jQuery = require("jquery");
