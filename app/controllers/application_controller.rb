@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   private
 
   def current_company
-    Company.find_by(subdomain: request.subdomain)
+    Company.find_by!(subdomain: request.subdomain)
   end
 end
