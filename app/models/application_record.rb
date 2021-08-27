@@ -3,18 +3,22 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.inherited(subclass)
     super
-    def subclass.not_multitenant
-      @multitenant = false
-    end
+    subclass.instance_eval do
+      def subclass.not_multitenant
+        @multitenant = false
+      end
 
-    def subclass.multitenanted?
-      @multitenant.nil?
+      def subclass.multitenant?
+        @multitenant.nil? || @multitenant
+      end
     end
 
     trace = TracePoint.new(:end) do |tp|
-      if tp.self == subclass && tp.self.multitenanted?
+      if tp.self == subclass
         trace.disable
-        subclass.instance_eval { default_scope { where(company_id: Company.current_company) } }
+        if tp.self.multitenant?
+          subclass.instance_eval { default_scope { where(company_id: Company.current_company_id) } }
+        end
       end
     end
     trace.enable
