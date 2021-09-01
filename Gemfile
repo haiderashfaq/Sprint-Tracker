@@ -60,4 +60,17 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# binding pry gems for block points
+gem 'pry', '~> 0.13.1'
+gem 'pry-rails'
 
+# gems for sequence of ids
+gem 'sequenceid', '=0.0.7', git: "https://github.com/alisyed/sequenceid.git", branch: 'feature/change_activerecord_base_to_applicationrecord_in_sti_parent_class_method'
+
+gem 'select2-rails'
+
+# pagination
+gem 'will_paginate', '~> 3.1.0'
+
+# datatable
+gem 'ajax-datatables-rails'

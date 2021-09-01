@@ -1,5 +1,6 @@
 class Company < ApplicationRecord
   not_multitenant
+  has_many :projects
 
   def self.current_company_id=(id)
     Thread.current[:company_id] = id

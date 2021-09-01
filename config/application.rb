@@ -18,5 +18,9 @@ module SprintTracker
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # conig supported locales and default locale
+    config.i18n.available_locales = %i[en]
+    config.i18n.default_locale = :en
   end
 end
