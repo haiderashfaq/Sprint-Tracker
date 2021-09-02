@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects/
   def create
+    @project.owner_id = @current_company.user_id
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: t('shared.success.create', resource_label: t('projects.project_label')) }
@@ -30,7 +31,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num/edit
   def edit
-    @users = User.all
+    @users = @current_company.users.all
     respond_to do |format|
       format.html
     end
@@ -49,7 +50,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num
   def show
-    @user = User.find_by!(id: @project.manager_id)
     respond_to do |format|
       format.html
     end

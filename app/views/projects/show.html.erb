@@ -6,7 +6,7 @@
     <div class="col-2 justify-content-end">
       <%= link_to t('shared.edit'), edit_project_path(@project), class: "btn btn-primary w-100 fa fa-pencil" %>
     </div>
-    <% if can? :delete, @project %>
+    <% if can? :delete, Project %>
       <div class="col-2 justify-content-end">
         <%= link_to t('shared.delete'), project_path(@project),
                 method: :delete,
@@ -19,19 +19,25 @@
 <div class="container">
   <div class="row bm-3">
     <div class="col-3 ">
+      <p><strong><%=t('projects.creator')%>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= @project.owner.email %></p>
+    </div>
+    <div class="col-3 ">
       <p><strong><%=t('projects.manager')%>:</strong></p>
     </div>
     <div class="col-3">
-      <p><%= @user.email %></p>
+      <p><%= @project.manager.email %></p>
     </div>
+  </div>
+  <div class="row bm-3">
     <div class="col-3 ">
       <p><strong><%= project_start_date_label %>:</strong></p>
     </div>
     <div class="col-3">
       <p><%= @project.start_date %></p>
     </div>
-  </div>
-  <div class="row bm-3">
     <div class="col-3 ">
       <p><strong><%= project_end_date_label %>:</strong></p>
     </div>

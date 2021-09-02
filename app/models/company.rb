@@ -12,6 +12,6 @@ class Company < ApplicationRecord
   end
 
   def self.current_company
-    @copmany = Company.find_by(id: current_company_id)
+    Company.find_by(id: current_company_id)
   end
 end

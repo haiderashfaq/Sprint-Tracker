@@ -5,10 +5,6 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable
   ROLE = { admin: 1, member: 2 }.freeze
 
-  def self.get_role_id(string)
-    ROLE[string]
-  end
-
   def admin?
     role_id == ROLE[:admin]
   end

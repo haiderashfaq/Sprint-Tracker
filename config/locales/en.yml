@@ -33,6 +33,7 @@ en:
   projects:
     project_label: 'Project'
     manager: "Project Manager"
+    creator: "Created By"
     started_on: "Started On"
     starting_on: "Starting On"
     ended_on: "Ended On"

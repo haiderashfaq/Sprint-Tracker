@@ -3,6 +3,6 @@ $(document).ready(function() {
   });
 });
 
- $('body').on('select2:open', '.js-select-field', () => {
-    document.querySelector('.select2-search__field').focus();
-  });
+$('body').on('select2:open', '.js-select-field', () => {
+  document.querySelector('.select2-search__field').focus();
+});

@@ -1,26 +1,26 @@
   <%= form_with model: project do |form| %>
   <div class="row g-3 align-items-center mb-3">
     <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
-      <%= form.label t('shared.name'), class: 'col-form-label col-form-label-md control-label' %>
+      <%= form.label t('shared.name'), min: 4, class: 'col-form-label col-form-label-md control-label' %>
     </div>
     <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
       <%= form.text_field :name, required: true, class: 'form-control form-control-md control-label' %>
     </div>
   </div>
   <div class="row g-3 align-items-center mb-3">
-    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2">
       <%= form.label t('shared.start_date'), class: 'col-form-label col-form-label-md control-label' %>
     </div>
     <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-      <%= form.date_field :start_date, required: true, class: 'form-control form-control-md' %>
+      <%= form.date_field :start_date, class: 'form-control form-control-md' %>
     </div>
   </div>
   <div class="row g-3 align-items-center mb-3">
-    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2">
       <%= form.label t('shared.end_date'), class: 'col-form-label col-form-label-md control-label' %>
     </div>
     <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-      <%= form.date_field :end_date, required: true, class: 'form-control form-control-md' %>
+      <%= form.date_field :end_date, class: 'form-control form-control-md' %>
     </div>
   </div>
   <% if can? :create, @project %>

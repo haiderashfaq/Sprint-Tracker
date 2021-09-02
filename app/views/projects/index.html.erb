@@ -3,7 +3,7 @@
     <div class="col-10 justify-content-start">
       <h1><%= t('projects.project_label').pluralize().upcase() %></h1>
     </div>
-    <% if can? :create, @project %>
+    <% if can? :create, Project %>
       <div class="col-2 justify-content-end">
         <a role='button' class="btn btn-primary w-100 fa fa-plus" href= <%= new_project_path %>> <%= t('shared.create_new_resource', resource_label: t('projects.project_label')) %></a>
       </div>

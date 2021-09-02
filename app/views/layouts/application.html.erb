@@ -10,7 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= render partial: 'Shared/flash_messages.html.erb', flash: flash %>
+    <%= render partial: 'Shared/flash_messages', flash: flash %>
     <%= yield %>
   </body>
 </html>
