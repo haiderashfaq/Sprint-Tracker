@@ -1,0 +1,68 @@
+<div class="container">
+  <%= form_with model: issue do |form| %>
+  <div class="row g-3 align-items-center mb-3 asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
+      <%= form.label :title, class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.text_field :title, class: 'form-control form-control-md',:required => true %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3  asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
+      <%= form.label :description, class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.text_area :description,  :cols => 40, :rows =>5, class: 'form-control form-control-md' ,required: true %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3 asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
+      <%= form.label :status, class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.select :status, { open: 'open', in_progress: 'in_progress', resolved: 'resolved', closed: 'closed' }, {required: true}, {class: "form-select form-select-lg js-example-matcher"}  %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3 asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
+      <%= form.label :priority, class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.select :priority, { low: 'low', medium: 'medium', high: 'high'}, {required: true}, {class: 'js-example-matcher form-select form-select-lg4'}%>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3 asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
+      <%= form.label :category, class: 'col-form-label col-form-label-md'  %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.select :category, {feature: "feature", hotfix: "hotifix"}, { required: true }, {class: "form-select form-select-lg js-example-matcher"}%>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3 asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
+      <%= form.label :estimated_start_date, class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.date_field :estimated_start_date, class: 'form-control form-control-md',:required => true %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3 asterick">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 d-flex justify-content-start control-label">
+      <%= form.label :estimated_end_date, class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.date_field :estimated_end_date, class: 'form-control form-control-md' ,:required => true %>
+    </div>
+  </div>
+   <div class="row d-flex justify-content-center">
+      <div class="col-2 ">
+        <%= form.submit class: 'btn btn-primary w-100 fa fa-check'%>
+      </div>
+      <div class="col-2 ">
+        <%= link_to 'Back', issues_path, class: 'btn btn-secondary w-100'%>
+      </div>
+    </div>
+  <% end %>
+</div>

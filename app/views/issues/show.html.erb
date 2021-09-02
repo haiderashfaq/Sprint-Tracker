@@ -1,0 +1,83 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <% if can? :update, @issue %>
+  <div class="row bm-2 ">
+    <h1 class="col-5 d-flex justify-content-start">Issues</h1>
+    <div class="col-2">
+      <%= link_to ' Edit', edit_issue_path(@issue), class: "btn btn-primary w-100 fa fa-pencil" %>
+    </div>
+    <div class="col-2">
+      <%= link_to ' Delete', issue_path(@issue),
+      method: :delete,
+      data: { confirm: 'Are you sure?' }, class: "btn btn-danger w-100 fa fa-trash" %>
+    </div>
+  </div>
+  <%end%>
+<hr/>
+</div>
+<div class="container">
+  <div class="row gx-6">
+    <div class="col-12 col-sm-6">
+      <div class="row ">
+        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+          Title:
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+          <p class=" "><%= @issue.title %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6">
+      <div class="row ">
+        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+          Status:
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+          <p><%= @issue.status %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6">
+      <div class="row ">
+        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+          Description:
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+          <p><%= @issue.description %></p>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6">
+      <div class="row ">
+        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+          Priority:
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+          <p><%= @issue.priority %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6">
+      <div class="row ">
+        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+          Estimated Start Date:
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+          <p><%= @issue.estimated_start_date %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6">
+      <div class="row ">
+        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+          Estimated End Date:
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+          <%= @issue.estimated_end_date %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr/>
+</div>

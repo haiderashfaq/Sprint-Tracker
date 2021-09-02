@@ -47,6 +47,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry', '=0.13.1'
+
 end
 
 group :test do
@@ -60,4 +62,13 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# will ....
+gem 'select2-rails'
 
+gem 'ajax-datatables-rails'
+
+gem 'will_paginate', '~> 3.1.0'
+
+gem 'will_paginate-bootstrap'
+
+gem 'sequenceid', '=0.0.7', git: "https://github.com/alisyed/sequenceid.git", branch: 'feature/change_activerecord_base_to_applicationrecord_in_sti_parent_class_method'
