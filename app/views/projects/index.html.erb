@@ -1,36 +1,42 @@
 <div class="container mt-3">
   <div class="row d-flex">
     <div class="col-10 justify-content-start">
-      <h1><%=t('projects.project_header')%></h1>
+      <h1><%= t('projects.project_label').pluralize().upcase() %></h1>
     </div>
     <% if can? :create, @project %>
       <div class="col-2 justify-content-end">
-        <a role='button' class="btn btn-primary w-100 fa fa-plus" href="/projects/new"> <%=t('shared.create_new_resource', resource_label: t('projects.project_label'))%></a>
+        <a role='button' class="btn btn-primary w-100 fa fa-plus" href= <%= new_project_path %>> <%= t('shared.create_new_resource', resource_label: t('projects.project_label')) %></a>
       </div>
-    <%end%>
+    <% end %>
   </div>
 </div>
-<br/>
 <div class="container mt-3">
-  <table class="table table-hover border-primary text-center" id="projects-datatable" data-source="<%= projects_path(format: :json) %>">
-    <thead class="bg-primary text-light">
-      <tr>
-        <th><%=label(:project, :name)%></th>
-        <th><%=label(:project, :start_date)%></th>
-        <th><%=label(:project, :end_date)%></th>
-        <th><%=label(:project, :manager_id)%></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @projects.each do |project| %>
+  <% if @projects.empty? %>
+    <div class="container text-center">
+      <%= render partial: 'Shared/no_resource_present', locals: { record: 'Projects' } %>
+    </div>
+  <% else %>
+    <table class="table table-hover border-primary text-center" id="projects-datatable" data-source="<%= projects_path(format: :json) %>">
+      <thead class="bg-primary text-light">
         <tr>
-          <td><%=link_to project.name, project%></td>
-          <td><%=project.start_date%></td>
-          <td><%=project.end_date%></td>
-          <td><%=project.manager.email%></td>
+          <th><%= t('shared.name') %></th>
+          <th><%= t('shared.start_date') %></th>
+          <th><%= t('shared.end_date') %></th>
+          <th><%= t('shared.manager') %></th>
         </tr>
-      <%end%>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr>
+            <td><%= link_to project.name, project %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+            <td><%= project.manager.email %></td>
+            <!-- TO DO !!! Replace Manager Email by Manager name when user is uptodate -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
   <%= will_paginate @projects %>
 </div>

@@ -4,13 +4,13 @@
       <h1><%= @project.name %></h1>
     </div>
     <div class="col-2 justify-content-end">
-      <%= link_to t('edit'), edit_project_path(@project), class: "btn btn-primary w-100 fa fa-pencil" %>
+      <%= link_to t('shared.edit'), edit_project_path(@project), class: "btn btn-primary w-100 fa fa-pencil" %>
     </div>
     <% if can? :delete, @project %>
       <div class="col-2 justify-content-end">
-        <%= link_to t('delete'), project_path(@project),
+        <%= link_to t('shared.delete'), project_path(@project),
                 method: :delete,
-                data: { confirm: 'Are you sure?' }, class: "btn btn-danger w-100 fa fa-trash" %>
+                data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 fa fa-trash" %>
       </div>
     <% end %>
   </div>
@@ -25,11 +25,7 @@
       <p><%= @user.email %></p>
     </div>
     <div class="col-3 ">
-      <p><strong><% if @project.start_date < Date.today %>
-            <%=t('projects.started_on')%>:
-          <% else %>
-            <%=t('projects.starting_on')%>:
-          <% end %></strong></p>
+      <p><strong><%= project_start_date_label %>:</strong></p>
     </div>
     <div class="col-3">
       <p><%= @project.start_date %></p>
@@ -37,11 +33,7 @@
   </div>
   <div class="row bm-3">
     <div class="col-3 ">
-      <p><strong><% if @project.end_date < Date.today %>
-            <%=t('projects.ended_on')%>:
-          <% else %>
-            <%= t('projects.due_on')%>:
-          <% end %></strong></p>
+      <p><strong><%= project_end_date_label %>:</strong></p>
     </div>
     <div class="col-3">
       <p><%= @project.end_date %></p>

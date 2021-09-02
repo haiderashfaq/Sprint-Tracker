@@ -30,40 +30,42 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
   projects:
-    project_header: 'PROJECTS'
     project_label: 'Project'
-    add_project: "ADD PROJECT"
     manager: "Project Manager"
     started_on: "Started On"
     starting_on: "Starting On"
     ended_on: "Ended On"
     due_on: "Due On"
-    success:
-      create: "Project Created Successfully"
-      update: "Project Updated Successfully"
-      delete: "Project Deleted Successfully"
-    failure:
-      create: "Project Creation Failed"
-      update: "Project Updation Failed"
-      delete: "Project Deletion Failed"    
 
   shared:
+    name: "Name"
+    start_date: "Start Date"
+    end_date: "End Date"
+    manager: "Project Manager" 
+    confirmation: "Are you sure?"
+    edit: 'Edit'
+    delete: 'Delete'
+    back: 'Back'
     create_new_resource: "Add New %{resource_label}"
     edit_resource: "Edit %{resource_label}"
+    success:
+      create: "%{resource_label} Created Successfully"
+      update: "%{resource_label} Updated Successfully"
+      delete: "%{resource_label} Deleted Successfully"
+    failure:
+      create: "%{resource_label} Creation Failed"
+      update: "%{resource_label} Updation Failed"
+      delete: "%{resource_label} Deletion Failed"
 
-  edit: 'Edit'
-  delete: 'Delete'
-  back: 'Back'
+  users:
+    profile: "Profile"
+    log_in: "Log In"
+    log_out: "Log Out"
+    sign_up: "Sign Up"
 
-  helpers:
-    label:
-      project:
-        name: "Name"
-        start_date: "Start Date"
-        end_date: "End Date"
-        manager_id: "Project Manager"
+
+  helpers:        
     submit:
       create: "Create %{model}"
       update: "Update %{model}"

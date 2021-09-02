@@ -3,5 +3,5 @@ class Project < ApplicationRecord
   sequenceid :company, :projects
   belongs_to :manager, class_name: 'User'
   validates :name, :start_date, :end_date, :manager_id, presence: true
-  self.per_page = 10
+  validates :name, length: { maximum: 100, minimum: 4 }
 end

@@ -3,26 +3,17 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
+  ROLE = { admin: 1, member: 2 }.freeze
 
   def self.get_role_id(string)
-    Role[string]
+    ROLE[string]
   end
 
   def admin?
-    case role_id
-    when 1
-      true
-    else
-      false
-    end
+    role_id == ROLE[:admin]
   end
 
   def member?
-    case role_id
-    when 2
-      true
-    else
-      false
-    end
+    role_id == ROLE[:member]
   end
 end

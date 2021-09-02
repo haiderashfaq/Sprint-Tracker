@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
   before_action :authenticate_user!
+  rescue_from ActionController::UnknownFormat do |exception|
+    flash[:alert] = exception
+    redirect_to root_url
+  end
 
   def set_tenant_id
     Company.current_company_id = current_company.id
@@ -12,6 +16,6 @@ class ApplicationController < ActionController::Base
   private
 
   def current_company
-    Company.find_by!(subdomain: request.subdomain)
+    @current_company = Company.find_by!(subdomain: request.subdomain)
   end
 end

@@ -1,4 +1,7 @@
 <div class="container">
-  <h1><%=t('shared.edit_resource', resource_label: t('projects.project_label'))%></h1>
+  <h1><%= t('shared.edit_resource', resource_label: t('projects.project_label')) %></h1>
+  <hr />
 </div>
-<%= render 'form', project: @project, users: @users%>
+<div class="container">
+  <%= render 'form', project: @project, users: @users %>
+</div>

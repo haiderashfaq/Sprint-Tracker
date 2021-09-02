@@ -1,52 +1,72 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[edit show update destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :sequence_num
 
+  # GET /projects
   def index
-    @projects = Project.accessible_by(current_ability).paginate(page: params[:page])
-  end
-
-  def new
-    @users = User.all
-  end
-
-  def create
-    @project = Project.new(project_params)
-    if @project.save!
-      redirect_to @project, notice: t('projects.success.create')
-    else
-      render :new, alert: t('projects.failure.create')
+    @projects = @projects.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
     end
   end
 
+  # GET /projects/new
+  def new
+    @users = @current_company.users.all
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  # POST /projects/
+  def create
+    respond_to do |format|
+      if @project.save
+        format.html { redirect_to @project, notice: t('shared.success.create', resource_label: t('projects.project_label')) }
+      else
+        format.html { render :new, alert: t('shared.failure.create', resource_label: t('projects.project_label')) }
+      end
+    end
+  end
+
+  # GET /projects/:sequence_num/edit
   def edit
     @users = User.all
-  end
-
-  def update
-    if @project.update(project_params)
-      redirect_to @project, notice: t('projects.success.update')
-    else
-      render :edit, alert: t('projects.failure.update')
+    respond_to do |format|
+      format.html
     end
   end
 
-  def show
-    @user = User.find_by!(id: @project.manager_id)
+  # POST /projects/:sequence_num/edit
+  def update
+    respond_to do |format|
+      if @project.update(project_params)
+        format.html { redirect_to @project, notice: t('shared.success.update', resource_label: t('projects.project_label')) }
+      else
+        format.html { render :edit, alert: t('shared.failure.update', resource_label: t('projects.project_label')) }
+      end
+    end
   end
 
-  def destroy
-    @project.destroy
+  # GET /projects/:sequence_num
+  def show
+    @user = User.find_by!(id: @project.manager_id)
+    respond_to do |format|
+      format.html
+    end
+  end
 
-    redirect_to projects_url, alert: t('projects.success.delete')
+  # DELETE /projects/:sequence_num
+  def destroy
+    respond_to do |format|
+      if @project.destroy
+        format.html { redirect_to projects_url, alert: t('shared.success.delete', resource_label: t('projects.project_label')) }
+      else
+        format.html { render :show, alert: t('shared.failure.delete', resource_label: t('projects.project_label')) }
+      end
+    end
   end
 
   private
-
-  def set_project
-    @company = Company.current_company
-    @project = @company.projects.find_by_sequence_num!(params[:id])
-  end
 
   def project_params
     params.require(:project).permit(:name, :start_date, :end_date, :manager_id)
