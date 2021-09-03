@@ -6,5 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-company = Company.create([{ name: '8Vals', subdomain: '8vals', user_id: nil }, { name: '7Vals', subdomain: '7vals', user_id: nil }])
+company = Company.create([{ name: '8Vals', subdomain: '8vals', owner_id: nil }, { name: '7Vals', subdomain: '7vals', owner_id: nil }])
 # user = User.create([{ email: 'haider@7vals.com', password: 'haider' }, { email: 'test@test.com', password: '123456' }])

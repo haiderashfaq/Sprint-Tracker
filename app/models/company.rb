@@ -1,5 +1,6 @@
 class Company < ApplicationRecord
   not_multitenant
+  belongs_to :owner, class_name: 'User', optional: true
   has_many :users
   has_many :projects
 
