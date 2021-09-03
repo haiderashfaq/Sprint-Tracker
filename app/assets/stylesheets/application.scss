@@ -1,2 +1,56 @@
 @import 'bootstrap/scss/bootstrap';
+@import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 
+body{
+  margin: 0;
+  padding: 0;
+  font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #858796;
+  text-align: left;
+  
+}
+.text-gray-400 {
+  color: #000000 !important;
+}
+.p-5{
+  padding: 3rem !important;
+}
+.p-0 {
+  padding: 0 !important;
+}
+.btn-user {
+  font-size: 0.8rem;
+  border-radius: 10rem;
+  padding: 0.75rem 1rem;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.form{
+  font-size: .8rem;
+  border-radius: 10rem;
+  padding: 1rem 1rem;
+}
+.bg-login-image {
+  background: url("https://wallpaperaccess.com/full/326191.jpg");
+  background-position: center;
+  background-size: cover;
+  border-radius: .35rem;
+
+}
+.bg-register-image {
+  background: url("https://d2slcw3kip6qmk.cloudfront.net/marketing/blog/2020Q1/lucidchart-for-sprint-planning/lucidchart-for-sprint-planning-header.png");
+  background-position: center;
+  background-size: initial;
+  border-radius: .35rem
+}
+.bg-member-image {
+  background: url("https://thumbs.dreamstime.com/b/add-member-icon-illustration-vector-169133638.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}

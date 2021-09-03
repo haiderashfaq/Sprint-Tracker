@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: {
-      sessions: 'users/sessions'
-}
-  resources :members
-  root to: 'dashboard#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { sessions: "sessions", registrations: "users/registrations" },
+   path: 'accounts',
+   path_names: { sign_up: 'new' }
+
+  root to: "dashboard#index"
+  constraints(subdomain: /.+/) do
+    resources :users do
+      # collection do
+      #   post 'new'
+      #   post 'create'
+      # end
+    end
+  end
+#   devise_for :users
+#   resources :users
 end

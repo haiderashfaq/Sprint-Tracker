@@ -1,0 +1,25 @@
+
+[1mFrom:[0m /home/dell/Documents/git/Sprint-Tracker/app/controllers/users/registrations_controller.rb:14 Users::RegistrationsController#create:
+
+    [1;34m13[0m: [32mdef[0m [1;34mcreate[0m
+ => [1;34m14[0m: binding.pry
+    [1;34m15[0m: [32mbegin[0m
+    [1;34m16[0m:   [1;34;4mCompany[0m.Transaction [32mdo[0m
+    [1;34m17[0m:     [1;34m#@user = User.new(user_params_filter)[0m
+    [1;34m18[0m:     [1;34m#Company.current_company_id = Company.find_by!(subdomain: params[:user][:company_attributes][:subdomain]).id[0m
+    [1;34m19[0m: 
+    [1;34m20[0m:     company = [1;34;4mCompany[0m.new([35mname[0m: params[[33m:user[0m][[33m:company_attributes[0m][[33m:name[0m], [35msubdomain[0m: params[[33m:user[0m][[33m:company_attributes[0m][[33m:subdomain[0m])
+    [1;34m21[0m:     user = company.users.new user_params_filter
+    [1;34m22[0m:     user.role_id = [1;34m1[0m
+    [1;34m23[0m:     user.save!
+    [1;34m24[0m:     company.user_id = user.id
+    [1;34m25[0m:     [1;34;4mCompany[0m.current_company_id = company.id
+    [1;34m26[0m:     company.save!
+    [1;34m27[0m:   [32mend[0m
+    [1;34m28[0m: [32mrescue[0m [1;34;4mActiveRecord[0m::[1;34;4mRecordInvalid[0m => e
+    [1;34m29[0m:   render new_user_registration_url
+    [1;34m30[0m:   puts e
+    [1;34m31[0m: [32mend[0m
+    [1;34m32[0m: redirect_to after_sign_up_path
+    [1;34m33[0m: [32mend[0m
+

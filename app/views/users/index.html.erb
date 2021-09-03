@@ -1,0 +1,38 @@
+ <div class="container">    
+  <div class="row d-flex">
+    <div class="col-10 justify-content-start">
+      <h1>Projects</h1>
+    </div>
+  <% if can? :create, User %>
+      <div class="col-2 justify-content-end">
+        <a role='button' class="btn btn-primary w-100 fa fa-plus" href="/users/new"> Add New User</a>
+      </div>
+    <%end%> 
+  </div>
+</div>
+<br/>
+    <table class="table table-striped table-bordered table-hover" id="users-datatable" data-source="<%= users_path(format: :json) %>">   
+      <thead class="table-dark">   
+      <tr>    
+        <th>Name</th>   
+        <th>Email</th>   
+        <th>Role</th>   
+      </tr>   
+      </thead>   
+      <tbody>
+       <% @users.each do |user| %> 
+        <tr>  
+        <td><%=link_to user.name, user %></td>
+        <!-- <td><%= user.name %></td>  --> 
+        <td><%= user.email %></td> 
+        <td><%= user.role_id == 1? "Admin" : "Member"%></td> 
+         
+
+        </tr> 
+       <% end %>   
+      </tbody>
+  </table>
+
+</div>
+</div>
+      
