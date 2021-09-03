@@ -30,4 +30,45 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  issues:
+    issue_label: 'Issue'
+    issues_label: 'Issues'
+    description: 'Description'
+    estimated_start_date: 'Estimated Start Date'
+    estimated_end_date: 'Estimated End Date'
+    status: 'Status'
+    category: 'Category'
+    priority: 'Priority'
+    title: 'Title'
+    create_issue: "Create Issue"
+
+  shared:
+    name: "Name"
+    start_date: "Start Date"
+    end_date: "End Date"
+    confirmation: "Are you sure?"
+    edit: 'Edit'
+    delete: 'Delete'
+    back: 'Back'
+    create_new_resource: "Add New %{resource_label}"
+    edit_resource: "Edit %{resource_label}"
+    success:
+      create: "%{resource_label} Created Successfully"
+      update: "%{resource_label} Updated Successfully"
+      delete: "%{resource_label} Deleted Successfully"
+    failure:
+      create: "%{resource_label} Creation Failed"
+      update: "%{resource_label} Updation Failed"
+      delete: "%{resource_label} Deletion Failed"
+
+  users:
+    profile: "Profile"
+    log_in: "Log In"
+    log_out: "Log Out"
+    sign_up: "Sign Up"
+
+
+  helpers:        
+    submit:
+      create: "Create %{model}"
+      update: "Update %{model}"

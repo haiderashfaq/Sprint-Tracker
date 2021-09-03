@@ -1,19 +1,18 @@
-
 <p id="notice"><%= notice %></p>
 <div class="container">
   <br>
   <div class="row d-flex">
     <div class="col-10 justify-content-start"><h2 >Issues</h2></div>
-    <div class="col-2 justify-content-end"><%= link_to ' Add new Issue', new_issue_path ,  class: "btn fa fa-plus btn-primary w-100"%></div>
+    <div class="col-2 justify-content-end"><%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path ,  class: "btn fa fa-plus btn-primary w-100 some-button" %></div>
   </div>
   <br/>
   <table class="table table-hover border-primary text-center" id="issues-datatable" data-source="<%= issues_path(format: :json) %>">
     <thead class="text-light bg-primary">
       <tr>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Priority</th>
-        <th>Category</th>
+        <th><%= t('issues.title') %></th>
+        <th><%= t('issues.status') %></th>
+        <th><%= t('issues.priority') %></th>
+        <th><%= t('issues.category') %></th>
       </tr>
     </thead>
     <tbody>
@@ -24,10 +23,8 @@
         <td><%= issue.priority %></td>
         <td><%= issue.category %></td>
       </tr>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
+      <% end %>
+    </tbody>
+  </table>
 <%= will_paginate @issues , renderer: BootstrapPagination::Rails %>
 </div>

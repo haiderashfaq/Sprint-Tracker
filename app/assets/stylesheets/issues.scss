@@ -1,93 +1,49 @@
-// Place all the styles related to the Issues controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-
-.trying{
-    margin:50px 0px; padding:0px;
-    text-align:center;
-    align:center;
-}
-th{
-  text-align: center;
-  background-color: #6610f2;
-
-}
-thead
-{
-   background-color: #6610f2;
-}
+$secondary-color: #999999;
+$hover-color: #000033;
+$a-border-color: #2e6ab1;
+$disable-border-color: #dddddd;
+$a-color: #105cb6;
 
 .pagination {
   background: white;
-float: right;
   cursor: default;
-  /* self-clearing method: */
-}
-.pagination a,
-.pagination span,
-.pagination em {
+  float: right;
+
+  a, span, em {
   padding: 0.2em 0.5em;
   display: block;
-  float: left;
+  float: right;
   margin-right: 1px;
-}
+  }
 
-.pagination .disabled {
-  color: #999999;
-  border: 1px solid #dddddd;
-}
+  .disabled {
+  color: $secondary-color;
+  border: 1px solid $disable-border-color;
+  }
 
-.pagination .current {
+  .current {
   font-style: normal;
   font-weight: bold;
-  background: #2e6ab1;
+  background: $a-border-color;
   color: white;
-  border: 1px solid #2e6ab1;
-}
+  border: 1px solid $a-border-color;
+  }
 
-.pagination a {
+  a {
   text-decoration: none;
-  color: #105cb6;
-  border: 1px solid #9aafe5;
+  color: $a-color;
+  border: 1px solid $a-border-color;
+
+    &:hover, &:focus {
+      color: $hover-color;
+      border-color: $hover-color;
+    }
+  }
 }
 
-.pagination a:hover,
-.pagination a:focus {
-  color: #000033;
-  border-color: #000033;
+.asterick {
+  .control-label:after{
+    content: "*";
+    color: red;
+  }
 }
-
-.pagination .page_info {
-  background: #2e6ab1;
-  color: white;
-  padding: 0.4em 0.6em;
-  width: 22em;
-  margin-bottom: 0.3em;
-  text-align: center;
-}
-
-.pagination .page_info b {
-  color: #000033;
-  background: #6aa6ed;
-  padding: 0.1em 0.25em;
-}
-
-.pagination:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
-* html .pagination {
-  height: 1%;
-}
-
-*:first-child+html .pagination {
-  overflow: hidden;
-}
-
-
-
-// https://mislav.github.io/will_paginate/

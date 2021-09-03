@@ -1,7 +1,6 @@
 <div class="card-header">
-	<h3 class="text-center font-weight-light my-4">Create Issue</h3>
+	<h3 class="text-center font-weight-light my-4"><%= t('shared.create_new_resource', resource_label: t('issues.issue_label')) %></h3>
 </div>
-
 <br/>
 
-	<%= render 'form', issue: @issue %>
+<%= render 'form', issue: @issue %>

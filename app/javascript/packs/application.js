@@ -9,9 +9,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'datatables.net-bs5'; 
-require('select2');
-
-
+require ('../app');
 
 require("bootstrap")
 // import "../stylesheets/application";
@@ -30,17 +28,4 @@ jQuery(document).ready(function() {
 });
 
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
-
-var select2func = function() {
-  $(".js-example-matcher").select2({
-  });
-}
-
-$(document).ready(select2func);
-$(document).on('turbolinks:load', select2func);
-
-$(document).on('select2:open', () => {
-    document.querySelector('.select2-search__field').focus();
-});

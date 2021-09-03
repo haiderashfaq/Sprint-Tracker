@@ -1,30 +1,31 @@
 class IssuesController < ApplicationController
- 
+
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
- 
-  # GET /issues or /issues.json
+  before_action :set_creator, only: :create
+
   def index
-    # @issues = Issue.all
     @issues = Issue.accessible_by(current_ability).paginate(page: params[:page])
   end
 
-  # GET /issues/1 or /issues/1.json
-  def show;
+  def show
+    respond_to do |format|
+      format.html
+    end
   end
 
-  # GET /issues/new
   def new
-    @issue = Issue.new
+    respond_to do |format|
+      format.html
+    end
   end
 
-  # GET /issues/1/edit
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.html
+    end
+  end
 
-  # POST /issues or /issues.json
   def create
-    #binding.pry
-    @issue.creator = current_user
-
     respond_to do |format|
       if @issue.save
         format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
@@ -36,11 +37,10 @@ class IssuesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /issues/1 or /issues/1.json
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue, notice: 'Issue was successfully updated.' }
+        format.html { redirect_to @issue, notice: t('shared.success.update', resource_label: t('issues.issue_label')) }
         format.json { render :show, status: :ok, location: @issue }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,27 +49,24 @@ class IssuesController < ApplicationController
     end
   end
 
-  # DELETE /issues/1 or /issues/1.json
   def destroy
     @issue.destroy
     respond_to do |format|
-      format.html { redirect_to issues_url, notice: 'Issue was successfully destroyed.' }
+      format.html { redirect_to issues_url, notice: t('shared.success.delete', resource_label: t('issues.issue_label')) }
       format.json { head :no_content }
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_issue
-    @company = Company.current_company
-    @issue = @company.issues.find_by_sequence_num!(params[:id])
-  end
-
   # Only allow a list of trusted parameters through.
   def issue_params
-
     params.require(:issue).permit(:title, :description, :status, :category, :priority, :estimated_end_date,
                                   :estimated_start_date)
   end
+
+  def set_creator
+    @issue.creator = current_user
+  end
+
 end
