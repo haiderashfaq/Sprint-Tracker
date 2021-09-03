@@ -8,7 +8,7 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
     if user.admin?
-      can [:create, :read, :update, :destroy], Issue
+      can [:create, :read, :update, :destroy, :index], Issue
     elsif user.member?
       can :read, Issue, creator: user
       can :create, Issue
@@ -17,9 +17,7 @@ class Ability
       can :read, Issue, assignee: user
       can :update, Issue, assignee: user
       can :read, Issue, reviewer: user
-      can :index, Issue
     end
-
 
     #   if user.admin?
     #     can :manage, :all

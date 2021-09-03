@@ -1,6 +1,6 @@
 class Company < ApplicationRecord
   not_multitenant
-  has_many :issues
+  has_many :issues, dependent: :nullify
 
   def self.current_company_id=(id)
     Thread.current[:company_id] = id
