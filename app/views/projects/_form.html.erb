@@ -1,0 +1,44 @@
+  <%= form_with model: project do |form| %>
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+      <%= form.label t('shared.name'), min: 4, class: 'col-form-label col-form-label-md control-label' %>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
+      <%= form.text_field :name, required: true, class: 'form-control form-control-md control-label' %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2">
+      <%= form.label t('shared.start_date'), class: 'col-form-label col-form-label-md control-label' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.date_field :start_date, class: 'form-control form-control-md' %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2">
+      <%= form.label t('shared.end_date'), class: 'col-form-label col-form-label-md control-label' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <%= form.date_field :end_date, class: 'form-control form-control-md' %>
+    </div>
+  </div>
+  <% if can? :create, @project %>
+    <div class="row g-3 align-items-center mb-3">
+      <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+        <%= form.label t('shared.manager'), class: 'col-form-label col-form-label-md control-label' %>
+      </div>
+      <div class="col-12 col-sm-8 col-md-6 col-lg-6 ">
+        <%= form.select :manager_id, @current_company.users.map{ |user| [user.email, user.id] }, { required: true }, { class: "form-select form-select-md js-select-field" } %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row d-flex justify-content-center">
+    <div class="col-2 ">
+      <%= form.submit class: 'btn btn-primary w-100 fa fa-check' %>
+    </div>
+    <div class="col-2 ">
+      <%= link_to t('shared.back'), projects_path, class: 'btn btn-secondary w-100' %>
+    </div>
+  </div>
+<% end %>

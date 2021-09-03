@@ -1,6 +1,4 @@
 class AddSequenceNumToIssues < ActiveRecord::Migration[6.1]
-  
-  
   def self.up
     add_column :issues, :sequence_num, :integer, null: false
     update_sequence_num_values

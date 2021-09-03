@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
   before_action :authenticate_user!
+
   rescue_from CanCan::AccessDenied do |exception|
     flash[:notice] = exception.message
     redirect_to root_url
@@ -20,6 +21,6 @@ class ApplicationController < ActionController::Base
   private
 
   def current_company
-    Company.find_by(subdomain: request.subdomain)
+    @current_company ||= Company.find_by!(subdomain: request.subdomain)
   end
 end

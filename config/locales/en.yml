@@ -8,7 +8,7 @@
 #
 # In views, this is aliased to just `t`:
 #
-#     <%= t('hello') %>
+#     <%= t('hello', key: value) %>
 #
 # To use a different locale, set it with `I18n.locale`:
 #
@@ -41,11 +41,21 @@ en:
     priority: 'Priority'
     title: 'Title'
     create_issue: "Create Issue"
+  projects:
+    project_label: 'Project'
+    manager: "Project Manager"
+    creator: "Created By"
+    started_on: "Started On"
+    starting_on: "Starting On"
+    ended_on: "Ended On"
+    due_on: "Due On"
 
   shared:
     name: "Name"
     start_date: "Start Date"
     end_date: "End Date"
+
+    manager: "Project Manager" 
     confirmation: "Are you sure?"
     edit: 'Edit'
     delete: 'Delete'

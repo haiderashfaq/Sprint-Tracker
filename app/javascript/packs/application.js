@@ -11,8 +11,11 @@ import "channels"
 import 'datatables.net-bs5'; 
 require ('../app');
 
+require('select2')
 require("bootstrap")
-// import "../stylesheets/application";
+require("../app.js")
+global.$ = global.jQuery = require("jquery");
+
 document.addEventListener("turbolinks:load", function() {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

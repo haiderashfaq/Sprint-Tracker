@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 RECORD_PER_PAGE = 10
+=======
+RECORDS_PER_PAGE = 10
+>>>>>>> cc0d728a6b88d8677ff88f2e0167af5d14369763
