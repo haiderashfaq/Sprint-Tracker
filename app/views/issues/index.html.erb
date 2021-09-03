@@ -17,12 +17,12 @@
     </thead>
     <tbody>
       <% @issues.each do |issue| %>
-      <tr>
-        <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
-        <td><%= issue.status %></td>
-        <td><%= issue.priority %></td>
-        <td><%= issue.category %></td>
-      </tr>
+        <tr>
+          <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
+          <td><%= issue.status %></td>
+          <td><%= issue.priority %></td>
+          <td><%= issue.category %></td>
+        </tr>
       <% end %>
     </tbody>
   </table>

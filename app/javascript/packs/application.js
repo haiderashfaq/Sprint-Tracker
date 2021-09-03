@@ -8,7 +8,6 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import 'datatables.net-bs5'; 
 require ('../app');
 
 require('select2')
@@ -22,13 +21,6 @@ document.addEventListener("turbolinks:load", function() {
         $('[data-toggle="popover"]').popover()
     })
 })
-jQuery(document).ready(function() {
- $('#issues-datatable').dataTable({
-    "paging": false,
-    "searching": false,
-    "info": false
-  });
-});
 
 Rails.start()
 ActiveStorage.start()
