@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
   <% if can? :update, @issue %>
-  <div class="row bm-2 ">
-    <h1 class="col-5 d-flex justify-content-start">Issues</h1>
-    <div class="col-2">
-      <%= link_to t('shared.edit'), edit_issue_path(@issue), class: "btn btn-primary w-100 fa fa-pencil" %>
+    <div class="row bm-2 ">
+      <h1 class="col-5 d-flex justify-content-start">Issues</h1>
+      <div class="col-2">
+        <%= link_to t('shared.edit'), edit_issue_path(@issue), class: "btn btn-primary w-100 fa fa-pencil" %>
+      </div>
+      <div class="col-2">
+        <%= link_to t('shared.delete'), issue_path(@issue),
+        method: :delete,
+        data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 fa fa-trash" %>
+      </div>
     </div>
-    <div class="col-2">
-      <%= link_to t('shared.delete'), issue_path(@issue),
-      method: :delete,
-      data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 fa fa-trash" %>
-    </div>
-  </div>
   <% end %>
 <hr/>
 </div>

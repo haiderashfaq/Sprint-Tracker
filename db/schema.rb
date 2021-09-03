@@ -46,6 +46,21 @@ ActiveRecord::Schema.define(version: 2021_09_02_062312) do
     t.index ["sequence_num", "company_id"], name: "index_issues_on_sequence_num_and_company_id", unique: true
   end
 
+  create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "manager_id", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "sequence_num", null: false
+    t.index ["company_id"], name: "index_projects_on_company_id"
+    t.index ["manager_id"], name: "index_projects_on_manager_id"
+    t.index ["owner_id"], name: "index_projects_on_owner_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -61,5 +76,8 @@ ActiveRecord::Schema.define(version: 2021_09_02_062312) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "projects", "companies"
+  add_foreign_key "projects", "users", column: "manager_id"
+  add_foreign_key "projects", "users", column: "owner_id"
   add_foreign_key "users", "companies"
 end
