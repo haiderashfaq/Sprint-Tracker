@@ -1,9 +1,11 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'select2/dist/css/select2';
 
-// $primary-color = 
 $secondary-color: #999999;
 $hover-color: #000033;
+$a-border-color: #2e6ab1;
+$disable-border-color: #dddddd;
+$a-color: #105cb6;
 
 .pagination {
   background: white;
@@ -19,30 +21,32 @@ $hover-color: #000033;
 
   .disabled {
   color: $secondary-color;
-  border: 1px solid #dddddd;
+  border: 1px solid $disable-border-color;
   }
 
   .current {
   font-style: normal;
   font-weight: bold;
-  background: #2e6ab1;
+  background: $a-border-color;
   color: white;
-  border: 1px solid #2e6ab1;
+  border: 1px solid $a-border-color;
   }
 
   a {
   text-decoration: none;
-  color: #105cb6;
-  border: 1px solid #9aafe5;
-  }
+  color: $a-color;
+  border: 1px solid $a-border-color;
 
-  a:hover, a:focus {
-    color: $hover-color;
-    border-color: $hover-color;
+    &:hover, &:focus {
+      color: $hover-color;
+      border-color: $hover-color;
+    }
   }
 }
 
-.asterick .control-label:after{
-  content:"*";
-  color:red;
+.asterick {
+  .control-label:after{
+    content: "*";
+    color: red;
+  }
 }

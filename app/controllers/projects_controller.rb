@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @users = @current_company.users.all
+    @users = @current_company.users
     respond_to do |format|
       format.html
     end
