@@ -12,6 +12,6 @@ class Project < ApplicationRecord
   def start_date_before_end_date
     return true if end_date.nil? || start_date < end_date
 
-    erros.add(:end_date, "Can\'t be before starting date")
+    errors.add(:end_date, "Can\'t be before starting date")
   end
 end

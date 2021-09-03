@@ -8,7 +8,7 @@ module ProjectsHelper
   end
 
   def project_end_date_label
-    if !@project.start_date.nil? && @project.end_date < Date.today
+    if !@project.end_date.nil? && @project.end_date < Date.today
       t('projects.ended_on')
     else
       t('projects.due_on')

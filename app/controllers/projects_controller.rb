@@ -11,7 +11,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @users = @current_company.users
     respond_to do |format|
       format.html
     end
@@ -31,7 +30,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num/edit
   def edit
-    @users = @current_company.users.all
     respond_to do |format|
       format.html
     end
