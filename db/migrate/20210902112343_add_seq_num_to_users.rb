@@ -1,4 +1,4 @@
-class AddNumToUsers < ActiveRecord::Migration[6.1]
+class AddSeqNumToUsers < ActiveRecord::Migration[6.1]
 def self.up
     add_column :users, :sequence_num, :integer,:null=>false
     update_sequence_num_values

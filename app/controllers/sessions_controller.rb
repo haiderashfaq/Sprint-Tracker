@@ -19,10 +19,10 @@ class SessionsController < Devise::SessionsController
 
   def create
     binding.pry
-    u = User.unscoped.includes(:company).where(email: params[:user][:email])
-    if u.length.positive? && request.subdomain == ""
-      redirect_to list_companies_path
-    end
+    # u = User.unscoped.includes(:company).where(email: params[:user][:email])
+    # if u.length.positive? && request.subdomain == ""
+    #   redirect_to list_companies_path
+    # end
     super
     # if member.present?
     #   if !member.active
