@@ -10,7 +10,7 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
-  
+
   # Set default mailer url options to localhost and port 3000
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
@@ -77,4 +77,7 @@ Rails.application.configure do
   config.action_dispatch.tld_length= 0
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # The length of top level domain
+  config.action_dispatch.tld_length = 0
 end

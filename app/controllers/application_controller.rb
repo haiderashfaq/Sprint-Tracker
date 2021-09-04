@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  rescue_from ActionController::UnknownFormat do |exception|
+    flash[:alert] = exception.message
+    redirect_to root_url
+  end
+
+
   def set_tenant_id
     Company.current_company_id = current_company&.id
     yield
@@ -11,6 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_company
+
     @current_company ||=
       case request.subdomain
       when 'www', '', nil
@@ -27,9 +34,9 @@ class ApplicationController < ActionController::Base
    protected
 
   def configure_permitted_parameters
-
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :phone_num, company_attributes: [:name, :subdomain])}
 
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password)}
+
   end
 end

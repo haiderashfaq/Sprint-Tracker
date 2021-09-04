@@ -1,5 +1,11 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+@import 'select2/dist/css/select2';
+$secondary-color: #999999;
+$hover-color: #000033;
+$a-border-color: #2e6ab1;
+$disable-border-color: #dddddd;
+$a-color: #105cb6;
 
 body{
   margin: 0;
@@ -53,4 +59,49 @@ body{
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  }
+
+.pagination {
+  background: white;
+  cursor: default;
+  float: right;
+
+  a, span, em {
+  padding: 0.2em 0.5em;
+  display: block;
+  float: right;
+  margin-right: 1px;
+  }
+
+  .disabled {
+  color: $secondary-color;
+  border: 1px solid $disable-border-color;
+  }
+
+  .current {
+  font-style: normal;
+  font-weight: bold;
+  background: $a-border-color;
+  color: white;
+  border: 1px solid $a-border-color;
+  }
+
+  a {
+  text-decoration: none;
+  color: $a-color;
+  border: 1px solid $a-border-color;
+
+    &:hover, &:focus {
+      color: $hover-color;
+      border-color: $hover-color;
+    }
+  }
+}
+
+.asterick {
+  .control-label:after{
+    content: "*";
+    color: red;
+  }
+
 }

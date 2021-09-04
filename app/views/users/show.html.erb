@@ -3,9 +3,11 @@
     <div class="col-8">
       <h1><%= @user.name %></h1>
     </div>
+    <% if can? :edit, @user %>
     <div class="col-2 justify-content-end">
       <%= link_to t('shared.edit'), edit_user_path(@user), class: "btn btn-primary w-100 fa fa-pencil" %>
     </div>
+    <% end %>
     <% if can? :destroy, @user %>
       <div class="col-2 justify-content-end">
         <%= link_to t('shared.destroy'), user_path(@user),method: :delete,

@@ -12,8 +12,11 @@ import 'datatables.net-bs5';
 
 global.$ = global.jQuery = require("jquery");
 
+require('select2')
 require("bootstrap")
-// import "../stylesheets/application";
+require("../app.js")
+global.$ = global.jQuery = require("jquery");
+
 document.addEventListener("turbolinks:load", function() {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
@@ -26,10 +29,10 @@ jQuery(document).ready(function() {
   $("#name").change(function(){
   $("#subdomain").val($("#name").val())
 });
+  
 });
 
 $('#users-datatable').DataTable().ajax.reload();
-
 $('#users-datatable').dataTable({
     "processing": true,
     "serverSide": true,
@@ -50,6 +53,4 @@ $('#users-datatable').dataTable({
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-
 

@@ -8,7 +8,7 @@
 #
 # In views, this is aliased to just `t`:
 #
-#     <%= t('hello') %>
+#     <%= t('hello', key: value) %>
 #
 # To use a different locale, set it with `I18n.locale`:
 #
@@ -30,4 +30,44 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  projects:
+    project_label: 'Project'
+    manager: "Project Manager"
+    creator: "Created By"
+    started_on: "Started On"
+    starting_on: "Starting On"
+    ended_on: "Ended On"
+    due_on: "Due On"
+
+  shared:
+    name: "Name"
+    start_date: "Start Date"
+    end_date: "End Date"
+    manager: "Project Manager" 
+    confirmation: "Are you sure?"
+    edit: 'Edit'
+    delete: 'Delete'
+    back: 'Back'
+    create_new_resource: "Add New %{resource_label}"
+    edit_resource: "Edit %{resource_label}"
+    success:
+      create: "%{resource_label} Created Successfully"
+      update: "%{resource_label} Updated Successfully"
+      delete: "%{resource_label} Deleted Successfully"
+    failure:
+      create: "%{resource_label} Creation Failed"
+      update: "%{resource_label} Updation Failed"
+      delete: "%{resource_label} Deletion Failed"
+
+  users:
+    profile: "Profile"
+    log_in: "Log In"
+    log_out: "Log Out"
+    sign_up: "Sign Up"
+
+
+  helpers:        
+    submit:
+      create: "Create %{model}"
+      update: "Update %{model}"
+
