@@ -3,9 +3,9 @@ class CreateIssues < ActiveRecord::Migration[6.1]
     create_table :issues do |t|
       t.string :title, null: false
       t.text :description, null: false
-      t.string :status, null: false
-      t.string :priority, null: false
-      t.string :category, null: false
+      t.string :status, null: false, index: true
+      t.string :priority, null: false, index: true
+      t.string :category, null: false, index: true
       t.references :company, null: false
       t.date :estimated_start_date, null: false
       t.date :actual_start_date

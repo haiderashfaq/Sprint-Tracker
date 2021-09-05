@@ -6981,6 +6981,11 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
+will-paginate@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/will-paginate/-/will-paginate-1.1.3.tgz#8ff70a4b45005f9ef6f0d47e87a9d6db0d38ce9f"
+  integrity sha512-F697iM4NAcUaxqAK/HAeM1sew2dUunsc4gCV0/BrPWuAYypktSmHt+C2UOjy6jqG/8iwuWM0x5hY0gcb/0cWdQ==
+
 worker-farm@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/worker-farm/-/worker-farm-1.7.0.tgz#26a94c5391bbca926152002f69b84a4bf772e5a8"

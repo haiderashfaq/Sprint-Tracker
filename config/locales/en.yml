@@ -41,6 +41,8 @@ en:
     priority: 'Priority'
     title: 'Title'
     create_issue: "Create Issue"
+    actual_start_date: 'Actual Start Date'
+    actual_end_date: 'Actual End Date'
   projects:
     project_label: 'Project'
     manager: "Project Manager"

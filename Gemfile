@@ -21,13 +21,14 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # pagination
 gem 'will_paginate', '~> 3.1.0'
-gem 'will_paginate-bootstrap'
 # gems for sequence of ids
 gem 'sequenceid', '=0.0.7', git: "https://github.com/alisyed/sequenceid.git", branch: 'feature/change_activerecord_base_to_applicationrecord_in_sti_parent_class_method'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 # Use cancancan for restricitng user access to resources
 gem 'cancancan', '= 3.3.0'
+# Use audit for maintaining histories of issues
+gem 'audited', '= 5.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

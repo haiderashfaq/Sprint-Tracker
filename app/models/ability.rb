@@ -6,19 +6,46 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
-    user ||= User.new # guest user (not logged in)
-    if user.admin?
-      can [:create, :read, :update, :destroy], Issue
-    elsif user.member?
-      can :read, Issue, creator: user
-      can :create, Issue
-      can :update, Issue, creator: user
-      can :destroy, Issue, creator: user
-      can :read, Issue, assignee: user
-      can :update, Issue, assignee: user
-      can :read, Issue, reviewer: user
-    end
+    return if user.nil?
 
+    if user.admin?
+      admin_permissions_for_project
+      admin_permissions_for_issues
+    elsif user.member?
+      member_permissions_for_issues(user)
+      member_permissions_for_project(user)
+      creator_permissions_for_issues(user)
+      reviewer_permissions_for_issues(user)
+      assignee_permissions_for_issues(user) 
+      can :create, Project
+    end
+  end
+
+
+  def admin_permissions_for_issues
+    can :manage, Issue
+  end
+
+  def admin_permissions_for_project
+    can %i[update read create delete], Project
+  end
+
+  def member_permissions_for_project(user)
+    can %i[read update], Project, manager: user
+  end
+
+  def creator_permissions_for_issues(user)
+    can [:create, :update, :destroy],  Issue, creator: user
+  end
+  def reviewer_permissions_for_issues(user)
+    can [:read], Issue, reviewer: user
+  end
+  def assignee_permissions_for_issues(user)
+    can [:read, :update], Issue,  creator: user
+  end
+  def member_permissions_for_issues(user)
+    can :create, Issue, user.company_id == Company.current_company.id
+  end
 
     #   if user.admin?
     #     can :manage, :all
@@ -43,5 +70,4 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-  end
 end
