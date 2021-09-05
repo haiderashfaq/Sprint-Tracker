@@ -46,7 +46,7 @@ class Ability
   end
 
   def member_permissions_for_issues(user)
-    can :create, Issue, user.company_id == Company.current_company.id
+    can :create, Issue if user.company_id == Company.current_company.id
   end
 
   #   if user.admin?
