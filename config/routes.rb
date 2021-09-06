@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :projects do
     resources :sprints
+    resources :projects_users
   end
   devise_for :users
 

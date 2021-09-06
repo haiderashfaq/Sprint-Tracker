@@ -4,6 +4,8 @@ class Project < ApplicationRecord
   belongs_to :owner, class_name: 'User'
 
   has_many :sprints
+  has_many :projects_users
+  has_many :users, through: :projects_users
 
   sequenceid :company, :projects
   validate :start_date_before_end_date

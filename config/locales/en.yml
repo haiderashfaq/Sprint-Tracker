@@ -38,6 +38,13 @@ en:
   sprints:
     label: 'Sprint'
 
+  users:
+    label: 'User'
+    log_in: "Log In"
+    profile: "Profile"
+    log_out: "Log Out"
+    sign_up: "Sign Up"
+
   shared:
     name: "Name"
     edit: 'Edit'
@@ -68,11 +75,6 @@ en:
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"
 
-  users:
-    log_in: "Log In"
-    profile: "Profile"
-    log_out: "Log Out"
-    sign_up: "Sign Up"
 
 
   helpers:        

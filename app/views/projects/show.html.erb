@@ -20,6 +20,7 @@
     <div class="container-md justify-content-start">
       <%= link_to t('shared.details'), @project, remote: true, class: 'navbar-brand' %>
       <%= link_to t('sprints.label').pluralize(), [@project, :sprints], remote: true, class: 'navbar-brand' %>
+      <%= link_to t('users.label').pluralize(), [@project, :projects_users], remote: true, class: 'navbar-brand' %>
     </div>
   </nav>
 </div>
