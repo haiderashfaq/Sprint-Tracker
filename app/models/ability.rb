@@ -9,12 +9,14 @@ class Ability
     return if user.nil?
     if user.account_owner?
       can :manage, User
+      admin_permissions_for_project(user)
+      admin_permissions_for_issues(user)
 
     elsif user.admin?
       can :manage, User
       cannot :manage, User, id: user.company.owner_id
-      admin_permissions_for_project
-      admin_permissions_for_issues
+      admin_permissions_for_project(user)
+      admin_permissions_for_issues(user)
     elsif user.member?
       can :read, User
       member_permissions_for_issues(user)
@@ -24,13 +26,14 @@ class Ability
       assignee_permissions_for_issues(user)
       can :create, Project
     end
+  end
 
-  def admin_permissions_for_issues
+  def admin_permissions_for_issues(user)
     can :manage, Issue, company_id: user.company_id
   end
 
-  def admin_permissions_for_project
-    can %i[update read create delete], Project
+  def admin_permissions_for_project(user)
+    can %i[update read create delete], Project, company_id: user.company_id
   end
 
   def member_permissions_for_project(user)
@@ -76,5 +79,4 @@ class Ability
   #
   # See the wiki for details:
   # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-  end
 end
