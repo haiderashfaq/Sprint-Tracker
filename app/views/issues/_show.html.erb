@@ -4,16 +4,18 @@
     <div class="col-8">
       <h1>Issues</h1>
     </div>
-     <div class="col-2 justify-content-end">
+      <div class="col-2 justify-content-end">
         <%= link_to t('shared.edit'), edit_issue_path(issue), class: "btn btn-primary w-100 fa fa-pencil" %>
       </div>
+    <% end %>
+    <% if can? :destroy, @issue %>
       <div class="col-2 justify-content-end">
         <%= link_to t('shared.delete'), issue_path(issue),
         method: :delete,
         data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 fa fa-trash" %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <hr/>
 </div>
 <div class="container">

@@ -43,6 +43,7 @@ en:
     create_issue: "Create Issue"
     actual_start_date: 'Actual Start Date'
     actual_end_date: 'Actual End Date'
+    no_histoires: 'No Histories yet!'
   projects:
     project_label: 'Project'
     manager: "Project Manager"
