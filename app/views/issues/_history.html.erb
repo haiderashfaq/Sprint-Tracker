@@ -1,0 +1,25 @@
+<% email="" %>
+<% distance_of_time="" %>
+<div class="container">
+  <% @issue.audits.includes(:user).drop(1).each do |audit| %>
+   <ul>
+     <!-- TO DO !!! Replace user email by user name when user is uptodate -->
+      <% if email != audit&.user&.email || distance_of_time != distance_of_time_in_words(audit.created_at, Time.now)%>
+          <hr/>
+          <%= email = audit&.user&.email %>
+          <%= distance_of_time = distance_of_time_in_words(audit.created_at, Time.now) %> ago
+      <% end %>
+      <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+       <li> 
+        <% audit.audited_changes.each do |attribute, value| %>
+          <%= attribute.titleize %>
+          <% if value.class == Array %> 
+            updated from <%= value[0] %> to <%= value[1] %>
+          <% end %>
+        <%end%>
+        </li>
+      </div>
+    </ul>
+  <% end %>
+</div>
+ 
