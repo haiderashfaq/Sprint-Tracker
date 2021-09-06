@@ -33,7 +33,6 @@ class IssuesController < ApplicationController
 
   # POST /issues/
   def create
-    binding.pry
     respond_to do |format|
       if @issue.save
         format.html { redirect_to @issue, notice: t('shared.success.create', resource_label: t('issues.issue_label'))  }
