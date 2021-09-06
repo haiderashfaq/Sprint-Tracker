@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-	sequenceid :company , :users
+  sequenceid :company , :users
   sequenceid :company, :users
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,7 +9,7 @@ class User < ApplicationRecord
   belongs_to :company
   accepts_nested_attributes_for :company
   validates :email, presence: true, uniqueness: { scope: :company_id }
-  #validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
+  validates_format_of :email, with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   ROLE = { admin: 1, member: 2 }.freeze
 

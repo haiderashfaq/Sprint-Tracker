@@ -42,23 +42,28 @@ body{
   padding: 1rem 1rem;
 }
 .bg-login-image {
-  background: url("https://wallpaperaccess.com/full/326191.jpg");
+  background: url("1.jpg");
   background-position: center;
   background-size: cover;
   border-radius: .35rem;
 
 }
 .bg-register-image {
-  background: url("https://d2slcw3kip6qmk.cloudfront.net/marketing/blog/2020Q1/lucidchart-for-sprint-planning/lucidchart-for-sprint-planning-header.png");
+  background: url("2.png");
   background-position: center;
   background-size: initial;
   border-radius: .35rem
 }
 .bg-member-image {
-  background: url("https://thumbs.dreamstime.com/b/add-member-icon-illustration-vector-169133638.jpg");
+  background: url("3.jpg");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  }
+.logo {
+  height: 40px;
+  width: 78px;
+  display: block;
   }
 
 .pagination {

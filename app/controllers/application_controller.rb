@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:list_company]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from ActionController::UnknownFormat do |exception|
     flash[:alert] = exception.message
     redirect_to root_url
   end
-
 
   def set_tenant_id
     Company.current_company_id = current_company&.id
@@ -17,13 +16,12 @@ class ApplicationController < ActionController::Base
   end
 
   def current_company
-
     @current_company ||=
       case request.subdomain
       when 'www', '', nil
         nil
       else
-        Company.find_by!(subdomain: request.subdomain) 
+        Company.find_by!(subdomain: request.subdomain)
       end
   end
 
@@ -31,12 +29,11 @@ class ApplicationController < ActionController::Base
     users_path
   end
 
-   protected
+  protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :phone_num, company_attributes: [:name, :subdomain])}
 
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password)}
-
   end
 end

@@ -39,8 +39,18 @@ en:
     ended_on: "Ended On"
     due_on: "Due On"
 
+  companies:
+    company_label: 'Company'
+    list_company_label: 'Your Companies'
+
   shared:
     name: "Name"
+    email: "Email Address"
+    role_id: "Role"
+    password: "Password"
+    password_confirmation: "Password Confirmation"
+    profile: "Profile"
+    phone_num: "Phone Number"
     start_date: "Start Date"
     end_date: "End Date"
     manager: "Project Manager" 
@@ -60,10 +70,20 @@ en:
       delete: "%{resource_label} Deletion Failed"
 
   users:
-    profile: "Profile"
+    user_label: 'User'
     log_in: "Log In"
     log_out: "Log Out"
     sign_up: "Sign Up"
+    create_new_resource: "Add New %{resource_label}"
+    edit_resource: "Edit %{resource_label}"
+    success:
+      create: "%{resource_label} Created Successfully"
+      update: "%{resource_label} Updated Successfully"
+      delete: "%{resource_label} Deleted Successfully"
+    failure:
+      create: "%{resource_label} Creation Failed"
+      update: "%{resource_label} Updation Failed"
+      delete: "%{resource_label} Deletion Failed"
 
 
   helpers:        
