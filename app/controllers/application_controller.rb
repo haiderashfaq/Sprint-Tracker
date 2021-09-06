@@ -1,10 +1,20 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
+
   before_action :authenticate_user!, except: [:list_company]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to root_url
+  end
   rescue_from ActionController::UnknownFormat do |exception|
-    flash[:alert] = exception.message
+    flash[:error] = exception.message
+    redirect_to root_url
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    flash[:error] = exception.message
     redirect_to root_url
   end
 

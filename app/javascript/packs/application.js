@@ -4,13 +4,13 @@
 // that code so it'll be compiled.
 
 
+global.$ = global.jQuery = require("jquery");
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import dt from "datatables.net";
 import 'datatables.net-bs5'; 
-global.$ = global.jQuery = require("jquery");
 
 require ('../app');
 require('select2')

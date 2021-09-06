@@ -4,8 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    binding.pry
-    if params[:subdomain1] != nil
+    if !params[:subdomain1].nil?
       redirect_to new_user_session_url(subdomain: params[:subdomain1])
     else
       super
@@ -19,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       Company.transaction do
         build_resource(user_params_filter) # will be the similar to user = User.new(sign_up_params)
         resource.company.owner = resource # resource will be an instance of User
-        resource.role_id = User::ROLE[:admin]
+        resource.role_id = User::ROLE_ID[:admin]
         resource.save!
         stored_subdomain = resource.company.subdomain
       end
