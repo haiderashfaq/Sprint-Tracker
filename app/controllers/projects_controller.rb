@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects/
   def create
-    @project.owner_id = @current_company.user_id
+    @project.owner_id = current_user
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: t('shared.success.create', resource_label: t('projects.project_label')) }
@@ -49,6 +49,7 @@ class ProjectsController < ApplicationController
   # GET /projects/:sequence_num
   def show
     respond_to do |format|
+      format.js
       format.html
     end
   end

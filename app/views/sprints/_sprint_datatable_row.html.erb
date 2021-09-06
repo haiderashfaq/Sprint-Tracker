@@ -1,0 +1,20 @@
+<tr id="sprint_<%= sprint.sequence_num %>">
+  <td><%= sprint.creator.email %></td>
+  <td><%= sprint.start_date %></td>
+  <td><%= sprint.end_date %></td>
+  <td><%= sprint.est_start_date %></td>
+  <td><%= sprint.est_end_date %></td>
+  <td>
+    <% if can? :read, Sprint %>
+      <%= link_to ' ', [@project, sprint], remote: true, class:"fa fa-eye" %>
+    <% end %>
+    <% if can? :edit, Sprint %>
+      <%= link_to ' ', [:edit, @project, sprint], remote: true, class:"fa fa-pencil" %>
+    <% end %>
+    <% if can? :destroy, Sprint %>
+      <%= link_to ' ', [@project, sprint],
+                method: :delete, remote: true,
+                data: { confirm: t('shared.confirmation') }, class: "fa fa-trash" %>
+    <% end %>
+  </td>
+</tr>

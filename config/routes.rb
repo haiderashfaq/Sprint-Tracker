@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects do
+    resources :sprints
+  end
   devise_for :users
 
   root to: 'dashboard#index'

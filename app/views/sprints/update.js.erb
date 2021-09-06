@@ -1,0 +1,7 @@
+<% if @sprint.errors.any? %>
+  $('#modal .js-modal').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+<% else %>
+  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#sprint_<%= @sprint.sequence_num %>').replaceWith("<%= escape_javascript render 'sprint_datatable_row', sprint: @sprint %>");
+  $('#formCloseBtn').click();
+<% end %>

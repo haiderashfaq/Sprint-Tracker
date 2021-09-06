@@ -1,0 +1,40 @@
+<%= form_with model: [project, sprint] do |form| %>
+  <div class="modal-body">
+    <div class="row mb-3">
+      <div class="col-4">
+        <%= form.label t('shared.start_date'), class: '' %>
+      </div>
+      <div class="col-8">
+        <%= form.date_field :start_date, class: 'form-control form-control-md' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-4">
+        <%= form.label t('shared.end_date'), class: 'col-form-label col-form-label-md control-label' %>
+      </div>
+      <div class="col-8">
+        <%= form.date_field :end_date, class: 'form-control form-control-md' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-4">
+        <%= form.label t('shared.est_start_date'), class: 'col-form-label col-form-label-md control-label' %>
+      </div>
+      <div class="col-8">
+        <%= form.date_field :est_start_date, class: 'form-control form-control-md' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-4">
+        <%= form.label t('shared.est_end_date'), class: 'col-form-label col-form-label-md control-label' %>
+      </div>
+      <div class="col-8">
+        <%= form.date_field :est_end_date, class: 'form-control form-control-md' %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%= form.submit class: 'btn btn-primary fa fa-check' %>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= t('shared.close') %></button>
+  </div>
+<% end %>

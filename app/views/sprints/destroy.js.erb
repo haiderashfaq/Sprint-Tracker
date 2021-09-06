@@ -1,0 +1,4 @@
+<% if !@sprint.errors.any? %>
+  $('#sprint_<%= @sprint.sequence_num %>').remove();
+<% end %>
+$('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");

@@ -32,16 +32,29 @@ class Ability
 
     if user.admin?
       admin_permissions_for_project
+      admin_permissions_for_sprint
     elsif user.member?
       member_permissions_for_project(user)
+      member_permissions_for_sprint(user)
     end
   end
 
+  # admin permissions
   def admin_permissions_for_project
-    can %i[update read create delete], Project
+    can %i[read create update destroy], Project
   end
 
+  def admin_permissions_for_sprint
+    can %i[read create update destroy], Sprint
+  end
+
+  # member permissions
   def member_permissions_for_project(user)
     can %i[read update], Project, manager: user
+  end
+
+  def member_permissions_for_sprint(user)
+    can %i[read create update destroy], Sprint, project: { manager: user }
+    can %i[read], Sprint
   end
 end
