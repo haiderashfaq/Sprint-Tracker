@@ -22,7 +22,7 @@ class Ability
   end
 
   def admin_permissions_for_issues
-    can :manage, Issue
+    can :manage, Issue, company_id: user.company_id
   end
 
   def admin_permissions_for_project
@@ -30,23 +30,23 @@ class Ability
   end
 
   def member_permissions_for_project(user)
-    can %i[read update], Project, manager: user
+    can %i[read update], Project, manager: user, company_id: user.company_id
   end
 
   def creator_permissions_for_issues(user)
-    can %i[create update destroy], Issue, creator: user
+    can %i[read update destroy], Issue, creator: user, company_id: user.company_id
   end
 
   def reviewer_permissions_for_issues(user)
-    can [:read], Issue, reviewer: user
+    can [:read], Issue, reviewer: user, company_id: user.company_id
   end
 
   def assignee_permissions_for_issues(user)
-    can %i[read update], Issue, creator: user
+    can %i[read update], Issue, creator: user, company_id: user.company_id
   end
 
   def member_permissions_for_issues(user)
-    can :create, Issue if user.company_id == Company.current_company.id
+    can :create, Issue, company_id: user.company_id
   end
 
   #   if user.admin?
