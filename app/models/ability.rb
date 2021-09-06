@@ -17,7 +17,6 @@ class Ability
       creator_permissions_for_issues(user)
       reviewer_permissions_for_issues(user)
       assignee_permissions_for_issues(user)
-      can :create, Project
     end
   end
 
