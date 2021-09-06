@@ -30,6 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  issues:
+    issue_label: 'Issue'
+    issues_label: 'Issues'
+    description: 'Description'
+    estimated_start_date: 'Estimated Start Date'
+    estimated_end_date: 'Estimated End Date'
+    status: 'Status'
+    category: 'Category'
+    priority: 'Priority'
+    title: 'Title'
+    create_issue: "Create Issue"
+    actual_start_date: 'Actual Start Date'
+    actual_end_date: 'Actual End Date'
   projects:
     project_label: 'Project'
     manager: "Project Manager"
@@ -43,6 +56,7 @@ en:
     name: "Name"
     start_date: "Start Date"
     end_date: "End Date"
+
     manager: "Project Manager" 
     confirmation: "Are you sure?"
     edit: 'Edit'
@@ -70,4 +84,3 @@ en:
     submit:
       create: "Create %{model}"
       update: "Update %{model}"
-
