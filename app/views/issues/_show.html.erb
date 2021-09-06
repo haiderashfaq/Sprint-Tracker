@@ -5,10 +5,10 @@
       <h1>Issues</h1>
     </div>
      <div class="col-2 justify-content-end">
-        <%= link_to t('shared.edit'), edit_issue_path(@issue), class: "btn btn-primary w-100 fa fa-pencil" %>
+        <%= link_to t('shared.edit'), edit_issue_path(issue), class: "btn btn-primary w-100 fa fa-pencil" %>
       </div>
       <div class="col-2 justify-content-end">
-        <%= link_to t('shared.delete'), issue_path(@issue),
+        <%= link_to t('shared.delete'), issue_path(issue),
         method: :delete,
         data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 fa fa-trash" %>
       </div>
@@ -24,7 +24,7 @@
           <%= t('issues.title') %>:
         </div>
         <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= @issue.title %></p>
+          <p><%= issue.title %></p>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
            <%= t('issues.status') %>:
         </div>
         <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= @issue.status %></p>
+          <p><%= issue.status %></p>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
            <%= t('issues.description') %>:
         </div>
         <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= @issue.description %></p>
+          <p><%= issue.description %></p>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <%= t('issues.priority') %>:
         </div>
         <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= @issue.priority %></p>
+          <p><%= issue.priority %></p>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@
            <%= t('issues.estimated_start_date') %>:
         </div>
         <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= @issue.estimated_start_date %></p>
+          <p><%= issue.estimated_start_date %></p>
         </div>
       </div>
     </div>
@@ -74,7 +74,7 @@
            <%= t('issues.estimated_end_date') %>:
         </div>
         <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <%= @issue.estimated_end_date %>
+          <%= issue.estimated_end_date %>
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@
            <%= t('issues.actual_start_date') %>:
         </div>
         <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= @issue.actual_end_date %></p>
+          <p><%= issue.actual_end_date %></p>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
            <%= t('issues.actual_end_date') %>:
         </div>
         <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <%= @issue.actual_end_date %>
+          <%= issue.actual_end_date %>
         </div>
       </div>
     </div>
