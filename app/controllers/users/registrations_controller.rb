@@ -3,13 +3,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
-  def new
-    if !params[:subdomain1].nil?
-      redirect_to new_user_session_url(subdomain: params[:subdomain1])
-    else
-      super
-    end
-  end
+  # def new
+  #   if !params[:subdomain1].nil?
+  #     redirect_to new_user_session_url(subdomain: params[:subdomain1])
+  #   else
+  #     super
+  #   end
+  # end
 
   # POST /resource
   def create
