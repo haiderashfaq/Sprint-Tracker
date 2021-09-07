@@ -1,7 +1,7 @@
 <% if @sprint.errors.any? %>
-  $('#modal .js-modal').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#modal .modal-body').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% else %>
   $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
-  $('#sprintDataTableBody').append("<%= escape_javascript render 'sprint_datatable_row', sprint: @sprint %>");
+  $('#sprint_data_table_body').append("<%= escape_javascript render 'sprint_datatable_row', sprint: @sprint, project: @project %>");
   $('#formCloseBtn').click();
 <% end %>

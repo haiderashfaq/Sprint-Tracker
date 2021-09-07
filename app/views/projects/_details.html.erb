@@ -1,13 +1,13 @@
 <div class="container pt-3">
   <div class="row bm-3">
     <div class="col-3 ">
-      <p><strong><%=t('shared.creator')%>:</strong></p>
+      <p><strong><%= t('shared.creator') %>:</strong></p>
     </div>
     <div class="col-3">
       <p><%= @project.owner.email %></p>
     </div>
     <div class="col-3 ">
-      <p><strong><%=t('projects.manager')%>:</strong></p>
+      <p><strong><%= t('projects.manager') %>:</strong></p>
     </div>
     <div class="col-3">
       <p><%= @project.manager.email %></p>
@@ -15,16 +15,16 @@
   </div>
   <div class="row bm-3">
     <div class="col-3 ">
-      <p><strong><%= project_start_date_label %>:</strong></p>
+      <p><strong><%= start_date_label(project.start_date) %>:</strong></p>
     </div>
     <div class="col-3">
-      <p><%= @project.start_date %></p>
+      <p><%= project.start_date %></p>
     </div>
     <div class="col-3 ">
-      <p><strong><%= project_end_date_label %>:</strong></p>
+      <p><strong><%= end_date_label(project.end_date) %>:</strong></p>
     </div>
     <div class="col-3">
-      <p><%= @project.end_date %></p>
+      <p><%= project.end_date %></p>
     </div>
   </div>
 </div>

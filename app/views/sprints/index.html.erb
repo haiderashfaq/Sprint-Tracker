@@ -3,11 +3,11 @@
     <div class="col-10 justify-content-start">
       <h1><%= t('sprints.label').pluralize().upcase() %></h1>
     </div>
-    <!-- <% if can? :create, Project %> -->
-    <div class="col-2 justify-content-end">
-      <%= link_to t('shared.create_new_resource', resource_label: t('sprints.label')), new_project_sprint_path, remote: true, class:"btn btn-primary w-100 fa fa-plus", id:"add_sprint" %>
-    </div>
-    <!-- <% end %> -->
+    <% if can? :create, Sprint %>
+      <div class="col-2 justify-content-end">
+        <%= link_to t('shared.create_new_resource', resource_label: t('sprints.label')), new_project_sprint_path, remote: true, class:"btn btn-primary w-100 fa fa-plus", id:"add_sprint" %>
+      </div>
+    <% end %>
   </div>
 </div>
 <div class="container mt-3">
@@ -23,7 +23,7 @@
           <th><%= t('shared.end_date') %></th>
           <th><%= t('shared.est_start_date') %></th>
           <th><%= t('shared.est_end_date') %></th>
-          <th>Actions</th>
+          <th><%= t('shared.actions') %></th>
         </tr>
       </thead>
       <tbody>
