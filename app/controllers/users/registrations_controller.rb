@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-
-  # GET /resource/sign_up
-
-  # POST /resource
   def create
     stored_subdomain = nil
     begin
@@ -21,14 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     redirect_to new_user_session_url(subdomain: stored_subdomain)
   end
-
-  # GET /resource/edit
-
-  # PUT /resource
-
-  # DELETE /resource
-
-  # GET /resource/cancel
 
   def user_params_filter
     params.require(:user).permit(:name,

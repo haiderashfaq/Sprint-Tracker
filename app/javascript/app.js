@@ -3,13 +3,12 @@ import 'datatables.net-bs5';
 $(document).ready(function() {
   $(".js-select-field").select2({
   });
-
-  $('body').on('select2:open', '.js-select-field', () => {
-    document.querySelector('.select2-search__field').focus();
-  });
-  $("#name").change(function(){
-  $("#subdomain").val($("#name").val())
-  }); 
+    $('body').on('select2:open', '.js-select-field', () => {
+      document.querySelector('.select2-search__field').focus();
+    });
+    $("#name").change(function(){
+    $("#subdomain").val($("#name").val())
+    }); 
 });
 
 

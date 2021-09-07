@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
   def index
     respond_to do |format|
-    format.html
-    format.json { render json: UserDatatable.new(params) }
+      format.html
+      format.json { render json: UserDatatable.new(params) }
     end
   end
 
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         format.html { redirect_to @user, notice: t('shared.success.update', resource_label: t('users.project_label')) }
       else
-       format.html { render :edit, alert: t('shared.failure.update', resource_label: t('users.project_label')) }
+        format.html { render :edit, alert: t('shared.failure.update', resource_label: t('users.project_label')) }
       end
     end
   end
@@ -55,14 +55,14 @@ class UsersController < ApplicationController
     end
   end
 
-private
+  private
 
-def user_params
-  params.require(:user).permit(:name,
-      :email,
-      :password,
-      :phone_num,
-      :role_id,
-      company_attributes: [:name, :subdomain]) 
+  def user_params
+    params.require(:user).permit(:name,
+        :email,
+        :password,
+        :phone_num,
+        :role_id,
+        company_attributes: [:name, :subdomain]) 
   end
 end

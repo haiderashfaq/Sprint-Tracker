@@ -7,6 +7,7 @@ class Ability
     # Define abilities for the passed in user here. For example:
 
     return if user.nil?
+
     if user.account_owner?
       can :manage, User
       admin_permissions_for_project(user)
@@ -55,5 +56,4 @@ class Ability
   def member_permissions_for_issues(user)
     can :create, Issue, company_id: user.company_id
   end
-  
 end
