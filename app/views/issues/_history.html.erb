@@ -6,12 +6,12 @@
     <%= distance_of_time_in_words(audit.created_at, Time.zone.now) %> ago
     <hr class="mt-1"/>
     <ul>
-      <% audit.audited_changes.each do |attribute, value| %>
+      <% audit[:audited_changes].each do |attribute, value| %>
         <li> 
           <b><%= attribute.titleize %></b>
           updated from <I><%= value[0] %></I> to <I><%= value[1] %></I>
         </li>
-      <%end%>
+      <% end %>
     </ul>
   <% end %>
 <div class="d-flex justify-content-left lead"><%= t('issues.no_histoires') if issue.audits.size == 1  %><div>

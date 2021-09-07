@@ -44,6 +44,7 @@ en:
     actual_start_date: 'Actual Start Date'
     actual_end_date: 'Actual End Date'
     no_histoires: 'No Histories yet!'
+    history_label: 'History'
   projects:
     project_label: 'Project'
     manager: "Project Manager"
