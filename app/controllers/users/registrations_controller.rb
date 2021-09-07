@@ -7,8 +7,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       stored_subdomain = Company.build_user(user_params_filter)
       
     rescue ActiveRecord::RecordInvalid => e
-      render new_user_registration_url and return
-      flash[:alert] = e
+      render new_user_registration_url
+      flash[:alert] = e.message
     end
     redirect_to new_user_session_url(subdomain: stored_subdomain)
   end

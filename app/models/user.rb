@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   ROLE_ID = { admin: 1, member: 2 }.freeze
 
-  def self.get_role
+  def self.get_roles
     ROLE_ID.map{|key, index| [key.capitalize, index]}
   end
 

@@ -10,10 +10,10 @@ class UserDatatable < AjaxDatatablesRails::ActiveRecord
   def data
     records.map do |record|
       {
-      name: record.name,
-      email:      record.email,
-      role_id:    record.role_id== 1? "Admin" : "Member",
-      DT_RowId:   record.id,
+        name: record.name,
+        email:      record.email,
+        role_id:    record.role_id== 1? "Admin" : "Member",
+        DT_RowId:   record.id,
       }
     end
   end
