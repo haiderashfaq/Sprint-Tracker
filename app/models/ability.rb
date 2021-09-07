@@ -10,18 +10,17 @@ class Ability
 
     if user.admin?
       admin_permissions_for_project
-      admin_permissions_for_issues
+      admin_permissions_for_issues(user)
     elsif user.member?
       member_permissions_for_issues(user)
       member_permissions_for_project(user)
       creator_permissions_for_issues(user)
       reviewer_permissions_for_issues(user)
       assignee_permissions_for_issues(user)
-      can :create, Project
     end
   end
 
-  def admin_permissions_for_issues
+  def admin_permissions_for_issues(user)
     can :manage, Issue, company_id: user.company_id
   end
 
