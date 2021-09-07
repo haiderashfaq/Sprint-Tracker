@@ -7,28 +7,23 @@
             <%= image_tag "logo.png" , class: 'logo'%>
             <h1 class="ms-3 h4 text-dark mt-2 ">Company List</h1>
           </div>
-  
           <%= form_with url: list_companies_url do |form| %>
             <% if @companies.empty? %>
-                <div class="container text-center">
-                  <%= render partial: 'Shared/no_resource_present', locals: { record: 'projects.project_label' } %>
-                </div>
+              <div class="container text-center">
+                <%= render partial: 'Shared/no_resource_present', locals: { record: 'projects.project_label' } %>
+              </div>
             <% else %>
-                    <% @companies.each do |company| %>
-                        <div class="card w-100 text-center" style="width: 18rem;">
-                        <div class="card-body">
-                        <%= form.label company.name %>
-                          <br>
-                          <%= link_to "Go to link",  new_user_session_url(subdomain: company.subdomain), {class: 'btn btn-primary'}%>
-                        </div>
-                        </div>
-						            
-                    <% end %>
+              <% @companies.each do |company| %>
+                <div class="card w-100 text-center" style="width: 18rem;">
+	                <div class="card-body">
+		                <%= form.label company.name %>
+		              	<br>
+		                <%= link_to "Go to link",  new_user_session_url(subdomain: company.subdomain), {class: 'btn btn-primary'}%>
+	                </div>
+                </div>    
+              <% end %>
             <% end %>
-          <% end %>
-
-	                               
-	                        
+          <% end %>                  
         </div>
       </div>
     </div>
