@@ -12,4 +12,20 @@ module ApplicationHelper
       flash_type.to_s
     end
   end
+
+  def start_date_label(start_date)
+    if start_date.nil? && start_date < Date.today
+      t('shared.started_on')
+    else
+      t('shared.starting_on')
+    end
+  end
+
+  def end_date_label(end_date)
+    if end_date.nil? && end_date < Date.today
+      t('shared.ended_on')
+    else
+      t('shared.due_on')
+    end
+  end
 end

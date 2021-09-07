@@ -16,9 +16,9 @@
           <%= @current_company&.name %>
         </div>
         <div class="navbar navbar-dark flex-column bg-dark">
-          <%= link_to ' Dashboard', root_path, class: "navbar-brand btn fa fa-home" %>
-          <%= link_to ' Projects', projects_path, class: "navbar-brand btn fa fa-list-alt" %>
-          <%= link_to ' '+t('users.log_out'), destroy_user_session_path, method: :delete, class: "navbar-brand btn" %>
+          <%= link_to t('shared.dashboard'), root_path, class: "navbar-brand btn fa fa-home" %>
+          <%= link_to t('projects.project_label').pluralize(), projects_path, class: "navbar-brand btn fa fa-list-alt" %>
+          <%= link_to +t('users.log_out'), destroy_user_session_path, method: :delete, class: "navbar-brand btn" %>
         </div>
       </div>
       <div class="col-11">
@@ -27,17 +27,7 @@
           <%= render partial: 'shared/flash_messages', flash: flash %>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="js-modal">
-              </div>
-            </div>
-          </div>
+        <div class="modal fade" id="modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         </div>
         <!-- Body Content -->
         <%= yield %>

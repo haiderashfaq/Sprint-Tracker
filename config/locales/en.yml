@@ -31,7 +31,6 @@
 
 en:
   projects:
-
     project_label: 'Project'
     manager: "Project Manager"
   
@@ -42,7 +41,7 @@ en:
     name: "Name"
     edit: 'Edit'
     back: 'Back'
-    close: "Close"
+    cancel: "Cancel"
     due_on: "Due On"
     delete: 'Delete'
     actions: "Actions"
@@ -50,6 +49,7 @@ en:
     end_date: "End Date"
     ended_on: "Ended On"
     creator: "Created By"
+    dashboard: "Dashboard" 
     start_date: "Start Date"
     started_on: "Started On"    
     starting_on: "Starting On"

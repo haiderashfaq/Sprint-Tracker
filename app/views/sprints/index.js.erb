@@ -1,1 +1,1 @@
-$('#navbarOption').html("<%= escape_javascript render('index') %>");
+$('#nav-sprints').html("<%= escape_javascript render('sprints_list', sprints: @sprints, project: @project) %>");
