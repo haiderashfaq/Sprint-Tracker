@@ -19,13 +19,13 @@
             <p><strong><%= start_date_label(sprint.start_date) %>:</strong></p>
           </div>
           <div class="col-3">
-            <p><%= sprint.start_date.to_s(:long) %></p>
+            <p><%= sprint.start_date&.to_formatted_s(:long) %></p>
           </div>
           <div class="col-3 ">
             <p><strong><%= end_date_label(sprint.end_date) %>:</strong></p>
           </div>
           <div class="col-3">
-            <p><%= sprint.end_date.to_s(:long) %></p>
+            <p><%= sprint.end_date&.to_formatted_s(:long) %></p>
           </div>
         </div>
         <div class="row bm-3">
@@ -33,19 +33,26 @@
             <p><strong><%= t('shared.est_start_date') %>:</strong></p>
           </div>
           <div class="col-3">
-            <p><%= sprint.estimated_start_date.to_s(:long) %></p>
+            <p><%= sprint.estimated_start_date&.to_formatted_s(:long) %></p>
           </div>
           <div class="col-3 ">
             <p><strong><%= t('shared.est_end_date') %>:</strong></p>
           </div>
           <div class="col-3">
-            <p><%= sprint.estimated_end_date.to_s(:long) %></p>
+            <p><%= sprint.estimated_end_date&.to_formatted_s(:long) %></p>
+          </div>
+          <div class="row bm-3">
+            <div class="col-3 ">
+              <p><strong><%= t('shared.desc') %>:</strong></p>
+            </div>
+            <div class="col-9">
+              <p><%= sprint.description %></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
+      </div>
     </div>
   </div>
-</div>

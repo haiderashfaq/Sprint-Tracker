@@ -7,7 +7,7 @@ class Project < ApplicationRecord
 
   include DateValidations
   sequenceid :company, :projects
-  validates :name, :manager_id, :owner_id, presence: true
+  validates :name, :manager_id, :creator_id, presence: true
   validates :name, length: { maximum: 100, minimum: 4 }
   validate_dates :start_date, :end_date
 end

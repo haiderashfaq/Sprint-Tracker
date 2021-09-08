@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects/
   def create
-    @project.owner = current_user
+    @project.creator = current_user
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: t('shared.success.create', resource_label: t('projects.project_label')) }
