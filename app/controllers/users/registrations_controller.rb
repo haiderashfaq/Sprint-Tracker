@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       subdomain = Company.create_symbol!(user_params)
     rescue ActiveRecord::RecordInvalid => e
       build_resource({})
-      flash.now[:alert] = e.message
+      flash.now[:error] = e.message.split(',')
       render 'new' and return
     end
     redirect_to new_user_session_url(

@@ -1,7 +1,6 @@
 
-<% if SUBDOMAIN_OPTIONS.any? { |subdomain| subdomain == request.subdomain }
-%>
-  <%= render partial: "findbyemail" %>
+<% if SUBDOMAIN_OPTIONS.include? request.subdomain %>
+  <%= render partial: "find_by_email" %>
   
 <% else %>
   <%= render partial: "form", locals: { resource: resource, email:params[:email] } %> 

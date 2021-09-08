@@ -40,7 +40,8 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         format.html { redirect_to @user, notice: t('shared.success.update', resource_label: t('users.user_label')) }
       else
-        format.html { render :edit, alert: t('shared.failure.update', resource_label: t('users.user_label')) }
+        flash.now[:alert] = t('shared.failure.update', resource_label: t('users.user_label'))
+        format.html { render :edit }
       end
     end
   end
