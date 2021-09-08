@@ -32,7 +32,10 @@
       <p><%= @user.email %></p>
     </div>
     <div class="col-3">
-      <p><%= @user.role_id == 1? "Admin" : "Member"%></p>
+      <p><strong><%=t('users.role')%>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= role_name(@user.role_id, @user.id)%></p>
     </div>
   </div>
   <hr/>

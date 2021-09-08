@@ -12,7 +12,7 @@ class UserDatatable < AjaxDatatablesRails::ActiveRecord
       {
         name: record.name,
         email:      record.email,
-        role_id:    record.role_id== 1? "Admin" : "Member",
+        role_id:    role_name(user.role_id, user.id),
         DT_RowId:   record.id,
       }
     end

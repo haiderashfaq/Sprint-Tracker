@@ -1,1 +1,2 @@
 RECORDS_PER_PAGE = 10
+SUBDOMAIN_OPTIONS = ['', 'www'].freeze

@@ -6,9 +6,13 @@ $(document).ready(function() {
     $('body').on('select2:open', '.js-select-field', () => {
       document.querySelector('.select2-search__field').focus();
     });
-    $("#name").change(function(){
-    $("#subdomain").val($("#name").val())
-    }); 
+    
+});
+
+$(document).on('change', 'input', function() {
+  $("#name").change(function(){
+  $("#subdomain").val($("#name").val())
+  }); 
 });
 
 

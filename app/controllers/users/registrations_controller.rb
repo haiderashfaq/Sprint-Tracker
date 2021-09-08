@@ -2,18 +2,20 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
-    stored_subdomain = nil
     begin
-      stored_subdomain = Company.build_user(user_params_filter)
-      
+      subdomain = Company.create_symbol!(user_params)
     rescue ActiveRecord::RecordInvalid => e
-      render new_user_registration_url
-      flash[:alert] = e.message
+      build_resource({})
+      render 'new' and return
+      flash.now[:alert] = e.message
     end
-    redirect_to new_user_session_url(subdomain: stored_subdomain)
+    redirect_to new_user_session_url(
+      subdomain: subdomain,
+      email: params[:user][:email]
+    )
   end
 
-  def user_params_filter
+  def user_params
     params.require(:user).permit(:name,
       :email,
       :password,

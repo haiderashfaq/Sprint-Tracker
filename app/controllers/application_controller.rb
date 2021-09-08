@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   around_action :set_tenant_id
 
   before_action :authenticate_user!, except: [:list_company]
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -28,7 +27,7 @@ class ApplicationController < ActionController::Base
   def current_company
     @current_company ||=
       case request.subdomain
-      when 'www', '', nil
+      when 'www', ''
         nil
       else
         Company.find_by!(subdomain: request.subdomain)
@@ -36,13 +35,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    users_path
-  end
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :phone_num, company_attributes: [ :name, :subdomain ])}
-    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password) }
+    root_path
   end
 end
