@@ -1,1 +1,1 @@
-$('#navbarOption').html("<%= escape_javascript render('index') %>");
+$('#nav-users').html("<%= escape_javascript render('users_list', project: @project, projects_users: @projects_users) %>");

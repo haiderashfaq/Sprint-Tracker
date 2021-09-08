@@ -48,25 +48,29 @@ en:
     name: "Name"
     edit: 'Edit'
     back: 'Back'
+    role: 'Role'
     cancel: "Cancel"
     due_on: "Due On"
+    member: "Member"
     delete: 'Delete'
     actions: "Actions"
     details: "Details"
     end_date: "End Date"
     ended_on: "Ended On"
     creator: "Created By"
-    dashboard: "Dashboard" 
+    dashboard: "Dashboard"
     start_date: "Start Date"
     started_on: "Started On"    
     starting_on: "Starting On"
-    manager: "Project Manager" 
+    manager: "Project Manager"
+    owner: "Company Owner"
     confirmation: "Are you sure?"
     est_end_date: "Estimated End Date"
     est_start_date: "Estimated Start Date"
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
     success:
+      add: "%{resource_label} added Successfully"
       create: "%{resource_label} Created Successfully"
       update: "%{resource_label} Updated Successfully"
       delete: "%{resource_label} Deleted Successfully"
@@ -81,4 +85,3 @@ en:
     submit:
       create: "Create %{model}"
       update: "Update %{model}"
-

@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
     @project.owner = current_user
     respond_to do |format|
       if @project.save
+        ProjectsUser.create(project: @project, user: @project.manager)
         format.html { redirect_to @project, notice: t('shared.success.create', resource_label: t('projects.project_label')) }
       else
         format.html do

@@ -1,0 +1,10 @@
+<% if @project.errors.any? %>
+  $('#modal .modal-body').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+<% else %>
+  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  <% @users.each do |user| %>
+    <% projects_user = @project.projects_users.find_by(user: user) %>
+    $('#projects_user_table_body').append("<%= escape_javascript render 'user_datatable_row', project: @project, projects_user: projects_user %>");
+  <% end %>
+  $('#formCloseBtn').click();
+<% end %>
