@@ -1,9 +1,9 @@
 <tr id="sprint_<%= sprint.sequence_num %>">
   <td><%= sprint.creator.email %></td>
-  <td><%= sprint.start_date %></td>
-  <td><%= sprint.end_date %></td>
-  <td><%= sprint.est_start_date %></td>
-  <td><%= sprint.est_end_date %></td>
+  <td><%= sprint.start_date.to_s(:long) %></td>
+  <td><%= sprint.end_date.to_s(:long) %></td>
+  <td><%= sprint.estimated_start_date.to_s(:long) %></td>
+  <td><%= sprint.estimated_end_date.to_s(:long) %></td>
   <td>
     <% if can? :read, Sprint %>
       <%= link_to ' ', [project, sprint], remote: true, class:"fa fa-eye" %>

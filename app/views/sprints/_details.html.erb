@@ -19,13 +19,13 @@
             <p><strong><%= start_date_label(sprint.start_date) %>:</strong></p>
           </div>
           <div class="col-3">
-            <p><%= sprint.start_date %></p>
+            <p><%= sprint.start_date.to_s(:long) %></p>
           </div>
           <div class="col-3 ">
             <p><strong><%= end_date_label(sprint.end_date) %>:</strong></p>
           </div>
           <div class="col-3">
-            <p><%= sprint.end_date %></p>
+            <p><%= sprint.end_date.to_s(:long) %></p>
           </div>
         </div>
         <div class="row bm-3">
@@ -33,13 +33,13 @@
             <p><strong><%= t('shared.est_start_date') %>:</strong></p>
           </div>
           <div class="col-3">
-            <p><%= sprint.est_start_date %></p>
+            <p><%= sprint.estimated_start_date.to_s(:long) %></p>
           </div>
           <div class="col-3 ">
             <p><strong><%= t('shared.est_end_date') %>:</strong></p>
           </div>
           <div class="col-3">
-            <p><%= sprint.est_end_date %></p>
+            <p><%= sprint.estimated_end_date.to_s(:long) %></p>
           </div>
         </div>
       </div>

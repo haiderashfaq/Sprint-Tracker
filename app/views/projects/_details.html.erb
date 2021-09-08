@@ -18,13 +18,13 @@
       <p><strong><%= start_date_label(project.start_date) %>:</strong></p>
     </div>
     <div class="col-3">
-      <p><%= project.start_date %></p>
+      <p><%= project.start_date.to_s(:long) %></p>
     </div>
     <div class="col-3 ">
       <p><strong><%= end_date_label(project.end_date) %>:</strong></p>
     </div>
     <div class="col-3">
-      <p><%= project.end_date %></p>
+      <p><%= project.end_date.to_s(:long) %></p>
     </div>
   </div>
 </div>

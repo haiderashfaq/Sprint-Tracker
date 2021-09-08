@@ -9,7 +9,7 @@ module DateValidations
           end_date = public_send end_date_column
 
           if start_date.present? && end_date.present? && start_date > end_date
-            errors.add(end_date_column, "can\'t be before #{start_date_column.to_s.humanize}")
+            errors.add(end_date_column, "can't be before #{start_date_column.to_s.humanize}")
           end
         end
       end
