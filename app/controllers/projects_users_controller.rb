@@ -1,6 +1,7 @@
 class ProjectsUsersController < ApplicationController
   load_and_authorize_resource :project, find_by: :sequence_num
-  load_and_authorize_resource :projects_user, through: :project
+  load_and_authorize_resource :projects_user, through: :project, except: :create
+  authorize_resource only: :create
 
   # POST /projects/:sequence_num/projects_users
   def index
