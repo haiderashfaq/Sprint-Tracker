@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects/
   def create
-    @project.owner = current_user
+    @project.creator = current_user
     respond_to do |format|
       if @project.save
         ProjectsUser.create(project: @project, user: @project.manager)

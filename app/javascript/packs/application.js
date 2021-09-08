@@ -11,6 +11,7 @@ import "channels"
 require('select2')
 require("bootstrap")
 require("../app.js")
+require("flatpickr");
 global.$ = global.jQuery = require("jquery");
 
 document.addEventListener("turbolinks:load", function() {
@@ -21,5 +22,5 @@ document.addEventListener("turbolinks:load", function() {
 })
 
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()

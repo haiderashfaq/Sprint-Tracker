@@ -1,3 +1,3 @@
-$('#modal .modal-header').html("<h1><%= @project.name %></h1>");
 $('#modal').html("<%= escape_javascript render('details', project: @project, sprint: @sprint) %>");
+$('#modal .modal-header').html("<h1><%= @sprint.name %></h1>");
 $('#modal').modal('show');

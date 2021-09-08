@@ -55,6 +55,7 @@ en:
     delete: 'Delete'
     actions: "Actions"
     details: "Details"
+    desc: "Description"
     end_date: "End Date"
     ended_on: "Ended On"
     creator: "Created By"

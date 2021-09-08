@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def start_date_label(start_date)
-    if start_date.nil? && start_date < Date.today
+    if start_date.present? && start_date < Date.today
       t('shared.started_on')
     else
       t('shared.starting_on')
@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def end_date_label(end_date)
-    if end_date.nil? && end_date < Date.today
+    if end_date.present? && end_date < Date.today
       t('shared.ended_on')
     else
       t('shared.due_on')
