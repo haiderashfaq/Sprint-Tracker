@@ -1,7 +1,6 @@
 module UserHelper
-  ROLE_ID = { admin: 1, member: 2 }.freeze
-  def get_roles
-    ROLE_ID.map { |key, index| [key.capitalize, index] }
+  def user_roles_dropdown_options_for_select
+    User::ROLE_ID.map { |label, id| [label.capitalize, id] }
   end
 
   def role_name(role_id, user_id)

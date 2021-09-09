@@ -98,6 +98,11 @@ en:
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"
 
+  roles:
+    admin: Admin
+    account_owner: Account Owner
+    member: Member
+
   users:
     user_label: 'User'
     log_in: "Log In"

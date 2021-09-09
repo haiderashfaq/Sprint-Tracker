@@ -14,8 +14,9 @@ $(document).ready(function() {
       "info": false
     });
 
-    $('#name').on('change', function(){
-      $('#subdomain').val($("#name").val())
+    $('.js-registration-form .js-name-field').on('keyup', function(){
+      var subdomain = $("#name").val().toLowerCase();
+      $('#subdomain').val(subdomain.replace(/[^a-z0-9]/g, '').substring(0, 25));
     });
     // $('#users-datatable').DataTable().ajax.reload();
     // $('#users-datatable').dataTable({

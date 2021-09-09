@@ -13,9 +13,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }
   validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
   validates :name, presence: true, length: { minimum: 2, maximum: 22 }
-  validates :role_id, presence: true, inclusion: { in: [1, 2] }
   ROLE_ID = { admin: 1, member: 2 }.freeze
-  
+  validates :role_id, presence: true, inclusion: { in: ROLE_ID.values }
+
   def account_owner?
     id == company.owner_id
   end
@@ -26,6 +26,16 @@ class User < ApplicationRecord
 
   def member?
     role_id == ROLE_ID[:member]
+  end
+
+  def role_name
+    if account_owner?
+      I18n.t('roles.account_owner')
+    elsif admin?
+      I18n.t('roles.admin')
+    else
+      I18n.t('roles.member')
+    end
   end
 
   def email_required?

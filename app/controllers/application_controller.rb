@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     flash[:error] = exception.message
-    redirect_to root_url
+    render file: 'public/404.html', status: :not_found
   end
 
   def set_tenant_id
@@ -25,15 +25,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_company
-    @current_company ||=
-      if SUBDOMAIN_OPTIONS.include? request.subdomain
-        nil
-      else
-        Company.find_by!(subdomain: request.subdomain)
-      end
+    return if PUBLIC_SUBDOMAINS.include? request.subdomain
+
+    @current_company ||= Company.find_by!(subdomain: request.subdomain)
   end
 
-  def after_sign_in_path_for(resource)
-    root_path
-  end
 end

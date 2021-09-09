@@ -25,7 +25,7 @@
       <tr>  
         <td><%=link_to user.name, user %></td>
         <td><%= user.email %></td> 
-        <td><%= role_name(user.role_id, user.id)%></td> 
+        <td><%= user.role_name %></td> 
         <td>
           <% if can? :edit, user %>
           <%= link_to "", edit_user_path(user), class: "bi bi-pencil-fill"  %>

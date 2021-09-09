@@ -1,5 +1,5 @@
 
-<% if SUBDOMAIN_OPTIONS.include? request.subdomain %>
+<% if PUBLIC_SUBDOMAINS.include? request.subdomain %>
   <%= render partial: "find_by_email" %>
   
 <% else %>
