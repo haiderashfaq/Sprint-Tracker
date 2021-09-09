@@ -1,43 +1,24 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-
-  # GET /resource/sign_up
-  def new
-    if !params[:subdomain1].nil?
-      redirect_to new_user_session_url(subdomain: params[:subdomain1])
-    else
-      super
-    end
-  end
-
-  # POST /resource
   def create
-    stored_subdomain = nil
     begin
-      Company.transaction do
-        build_resource(user_params_filter) # will be the similar to user = User.new(sign_up_params)
-        resource.company.owner = resource # resource will be an instance of User
-        resource.role_id = User::ROLE_ID[:admin]
-        resource.save!
-        stored_subdomain = resource.company.subdomain
-      end
+      build_resource(user_params)
+      resource.company.owner = resource # resource will be an instance of User
+      resource.role_id = User::ROLE_ID[:admin]
+      resource.save!
     rescue ActiveRecord::RecordInvalid => e
-      redirect_to new_user_registration_url and return
-      puts e
+      flash.now[:error] = e.record.errors.full_messages
+      render 'new' and return
     end
-    redirect_to new_user_session_url(subdomain: stored_subdomain)
+    flash[:notice] = t('shared.success.create', resource_label: t('users.user_label'))
+    redirect_to new_user_session_url(
+      subdomain: resource.company.subdomain,
+      email: params[:user][:email]
+    )
   end
 
-  # GET /resource/edit
-
-  # PUT /resource
-
-  # DELETE /resource
-
-  # GET /resource/cancel
-
-  def user_params_filter
+  def user_params
     params.require(:user).permit(:name,
       :email,
       :password,

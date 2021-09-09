@@ -11,6 +11,7 @@ class Ability
       cannot :manage, User, id: user.company.owner_id
       admin_permissions_for_sprint
       admin_permissions_for_project(user)
+      admin_permissions_for_users(user)
       admin_permissions_for_issues(user)
       admin_permissions_for_time_logs(user)
     elsif user.member?
@@ -23,12 +24,21 @@ class Ability
       assignee_permissions_for_issues(user)
     end
   end
+
+  def admin_permissions_for_users(user)
+    can :manage, User
+    unless user.account_owner?
+      cannot %i[edit update destroy], User, id: user.company.owner_id
+    end
+  end
+
   def admin_permissions_for_issues(user)
     can :manage, Issue, company_id: user.company_id
   end
   def admin_permissions_for_project(user)
     can %i[update read create delete], Project, company_id: user.company_id
   end
+
 
   def admin_permissions_for_time_logs(user)
     can :manage, TimeLog, company_id: user.company_id
@@ -64,3 +74,4 @@ class Ability
     can :create, Issue, company_id: user.company_id
   end
 end
+

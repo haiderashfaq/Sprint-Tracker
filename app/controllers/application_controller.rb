@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
 
-  before_action :authenticate_user!, except: [:list_company]
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!, except: [:list_companies]
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -15,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     flash[:error] = exception.message
-    redirect_to root_url
+    render file: 'public/404.html', status: :not_found
   end
 
   def set_tenant_id
@@ -26,24 +25,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_company
-    @current_company ||=
-      case request.subdomain
-      when 'www', ''
-        nil
-      else
-        Company.find_by!(subdomain: request.subdomain)
-      end
-  end
+    return if PUBLIC_SUBDOMAINS.include? request.subdomain
 
-  def after_sign_in_path_for(resource)
-    users_path
-  end
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :phone_num, company_attributes: [:name, :subdomain])}
-
-    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password)}
+    @current_company ||= Company.find_by!(subdomain: request.subdomain)
   end
 end

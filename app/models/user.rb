@@ -1,8 +1,5 @@
 class User < ApplicationRecord
   sequenceid :company, :users
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
@@ -14,16 +11,11 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :company
   validates :email, presence: true, uniqueness: { scope: :company_id }
   validates_format_of :email, with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-
+  validates :password, presence: true, length: { minimum: 6, maximum: 128 }
+  validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
+  validates :name, presence: true, length: { minimum: 2, maximum: 22 }
   ROLE_ID = { admin: 1, member: 2 }.freeze
-
-  def self.get_role
-    ROLE_ID.map{|key, index| [key.capitalize, index]}
-  end
-
-  def self.get_role_id(string)
-    ROLE_ID[string]
-  end
+  validates :role_id, presence: true, inclusion: { in: ROLE_ID.values }
 
   def account_owner?
     id == company.owner_id
@@ -35,6 +27,16 @@ class User < ApplicationRecord
 
   def member?
     role_id == ROLE_ID[:member]
+  end
+
+  def role_name
+    if account_owner?
+      I18n.t('roles.account_owner')
+    elsif admin?
+      I18n.t('roles.admin')
+    else
+      I18n.t('roles.member')
+    end
   end
 
   def email_required?

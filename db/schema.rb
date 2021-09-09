@@ -124,6 +124,41 @@ ActiveRecord::Schema.define(version: 2021_09_08_110337) do
     t.index ["sequence_num", "issue_id"], name: "index_time_logs_on_sequence_num_and_issue_id", unique: true
   end
 
+  create_table "sprints", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "estimated_start_date"
+    t.datetime "estimated_end_date"
+    t.integer "sequence_num", null: false
+    t.bigint "project_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "creator_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_sprints_on_company_id"
+    t.index ["creator_id"], name: "index_sprints_on_creator_id"
+    t.index ["project_id"], name: "index_sprints_on_project_id"
+    t.index ["sequence_num"], name: "index_sprints_on_sequence_num"
+  end
+
+  create_table "time_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.date "date"
+    t.decimal "logged_time", precision: 10, scale: 2, null: false
+    t.text "work_description", null: false
+    t.bigint "company_id", null: false
+    t.bigint "issue_id", null: false
+    t.bigint "assignee_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "sequence_num", null: false
+    t.index ["assignee_id"], name: "index_time_logs_on_assignee_id"
+    t.index ["company_id"], name: "index_time_logs_on_company_id"
+    t.index ["issue_id"], name: "index_time_logs_on_issue_id"
+    t.index ["sequence_num", "issue_id"], name: "index_time_logs_on_sequence_num_and_issue_id", unique: true
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -148,6 +183,10 @@ ActiveRecord::Schema.define(version: 2021_09_08_110337) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users", column: "creator_id"
   add_foreign_key "projects", "users", column: "manager_id"
+<<<<<<< HEAD
+=======
+  add_foreign_key "projects", "users", column: "owner_id"
+>>>>>>> 836860996efe408153017218400ec189437abc98
   add_foreign_key "sprints", "companies"
   add_foreign_key "sprints", "projects"
   add_foreign_key "sprints", "users", column: "creator_id"

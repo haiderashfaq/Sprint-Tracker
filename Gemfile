@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.1'
 
 # add internalization
-gem 'rails-i18n'
 # wrapper on datatables for server side processing
 gem 'ajax-datatables-rails', '=1.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

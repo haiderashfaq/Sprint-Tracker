@@ -92,13 +92,20 @@ en:
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
     success:
+      fetched: "%{resource_label} Retrieved Successfully"
       create: "%{resource_label} Created Successfully"
       update: "%{resource_label} Updated Successfully"
       delete: "%{resource_label} Deleted Successfully"
     failure:
+      fetched: "Cannot Find Companies registered with this %{resource_label} "
       create: "%{resource_label} Creation Failed"
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"
+
+  roles:
+    admin: Admin
+    account_owner: Account Owner
+    member: Member
 
   users:
     user_label: 'User'

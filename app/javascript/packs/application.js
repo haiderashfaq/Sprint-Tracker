@@ -21,10 +21,10 @@ require("flatpickr");
 global.$ = global.jQuery = require("jquery");
 
 document.addEventListener("turbolinks:load", function() {
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-        $('[data-toggle="popover"]').popover()
-    })
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
+  })
 })
 
 Rails.start()
