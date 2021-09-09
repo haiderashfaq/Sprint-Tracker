@@ -5,14 +5,14 @@
     </div>
     <% if can? :edit, @project %>
       <div class="col-2">
-        <%= link_to t('shared.edit'), edit_project_path(@project), class: "btn btn-primary w-100 fa fa-pencil" %>
+        <%= link_to t('shared.edit'), edit_project_path(@project), class: "btn btn-primary w-100 bi bi-pencil" %>
       </div>
     <% end %>
     <% if can? :destroy, @project %>
       <div class="col-2">
         <%= link_to t('shared.delete'), project_path(@project),
                 method: :delete,
-                data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 fa fa-trash" %>
+                data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 bi bi-trash" %>
       </div>
     <% end %>
   </div>

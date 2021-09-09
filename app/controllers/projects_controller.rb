@@ -69,7 +69,10 @@ class ProjectsController < ApplicationController
       if @project.destroy
         format.html { redirect_to projects_url, alert: t('shared.success.delete', resource_label: t('projects.project_label')) }
       else
-        format.html { render :show, alert: t('shared.failure.delete', resource_label: t('projects.project_label')) }
+        format.html do
+          flash.now[:error] = t('shared.failure.delete', resource_label: t('projects.project_label'))
+          render :show
+        end
       end
     end
   end

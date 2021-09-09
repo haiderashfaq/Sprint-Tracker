@@ -33,6 +33,7 @@ en:
   projects:
     project_label: 'Project'
     manager: "Project Manager"
+    deletion_error: "Delete all sprints before deleting project"
   
   sprints:
     label: 'Sprint'
@@ -43,6 +44,7 @@ en:
     profile: "Profile"
     log_out: "Log Out"
     sign_up: "Sign Up"
+    duplicate_error: "User already exists"
 
   shared:
     name: "Name"
@@ -67,6 +69,7 @@ en:
     owner: "Company Owner"
     confirmation: "Are you sure?"
     est_end_date: "Estimated End Date"
+    date_related_error: "can't be before "
     est_start_date: "Estimated Start Date"
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"

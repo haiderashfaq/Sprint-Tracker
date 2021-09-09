@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
-    <div class="modal-header">
-    </div>
+    <div class="modal-header"></div>
+    <div class="modal-flash-messages"></div>
     <%= form_with model: [project, projects_user], local: false do |form| %>
       <div class="modal-body">
         <div class="col-12">
@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= form.submit t('shared.create_new_resource', resource_label: t('users.label')).pluralize, class: 'btn btn-primary fa fa-check' %>
+        <%= form.submit t('shared.create_new_resource', resource_label: t('users.label')).pluralize, class: 'btn btn-primary' %>
         <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.close') %></button>
       </div>
     <% end %>

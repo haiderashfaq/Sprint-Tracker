@@ -22,14 +22,17 @@ class ProjectsUsersController < ApplicationController
   # POST /projects/:sequence_num/projects_users
   def create
     user_ids = projects_user_params[:user_id].reject(&:blank?)
-    @users = User.find(user_ids)
+    users = User.find(user_ids)
+    binding.pry
 
-    @users.each do |user|
+    users.each do |user|
       @project.projects_users.build(user: user)
     end
 
     respond_to do |format|
+      binding.pry
       if @project.save
+        @projects_users = @project.projects_users.where(user_id: user_ids)
         format.js { flash.now[:notice] = t('shared.success.add', resource_label: t('users.label').pluralize) }
       else
         format.js { flash.now[:error] = @project.errors.full_messages }
@@ -42,7 +45,7 @@ class ProjectsUsersController < ApplicationController
     @projects_user = @project.projects_users.find_by(id: params[:id])
     respond_to do |format|
       if @projects_user.destroy
-        format.js { flash.now[:notice] = t('shared.success.destroy', resource_label: t('users.label')) }
+        format.js { flash.now[:notice] = t('shared.success.delete', resource_label: t('users.label')) }
       else
         format.js { flash.now[:error] = @projects_user.errors.full_messages }
       end

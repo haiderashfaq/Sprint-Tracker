@@ -10,5 +10,7 @@ $(document).ready(function() {
 
 
 var dateTimeFunc =  function(){
-  $(".js-flatpickr-datetime").flatpickr({});
+  $(".js-flatpickr-datetime").flatpickr({
+    enableTime: true
+  });
 }
