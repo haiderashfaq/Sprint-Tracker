@@ -11,6 +11,7 @@ import "channels"
 require ('../app');
 
 require('select2')
+require('datatables.net-bs5')
 require("bootstrap")
 require("../app.js")
 require("flatpickr");
