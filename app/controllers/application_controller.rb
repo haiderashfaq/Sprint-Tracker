@@ -1,8 +1,18 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
   before_action :authenticate_user!
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to root_url
+  end
   rescue_from ActionController::UnknownFormat do |exception|
-    flash[:alert] = exception.message
+    flash[:error] = exception.message
+    redirect_to root_url
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    flash[:error] = exception.message
     redirect_to root_url
   end
 

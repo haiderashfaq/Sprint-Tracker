@@ -7,7 +7,16 @@
         <% else %>
           <ul class="m-0 p-0">
             <% msg.each do |message| %>
-              <li><%= message %></li>
+              <% if message.class == Hash %>
+                <% message.each do |key, value| %>
+                  <b><%= key %></b>
+                  <% value.each do |error| %>
+                    <li class="ms-5"><%= error %></li>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <li><%= message %></li>
+              <% end %>
             <% end %>
           </ul>
         <% end %>

@@ -23,19 +23,14 @@ class ProjectsUsersController < ApplicationController
   def create
     user_ids = projects_user_params[:user_id].reject(&:blank?)
     users = User.find(user_ids)
-    binding.pry
 
-    users.each do |user|
-      @project.projects_users.build(user: user)
-    end
-
+    @projects_users = ProjectsUser.create_projects_users(@project, users)
     respond_to do |format|
-      binding.pry
-      if @project.save
-        @projects_users = @project.projects_users.where(user_id: user_ids)
+      if @projects_users.all?(&:persisted?)
         format.js { flash.now[:notice] = t('shared.success.add', resource_label: t('users.label').pluralize) }
       else
-        format.js { flash.now[:error] = @project.errors.full_messages }
+        @projects_usrers, flash.now[:error] = ProjectsUser.error_messages_and_valid_users(@projects_users)
+        format.js
       end
     end
   end

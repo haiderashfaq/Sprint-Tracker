@@ -30,6 +30,22 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  issues:
+    issue_label: 'Issue'
+    issues_label: 'Issues'
+    description: 'Description'
+    estimated_start_date: 'Estimated Start Date'
+    estimated_end_date: 'Estimated End Date'
+    status: 'Status'
+    category: 'Category'
+    priority: 'Priority'
+    title: 'Title'
+    create_issue: "Create Issue"
+    actual_start_date: 'Actual Start Date'
+    actual_end_date: 'Actual End Date'
+    no_histoires: 'No Histories yet!'
+    history_label: 'History'
+  
   projects:
     project_label: 'Project'
     manager: "Project Manager"
