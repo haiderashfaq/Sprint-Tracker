@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>SprintTracker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
@@ -10,28 +9,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <div class="row">
-      <div class="col-1">
-        <div class="container navbar-brand bg-dark text-light text-end">
-          <%= @current_company&.name %>
-        </div>
-        <div class="navbar navbar-dark flex-column bg-dark">
-          <%= link_to t('shared.dashboard'), root_path, class: "navbar-brand btn fa fa-home" %>
-          <%= link_to t('projects.project_label').pluralize(), projects_path, class: "navbar-brand btn fa fa-list-alt" %>
-          <%= link_to +t('users.log_out'), destroy_user_session_path, method: :delete, class: "navbar-brand btn" %>
-        </div>
+    <%= render partial: 'shared/flash_messages' %>
+    <%= yield %>
+      <div class="modal fade" id="modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
       </div>
-      <div class="col-11">
-        <!-- Flash Messages -->
-        <div class="container" id="flashMessages">
-          <%= render partial: 'shared/flash_messages', flash: flash %>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        </div>
-        <!-- Body Content -->
-        <%= yield %>
-      </div>
-    </div>
   </body>
 </html>

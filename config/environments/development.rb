@@ -13,7 +13,16 @@ Rails.application.configure do
 
   # Set default mailer url options to localhost and port 3000
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    user_name:      Rails.application.secrets.mail_username,
+    password:       Rails.application.secrets.mail_password,
+    domain:         'gmail.com',
+    address:       'smtp.gmail.com',
+    port:          '587',
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
   # Show full error reports.
   config.consider_all_requests_local = true
 
@@ -36,8 +45,8 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # Send error if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -74,6 +83,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  config.action_dispatch.tld_length= 0
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
   # The length of top level domain

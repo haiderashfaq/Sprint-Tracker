@@ -1,9 +1,13 @@
 class Company < ApplicationRecord
   not_multitenant
+
+  has_many :users, dependent: :destroy
+  validates :subdomain, uniqueness: true
+  belongs_to :owner, class_name: "User", optional: true
   has_many :issues, dependent: :destroy
-  belongs_to :owner, class_name: 'User', optional: true
-  has_many :users
   has_many :projects
+  validates :name, uniqueness: true
+  validates :subdomain, uniqueness: true
 
   def self.current_company_id=(id)
     Thread.current[:company_id] = id

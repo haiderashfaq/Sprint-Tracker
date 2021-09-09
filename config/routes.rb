@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  resources :projects do
-    resources :sprints
+  get '/list_companies', to: 'list_companies#list_companies'
+  post '/list_companies', to: 'list_companies#list_companies'
+
+  devise_for :users, controllers: { registrations: 'users/registrations' },
+    path: 'accounts',
+    path_names: { sign_up: 'new' }
+
+  constraints(subdomain: /^(?!www\Z)(\w+)/) do #end of input of string
+    resources :projects
     resources :issues
+
+    resources :users do
+    end
   end
-
-  resources :issues
-
-  devise_for :users
   root to: 'dashboard#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

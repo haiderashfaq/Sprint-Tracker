@@ -3,13 +3,16 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+
 global.$ = global.jQuery = require("jquery");
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-require ('../app');
+import dt from "datatables.net";
+import 'datatables.net-bs5'; 
 
+require ('../app');
 require('select2')
 require('datatables.net-bs5')
 require("bootstrap")
@@ -18,12 +21,13 @@ require("flatpickr");
 global.$ = global.jQuery = require("jquery");
 
 document.addEventListener("turbolinks:load", function() {
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-        $('[data-toggle="popover"]').popover()
-    })
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
+  })
 })
 
 Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
+
