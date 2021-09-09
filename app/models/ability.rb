@@ -26,7 +26,6 @@ class Ability
   def admin_permissions_for_users(user)
     can :manage, User
     unless user.account_owner?
-      binding.pry
       cannot %i[edit update destroy], User, id: user.company.owner_id
     end
   end
