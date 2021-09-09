@@ -1,0 +1,62 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header"></div>
+    <div class="modal-flash-messages"></div>
+    <%= form_with model: [project, sprint], local: false do |form| %>
+      <div class="modal-body">
+        <div class="row mb-3">
+          <div class="col-4">
+            <%= form.label t('shared.name') %>
+          </div>
+          <div class="col-8">
+            <%= form.text_field :name, class: 'form-control form-control-md' %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <%= form.label t('shared.desc') %>
+          </div>
+          <div class="col-8">
+            <%= form.text_area :description, class: 'form-control form-control-md' %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <%= form.label t('shared.start_date') %>
+          </div>
+          <div class="col-8">
+            <%= form.date_field :start_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <%= form.label t('shared.end_date'), class: 'col-form-label col-form-label-md control-label' %>
+          </div>
+          <div class="col-8">
+            <%= form.date_field :end_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <%= form.label t('shared.est_start_date'), class: 'col-form-label col-form-label-md control-label' %>
+          </div>
+          <div class="col-8">
+            <%= form.date_field :estimated_start_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <%= form.label t('shared.est_end_date'), class: 'col-form-label col-form-label-md control-label' %>
+          </div>
+          <div class="col-8">
+            <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= form.submit class: 'btn btn-primary fa fa-check', remote: true %>
+        <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -18,12 +18,16 @@ class ProjectsController < ApplicationController
 
   # POST /projects/
   def create
-    @project.owner_id = @current_company.user_id
+    @project.creator = current_user
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: t('shared.success.create', resource_label: t('projects.project_label')) }
       else
-        format.html { render :new, alert: t('shared.failure.create', resource_label: t('projects.project_label')) }
+        format.html do
+          flash.now[:error] = @project.errors.full_messages
+          flash.now[:error] << t('shared.failure.create', resource_label: t('projects.project_label'))
+          render :new
+        end
       end
     end
   end
@@ -41,7 +45,11 @@ class ProjectsController < ApplicationController
       if @project.update(project_params)
         format.html { redirect_to @project, notice: t('shared.success.update', resource_label: t('projects.project_label')) }
       else
-        format.html { render :edit, alert: t('shared.failure.update', resource_label: t('projects.project_label')) }
+        format.html do
+          flash.now[:error] = @project.errors.full_messages
+          flash.now[:error] << t('shared.failure.update', resource_label: t('projects.project_label'))
+          render :edit
+        end
       end
     end
   end
@@ -49,6 +57,7 @@ class ProjectsController < ApplicationController
   # GET /projects/:sequence_num
   def show
     respond_to do |format|
+      format.js
       format.html
     end
   end

@@ -45,27 +45,37 @@ en:
     actual_end_date: 'Actual End Date'
     no_histoires: 'No Histories yet!'
     history_label: 'History'
+  
   projects:
     project_label: 'Project'
     manager: "Project Manager"
-    creator: "Created By"
-    started_on: "Started On"
-    starting_on: "Starting On"
-    ended_on: "Ended On"
-    due_on: "Due On"
+  
+  sprints:
+    label: 'Sprint'
 
   shared:
     name: "Name"
-    start_date: "Start Date"
+    edit: 'Edit'
+    back: 'Back'
+    cancel: "Cancel"
+    due_on: "Due On"
+    delete: 'Delete'
+    actions: "Actions"
+    details: "Details"
+    desc: "Description"
     end_date: "End Date"
-
+    ended_on: "Ended On"
+    creator: "Created By"
+    dashboard: "Dashboard" 
+    start_date: "Start Date"
+    started_on: "Started On"    
+    starting_on: "Starting On"
     manager: "Project Manager" 
     confirmation: "Are you sure?"
-    edit: 'Edit'
-    delete: 'Delete'
-    back: 'Back'
-    create_new_resource: "Add New %{resource_label}"
+    est_end_date: "Estimated End Date"
+    est_start_date: "Estimated Start Date"
     edit_resource: "Edit %{resource_label}"
+    create_new_resource: "Add New %{resource_label}"
     success:
       create: "%{resource_label} Created Successfully"
       update: "%{resource_label} Updated Successfully"
@@ -76,8 +86,8 @@ en:
       delete: "%{resource_label} Deletion Failed"
 
   users:
-    profile: "Profile"
     log_in: "Log In"
+    profile: "Profile"
     log_out: "Log Out"
     sign_up: "Sign Up"
 
