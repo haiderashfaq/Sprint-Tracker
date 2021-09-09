@@ -12,7 +12,7 @@
       <%= form.label t('shared.start_date'), class: 'col-form-label col-form-label-md control-label' %>
     </div>
     <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-      <%= form.date_field :start_date, class: 'form-control form-control-md' %>
+      <%= form.date_field :start_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
     </div>
   </div>
   <div class="row g-3 align-items-center mb-3">
@@ -20,7 +20,7 @@
       <%= form.label t('shared.end_date'), class: 'col-form-label col-form-label-md control-label' %>
     </div>
     <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-      <%= form.date_field :end_date, class: 'form-control form-control-md' %>
+      <%= form.date_field :end_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
     </div>
   </div>
   <% if can? :create, @project %>

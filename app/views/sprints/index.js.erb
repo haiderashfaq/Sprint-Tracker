@@ -1,0 +1,6 @@
+$('#nav-sprints').html("<%= escape_javascript render('sprints_index', sprints: @sprints, project: @project) %>");
+<% if @sprints.present? %>
+	$('#sprints_datatable_space').html("<%= escape_javascript render('sprints_table', sprints: @sprints, project: @project) %>");
+<% else %>
+	$('#sprints_datatable_space').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: 'sprints.label' }) %>");
+<% end %>

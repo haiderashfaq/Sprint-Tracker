@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get '/list_companies', to: 'list_companies#list_companies'
   post '/list_companies', to: 'list_companies#list_companies'
 
@@ -7,11 +6,12 @@ Rails.application.routes.draw do
     path: 'accounts',
     path_names: { sign_up: 'new' }
 
-  root to: 'dashboard#index'
   constraints(subdomain: /^(?!www\Z)(\w+)/) do #end of input of string
     resources :projects
     resources :issues
+
     resources :users do
     end
   end
+  root to: 'dashboard#index'
 end
