@@ -82,6 +82,7 @@ en:
       update: "%{resource_label} Updated Successfully"
       delete: "%{resource_label} Deleted Successfully"
     failure:
+      fetched: "Cannot Find Companies registered with this %{resource_label} "
       create: "%{resource_label} Creation Failed"
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"

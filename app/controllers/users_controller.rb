@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
+
   def index
     respond_to do |format|
       format.html
@@ -51,7 +52,8 @@ class UsersController < ApplicationController
       if @user.destroy
         format.html { redirect_to users_url, alert: t('shared.success.delete', resource_label: t('users.user_label')) }
       else
-        format.html { render :show, alert: t('shared.failure.delete', resource_label: t('users.user_label')) }
+        flash.now[:alert] = t('shared.failure.delete', resource_label: t('users.user_label'))
+        format.html { render :show }
       end
     end
   end

@@ -8,14 +8,8 @@ class Ability
 
     return if user.nil?
 
-    if user.account_owner?
-      can :manage, User
-      admin_permissions_for_project(user)
-      admin_permissions_for_issues(user)
-
-    elsif user.admin?
-      can :manage, User
-      cannot :manage, User, id: user.company.owner_id
+    if user.admin?
+      admin_permissions_for_users
       admin_permissions_for_project(user)
       admin_permissions_for_issues(user)
     elsif user.member?
@@ -26,6 +20,10 @@ class Ability
       reviewer_permissions_for_issues(user)
       assignee_permissions_for_issues(user)
     end
+  end
+
+  def admin_permissions_for_users
+    can :manage, User
   end
 
   def admin_permissions_for_issues(user)

@@ -1,6 +1,7 @@
 module UserHelper
-  def get_roles(role_id)
-    role_id.map { |key, index| [key.capitalize, index] }
+  ROLE_ID = { admin: 1, member: 2 }.freeze
+  def get_roles
+    ROLE_ID.map { |key, index| [key.capitalize, index] }
   end
 
   def role_name(role_id, user_id)

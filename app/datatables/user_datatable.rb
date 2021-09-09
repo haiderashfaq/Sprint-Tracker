@@ -19,6 +19,5 @@ class UserDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    @users = User.all.rewhere(company_id: Company.current_company_id)
   end
 end

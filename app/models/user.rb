@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2, maximum: 22 }
   validates :role_id, presence: true, inclusion: { in: [1, 2] }
   ROLE_ID = { admin: 1, member: 2 }.freeze
-
+  
   def account_owner?
     id == company.owner_id
   end

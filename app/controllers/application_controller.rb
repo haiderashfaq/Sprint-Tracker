@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
 
-  before_action :authenticate_user!, except: [:list_company]
+  before_action :authenticate_user!, except: [:list_companies]
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -26,8 +26,7 @@ class ApplicationController < ActionController::Base
 
   def current_company
     @current_company ||=
-      case request.subdomain
-      when 'www', ''
+      if SUBDOMAIN_OPTIONS.include? request.subdomain
         nil
       else
         Company.find_by!(subdomain: request.subdomain)
