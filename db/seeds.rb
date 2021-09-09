@@ -14,3 +14,5 @@ company = Company.create([{ name: '8Vals', subdomain: '8vals', owner_id: nil },
 #                     { email: 'zain@8vals.com', password: '123456', role_id: 2, company_id: company },
 #                     { email: 'bakz@8vals.com', password: '123456', role_id: 2, company_id: company },
 #                     { email: 'tommy@7vals.com', password: '123456', role_id: 1, company_id: 2 }])
+
+# Company.first.issues.create({title: "Issue ", description: "ddd",status: "open", priority: "low", category: "hotfix", estimated_start_date: "2021-08-11", estimated_end_date:"2021-08-04", creator_id: 1})

@@ -4,7 +4,6 @@ class ApplicationRecord < ActiveRecord::Base
   def self.inherited(subclass)
     super
     self.per_page = RECORDS_PER_PAGE
-
     subclass.instance_eval do
       def subclass.not_multitenant
         @multitenant = false
