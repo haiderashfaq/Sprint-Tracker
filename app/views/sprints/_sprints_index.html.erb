@@ -1,0 +1,13 @@
+<% if can? :create, project => Sprint %>
+  <div class="container mt-3">
+    <div class="row d-flex justify-content-end">
+      <div class="col-2">
+        <%= link_to t('shared.create_new_resource', resource_label: t('sprints.label')), new_project_sprint_path, remote: true, class:"btn btn-primary w-100 fa fa-plus" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="container mt-3">
+  <div class="text-center" id="sprints_datatable_space"></div>
+</div>
+<%= will_paginate sprints %>

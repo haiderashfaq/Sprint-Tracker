@@ -1,6 +1,8 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 @import 'select2/dist/css/select2';
+@import 'flatpickr/dist/flatpickr.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 $secondary-color: #999999;
 $hover-color: #000033;
 $a-border-color: #2e6ab1;
@@ -18,6 +20,8 @@ body{
   text-align: left;
   
 }
+.progress {width: 66%;}
+
 .text-gray-400 {
   color: #000000 !important;
 }

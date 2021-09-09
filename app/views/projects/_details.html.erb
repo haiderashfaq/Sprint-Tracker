@@ -1,0 +1,30 @@
+<div class="container pt-3">
+  <div class="row bm-3">
+    <div class="col-3 ">
+      <p><strong><%= t('shared.creator') %>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= @project.creator.email %></p>
+    </div>
+    <div class="col-3 ">
+      <p><strong><%= t('projects.manager') %>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= @project.manager.email %></p>
+    </div>
+  </div>
+  <div class="row bm-3">
+    <div class="col-3 ">
+      <p><strong><%= start_date_label(project.start_date) %>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= project.start_date&.to_formatted_s(:long) %></p>
+    </div>
+    <div class="col-3 ">
+      <p><strong><%= end_date_label(project.end_date) %>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= project.end_date&.to_formatted_s(:long) %></p>
+    </div>
+  </div>
+</div>

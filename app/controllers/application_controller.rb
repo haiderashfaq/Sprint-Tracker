@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   def current_company
     @current_company ||=
       case request.subdomain
-      when 'www', '', nil
+      when 'www', ''
         nil
       else
         Company.find_by!(subdomain: request.subdomain)

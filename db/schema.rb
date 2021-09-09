@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_201741) do
+ActiveRecord::Schema.define(version: 2021_09_08_110337) do
+
+  create_table "audits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "auditable_id"
+    t.string "auditable_type"
+    t.integer "associated_id"
+    t.string "associated_type"
+    t.integer "user_id"
+    t.string "user_type"
+    t.string "username"
+    t.string "action"
+    t.json "audited_changes"
+    t.integer "version", default: 0
+    t.string "comment"
+    t.string "remote_address"
+    t.string "request_uuid"
+    t.datetime "created_at"
+    t.index ["associated_type", "associated_id"], name: "associated_index"
+    t.index ["auditable_type", "auditable_id", "version"], name: "auditable_index"
+    t.index ["created_at"], name: "index_audits_on_created_at"
+    t.index ["request_uuid"], name: "index_audits_on_request_uuid"
+    t.index ["user_id", "user_type"], name: "user_index"
+  end
 
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -25,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_09_03_201741) do
   create_table "issues", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
+    t.decimal "estimated_time", precision: 10, scale: 2, null: false
     t.string "status", null: false
     t.string "priority", null: false
     t.string "category", null: false
@@ -39,11 +62,13 @@ ActiveRecord::Schema.define(version: 2021_09_03_201741) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sequence_num", null: false
+    t.bigint "project_id"
     t.index ["assignee_id"], name: "index_issues_on_assignee_id"
     t.index ["category"], name: "index_issues_on_category"
     t.index ["company_id"], name: "index_issues_on_company_id"
     t.index ["creator_id"], name: "index_issues_on_creator_id"
     t.index ["priority"], name: "index_issues_on_priority"
+    t.index ["project_id"], name: "index_issues_on_project_id"
     t.index ["reviewer_id"], name: "index_issues_on_reviewer_id"
     t.index ["sequence_num", "company_id"], name: "index_issues_on_sequence_num_and_company_id", unique: true
     t.index ["status"], name: "index_issues_on_status"
@@ -51,17 +76,52 @@ ActiveRecord::Schema.define(version: 2021_09_03_201741) do
 
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.bigint "manager_id", null: false
-    t.bigint "owner_id", null: false
+    t.bigint "creator_id", null: false
     t.bigint "company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sequence_num", null: false
     t.index ["company_id"], name: "index_projects_on_company_id"
+    t.index ["creator_id"], name: "index_projects_on_creator_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"
-    t.index ["owner_id"], name: "index_projects_on_owner_id"
+  end
+
+  create_table "sprints", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "estimated_start_date"
+    t.datetime "estimated_end_date"
+    t.integer "sequence_num", null: false
+    t.bigint "project_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "creator_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_sprints_on_company_id"
+    t.index ["creator_id"], name: "index_sprints_on_creator_id"
+    t.index ["project_id"], name: "index_sprints_on_project_id"
+    t.index ["sequence_num"], name: "index_sprints_on_sequence_num"
+  end
+
+  create_table "time_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.date "date"
+    t.decimal "logged_time", precision: 10, scale: 2, null: false
+    t.text "work_description", null: false
+    t.bigint "company_id", null: false
+    t.bigint "issue_id", null: false
+    t.bigint "assignee_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "sequence_num", null: false
+    t.index ["assignee_id"], name: "index_time_logs_on_assignee_id"
+    t.index ["company_id"], name: "index_time_logs_on_company_id"
+    t.index ["issue_id"], name: "index_time_logs_on_issue_id"
+    t.index ["sequence_num", "issue_id"], name: "index_time_logs_on_sequence_num_and_issue_id", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -84,8 +144,15 @@ ActiveRecord::Schema.define(version: 2021_09_03_201741) do
   end
 
   add_foreign_key "companies", "users", column: "owner_id"
+  add_foreign_key "issues", "projects"
   add_foreign_key "projects", "companies"
+  add_foreign_key "projects", "users", column: "creator_id"
   add_foreign_key "projects", "users", column: "manager_id"
-  add_foreign_key "projects", "users", column: "owner_id"
+  add_foreign_key "sprints", "companies"
+  add_foreign_key "sprints", "projects"
+  add_foreign_key "sprints", "users", column: "creator_id"
+  add_foreign_key "time_logs", "companies"
+  add_foreign_key "time_logs", "issues"
+  add_foreign_key "time_logs", "users", column: "assignee_id"
   add_foreign_key "users", "companies"
 end

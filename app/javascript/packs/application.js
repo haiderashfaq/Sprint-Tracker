@@ -14,8 +14,11 @@ import 'datatables.net-bs5';
 
 require ('../app');
 require('select2')
+require('datatables.net-bs5')
 require("bootstrap")
 require("../app.js")
+require("flatpickr");
+global.$ = global.jQuery = require("jquery");
 
 document.addEventListener("turbolinks:load", function() {
     $(function () {
@@ -25,5 +28,6 @@ document.addEventListener("turbolinks:load", function() {
 })
 
 Rails.start()
+// Turbolinks.start()
 ActiveStorage.start()
 

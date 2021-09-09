@@ -6,10 +6,16 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" aria-controls="history" aria-selected="false"><%= t('issues.history_label') %></button>
     </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" remote="true" id="time_logs-tab" data-bs-toggle="tab" data-bs-target="#time_logs" type="button" role="tab" aria-controls="time_logs" aria-selected="false"><%= t('issues.time_logs_label') %></button>
+    </li>
   </ul>
   <div class="tab-content" id="issue_content">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="homee-tab"><%= render partial: "show", locals: { issue: @issue } %></div>
     <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab"><%= render partial: "history", locals: { issue: @issue } %></div>
+
   </div>
+
 </div>
+  <%= link_to 'Click Me', new_issue_time_log_path(issue_id: @issue.id), remote: true %>
 

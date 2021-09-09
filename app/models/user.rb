@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  sequenceid :company , :users
   sequenceid :company, :users
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -10,6 +9,7 @@ class User < ApplicationRecord
   has_many :assigned_issues, class_name: 'Issue', foreign_key: 'assignee_id', dependent: :nullify
   has_many :created_issues, class_name: 'Issue', foreign_key: 'creator_id', dependent: :nullify
   has_many :reviewed_issues, class_name: 'Issue', foreign_key: 'reviewer_id', dependent: :nullify
+  has_many :time_logs
   belongs_to :company
   accepts_nested_attributes_for :company
   validates :email, presence: true, uniqueness: { scope: :company_id }

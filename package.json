@@ -8,10 +8,8 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.2",
     "bootstrap": "^5.1.0",
-<<<<<<< HEAD
-=======
     "bootstrap-icons": "^1.5.0",
->>>>>>> bb5e60fd0ca6039cd3300d4c51d5ac37fc019ed7
+    "flatpickr": "^4.6.9",
     "datatables.net-bs5": "^1.10.25",
     "jquery": "^3.6.0",
     "select2": "^4.1.0-rc.0",
