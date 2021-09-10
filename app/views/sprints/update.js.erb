@@ -2,6 +2,10 @@
   $('#modal .modal-flash-messages').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% else %>
   $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
-  $('#sprint_<%= @sprint.sequence_num %>').replaceWith("<%= escape_javascript render 'sprint_datatable_row', sprint: @sprint %>");
+  <% if @project.nil? %>
+    $("#nav-sprints").load(window.location.href + " #nav-sprints")
+  <% else %>
+    $('#sprint_<%= @sprint.sequence_num %>').replaceWith("<%= escape_javascript render 'sprint_datatable_row', sprint: @sprint, project: @project %>");
+  <% end %>
   $('#formCloseBtn').click();
 <% end %>

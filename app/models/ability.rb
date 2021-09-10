@@ -71,7 +71,7 @@ class Ability
 
   def member_permissions_for_sprint(user)
     can %i[read create update delete destroy], Sprint, project: { manager: user }
-    can :read, Sprint
+    can :read, Sprint, project: { projects_users: user }
   end
 
   def member_permissions_for_projects_users(user)

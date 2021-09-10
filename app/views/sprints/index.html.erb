@@ -1,0 +1,22 @@
+<div class="container mt-3">
+  <div class="row d-flex justify-content-end">
+    <div class="col-10">
+      <h1><%= t('sprints.label').pluralize %></h1>
+    </div>
+    <% if can? :create, Sprint %>
+      <div class="col-2">
+        <%= link_to t('shared.create_new_resource', resource_label: t('sprints.label')), new_sprint_path, remote: true, class:"btn btn-primary w-100 bi bi-plus" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="container mt-3">
+  <div class="text-center" id="sprints_datatable_space">
+    <% if @sprints.exists? %>
+      <%= render('sprints_table', sprints: @sprints) %>
+    <% else %>
+      <%= render 'shared/no_resource_present', record: 'sprints.label' %>
+    <% end %>
+  </div>
+  <%= js_paginate @sprints %>
+</div>
