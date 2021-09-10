@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     path_names: { sign_up: 'new' }
 
   constraints(subdomain: /^(?!www\Z)(\w+)/) do #end of input of string
-    resources :projects
+    resources :projects do
+      resources :sprints
+    end
+    resources :projects do
+      resources :issues, :sprints
+    end
     resources :issues
 
     resources :users do

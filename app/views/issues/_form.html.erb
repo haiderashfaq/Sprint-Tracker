@@ -1,84 +1,119 @@
-<div class="container">
-  <%= form_with model: issue do |form| %>
-    <div class="row g-3 align-items-center mb-3 asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
-        <%= form.label t('issues.title'), class: 'col-form-label col-form-label-md' %>
-      </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.text_field :title, class: 'form-control form-control-md',:required => true %>
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header text-center">
+      <div class= "col-12 modal-title text-center">
+        <h2><%= t('shared.create_new_resource', resource_label: t('issues.issue_label')) %></h2>
       </div>
     </div>
-    <div class="row g-3 align-items-center mb-3  asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
-        <%= form.label t('issues.description'), class: 'col-form-label col-form-label-md' %>
+     <div class="modal-flash-messages"></div>
+    <div class="container modal-body">
+      <%= form_with model: [project, issue], local:false do |form| %>
+      <div class="row mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.title'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.text_field :title, class: 'form-control form-control-md',:required => true %>
+        </div>
       </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.text_area :description,  :cols => 40, :rows =>5, class: 'form-control form-control-md', required: true %>
+      <div class="row mb-3  asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.description'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.text_area :description, :cols => 40, :rows =>5, class: 'form-control form-control-md', required: true %>
+        </div>
       </div>
+      <div class="row mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.select :status, Issue::STATUS , { required: true }, {class: "js-select-field form-select form-select-lg"}  %>
+        </div>
+      </div>
+      <div class="row mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.priority'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.select :priority, Issue::PRIORITY, { required: true }, {class: 'js-select-field form-select form-select-lg4'}%>
+        </div>
+      </div>
+      <div class="row mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.category'), class: 'col-form-label col-form-label-md'  %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.select :category, Issue::CATEGORY, { required: true }, {class: "js-select-field form-select form-select-lg"}%>
+        </div>
+      </div>
+      <div class="row g-3 align-items-center mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.estimated_start_date'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.date_field :estimated_start_date, class: 'form-control form-control-md',:required => true %>
+        </div>
+      </div>
+      <div class="row mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 d-flex justify-content-start control-label">
+          <%= form.label t('issues.estimated_end_date'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md' ,:required => true %>
+        </div>
+      </div>
+      <div class="row g-3 align-items-center mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.actual_start_date'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.date_field :actual_start_date, class: 'form-control form-control-md'%>
+        </div>
+      </div>
+      <div class="row mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 d-flex justify-content-start control-label">
+          <%= form.label t('issues.actual_end_date'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.date_field :actual_end_date, class: 'form-control form-control-md'  %>
+        </div>
+      </div>
+      <div class="row g-3  mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('projects.project_label'), class: 'col-form-label col-form-label-md'  %>
+        </div>
+
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <% if params[:project_id].nil? %> 
+           <%= form.select :project_id, projects.map{|project| [project.name, project.id] } , { required: true }, {class: "js-select-field form-select form-select-lg"}  %>
+          <% else %>
+          <%= form.select :project_name, [project.id,project.name],{ required: true, selected: [project.id, project.name]}, {class: "js-select-pa form-select form-select-lg",disabled: true}%>
+          <% end %>
+        </div>
+      </div>
+      <div class="row g-3  mb-3">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.reviewer'), class: 'col-form-label col-form-label-md'  %>
+        </div>
+         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.select :reviewer_id, users.map{|user| [user.name, user.id] } ,{}, {class: "js-select-field form-select form-select-lg"}  %>
+        </div>
+      </div>
+      <div class="row g-3  mb-3">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.assignee'), class: 'col-form-label col-form-label-md'  %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8"> 
+          <%= form.select :assignee_id, users.map{|user| [user.name, user.id] } ,{}, {class: "js-select-field form-select form-select-lg"}  %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= form.submit class: 'btn btn-primary fa fa-check', remote: true %>
+        <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
+      </div>
+      <% end %>
     </div>
-    <div class="row g-3 align-items-center mb-3 asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
-        <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
-      </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.select :status, Issue::STATUS , { required: true }, {class: "js-select-field form-select form-select-lg"}  %>
-      </div>
-    </div>
-    <div class="row g-3 align-items-center mb-3 asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
-        <%= form.label t('issues.priority'), class: 'col-form-label col-form-label-md' %>
-      </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.select :priority, Issue::PRIORITY, { required: true }, {class: 'js-select-field form-select form-select-lg4'}%>
-      </div>
-    </div>
-    <div class="row g-3 align-items-center mb-3 asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
-        <%= form.label t('issues.category'), class: 'col-form-label col-form-label-md'  %>
-      </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.select :category, Issue::CATEGORY, { required: true }, {class: "js-select-field form-select form-select-lg"}%>
-      </div>
-    </div>
-    <div class="row g-3 align-items-center mb-3 asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
-        <%= form.label t('issues.estimated_start_date'), class: 'col-form-label col-form-label-md' %>
-      </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.date_field :estimated_start_date, class: 'form-control form-control-md',:required => true %>
-      </div>
-    </div>
-    <div class="row g-3 align-items-center mb-3 asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 d-flex justify-content-start control-label">
-        <%= form.label t('issues.estimated_end_date'), class: 'col-form-label col-form-label-md' %>
-      </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.date_field :estimated_end_date, class: 'form-control form-control-md' ,:required => true %>
-      </div>
-    </div>
-     <div class="row g-3 align-items-center mb-3 asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
-        <%= form.label t('issues.actual_start_date'), class: 'col-form-label col-form-label-md' %>
-      </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.date_field :actual_start_date, class: 'form-control form-control-md'%>
-      </div>
-    </div>
-    <div class="row g-3 align-items-center mb-3 asterick">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 d-flex justify-content-start control-label">
-        <%= form.label t('issues.actual_end_date'), class: 'col-form-label col-form-label-md' %>
-      </div>
-      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-        <%= form.date_field :actual_end_date, class: 'form-control form-control-md'  %>
-      </div>
-    </div>
-    <div class="row d-flex justify-content-center">
-      <div class="col-2 ">
-        <%= form.submit class: 'btn btn-primary w-100 fa fa-check'%>
-      </div>
-      <div class="col-2 ">
-        <%= link_to t('shared.back'), issues_path, class: 'btn btn-secondary w-100' %>
-      </div>
-    </div>
-  <% end %>
+  </div>
 </div>

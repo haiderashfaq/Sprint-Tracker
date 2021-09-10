@@ -1,6 +1,7 @@
 require ('select2')
 $(document).ready(function() {
   $(".js-select-field").select2({
+     dropdownParent: $('#staticBackdrop')
   });
     $('body').on('select2:open', '.js-select-field', () => {
     document.querySelector('.select2-search__field').focus();
@@ -13,6 +14,8 @@ $(document).ready(function() {
       "searching": false,
       "info": false
     });
+    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
 
     $('.js-registration-form .js-name-field').on('keyup', function(){
       var subdomain = $("#name").val().toLowerCase();

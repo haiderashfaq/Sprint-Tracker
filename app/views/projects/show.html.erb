@@ -20,11 +20,17 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <%= link_to t('shared.details'), @project, class: 'nav-link active', id: "nav-projects-tab", data: {bs_toggle: "tab", bs_target: "#nav-projects"},  type: "button", role: 'tab', aria_controls: "nav-projects", aria_selected: true %>
       <%= link_to t('sprints.label').pluralize(), [@project, :sprints], remote: true, class: 'nav-link', id: "nav-sprints-tab", data: {bs_toggle: "tab", bs_target: "#nav-sprints"}, type: "button", role: 'tab', aria_controls: "nav-sprints", aria_selected: false %>
+      <%= link_to t('issues.issue_label').pluralize(), project_issues_path(@project), remote: true, class: 'nav-link', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues", aria_selected: false %>
     </div>
   </nav>
   <div class="tab-content" id="tab-tabContent">
     <div class="tab-pane fade show active" id="nav-projects" role="tabpanel" aria-labelledby="nav-projects-tab">
       <%= render 'details', project: @project %>
+    </div>
+    <div class="tab-pane fade" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
+      <div id="header" ></div>
+      <div id="filter"></div>
+      <div id="issues-table"></div>
     </div>
     <div class="tab-pane fade" id="nav-sprints" role="tabpanel" aria-labelledby="nav-sprints-tab"></div>
   </div>

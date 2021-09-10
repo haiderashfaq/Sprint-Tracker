@@ -1,0 +1,14 @@
+<div id= "header">
+  <div class="container d-flex mt-3">
+    <div class="col-9 justify-content-start">
+      <h1><%= t('issues.issue_label') %></h1>
+    </div>
+    <div id="header", class="col-3 justify-content-end">
+      <% if params[:project_id].present? %>
+      <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path(project_id: params[:project_id], project: project) ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn fa fa-plus btn-primary w-100 some-button'} %>
+      <% else %>
+       <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn fa fa-plus btn-primary w-100 some-button'} %>
+      <%end%>
+    </div>
+  </div>
+</div>

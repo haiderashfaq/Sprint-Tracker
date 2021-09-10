@@ -31,7 +31,7 @@ class Ability
   end
 
   def admin_permissions_for_issues(user)
-    can :manage, Issue, company_id: user.company_id
+    can %i[read update destroy index create], Issue, company_id: user.company_id
   end
 
   def admin_permissions_for_project

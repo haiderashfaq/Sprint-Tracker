@@ -1,0 +1,8 @@
+<% binding.pry %>
+<% if @issue.errors.present? %>
+  $('#staticBackdrop .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% else %>
+  $('#issues_datatable_body').append("<%= escape_javascript render 'issue_datatable_row', issue: @issue %>");
+  $('#formCloseBtn').click();
+  window.location.href = issues_url
+<% end %>

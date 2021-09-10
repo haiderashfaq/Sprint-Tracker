@@ -1,0 +1,7 @@
+<% binding.pry %>
+<% if @issue.errors.present? %>
+  $('#staticBackdrop .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% else %>
+  $('#formCloseBtn').click();
+  $("#nav-issues").html("<%= escape_javascript render(:partial => 'issues/show',  :locals=>{projects: @projects,project:@project, issue: @issue} ) %>");
+<% end %>

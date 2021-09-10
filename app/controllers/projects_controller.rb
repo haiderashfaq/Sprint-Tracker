@@ -1,9 +1,13 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource find_by: :sequence_num
+
+  load_and_authorize_resource find_by: :sequence_num, through: :current_company
+  load_resource :issues, find_by: :sequence_num, through: :project
+
+  before_action :fetch_issues, only: :show
 
   # GET /projects
   def index
-    @projects = @projects.paginate(page: params[:page])
+    @projects = @projects.includes(:issues).paginate(page: params[:page])
     respond_to do |format|
       format.html
     end
@@ -18,6 +22,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects/
   def create
+    binding.pry 
     @project.creator = current_user
     respond_to do |format|
       if @project.save
@@ -77,5 +82,10 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :start_date, :end_date, :manager_id)
+  end
+
+  def fetch_issues
+    @issues = @project.issues.paginate(page: params[:page])
+    # @issues = @issues.paginate(page: params[:page])
   end
 end

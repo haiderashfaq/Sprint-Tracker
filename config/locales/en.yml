@@ -45,10 +45,16 @@ en:
     actual_end_date: 'Actual End Date'
     no_histoires: 'No Histories yet!'
     history_label: 'History'
+    assignee: 'Assignee'
+    reviewer: 'Reviewer'
   
   projects:
     project_label: 'Project'
     manager: "Project Manager"
+  filter:
+    add: 'Add filter'
+
+
   
   sprints:
     label: 'Sprint'
@@ -56,6 +62,12 @@ en:
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
+    creator: "Created By"
+    started_on: "Started On"
+    starting_on: "Starting On"
+    ended_on: "Ended On"
+    due_on: "Due On"
+    project_id: "Project_id"
 
   shared:
     name: "Name"
@@ -87,6 +99,7 @@ en:
     est_start_date: "Estimated Start Date"
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
+    cancel: 'Cancel'
     success:
       fetched: "%{resource_label} Retrieved Successfully"
       create: "%{resource_label} Created Successfully"
