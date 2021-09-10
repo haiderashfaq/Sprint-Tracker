@@ -18,9 +18,9 @@ class Project < ApplicationRecord
   private
 
   def check_for_sprints
-    if sprints.exists?
-      errors.add(:base, I18n.t('projects.deletion_error'))
-      throw :abort
-    end
+    return unless sprints.exists?
+
+    errors.add(:base, I18n.t('projects.deletion_error'))
+    throw :abort
   end
 end

@@ -17,9 +17,14 @@ class ProjectsUser < ApplicationRecord
     invalid_users = projects_users.select(&:new_record?)
     errors = []
     invalid_users.each do |projects_user|
-      errors << { projects_user.user.email => projects_user.errors.full_messages }
+      errors << { projects_user.user&.email => projects_user.errors.full_messages }
     end
     projects_users.select!(&:persisted?)
     [projects_users, errors]
+  end
+
+  def self.add_projects_users(project, users)
+    projects_users = create_projects_users(project, users)
+    error_messages_and_valid_users(projects_users)
   end
 end

@@ -52,15 +52,15 @@ class Ability
   end
 
   def admin_permissions_for_project
-    can %i[read create update delete destroy], Project
+    can %i[read create update destroy], Project
   end
 
   def admin_permissions_for_sprint
-    can %i[read create update delete destroy], Sprint
+    can %i[read create update destroy], Sprint
   end
 
   def admin_permissions_for_projects_users
-    can %i[read create delete destroy], ProjectsUser
+    can %i[read create destroy], ProjectsUser
   end
 
   # member permissions
@@ -70,12 +70,12 @@ class Ability
   end
 
   def member_permissions_for_sprint(user)
-    can %i[read create update delete destroy], Sprint, project: { manager: user }
+    can %i[read create update destroy], Sprint, project: { manager: user }
     can :read, Sprint
   end
 
   def member_permissions_for_projects_users(user)
-    can %i[read create update delete destroy], ProjectsUser, project: { manager: user }
+    can %i[read create update destroy], ProjectsUser, project: { manager: user }
     can :read, ProjectsUser
   end
 
