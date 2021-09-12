@@ -7,6 +7,7 @@ class IssuesController < ApplicationController
     @issues = @issues.includes(:creator, :reviewer).paginate(page: params[:page])
     respond_to do |format|
       format.html
+      format.js
     end
   end
 
@@ -78,5 +79,4 @@ class IssuesController < ApplicationController
   def set_creator
     @issue.creator = current_user
   end
-
 end

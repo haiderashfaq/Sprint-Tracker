@@ -23,6 +23,7 @@
       <%= link_to t('shared.details'), @project, class: 'nav-link active', id: "nav-projects-tab", data: {bs_toggle: "tab", bs_target: "#nav-projects"},  type: "button", role: 'tab', aria_controls: "nav-projects", aria_selected: true %>
       <%= link_to t('sprints.label').pluralize(), [@project, :sprints], remote: true, class: 'nav-link', id: "nav-sprints-tab", data: {bs_toggle: "tab", bs_target: "#nav-sprints"}, type: "button", role: 'tab', aria_controls: "nav-sprints", aria_selected: false %>
       <%= link_to t('users.label').pluralize(), [@project, :projects_users], remote: true, class: 'nav-link', id: "nav-users-tab", data: {bs_toggle: "tab", bs_target: "#nav-users"}, type: "button", role: 'tab', aria_controls: "nav-users", aria_selected: false %>
+      <%= link_to t('projects.backlog').pluralize(), [@project, :issues], remote: true, class: 'nav-link', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues", aria_selected: false %>
     </div>
   </nav>
   <div class="tab-content" id="tab-tabContent">
@@ -31,5 +32,6 @@
     </div>
     <div class="tab-pane fade" id="nav-sprints" role="tabpanel" aria-labelledby="nav-sprints-tab"></div>
     <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab"></div>
+    <div class="tab-pane fade" id="nav-issues" role="tabpanel" aria-labelledby="nav-users-tab"></div>
   </div>
 </div>

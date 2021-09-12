@@ -50,6 +50,7 @@ en:
     project_label: 'Project'
     manager: "Project Manager"
     deletion_error: "Delete all sprints before deleting project"
+    backlog: "Backlog"
   
   sprints:
     label: 'Sprint'
