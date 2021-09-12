@@ -22,10 +22,7 @@ class ProjectsUsersController < ApplicationController
   # POST /projects/:sequence_num/projects_users
   def create
     user_ids = projects_user_params[:user_id].reject(&:blank?)
-    users = []
-    user_ids.each do |id|
-      users << User.find_by(id: id)
-    end
+    users = User.where({ id: user_ids })
 
     @projects_users, errors = ProjectsUser.add_projects_users(@project, users)
     respond_to do |format|
