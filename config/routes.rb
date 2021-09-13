@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   get '/list_companies', to: 'list_companies#list_companies'
   post '/list_companies', to: 'list_companies#list_companies'
-
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'users/registrations', confirmations: 'users/confirmations' },
     path: 'accounts',
     path_names: { sign_up: 'new' }
@@ -12,8 +11,6 @@ Rails.application.routes.draw do
   constraints(subdomain: /^(?!www\Z)(\w+)/) do
     resources :projects do
       resources :sprints
-      resources :issues
-      resources :projects_users
     end
     resources :issues do
       resources :time_logs
@@ -21,5 +18,4 @@ Rails.application.routes.draw do
     resources :users do
     end
   end
-  resources :issues
 end

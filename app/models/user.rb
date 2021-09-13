@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
   attr_accessor :new_member
 
-  def encrypted_password?
+  def has_password?
     encrypted_password.present?
   end
 

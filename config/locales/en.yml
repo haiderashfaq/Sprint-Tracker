@@ -46,7 +46,6 @@ en:
     actual_end_date: 'Actual End Date'
     no_histoires: 'No Histories yet!'
     history_label: 'History'
-    time_logs_label: 'Time Logs'
   projects:
     project_label: 'Project'
     manager: "Project Manager"
@@ -67,13 +66,6 @@ en:
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
-    
-  time_logs:
-    label: 'Time log'
-    assignee: Assignee
-    date: Date
-    description: Description
-
 
   shared:
     name: "Name"
