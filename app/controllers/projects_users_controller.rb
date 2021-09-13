@@ -13,7 +13,7 @@ class ProjectsUsersController < ApplicationController
 
   # GET /projects/:sequence_num/projects_user/new
   def new
-    @users = @current_company.users.joins("LEFT JOIN projects_users ON users.id = projects_users.user_id and projects_users.project_id = #{@project.id}").where(projects_users: { id: nil })
+    @users = @current_company.users.left_outer_joins(:projects_users).where(projects_users: { id: nil })
     respond_to do |format|
       format.js
     end
