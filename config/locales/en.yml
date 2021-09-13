@@ -30,6 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  password:
+    label: Password
+    forgot_password: Forgot your password?
+    change_password: Change password
+    new_password: New password
   issues:
     issue_label: 'Issue'
     issues_label: 'Issues'

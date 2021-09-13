@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get '/list_companies', to: 'list_companies#list_companies'
   post '/list_companies', to: 'list_companies#list_companies'
-  devise_for :users, controllers: { sessions: 'sessions', registrations: 'users/registrations', confirmations: 'users/confirmations' },
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations' },
     path: 'accounts',
     path_names: { sign_up: 'new' }
 
