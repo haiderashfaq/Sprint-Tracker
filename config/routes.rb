@@ -11,10 +11,12 @@ Rails.application.routes.draw do
   constraints(subdomain: /^(?!www\Z)(\w+)/) do
     resources :projects do
       resources :sprints
+      resources :projects_users
+      resources :issues do
+        resources :time_logs
+      end
     end
-    resources :issues do
-      resources :time_logs
-    end
+    resources :issues
     resources :users do
     end
   end
