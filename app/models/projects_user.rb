@@ -3,7 +3,7 @@ class ProjectsUser < ApplicationRecord
   belongs_to :user
 
   validates :project_id, :user_id, presence: true
-  validates_uniqueness_of :user_id, scope: :project_id
+  validates_uniqueness_of :user_id, { scope: :project_id, message: I18n.t('users.duplicate_error') }
 
   def self.create_projects_users(project, users)
     projects_users_attrs = []

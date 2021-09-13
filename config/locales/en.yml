@@ -69,6 +69,7 @@ en:
     back: 'Back'
     role: 'Role'
     cancel: "Cancel"
+    status: 'Status'
     due_on: "Due On"
     member: "Member"
     delete: 'Delete'

@@ -57,6 +57,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num
   def show
+    binding.pry
     respond_to do |format|
       format.js
       format.html

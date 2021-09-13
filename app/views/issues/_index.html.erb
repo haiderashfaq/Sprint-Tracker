@@ -10,6 +10,7 @@
   <table class="table table-hover border-primary text-center" id="issues-datatable" data-source="<%= issues_path(format: :json) %>">
     <thead class="text-light bg-primary">
       <tr>
+        <th><%= check_box_tag "check all" %></th>
         <th><%= t('issues.title') %></th>
         <th><%= t('issues.status') %></th>
         <th><%= t('issues.priority') %></th>
@@ -17,13 +18,19 @@
       </tr>
     </thead>
     <tbody>
-      <% issues.each do |issue| %>
-        <tr>
-          <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
-          <td><%= issue.status %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.category %></td>
-        </tr>
+      <%= form_tag do %>
+        <div class="mb-3 d-flex justify-content-end">
+          <%= submit_tag 'Add Issues', class: "btn btn-primary" %>
+        </div>
+        <% issues.each do |issue| %>
+          <tr>
+            <td><%= check_box_tag 'issue_ids[]', issue.id, false, class: "issue-check-box" %></td>
+            <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
+            <td><%= issue.status %></td>
+            <td><%= issue.priority %></td>
+            <td><%= issue.category %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

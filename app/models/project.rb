@@ -2,6 +2,7 @@ class Project < ApplicationRecord
   belongs_to :company
   belongs_to :manager, class_name: 'User'
   belongs_to :creator, class_name: 'User'
+  belongs_to :active_sprint, class_name: 'Sprint'
 
   has_many :sprints
   has_many :projects_users

@@ -1,1 +1,9 @@
-$('#nav-issues').html("<%= escape_javascript render('index', issues: @issues) %>")
+$('#nav-issues').html("<%= escape_javascript render('index', issues: @issues) %>");
+$('#check_all').on("click", function() {
+  var checkboxes = $(".issue-check-box");
+  if (checkboxes.prop("checked")) {
+    checkboxes.prop("checked", false);
+  } else {
+    checkboxes.prop("checked", true);
+  }
+});

@@ -6,7 +6,6 @@ class ProjectsUsersController < ApplicationController
   # POST /projects/:sequence_num/projects_users
   def index
     @projects_users = @projects_users.paginate(page: params[:page])
-    binding.pry
     respond_to do |format|
       format.js
     end

@@ -23,6 +23,7 @@ class SprintsController < ApplicationController
   # POST /projects/:sequence_num/sprints/new
   def create
     @sprint.creator = current_user
+    @sprint.status = 'Planning'
     respond_to do |format|
       if @sprint.save
         format.js { flash.now[:notice] = t('shared.success.create', resource_label: t('sprints.label')) }
