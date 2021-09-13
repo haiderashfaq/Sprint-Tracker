@@ -1,7 +1,0 @@
-<% if @time_log.errors.any? %>
-  $('#modal .modal-flash-messages').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
-<% else %>
-  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
-  $('#time_log_<%= @time_log.sequence_num %>').replaceWith("<%= escape_javascript render 'time_logs_datatable_row', time_log: @time_log %>");
-  $('#formCloseBtn').click();
-<% end %>
