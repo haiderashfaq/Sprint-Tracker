@@ -5,7 +5,7 @@ class ProjectsUsersController < ApplicationController
 
   # GET /projects/:sequence_num/projects_users
   def index
-    @projects_users = @projects_users.paginate(page: params[:page])
+    @projects_users = @projects_users.includes(:user).paginate(page: params[:page])
     respond_to do |format|
       format.js
     end
@@ -22,14 +22,13 @@ class ProjectsUsersController < ApplicationController
   # POST /projects/:sequence_num/projects_users
   def create
     user_ids = projects_user_params[:user_id].reject(&:blank?)
-    users = User.where({ id: user_ids })
 
-    @projects_users, errors = ProjectsUser.add_projects_users(@project, users)
+    @projects_users, errors = ProjectsUser.add_projects_users(@project, user_ids)
     respond_to do |format|
-      if @projects_users.all?(&:persisted?)
+      if errors.blank?
         format.js { flash.now[:notice] = t('shared.success.add', resource_label: t('users.label').pluralize) }
       else
-        format.js { flash.now[:error] = errors }
+        format.js { flash.now[:error] = errors.flatten }
       end
     end
   end

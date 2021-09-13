@@ -61,6 +61,7 @@ en:
     log_out: "Log Out"
     sign_up: "Sign Up"
     duplicate_error: "User already exists"
+    no_user_error: "User with id: %{id} doesn't exists"
 
   shared:
     name: "Name"
