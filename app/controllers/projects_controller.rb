@@ -25,7 +25,6 @@ class ProjectsController < ApplicationController
       else
         format.html do
           flash.now[:error] = @project.errors.full_messages
-          flash.now[:error] << t('shared.failure.create', resource_label: t('projects.project_label'))
           render :new
         end
       end
@@ -47,7 +46,6 @@ class ProjectsController < ApplicationController
       else
         format.html do
           flash.now[:error] = @project.errors.full_messages
-          flash.now[:error] << t('shared.failure.update', resource_label: t('projects.project_label'))
           render :edit
         end
       end
@@ -68,7 +66,10 @@ class ProjectsController < ApplicationController
       if @project.destroy
         format.html { redirect_to projects_url, alert: t('shared.success.delete', resource_label: t('projects.project_label')) }
       else
-        format.html { render :show, alert: t('shared.failure.delete', resource_label: t('projects.project_label')) }
+        format.html do
+          flash.now[:error] = @project.errors.full_messages
+          render :show
+        end
       end
     end
   end
