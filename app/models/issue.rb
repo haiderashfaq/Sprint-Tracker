@@ -9,7 +9,7 @@ class Issue < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   belongs_to :creator, class_name: 'User'
   belongs_to :reviewer, class_name: 'User', optional: true
-  has_many :time_logs
+  has_many :time_logs, dependent: :destroy
 
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
