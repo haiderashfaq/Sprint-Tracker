@@ -35,10 +35,10 @@ class Ability
   def admin_permissions_for_issues(user)
     can :manage, Issue, company_id: user.company_id
   end
+
   def admin_permissions_for_project(user)
     can %i[update read create delete], Project, company_id: user.company_id
   end
-
 
   def admin_permissions_for_time_logs(user)
     can :manage, TimeLog, company_id: user.company_id
@@ -74,4 +74,3 @@ class Ability
     can :create, Issue, company_id: user.company_id
   end
 end
-
