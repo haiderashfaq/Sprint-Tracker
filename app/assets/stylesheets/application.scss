@@ -1,7 +1,8 @@
 @import 'bootstrap/scss/bootstrap';
+@import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 @import 'select2/dist/css/select2';
-@import 'flatpickr/dist/flatpickr.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'flatpickr/dist/flatpickr.css';
 
 $secondary-color: #999999;
 $hover-color: #000033;
@@ -12,6 +13,47 @@ $a-color: #105cb6;
 .select2-container--open {
   z-index: 9999999
 }
+.text-gray-400 {
+  color: #000000 !important;
+}
+.btn-user {
+  font-size: 0.8rem;
+  border-radius: 10rem;
+  padding: 0.75rem 1rem;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.form{
+  font-size: .8rem;
+  border-radius: 10rem;
+  padding: 1rem 1rem;
+}
+.bg-login-image {
+  background: url("1.jpg");
+  background-position: center;
+  background-size: cover;
+  border-radius: .35rem;
+
+}
+.bg-register-image {
+  background: url("2.png");
+  background-position: center;
+  background-size: initial;
+  border-radius: .35rem
+}
+.bg-member-image {
+  background: url("3.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  }
+.logo {
+  height: 40px;
+  width: 78px;
+  display: block;
+  }
 
 .pagination {
   background: white;
@@ -55,4 +97,5 @@ $a-color: #105cb6;
     content: "*";
     color: red;
   }
+
 }

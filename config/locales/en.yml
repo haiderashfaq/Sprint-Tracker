@@ -63,8 +63,20 @@ en:
     duplicate_error: "User already exists"
     no_user_error: "User with id: %{id} doesn't exists"
 
+  companies:
+    company_label: 'Company'
+    list_company_label: 'Your Companies'
+
+
   shared:
     name: "Name"
+    email: "Email Address"
+    role_id: "Role"
+    password: "Password"
+    password_confirmation: "Password Confirmation"
+    profile: "Profile"
+    phone_num: "Phone Number"
+    start_date: "Start Date"
     edit: 'Edit'
     back: 'Back'
     role: 'Role'
@@ -91,16 +103,23 @@ en:
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
     success:
+
       add: "%{resource_label} added Successfully"
+      fetched: "%{resource_label} Retrieved Successfully"
       create: "%{resource_label} Created Successfully"
       update: "%{resource_label} Updated Successfully"
       delete: "%{resource_label} Deleted Successfully"
     failure:
+      fetched: "Cannot Find Companies registered with this %{resource_label} "
       create: "%{resource_label} Creation Failed"
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"
 
 
+  roles:
+    admin: "Admin"
+    account_owner: "Account Owner"
+    member: "Member"
 
   helpers:        
     submit:

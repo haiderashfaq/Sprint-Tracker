@@ -7,7 +7,6 @@ class CreateProjects < ActiveRecord::Migration[6.1]
       t.references :manager, null: false, foreign_key: { to_table: :users }
       t.references :creator, null: false, foreign_key: { to_table: :users }
       t.references :company, null: false, foreign_key: true
-
       t.timestamps
     end
   end
