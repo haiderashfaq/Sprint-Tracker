@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
-  before_action :authenticate_user!
+
+  before_action :authenticate_user!, except: [:list_companies]
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -13,19 +14,20 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     flash[:error] = exception.message
-    redirect_to root_url
+    render file: 'public/404.html', status: :not_found
   end
 
   def set_tenant_id
-    Company.current_company_id = current_company.id
+    Company.current_company_id = current_company&.id
     yield
   ensure
     Company.current_company_id = nil
   end
 
-  private
-
   def current_company
+    return if PUBLIC_SUBDOMAINS.include? request.subdomain
+
     @current_company ||= Company.find_by!(subdomain: request.subdomain)
   end
+
 end

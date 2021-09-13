@@ -2,30 +2,34 @@ require('select2')
 $(document).ready(function() {
   $(".js-select-field-single").select2({});
 
-  $('body').on('select2:open', '.js-select-field', () => {
+  $('body').on('select2:open', '.js-select-field-single', () => {
     document.querySelector('.select2-search__field').focus();
   });
-  dateTimeFunc();
-  $("#modal").on('shown.bs.modal', dateTimeFunc);
+
+  $('body').on('select2:open', '.js-select-field', () => {
+    $(".js-select-field").select2({});
+  });
 
   $('#issues-datatable').dataTable({
     "paging": false,
     "searching": false,
     "info": false
   });
-});
 
-// $(document).ajaxComplete(function() {
-//   $('#check_all').on("click", function() {
-//     console.log("Say hello")
-//     var checkboxes = $("#issue_ids");
-//     if (checkboxes.prop("checked")) {
-//       checkboxes.prop("checked", false);
-//     } else {
-//       checkboxes.prop("checked", true);
-//     }
-//   });
-// });
+  $('#issues-datatable').dataTable({
+    "paging": false,
+    "searching": false,
+    "info": false
+  });
+
+  $('.js-registration-form .js-name-field').on('keyup', function() {
+    var subdomain = $("#name").val().toLowerCase();
+    $('#subdomain').val(subdomain.replace(/[^a-z0-9]/g, '').substring(0, 25));
+  });
+
+  dateTimeFunc();
+  $("#modal").on('shown.bs.modal', dateTimeFunc);
+});
 
 var dateTimeFunc = function() {
   $(".js-flatpickr-datetime").flatpickr({

@@ -1,0 +1,42 @@
+<div class="container mt-3">
+  <div class="row bm-3 d-flex">
+    <div class="col-8">
+      <h1><%= @user.name %></h1>
+    </div>
+    <% if can? :edit, @user %>
+    <div class="col-2 justify-content-end">
+      <%= link_to t('shared.edit'), edit_user_path(@user), class: "btn btn-primary w-100 fa fa-pencil" %>
+    </div>
+    <% end %>
+    <% if can? :destroy, @user %>
+      <div class="col-2 justify-content-end">
+        <%= link_to t('shared.destroy'), user_path(@user),method: :delete,
+                data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 fa fa-trash" %>
+      </div>
+    <% end %>
+  </div>
+  <hr/>
+</div>
+<div class="container">
+  <div class="row bm-3">
+    <div class="col-3 ">
+      <p><strong><%=t('users.name')%>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%=@user.name %></p>
+    </div>
+    <div class="col-3 ">
+      <p><strong><%=t('users.email')%>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= @user.email %></p>
+    </div>
+    <div class="col-3">
+      <p><strong><%=t('users.role')%>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= @user.role_name %></p>
+    </div>
+  </div>
+  <hr/>
+</div>

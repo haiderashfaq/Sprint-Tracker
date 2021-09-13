@@ -1,0 +1,59 @@
+  <%= form_with model: user do |form| %>
+   <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+      <%= form.label t('shared.name'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
+      <%= form.text_field :name,required: true, class: 'form-control form-control-md' %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+      <%= form.label t('shared.email'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
+      <%= form.email_field :email, required: true, class: 'form-control form-control-md' %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+      <%= form.label t('shared.role_id'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
+      <%= form.select :role_id, user_roles_dropdown_options_for_select , { required: true }, {class: "js-select-field form-select form-select-lg"}  %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+      <%= form.label t('shared.password'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
+      <%= form.password_field :password, required: true, class: 'form-control form-control-md' %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+      <%= form.label t('shared.password_confirmation'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
+      <%= form.password_field :password_confirmation, required: true, class: 'form-control form-control-md' %>
+    </div>
+  </div>
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+      <%= form.label t('shared.phone_num'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
+      <%= form.text_field :phone_num,required: true, class: 'form-control form-control-md' %>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-2 ">
+      <%= form.submit class: 'btn btn-primary w-100 fa fa-check' %>
+    </div>
+    <div class="col-2 ">
+      <%= link_to t('shared.back'), users_path, class: 'btn btn-secondary w-100' %>
+    </div>
+  </div>
+<% end %>
