@@ -29,7 +29,7 @@
         <%= form.label t('shared.manager'), class: 'col-form-label col-form-label-md control-label' %>
       </div>
       <div class="col-12 col-sm-8 col-md-6 col-lg-6 ">
-        <%= form.select :manager_id, @current_company.users.map{ |user| [user.email, user.id] }, { required: true }, { class: "form-select form-select-md js-select-field" } %>
+        <%= form.select :manager_id, @current_company.users.map{ |user| [user.email, user.id] }, { required: true }, { class: "form-select form-select-md js-select-field-single" } %>
       </div>
     </div>
   <% end %>

@@ -1,0 +1,11 @@
+$('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+
+if ($("#projects_users_datatable").length == 0) {
+  $('#users_datatable_space').html("<%= escape_javascript render('user_datatable', projects_users: @projects_users, project: @project) %>");
+} else {
+  <% @projects_users.each do |projects_user| %>
+  $('#projects_users_datatable_body').append("<%= escape_javascript render 'user_datatable_row', project: @project, projects_user: projects_user %>");
+  <% end %>
+}
+
+$('#modal').modal('hide');

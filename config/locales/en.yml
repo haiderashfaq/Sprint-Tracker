@@ -50,19 +50,30 @@ en:
   projects:
     project_label: 'Project'
     manager: "Project Manager"
+    deletion_error: "Delete all sprints before deleting project"
   
   sprints:
     label: 'Sprint'
 
+  users:
+    label: 'User'
+    log_in: "Log In"
+    profile: "Profile"
+    log_out: "Log Out"
+    sign_up: "Sign Up"
+    duplicate_error: "User already exists"
+    no_user_error: "User with id: %{id} doesn't exists"
+
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
-
+    
   time_logs:
     label: 'Time log'
     assignee: Assignee
     date: Date
     description: Description
+
 
   shared:
     name: "Name"
@@ -75,8 +86,10 @@ en:
     start_date: "Start Date"
     edit: 'Edit'
     back: 'Back'
+    role: 'Role'
     cancel: "Cancel"
     due_on: "Due On"
+    member: "Member"
     delete: 'Delete'
     actions: "Actions"
     details: "Details"
@@ -84,17 +97,21 @@ en:
     end_date: "End Date"
     ended_on: "Ended On"
     creator: "Created By"
-    dashboard: "Dashboard" 
+    dashboard: "Dashboard"
     start_date: "Start Date"
     started_on: "Started On"    
     starting_on: "Starting On"
-    manager: "Project Manager" 
+    manager: "Project Manager"
+    owner: "Company Owner"
     confirmation: "Are you sure?"
     est_end_date: "Estimated End Date"
+    date_related_error: "can't be before "
     est_start_date: "Estimated Start Date"
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
     success:
+
+      add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"
       create: "%{resource_label} Created Successfully"
       update: "%{resource_label} Updated Successfully"
@@ -105,28 +122,11 @@ en:
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"
 
+
   roles:
-    admin: Admin
-    account_owner: Account Owner
-    member: Member
-
-  users:
-    user_label: 'User'
-    log_in: "Log In"
-    profile: "Profile"
-    log_out: "Log Out"
-    sign_up: "Sign Up"
-    create_new_resource: "Add New %{resource_label}"
-    edit_resource: "Edit %{resource_label}"
-    success:
-      create: "%{resource_label} Created Successfully"
-      update: "%{resource_label} Updated Successfully"
-      delete: "%{resource_label} Deleted Successfully"
-    failure:
-      create: "%{resource_label} Creation Failed"
-      update: "%{resource_label} Updation Failed"
-      delete: "%{resource_label} Deletion Failed"
-
+    admin: "Admin"
+    account_owner: "Account Owner"
+    member: "Member"
 
   helpers:        
     submit:

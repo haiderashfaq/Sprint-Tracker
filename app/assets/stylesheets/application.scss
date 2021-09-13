@@ -11,8 +11,14 @@ $a-border-color: #2e6ab1;
 $disable-border-color: #dddddd;
 $a-color: #105cb6;
 
+<<<<<<< HEAD
 
 .progress {width: 66%;}
+=======
+.select2-container--open {
+  z-index: 9999999
+}
+>>>>>>> 600e9cae3d755c7e3ff506c5766280d32c92eb56
 .text-gray-400 {
   color: #000000 !important;
 }

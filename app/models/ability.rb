@@ -12,6 +12,7 @@ class Ability
       admin_permissions_for_sprint
       admin_permissions_for_project(user)
       admin_permissions_for_users(user)
+      admin_permissions_for_projects_users
       admin_permissions_for_issues(user)
       admin_permissions_for_time_logs(user)
     elsif user.member?
@@ -19,6 +20,7 @@ class Ability
       member_permissions_for_issues(user)
       member_permissions_for_project(user)
       member_permissions_for_sprint(user)
+      member_permissions_for_projects_users(user)
       creator_permissions_for_issues(user)
       reviewer_permissions_for_issues(user)
       assignee_permissions_for_issues(user)
@@ -48,14 +50,24 @@ class Ability
     can %i[read create update destroy], Sprint
   end
 
+  def admin_permissions_for_projects_users
+    can %i[read create destroy], ProjectsUser
+  end
+
   # member permissions
   def member_permissions_for_project(user)
     can %i[read update], Project, manager: user, company_id: user.company_id
+    can :read, Project, projects_users: { user: user }
   end
 
   def member_permissions_for_sprint(user)
     can %i[read create update destroy], Sprint, project: { manager: user }
     can :read, Sprint
+  end
+
+  def member_permissions_for_projects_users(user)
+    can %i[read create update destroy], ProjectsUser, project: { manager: user }
+    can :read, ProjectsUser
   end
 
   def creator_permissions_for_issues(user)

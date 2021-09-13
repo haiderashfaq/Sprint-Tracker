@@ -1,0 +1,9 @@
+$('#modal').html("<%= escape_javascript render('form', project: @project, projects_user: @projects_user, users: @users) %>");
+$('#modal .modal-header').html("<h1><%= t('shared.create_new_resource', resource_label: t('users.label')).pluralize %></h1>");
+$('#modal').modal('show');
+$('#modal').off('shown.bs.modal').on('shown.bs.modal', function() {
+  $(".js-select-field-multiple").select2({}).focus();
+  $('body').on('select2:open', '.js-select-field-multiple', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
+})

@@ -1,0 +1,14 @@
+</div>
+<div class="container mt-3">
+  <div class="row d-flex justify-content-end">
+    <% if can? :create, project => ProjectsUser %>
+      <div class="col-2">
+        <%= link_to t('shared.create_new_resource', resource_label: t('users.label')), new_project_projects_user_path, remote: true, class: "btn btn-primary w-100 bi bi-plus" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="container mt-3">
+  <div class="text-center" id="users_datatable_space"></div>
+  <%= js_paginate projects_users, params: {format: "js"} %>
+</div>
