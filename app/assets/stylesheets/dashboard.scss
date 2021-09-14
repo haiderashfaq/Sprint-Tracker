@@ -25,26 +25,26 @@ $border-gray-color: #b4b4b4;
   height:2000px;
 }
 
-.remove_underline{
+.remove-underline{
   text-decoration:none; 
 }
 
-.login_button {
+.login-button {
   transition-duration: 0.4s;
   background-color: $blue-color;
   color: $white-color;
-}
 
-.login_button:hover {
-  background-color: $white-color;
-  color: $blue-color;
+  &:hover{
+    background-color: $white-color;
+    color: $blue-color;
+  }
 }
 
 .h-30{
   height: 35%;
 }
 
-.home_content_below_navbar{
+.home-content-below-navbar{
   padding-top: 5%;
 }
 
@@ -61,27 +61,27 @@ $border-gray-color: #b4b4b4;
   padding: 6px 14px;
   transition: all 0.5s ease;
 
-  .logo_content .logo{
+  .logo-content .logo{
     color: $white-color;
     display: flex;
     height: 50px;
     width: 100%;
     align-items: center;
     opacity: 0;
+
+    i{
+      font-size: 28px;
+      margin-right: 5px;
+      pointer-events: none;
+    }
+
+    .logo-name{
+      font-size: 20px;
+      font-weight: 400;
+    }
   }
 
-  .logo_content .logo i{
-    font-size: 28px;
-    margin-right: 5px;
-    pointer-events: none;
-  }
-
-  .logo_content .logo .logo_name{
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  .profile_content{
+  .profile-content{
     position: absolute;
     color: $white-color;
     bottom: 0;
@@ -94,14 +94,14 @@ $border-gray-color: #b4b4b4;
       height: 60px;
       background: $profile-background-color;
 
-      .profile_details{
+      .profile-details{
         display: flex;
         align-items: center;
         opacity: 0;
         pointer-events: none;
         white-space: nowrap;  
 
-        .name_job{
+        .name-job{
           margin-left: 10px;
         }
 
@@ -114,23 +114,24 @@ $border-gray-color: #b4b4b4;
           font-size: 12px;
         }
       }
-    }
-    .profile #logout{
-      position: absolute;
-      left: 50%;
-      bottom: 5px;
-      transform: translateX(-50%);
-      min-width: 50px;
-      line-height: 50px;
-      font-size: 20px;
-      border-radius: 12px;
-      color: $white-color;
-      text-decoration: none;
-      text-align: center;
+
+      .logout{
+        position: absolute;
+        left: 50%;
+        bottom: 5px;
+        transform: translateX(-50%);
+        min-width: 50px;
+        line-height: 50px;
+        font-size: 20px;
+        border-radius: 12px;
+        color: $white-color;
+        text-decoration: none;
+        text-align: center;
+      }
     }
   }
 
-  #menu-btn{
+  .menu-btn{
     position: absolute;
     color: $white-color;
     left: 50%;
@@ -170,7 +171,7 @@ $border-gray-color: #b4b4b4;
           whitespace: no-wrap;
         }
 
-        .links_name{
+        .links-name{
           font-size: 15px;
           font-weight: 400;
           white-space: nowrap;
@@ -178,11 +179,11 @@ $border-gray-color: #b4b4b4;
           pointer-events: none;
           transition: 0.4s;
         }
-      }
 
-      a:hover{
-        color: $black-color;
-        background: $white-color;
+        &:hover{
+          color: $black-color;
+          background: $white-color;
+        }
       }
 
       .tooltip{
@@ -201,6 +202,16 @@ $border-gray-color: #b4b4b4;
         opacity: 0;
         pointer-events: none;
       }
+
+      &:hover{
+        .tooltip{
+          opacity: 1;
+          pointer-events: auto;
+          transition: all 0.4s ease;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
     }
   }
 }
@@ -208,7 +219,7 @@ $border-gray-color: #b4b4b4;
 .sidebar.active{
   width: 240px;
 
-  .logo_content .logo{
+  .logo-content .logo{
     color: $white-color;
     display: flex;
     height: 50px;
@@ -216,7 +227,7 @@ $border-gray-color: #b4b4b4;
     opacity: 1;
   }
 
-  #menu-btn{
+  .menu-btn{
     position: absolute;
     color: $white-color;
     left: 90%;
@@ -230,12 +241,12 @@ $border-gray-color: #b4b4b4;
   }
 
   .profile{
-    .profile_details{
+    .profile-details{
       opacity: 1;
       pointer-events: auto;
     }
 
-    #logout{
+    .logout{
       position: absolute;
       left: 88%;
       bottom: 5px;
@@ -249,7 +260,7 @@ $border-gray-color: #b4b4b4;
     }
   }
 
-  ~.home_content{
+  ~.home-content{
     width: calc(100% - 240px);
     left:240px;
     .bigBar{
@@ -268,7 +279,7 @@ $border-gray-color: #b4b4b4;
       }
 
       a{
-        .links_name{
+        .links-name{
           opacity: 1;
           pointer-events: auto;
         }
@@ -277,20 +288,7 @@ $border-gray-color: #b4b4b4;
   }
 }
 
-.sidebar li:hover .tooltip{
-  opacity: 1;
-  pointer-events: auto;
-  transition: all 0.4s ease;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.sidebar.open li .tooltip{
-  display: none;
-}
-
-
-.home_content{
+.home-content{
   position:relative;
   height:100%;
   width: calc(100% - 78px);

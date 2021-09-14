@@ -1,76 +1,69 @@
 <div class="menu-container">
-  <div class="sidebar">
-    <div class="logo_content">
+  <div class="sidebar" id="sidebar">
+    <div class="logo-content">
       <div class="logo">
         <i class='bx bx-run' ></i>
-        <div class="logo_name">
+        <div class="logo-name">
           Flash
         </div>
       </div>
-      <i class='bx bx-menu' id = 'menu-btn'></i>
+      <i class='bx bx-menu menu-btn' id = 'menu-btn'></i>
     </div>
     <ul class="nav_list ps-0">
       <li>
-        <a href='users'>
+        <a href='#'>
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Dashboard</span>
+          <span class="links-name"><%= t('sidebar.dashboard') %></span>
         </a>
-        <span class="tooltip">Dashboard</span>
+        <span class="tooltip"><%= t('sidebar.dashboard') %></span>
       </li>
       <li>
         <a href='<%= users_url %>'>
           <i class='bx bx-user'></i>
-          <span class="links_name">User</span>
+          <span class="links-name"><%= t('sidebar.user') %></span>
         </a>
-        <span class="tooltip">User</span>
+        <span class="tooltip"><%= t('sidebar.user') %></span>
       </li>
       <li>
         <a href='<%= projects_url %>'>
           <i class="bi bi-journal-richtext"></i>
-          <span class="links_name">Projects</span>
+          <span class="links-name"><%= t('sidebar.projects') %></span>
         </a>
-        <span class="tooltip">Projects</span>
+        <span class="tooltip"><%= t('sidebar.projects') %></span>
       </li>
       <li>
         <a href='<%= issues_url %>'>
           <i class="bi bi-card-checklist"></i>
-          <span class="links_name">Issues</span>
+          <span class="links-name"><%= t('sidebar.issues') %></span>
         </a>
-        <span class="tooltip">Issues</span>
+        <span class="tooltip"><%= t('sidebar.issues') %></span>
       </li>
       <li>
         <a href='#'>
           <i class='bx bxl-c-plus-plus'></i>
-          <span class="links_name">Portfolio</span>
+          <span class="links-name"><%= t('sidebar.portfolio') %></span>
         </a>
-        <span class="tooltip">Portfolio</span>
+        <span class="tooltip"><%= t('sidebar.portfolio') %></span>
       </li>
       <li>
         <a href='#'>
           <i class='bx bx-cog'></i>
-          <span class="links_name">Setting</span>
+          <span class="links-name"><%= t('sidebar.setting') %></span>
         </a>
-        <span class="tooltip">Setting</span>
+        <span class="tooltip"><%= t('sidebar.setting') %></span>
       </li>
       <li>
         <a href='#'>
           <i class='bx bxs-report'></i>
-          <span class="links_name">Reports</span>
+          <span class="links-name"><%= t('sidebar.reports') %></span>
         </a>
-        <span class="tooltip">Reports</span>
-      </li>
-      <li>
-        <a href='#'>
-          <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Dashboard</span>
-        </a>
-        <span class="tooltip">Dashboard</span>
+        <span class="tooltip"><%= t('sidebar.reports') %></span>
       </li>
     </ul>
-    <div class="profile_content">
+    <div class="profile-content">
       <div class="profile">
-        <div class="profile_details">
-          <div class="name_job">
+        <div class="profile-details">
+          <div class="name-job">
             <div class="name">
               <%= current_user.name.capitalize %>
             </div>
@@ -79,12 +72,11 @@
             </div>
           </div>
         </div>
-        <%= link_to "", destroy_user_session_path, method: :delete, :class => 'bx bx-log-out', id:"logout" %>
-        <i class='' id="logout" ></i>
+        <%= link_to "", destroy_user_session_path, method: :delete, class: 'bx bx-log-out logout', id:"logout" %>
       </div>
     </div>
   </div>
-  <div class="home_content">
+  <div class="home-content">
     <%= render partial: 'layouts/signed_in_navbar' %>
     <%= render partial: 'shared/flash_messages' %>
     <%= yield %>
