@@ -1,4 +1,3 @@
-<% binding.pry %>
 $("#staticBackdrop").html("<%= escape_javascript render('form', project: @project, issue: @issue, projects: @projects, users: @users )%>");
 $("#staticBackdrop").modal('show');
 

@@ -13,8 +13,17 @@ class Issue < ApplicationRecord
   belongs_to :reviewer, class_name: 'User', optional: true
   belongs_to :project, class_name: 'Project'
 
+  scope :filter_by_status, ->(status) { where status: status }
+  scope :filter_by_assignee, ->(assignee) { where assignee: assignee }
+  scope :filter_by_category, ->(category) { where category: category }
+  scope :filter_by_creator, ->(creator) { where creator: creator }
+  scope :filter_by_reviewer, ->(reviewer) { where reviewer: reviewer }
+  scope :filter_by_priority, ->(priority) { where priority: priority }
+  scope :filter_by_project_id, ->(project_id) {where(@project.sequence_num ==project_id)}
+  scope :filter_by_title, ->(title) { where title: title }
+
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
   CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
-  FILTER = { Assignee: 'Assignee', Creator: 'Creator', Project: 'Project', Status: 'Status', Category: 'Category', Priority: 'Priority' }.freeze
+  FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
 end

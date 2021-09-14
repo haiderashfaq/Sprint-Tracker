@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
 
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
   load_resource :issues, find_by: :sequence_num, through: :project
-
   before_action :fetch_issues, only: :show
 
   # GET /projects
@@ -22,7 +21,6 @@ class ProjectsController < ApplicationController
 
   # POST /projects/
   def create
-    binding.pry 
     @project.creator = current_user
     respond_to do |format|
       if @project.save
@@ -86,6 +84,5 @@ class ProjectsController < ApplicationController
 
   def fetch_issues
     @issues = @project.issues.paginate(page: params[:page])
-    # @issues = @issues.paginate(page: params[:page])
   end
 end

@@ -1,3 +1,24 @@
-$('#header').html("<%= escape_javascript render(:partial => 'issues/header',  :locals=>{projects: @projects,project:@project, issue: @issue} ) %>");
-$('#filter').html("<%= escape_javascript render(:partial => 'issues/filter',  :locals=>{issues: @issues} ) %>");
+<% if (Issue::FILTER.values & params.keys).empty? %>
+  $('#header').html("<%= escape_javascript render(:partial => 'issues/header',  :locals=>{projects: @projects,project:@project, issue: @issue} ) %>");
+  $('#filter').html("<%= escape_javascript render(:partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects} ) %>");
+  var data = $('form').serialize();
+    if (!data.includes('&'))
+    {
+      $('.btn-filter').hide();
+    }
+<% end %>
 $('#issues-table').html("<%= escape_javascript render(:partial => 'issues/table',  :locals=>{ issues: @issues} ) %>");
+$('.js-select-field').select2({
+  width: 200
+});
+ 
+$('.js-remove-filter').on('click', function(e){
+    e.preventDefault();
+    var parent = this.parentNode.parentNode.id;
+    var id ="#"+parent
+    var classname = ".js-"+parent+"-field"
+    $(id).hide();
+    $( classname).prop( "disabled", true );
+    debugger
+    // alert('clicked');
+});

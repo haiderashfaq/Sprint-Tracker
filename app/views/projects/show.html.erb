@@ -29,7 +29,9 @@
     </div>
     <div class="tab-pane fade" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
       <div id="header" ></div>
-      <div id="filter"></div>
+      <% if (Issue::FILTER.keys & params.keys).empty? %>
+        <div id="filter"></div>
+      <% end %>
       <div id="issues-table"></div>
     </div>
     <div class="tab-pane fade" id="nav-sprints" role="tabpanel" aria-labelledby="nav-sprints-tab"></div>

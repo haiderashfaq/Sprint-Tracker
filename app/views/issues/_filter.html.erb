@@ -1,7 +1,98 @@
-<%= form_with url: "/search", method: :get do |form| %>
-  <div class="col-12 control-label d-flex justify-content-end">
-    <%= form.label t('filter.add')%>
-    <%= form.select '', Issue::FILTER, {class: "js-select-field form-select form-select-lg"} %>
+<div class="container mb-3">
+<%= form_with  local: false, action: "/", method: :get do |form| %>
+  <div class="row  d-flex justify-content-end">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-1 control-label"><%= form.label t('filter.filter_label'), class: 'col-form-label col-form-label-md'  %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-2">
+      <% if params[:project_id].present? %>
+      <%= form.select t('filter.filter_label'), Issue::FILTER.except(:Project),{include_blank:true}, { include_blank:true,   class: "js-select-field js-filter-field form-select form-select-lg"} %>
+      <% else %>
+      <%= form.select t('filter.filter_label'), Issue::FILTER,{include_blank:true}, {   class: "js-select-field js-filter-field form-select form-select-lg"} %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row", id="creator" style="display: none;">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-1 d-flex justify-content-start control-label">
+      <%= form.label t('issues.creator'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-2" ,id="js-creator">
+      <%= form.select :creator, users.map{|user| [user.name, user.id] } , {}, {disabled: true, class: "js-select-field js-creator-field form-select form-select-lg"}  %>
+    </div>
+    <div class="col-1">
+      <%= link_to '', '', class: 'btn btn-close js-remove-filter'  %>
+    </div>
+  </div>
+  <div class="row", id="reviewer" style="display: none;">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-1 d-flex justify-content-start control-label">
+      <%= form.label t('issues.reviewer'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-2">
+      <%= form.select :reviewer, users.map{|user| [user.name, user.id] } ,{ }, {disabled: true, class: "js-select-field form-select js-reviewer-field form-select-lg"}  %>
+    </div>
+    <div class="col-1">
+      <%= link_to '', '', class: 'btn btn-close js-remove-filter'   %>
+    </div>
+  </div>
+  <div class="row", id="assignee" style="display: none;">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-1 d-flex justify-content-start control-label">
+      <%= form.label t('issues.assignee'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-2">
+      <%= form.select :assignee, users.map{|user| [user.name, user.id] } ,{}, {disabled: true, class: "js-select-field js-assignee-field form-select  form-select-lg"}  %>
+    </div>
+    <div class="col-1">
+      <%= link_to '', '', class: 'btn btn-close js-remove-filter'  %>
+    </div>
+  </div>
+  <div class="row", id="project" style="display: none;">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-1 d-flex justify-content-start control-label">
+      <%= form.label t('projects.project_label'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    
+    <div class="col-12 col-sm-8 col-md-6 col-lg-2", id="js-project">
+      <%= form.select :project_id, projects.map{|project| [project.name, project.sequence_num] }, {}, {disabled: true, class: "js-select-field js-project-field form-select form-select-lg" }%>
+    </div>
+    <div class="col-1">
+      <%= link_to '','', class: 'btn btn-close js-remove-filter' %>
+    </div>
+  </div>
+  <div class="row", id="status" style="display: none;">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-1 d-flex justify-content-start control-label">
+      <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    
+    <div class="col-12 col-sm-8 col-md-6 col-lg-2", id="js-status">
+      <%= form.select :status, Issue::STATUS, { }, {disabled: true, class: "js-select-field js-status-field form-select form-select-lg js-status-field"} %>
+    </div>
+    <div class="col-1">
+       <%= link_to '', '', class: 'btn btn-close js-remove-filter' %>
+      
+    </div>
+  </div>
+  <div class="row ", id="priority" style="display: none;">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-1 d-flex justify-content-start control-label">
+      <%= form.label t('issues.priority'), class: 'col-form-label col-form-label-md' %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-2">
+      <%= form.select :priority, Issue::PRIORITY, { }, {disabled: true, class: 'js-select-field  form-select form-select-lg4  js-priority-field'}%>
+    </div>
+    <div class="col-1">
+      <%= link_to '', '', class: 'btn btn-close js-remove-filter'  %>
+    </div>
+  </div>
+  <div class="row", id="category" style="display: none;">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-1 d-flex justify-content-start control-label">
+      <%= form.label t('issues.category'), class: 'col-form-label col-form-label-md'  %>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-2">
+      <%= form.select :category, Issue::CATEGORY, {}, {disabled: true, class: "js-select-field form-select form-select-lg  js-category-field"}%>
+    </div>
+    <div class="col-1">
+      <%= link_to '', '', class: 'btn btn-close js-remove-filter'  %>
+    </div>
+  </div>
+  <div class="col-1 btn-filter " style="display: none;">
+    <%= form.submit 'Apply', class: 'btn btn btn-outline-primary mt-4 px-4', remote: true %>
   </div>
 <% end %>
-
+</div>

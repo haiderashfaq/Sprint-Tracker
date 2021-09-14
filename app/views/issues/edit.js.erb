@@ -1,4 +1,4 @@
-$("#staticBackdrop").html("<%= escape_javascript render('form', project: @project, issue: @issue, projects: @projects, users: @users )%>");
+$("#staticBackdrop").html("<%= escape_javascript render('form', project: @issue.project, issue: @issue, projects: @projects, users: @users )%>");
 $("#staticBackdrop").modal('show');
 
 $('#staticBackdrop').on('shown.bs.modal', function(){

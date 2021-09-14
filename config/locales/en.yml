@@ -47,12 +47,15 @@ en:
     history_label: 'History'
     assignee: 'Assignee'
     reviewer: 'Reviewer'
+    creator: 'Creator'
   
   projects:
     project_label: 'Project'
     manager: "Project Manager"
   filter:
     add: 'Add filter'
+    filter_label: 'Filter'
+    creator: 'Creator'
 
 
   

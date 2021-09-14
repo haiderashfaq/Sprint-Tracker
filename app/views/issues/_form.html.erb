@@ -5,7 +5,7 @@
         <h2><%= t('shared.create_new_resource', resource_label: t('issues.issue_label')) %></h2>
       </div>
     </div>
-     <div class="modal-flash-messages"></div>
+    <div class="modal-flash-messages"></div>
     <div class="container modal-body">
       <%= form_with model: [project, issue], local:false do |form| %>
       <div class="row mb-3 asterick">
@@ -50,10 +50,10 @@
       </div>
       <div class="row g-3 align-items-center mb-3 asterick">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
-          <%= form.label t('issues.estimated_start_date'), class: 'col-form-label col-form-label-md' %>
+          <%= form.label t('issues.estimated_start_date'), class: 'col-form-label col-form-label-md ' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :estimated_start_date, class: 'form-control form-control-md',:required => true %>
+          <%= form.date_field :estimated_start_date, class: 'form-control form-control-md js-flatpickr-datetime',:required => true %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -61,7 +61,7 @@
           <%= form.label t('issues.estimated_end_date'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md' ,:required => true %>
+          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime' ,:required => true %>
         </div>
       </div>
       <div class="row g-3 align-items-center mb-3 asterick">
@@ -86,7 +86,7 @@
         </div>
 
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <% if params[:project_id].nil? %> 
+          <% if project.nil? %> 
            <%= form.select :project_id, projects.map{|project| [project.name, project.id] } , { required: true }, {class: "js-select-field form-select form-select-lg"}  %>
           <% else %>
           <%= form.select :project_name, [project.id,project.name],{ required: true, selected: [project.id, project.name]}, {class: "js-select-pa form-select form-select-lg",disabled: true}%>

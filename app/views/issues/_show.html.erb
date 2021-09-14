@@ -1,102 +1,105 @@
 <div class="container">
-  <div class="row gx-6">
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.title') %>:
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= issue.title %></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.status') %>:
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= issue.status %></p>
+  <div id="flashMessages"></div>
+  <div id="issue_show"> 
+    <div class="row gx-6">
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.title') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+            <p><%= issue.title %></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.description') %>:
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= issue.description %></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.priority') %>:
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= issue.priority %></p>
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.status') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+            <p><%= issue.status %></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.estimated_start_date') %>:
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= issue.estimated_start_date %></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.estimated_end_date') %>:
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= issue.estimated_end_date %></p>
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.description') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+            <p><%= issue.description %></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.actual_start_date') %>:
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= issue.actual_end_date %></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <p><%= t('issues.actual_end_date') %>:<p>
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-          <p><%= issue.actual_end_date %></p>
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.priority') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+            <p><%= issue.priority %></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.reviewer') %>:
-        </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-         <p> <%= issue.reviewer.email %></p>
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.estimated_start_date') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+            <p><%= issue.estimated_start_date %></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 col-sm-6">
-      <div class="row ">
-        <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
-          <%= t('issues.creator') %>:
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.estimated_end_date') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+            <p><%= issue.estimated_end_date %></p>
+          </div>
         </div>
-        <div class="col-12 col-sm-7 col-md-7 col-lg-8">
-         <p> <%= issue.creator.email %></p>
+      </div>
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.actual_start_date') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+            <p><%= issue.actual_end_date %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <p><%= t('issues.actual_end_date') %>:<p>
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+            <p><%= issue.actual_end_date %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.reviewer') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+           <p> <%= issue.reviewer.email %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6">
+        <div class="row ">
+          <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+            <%= t('issues.creator') %>:
+          </div>
+          <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+           <p> <%= issue.creator.email %></p>
+          </div>
         </div>
       </div>
     </div>
