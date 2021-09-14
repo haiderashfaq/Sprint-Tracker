@@ -32,6 +32,7 @@
 en:
   sidebar:
     dashboard: Dashboard
+    # To do remove if unused
     portfolio: Portfolio
     setting: Setting
     reports: Reports
