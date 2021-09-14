@@ -9,8 +9,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     # Setting reset_password_token itself to reach reset password screen for the user
     resource = resource_class.find_by(confirmation_token: params[:confirmation_token])
     token    = Devise.token_generator.generate(resource_class, :reset_password_token)
-    resource.update_column(:reset_password_token, token.second)
-    resource.update_column(:reset_password_sent_at, Time.now.utc)
+    resource.update_columns({ reset_password_token: token.second, reset_password_sent_at: Time.now.utc })
     edit_user_password_url(resource, reset_password_token: token.first)
   end
 end
