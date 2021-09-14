@@ -1,15 +1,16 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 @import 'select2/dist/css/select2';
-@import 'bootstrap-icons/font/bootstrap-icons.css';
 @import 'flatpickr/dist/flatpickr.css';
-
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'boxicons/css/boxicons.css';
 $secondary-color: #999999;
 $hover-color: #000033;
 $a-border-color: #2e6ab1;
 $disable-border-color: #dddddd;
 $a-color: #105cb6;
 
+.progress {width: 66%;}
 .select2-container--open {
   z-index: 9999999
 }

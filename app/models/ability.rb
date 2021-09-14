@@ -4,17 +4,15 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
     return if user.nil?
 
     if user.admin?
       admin_permissions_for_users(user)
-      admin_permissions_for_project
       admin_permissions_for_sprint
-      admin_permissions_for_projects_users
+      admin_permissions_for_project(user)
       admin_permissions_for_issues(user)
     elsif user.member?
-      can :read, User
+      member_permsisions_for_users(user)
       member_permissions_for_issues(user)
       member_permissions_for_project(user)
       member_permissions_for_sprint(user)
@@ -32,23 +30,32 @@ class Ability
     end
   end
 
+  def admin_permissions_for_projects_users(user)
+    can %i[read create destroy], ProjectsUser, company_id: user.company_id
+  end
+
   def admin_permissions_for_issues(user)
     can :manage, Issue, company_id: user.company_id
   end
 
-  def admin_permissions_for_project
-    can %i[read create update destroy], Project
+  def admin_permissions_for_project(user)
+    can %i[update read create delete], Project, company_id: user.company_id
   end
 
   def admin_permissions_for_sprint
     can %i[read create update destroy], Sprint
   end
 
-  def admin_permissions_for_projects_users
-    can %i[read create destroy], ProjectsUser
+  # member permissions
+  def member_permsisions_for_users(user)
+    can :read, User, company_id: user.company_id
   end
 
-  # member permissions
+  def member_permissions_for_projects_users(user)
+    can %i[read create update destroy], ProjectsUser, project: { manager: user }
+    can :read, ProjectsUser, projects_users: { user: user }
+  end
+
   def member_permissions_for_project(user)
     can %i[read update], Project, manager: user, company_id: user.company_id
     can :read, Project, projects_users: { user: user }
@@ -57,11 +64,6 @@ class Ability
   def member_permissions_for_sprint(user)
     can %i[read create update destroy], Sprint, project: { manager: user }
     can :read, Sprint
-  end
-
-  def member_permissions_for_projects_users(user)
-    can %i[read create update destroy], ProjectsUser, project: { manager: user }
-    can :read, ProjectsUser
   end
 
   def creator_permissions_for_issues(user)

@@ -30,10 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  password:
+    label: Password
+    forgot_password: Forgot your password?
+    change_password: Change password
+    new_password: New password
   issues:
     issue_label: 'Issue'
     issues_label: 'Issues'
     description: 'Description'
+    estimated_time: 'Estimated Time'
     estimated_start_date: 'Estimated Start Date'
     estimated_end_date: 'Estimated End Date'
     status: 'Status'
@@ -45,7 +51,6 @@ en:
     actual_end_date: 'Actual End Date'
     no_histoires: 'No Histories yet!'
     history_label: 'History'
-  
   projects:
     project_label: 'Project'
     manager: "Project Manager"
@@ -66,7 +71,6 @@ en:
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
-
 
   shared:
     name: "Name"
