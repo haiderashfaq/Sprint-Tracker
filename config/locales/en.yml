@@ -71,7 +71,7 @@ en:
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
-    
+
   shared:
     name: "Name"
     email: "Email Address"
