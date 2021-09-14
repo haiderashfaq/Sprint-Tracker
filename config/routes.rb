@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     path: 'accounts',
     path_names: { sign_up: 'new' }
 
-  root to: 'dashboard#index'
+  root to: 'dashboard#home'
 
   constraints(subdomain: /^(?!www\Z)(\w+)/) do
     resources :projects do

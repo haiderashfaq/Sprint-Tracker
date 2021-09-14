@@ -3,6 +3,7 @@
 @import 'select2/dist/css/select2';
 @import 'flatpickr/dist/flatpickr.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'dashboard';
 @import 'boxicons/css/boxicons.css';
 
 $secondary-color: #999999;
@@ -10,13 +11,14 @@ $hover-color: #000033;
 $a-border-color: #2e6ab1;
 $disable-border-color: #dddddd;
 $a-color: #105cb6;
+$gray-color: #000000;
 
 .progress {width: 66%;}
 .select2-container--open {
   z-index: 9999999
 }
 .text-gray-400 {
-  color: #000000 !important;
+  color: $black-color !important;
 }
 .btn-user {
   font-size: 0.8rem;

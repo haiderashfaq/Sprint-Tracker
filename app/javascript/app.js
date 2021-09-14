@@ -35,6 +35,10 @@ $(document).ready(function() {
     $('#subdomain').val(subdomain.replace(/[^a-z0-9]/g, '').substring(0, 25));
   });
 
+  $('#menu-btn').on('click', function(){
+    $('#sidebar').toggleClass("active");
+  });
+
 });
 var dateTimeFunc =  function(){
   $(".js-flatpickr-datetime").flatpickr({
