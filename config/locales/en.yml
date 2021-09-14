@@ -32,9 +32,6 @@
 en:
   sidebar:
     dashboard: Dashboard
-    user: User
-    projects: Projects
-    issues: Issues
     portfolio: Portfolio
     setting: Setting
     reports: Reports
