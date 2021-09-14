@@ -30,5 +30,4 @@ class ApplicationController < ActionController::Base
 
     @current_company ||= Company.find_by!(subdomain: request.subdomain)
   end
-
 end

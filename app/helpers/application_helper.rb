@@ -33,4 +33,8 @@ module ApplicationHelper
       t('shared.due_on')
     end
   end
+
+  def js_paginate(collection, params = {})
+    will_paginate collection, params.merge(renderer: RemoteLinkPaginationHelper::LinkRenderer)
+  end
 end

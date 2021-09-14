@@ -21,11 +21,13 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user.new_member = true
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: t('shared.success.create', resource_label: t('users.user_label')) }
+
+        format.html { redirect_to @user, notice: t('shared.success.create', resource_label: t('users.label')) }
       else
-        format.html { render :new, alert: t('shared.failure.create', resource_label: t('users.user_label')) }
+        format.html { render :new, alert: t('shared.failure.create', resource_label: t('users.label')) }
       end
     end
   end
@@ -39,9 +41,9 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: t('shared.success.update', resource_label: t('users.user_label')) }
+        format.html { redirect_to @user, notice: t('shared.success.update', resource_label: t('users.label')) }
       else
-        flash.now[:alert] = t('shared.failure.update', resource_label: t('users.user_label'))
+        flash.now[:alert] = t('shared.failure.update', resource_label: t('users.label'))
         format.html { render :edit }
       end
     end
@@ -50,9 +52,9 @@ class UsersController < ApplicationController
   def destroy
     respond_to do |format|
       if @user.destroy
-        format.html { redirect_to users_url, alert: t('shared.success.delete', resource_label: t('users.user_label')) }
+        format.html { redirect_to users_url, alert: t('shared.success.delete', resource_label: t('users.label')) }
       else
-        flash.now[:alert] = t('shared.failure.delete', resource_label: t('users.user_label'))
+        flash.now[:alert] = t('shared.failure.delete', resource_label: t('users.label'))
         format.html { render :show }
       end
     end
@@ -64,7 +66,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(
       :name,
       :email,
-      :password,
       :phone_num,
       :role_id
     )

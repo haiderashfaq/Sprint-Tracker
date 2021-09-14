@@ -1,4 +1,4 @@
-module UserHelper
+module UsersHelper
   def user_roles_dropdown_options_for_select
     User::ROLE_ID.map { |label, id| [label.capitalize, id] }
   end

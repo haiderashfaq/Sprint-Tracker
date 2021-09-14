@@ -1,0 +1,73 @@
+<div class="home_container">
+  <nav class="navbar fixed-top navbar-expand-sm navbar-dark"
+  style="background-color:#0062cc">
+    <div class="container">
+      <a href="#" class="navbar-brand mb-0 h1">
+        <%= image_tag("logo.png", width: 30) %>
+        Flash
+      </a>
+      <button 
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#home_navbar"
+      class="navbar-toggler"
+      aria-controls="home_navbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="home_navbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item active">
+            <a href='#' class="nav-link active">
+              Home
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href='#' class="nav-link">
+              Features
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href='#' class="nav-link">
+              Pricing
+            </a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <ul class="navbar-nav me-auto">
+            <% if user_signed_in? %> Logged in as <strong><%= current_user.email %> </strong>.
+              <%= link_to t('users.log_out'), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+              <%= link_to t('users.view company members'), users_url, :class => 'navbar-link'  %>
+              <%= link_to t('projects.project_header'), projects_url, :class => 'navbar-link'  %>
+            <% else %>
+              <%= link_to t('users.sign_up'), new_user_registration_path, :class => 'text-light remove_underline mt-2 me-3'  %> 
+              <%= link_to t('users.log_in'), new_user_session_path, :class => 'btn login_button'  %>
+            <% end %>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid home_content_below_navbar h-30">
+    <div class="row d-flex p-5 ms-5">
+      <div class="col-md-5 padding-5 col-lg-4">
+        <h1 class="heading"> The #1 software development tool used by agile teams </h1>
+      </div>
+      <div class="col-md-7">
+        <%= image_tag("home_background.jpg", class: "w-100 h-75") %>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row ps-5">
+      <div class="d-flex justify-content-center ps-5">
+        <h2 class="heading"> The best software teams utilise speed like the Flash. </h2>
+      </div>
+      <div class="d-flex justify-content-center pe-5">
+        <p>Flash Software is built for every member of your software team to plan,<br> track, and be efficient in work.</p>
+      </div>
+    </div>
+  </div>
+</div>

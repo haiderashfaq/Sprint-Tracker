@@ -8,8 +8,8 @@ $(document).ready(function() {
     $(id).hide();
     $( classname).prop( "disabled", true );
   });
-   $(".js-select-field").select2({
-     dropdownParent: $('#staticBackdrop')
+  $(".js-select-field").select2({
+    dropdownParent: $('#modal')
   });
 
   $('.js-select-field').select2({
@@ -34,7 +34,7 @@ $(document).ready(function() {
     var subdomain = $("#name").val().toLowerCase();
     $('#subdomain').val(subdomain.replace(/[^a-z0-9]/g, '').substring(0, 25));
   });
-  
+
 });
 var dateTimeFunc =  function(){
   $(".js-flatpickr-datetime").flatpickr({

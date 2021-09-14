@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_06_125848) do
+ActiveRecord::Schema.define(version: 2021_09_13_124738) do
 
   create_table "audits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "auditable_id"
@@ -88,6 +88,17 @@ ActiveRecord::Schema.define(version: 2021_09_06_125848) do
     t.index ["manager_id"], name: "index_projects_on_manager_id"
   end
 
+  create_table "projects_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_projects_users_on_company_id"
+    t.index ["project_id"], name: "index_projects_users_on_project_id"
+    t.index ["user_id"], name: "index_projects_users_on_user_id"
+  end
+
   create_table "sprints", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -120,8 +131,13 @@ ActiveRecord::Schema.define(version: 2021_09_06_125848) do
     t.bigint "company_id"
     t.integer "role_id"
     t.integer "sequence_num", null: false
+    t.string "confirmation_token"
+    t.string "unconfirmed_email"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.index ["company_id", "email"], name: "index_users_on_company_id_and_email", unique: true
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["sequence_num", "company_id"], name: "index_users_on_sequence_num_and_company_id", unique: true
   end
@@ -131,6 +147,9 @@ ActiveRecord::Schema.define(version: 2021_09_06_125848) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users", column: "creator_id"
   add_foreign_key "projects", "users", column: "manager_id"
+  add_foreign_key "projects_users", "companies"
+  add_foreign_key "projects_users", "projects"
+  add_foreign_key "projects_users", "users"
   add_foreign_key "sprints", "companies"
   add_foreign_key "sprints", "projects"
   add_foreign_key "sprints", "users", column: "creator_id"
