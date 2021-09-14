@@ -1,0 +1,84 @@
+<div class="menu-container">
+  <div class="sidebar" id="sidebar">
+    <div class="logo-content">
+      <div class="logo">
+        <i class='bx bx-run' ></i>
+        <div class="logo-name">
+          Flash
+        </div>
+      </div>
+      <i class='bx bx-menu menu-btn' id = 'menu-btn'></i>
+    </div>
+    <ul class="nav_list ps-0">
+      <li>
+        <a href='#'>
+          <i class='bx bx-grid-alt'></i>
+          <span class="links-name"><%= t('sidebar.dashboard') %></span>
+        </a>
+        <span class="tooltip"><%= t('sidebar.dashboard') %></span>
+      </li>
+      <li>
+        <a href='<%= users_url %>'>
+          <i class='bx bx-user'></i>
+          <span class="links-name"><%= t('users.label') %></span>
+        </a>
+        <span class="tooltip"><%= t('users.label') %></span>
+      </li>
+      <li>
+        <a href='<%= projects_url %>'>
+          <i class="bi bi-journal-richtext"></i>
+          <span class="links-name"><%= t('projects.project_label') %></span>
+        </a>
+        <span class="tooltip"><%= t('projects.project_label') %></span>
+      </li>
+      <li>
+        <a href='<%= issues_url %>'>
+          <i class="bi bi-card-checklist"></i>
+          <span class="links-name"><%= t('issues.issue_label') %></span>
+        </a>
+        <span class="tooltip"><%= t('issues.issue_label') %></span>
+      </li>
+      <li>
+        <a href='#'>
+          <i class='bx bxl-c-plus-plus'></i>
+          <span class="links-name"><%= t('sidebar.portfolio') %></span>
+        </a>
+        <span class="tooltip"><%= t('sidebar.portfolio') %></span>
+      </li>
+      <li>
+        <a href='#'>
+          <i class='bx bx-cog'></i>
+          <span class="links-name"><%= t('sidebar.setting') %></span>
+        </a>
+        <span class="tooltip"><%= t('sidebar.setting') %></span>
+      </li>
+      <li>
+        <a href='#'>
+          <i class='bx bxs-report'></i>
+          <span class="links-name"><%= t('sidebar.reports') %></span>
+        </a>
+        <span class="tooltip"><%= t('sidebar.reports') %></span>
+      </li>
+    </ul>
+    <div class="profile-content">
+      <div class="profile">
+        <div class="profile-details">
+          <div class="name-job">
+            <div class="name">
+              <%= current_user.name.capitalize %>
+            </div>
+            <div class="job">
+              <%= current_user.role_name %>
+            </div>
+          </div>
+        </div>
+        <%= link_to "", destroy_user_session_path, method: :delete, class: 'bx bx-log-out logout', id:"logout" %>
+      </div>
+    </div>
+  </div>
+  <div class="home-content">
+    <%= render partial: 'layouts/signed_in_navbar' %>
+    <%= render partial: 'shared/flash_messages' %>
+    <%= yield %>
+  </div>
+</div>

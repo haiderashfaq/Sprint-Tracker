@@ -9,8 +9,15 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-      <%= render partial: 'shared/flash_messages' %>
+    <% if user_signed_in? %>
+      <%= render partial: 'layouts/signed_in_sidebar' %>
+    <% else%>
+      <%= render partial: 'layouts/signed_out_navbar' %>
+      <div class="home-content-below-navbar">
+        <%= render partial: 'shared/flash_messages' %>
+      </div>
       <%= yield %>
+    <% end %>
       <div class="modal fade" id="modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
       </div>
   </body>

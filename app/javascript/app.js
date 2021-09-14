@@ -18,6 +18,11 @@ $(document).ready(function() {
       var subdomain = $("#name").val().toLowerCase();
       $('#subdomain').val(subdomain.replace(/[^a-z0-9]/g, '').substring(0, 25));
     });
+
+    $('#menu-btn').on('click', function(){
+      $('#sidebar').toggleClass("active");
+    });
+
     // $('#users-datatable').DataTable().ajax.reload();
     // $('#users-datatable').dataTable({
     //     "processing": true,

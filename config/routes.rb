@@ -6,15 +6,13 @@ Rails.application.routes.draw do
     path: 'accounts',
     path_names: { sign_up: 'new' }
 
-  root to: 'dashboard#index'
+  root to: 'dashboard#home'
 
   constraints(subdomain: /^(?!www\Z)(\w+)/) do
     resources :projects do
       resources :sprints
       resources :projects_users
-      resources :issues do
-        resources :time_logs
-      end
+      resources :issues
     end
     resources :issues
     resources :users do
