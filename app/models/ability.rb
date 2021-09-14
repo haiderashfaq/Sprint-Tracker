@@ -53,7 +53,7 @@ class Ability
 
   def member_permissions_for_projects_users(user)
     can %i[read create update destroy], ProjectsUser, project: { manager: user }
-    can :read, ProjectsUser
+    can :read, ProjectsUser, projects_users: { user: user }
   end
 
   def member_permissions_for_project(user)
