@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   around_action :set_tenant_id
 
-  before_action :authenticate_user!, except: [:list_companies]
+  before_action :authenticate_user!, except: [:list_companies, :home]
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
     yield
   ensure
     Company.current_company_id = nil
+  end
+
+  def after_sign_in_path_for(resource)
+    root_path
   end
 
   def current_company

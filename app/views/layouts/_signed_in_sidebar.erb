@@ -1,0 +1,92 @@
+<div class="menu-container">
+  <div class="sidebar">
+    <div class="logo_content">
+      <div class="logo">
+        <i class='bx bx-run' ></i>
+        <div class="logo_name">
+          Flash
+        </div>
+      </div>
+      <i class='bx bx-menu' id = 'menu-btn'></i>
+    </div>
+    <ul class="nav_list">
+      <li>
+        <a href='users'>
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+        <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a href='<%= users_url %>'>
+          <i class='bx bx-user'></i>
+          <span class="links_name">User</span>
+        </a>
+        <span class="tooltip">User</span>
+      </li>
+      <li>
+        <a href='<%= projects_url %>'>
+          <i class="bi bi-journal-richtext"></i>
+          <span class="links_name">Projects</span>
+        </a>
+        <span class="tooltip">Projects</span>
+      </li>
+      <li>
+        <a href='<%= issues_url %>'>
+          <i class="bi bi-card-checklist"></i>
+          <span class="links_name">Issues</span>
+        </a>
+        <span class="tooltip">Issues</span>
+      </li>
+      <li>
+        <a href='#'>
+          <i class='bx bxl-c-plus-plus'></i>
+          <span class="links_name">Portfolio</span>
+        </a>
+        <span class="tooltip">Portfolio</span>
+      </li>
+      <li>
+        <a href='#'>
+          <i class='bx bx-cog'></i>
+          <span class="links_name">Setting</span>
+        </a>
+        <span class="tooltip">Setting</span>
+      </li>
+      <li>
+        <a href='#'>
+          <i class='bx bxs-report'></i>
+          <span class="links_name">Reports</span>
+        </a>
+        <span class="tooltip">Reports</span>
+      </li>
+      <li>
+        <a href='#'>
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+        <span class="tooltip">Dashboard</span>
+      </li>
+    </ul>
+    <div class="profile_content">
+      <div class="profile">
+        <div class="profile_details">
+          <div class="name_job">
+            <div class="name">
+              <%= current_user.name.capitalize %>
+            </div>
+            <div class="job">
+              <%= current_user.role_name %>
+            </div>
+          </div>
+        </div>
+        <%= link_to "", destroy_user_session_path, method: :delete, :class => 'bx bx-log-out', id:"logout" %>
+        <i class='' id="logout" ></i>
+      </div>
+    </div>
+  </div>
+  <div class="home_content">
+    <%= render partial: 'layouts/signed_in_navbar' %>
+    <%= render partial: 'shared/flash_messages' %>
+    <%= yield %>
+  </div>
+</div>

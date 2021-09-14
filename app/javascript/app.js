@@ -18,6 +18,14 @@ $(document).ready(function() {
       var subdomain = $("#name").val().toLowerCase();
       $('#subdomain').val(subdomain.replace(/[^a-z0-9]/g, '').substring(0, 25));
     });
+
+    let btn = document.querySelector("#menu-btn");
+    let sidebar = document.querySelector(".sidebar");
+
+    btn.onclick = function() {
+      sidebar.classList.toggle("active");
+    }
+
     // $('#users-datatable').DataTable().ajax.reload();
     // $('#users-datatable').dataTable({
     //     "processing": true,
