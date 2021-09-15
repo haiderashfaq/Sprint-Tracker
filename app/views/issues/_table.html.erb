@@ -7,7 +7,7 @@
         <th><%= t('issues.status') %></th>
         <th><%= t('issues.priority') %></th>
         <th><%= t('issues.category') %></th>
-        <th>Actions</th>
+        <th><%= t('shared.actions') %></th>
       </tr>
     </thead>
     <tbody id="issues_datatable_body">
@@ -16,9 +16,8 @@
       <% end %>
     </tbody>
   </table>
-  <% if issues.size>1 %>
-  <%= paginate issues %>
-  <% end %>
+  
+  <%= js_paginate issues %>
 </div>
 
 

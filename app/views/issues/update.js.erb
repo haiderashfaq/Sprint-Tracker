@@ -1,5 +1,5 @@
 <% if @issue.errors.present? %>
-  $('#staticBackdrop .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
 <% else %>
   $('#formCloseBtn').click();
   $('#issue_<%= @issue.sequence_num %>').replaceWith("<%= escape_javascript render 'issue_datatable_row', issue: @issue %>");

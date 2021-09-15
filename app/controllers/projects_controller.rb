@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
 
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
   load_resource :issues, find_by: :sequence_num, through: :project
-  before_action :fetch_issues, only: :show
 
   # GET /projects
   def index
@@ -81,9 +80,5 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :start_date, :end_date, :manager_id)
-  end
-
-  def fetch_issues
-    @issues = @project.issues.paginate(page: params[:page])
   end
 end

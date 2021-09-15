@@ -11,14 +11,13 @@ $('#issues-table').html("<%= escape_javascript render(:partial => 'issues/table'
 $('.js-select-field').select2({
   width: 200
 });
- 
+
 $('.js-remove-filter').on('click', function(e){
-    e.preventDefault();
-    var parent = this.parentNode.parentNode.id;
-    var id ="#"+parent
-    var classname = ".js-"+parent+"-field"
-    $(id).hide();
-    $( classname).prop( "disabled", true );
-    debugger
-    // alert('clicked');
+  e.preventDefault();
+  var parent = this.parentNode.parentNode.id;
+  var id ="#"+parent
+  var className = ".js-"+parent+"-field"
+  $(id).hide();
+  $(className).prop( "disabled", true );
 });
+ 

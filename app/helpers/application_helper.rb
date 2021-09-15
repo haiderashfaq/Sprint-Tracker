@@ -1,8 +1,4 @@
 module ApplicationHelper
-  
-  def paginate(collection, params = {})
-    will_paginate collection, params.merge(renderer: RemoteLinkPaginationHelper::LinkRenderer)
-  end
 
   def bootstrap_class_for_flash(flash_type)
     case flash_type

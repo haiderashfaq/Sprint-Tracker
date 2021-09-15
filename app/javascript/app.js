@@ -4,10 +4,11 @@ $(document).ready(function() {
     e.preventDefault();
     var parent = this.parentNode.parentNode.id;
     var id ="#"+parent
-    var classname = ".js-"+parent+"-field"
+    var className = ".js-"+parent+"-field"
     $(id).hide();
-    $( classname).prop( "disabled", true );
+    $(className).prop( "disabled", true );
   });
+
   $(".js-select-field").select2({
     dropdownParent: $('#modal')
   });
@@ -22,11 +23,7 @@ $(document).ready(function() {
   dateTimeFunc();
   $("#modal").on('shown.bs.modal', dateTimeFunc);
 
-  $('#issues-datatable').dataTable({
-    "paging": false,
-    "searching": false,
-    "info": false
-  });
+
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 
@@ -39,18 +36,19 @@ $(document).ready(function() {
     $('#sidebar').toggleClass("active");
   });
 
+  $(document).on('select2:select',".js-filter-field", function (e){
+      var data = e.params.data;
+      var id = "#"+e.params.data["id"]
+      $('.btn-filter').show();
+      $(id).css('display', 'flex');
+      $( id+"_id" ).prop( "disabled", false );
+      $( ".js-"+e.params.data["id"]+"-field").prop( "disabled", false );
+  });
+
 });
 var dateTimeFunc =  function(){
   $(".js-flatpickr-datetime").flatpickr({
     enableTime: true
   });
 }
-$(document).on('select2:select',".js-filter-field", function (e){
-    var data = e.params.data;
-    var id = "#"+e.params.data["id"]
-    $('.btn-filter').show();
-    $(id).show();
-    $( id+"_id" ).prop( "disabled", false );
-    $( ".js-"+e.params.data["id"]+"-field").prop( "disabled", false );
-});
 

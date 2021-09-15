@@ -6,10 +6,10 @@
   <td><%= issue.category %></td>
   <td>
     <% if can? :update, issue %>
-      <%= link_to '', edit_issue_path(issue) ,{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'bi bi-pencil'} %>
+      <%= link_to '', edit_issue_path(issue), { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'bi bi-pencil' } %>
     <% end %>
     <% if can? :destroy, issue %>
-      <%= link_to '', issue_path(issue),remote: true ,method: :delete, data: {confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
+      <%= link_to '', issue_path(issue), remote: true , method: :delete, data: {confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
     <% end %>
   </td>
 </tr>

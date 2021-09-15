@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
   rescue_from ActionController::UnknownFormat do |exception|
-    binding.pry
     flash[:error] = exception.message
     redirect_to root_url
   end

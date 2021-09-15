@@ -1,17 +1,18 @@
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header text-center"></div>
-    <div class= "col-12 modal-title text-center"></div>
-    <h2><%= t('shared.create_new_resource', resource_label: t('issues.issue_label')) %></h2>
+    <div class= "col-12 modal-title text-center">
+      <h2><%= t('shared.create_new_resource', resource_label: t('issues.issue_label')) %></h2>
+    </div>
     <div class="modal-flash-messages"></div>
     <div class="container modal-body">
-      <%= form_with model: [project, issue], local:false do |form| %>
+      <%= form_with model: [project, issue], local: false do |form| %>
       <div class="row mb-3 asterick">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
           <%= form.label t('issues.title'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.text_field :title, class: 'form-control form-control-md',:required => true %>
+          <%= form.text_field :title, class: 'form-control form-control-md',required: true %>
         </div>
       </div>
       <div class="row mb-3  asterick">
@@ -19,7 +20,7 @@
           <%= form.label t('issues.description'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.text_area :description, :cols => 40, :rows =>5, class: 'form-control form-control-md', required: true %>
+          <%= form.text_area :description, cols: 40, rows: 5, class: 'form-control form-control-md', required: true %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -27,7 +28,7 @@
           <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :status, Issue::STATUS , { required: true }, {class: "js-select-field form-select form-select-lg"}  %>
+          <%= form.select :status, Issue::STATUS , { required: true }, {class: "js-select-field form-select form-select-lg"} %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -35,7 +36,7 @@
           <%= form.label t('issues.priority'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :priority, Issue::PRIORITY, { required: true }, {class: 'js-select-field form-select form-select-lg4'}%>
+          <%= form.select :priority, Issue::PRIORITY, { required: true }, {class: 'js-select-field form-select form-select-lg4'} %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -43,7 +44,7 @@
           <%= form.label t('issues.category'), class: 'col-form-label col-form-label-md'  %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :category, Issue::CATEGORY, { required: true }, {class: "js-select-field form-select form-select-lg"}%>
+          <%= form.select :category, Issue::CATEGORY, { required: true }, {class: "js-select-field form-select form-select-lg"} %>
         </div>
       </div>
       <div class="row g-3 align-items-center mb-3 asterick">
@@ -51,7 +52,7 @@
           <%= form.label t('issues.estimated_start_date'), class: 'col-form-label col-form-label-md ' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :estimated_start_date, class: 'form-control form-control-md js-flatpickr-datetime',:required => true %>
+          <%= form.date_field :estimated_start_date, class: 'form-control form-control-md js-flatpickr-datetime',required: true %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -59,7 +60,7 @@
           <%= form.label t('issues.estimated_end_date'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime' ,:required => true %>
+          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime' ,required: true %>
         </div>
       </div>
       <div class="row g-3 align-items-center mb-3 asterick">

@@ -1,9 +1,9 @@
-$("#staticBackdrop").html("<%= escape_javascript render('form', project: @issue.project, issue: @issue, projects: @projects, users: @users )%>");
-$("#staticBackdrop").modal('show');
+$("#modal").html("<%= escape_javascript render('form', project: @issue.project, issue: @issue, projects: @projects, users: @users )%>");
+$("#modal").modal('show');
 
-$('#staticBackdrop').on('shown.bs.modal', function(){
+$('#modal').on('shown.bs.modal', function(){
   $(".js-select-field").select2({
-  	dropdownParent: $('#staticBackdrop')
+  	dropdownParent: $('#modal')
   });
   $('body').on('select2:open', '.js-select-field', () => {
     document.querySelector('.select2-search__field').focus();

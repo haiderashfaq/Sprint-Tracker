@@ -5,10 +5,11 @@
     </div>
     <div id="header", class="col-3 align-items-right">
       <% if params[:project_id].present? %>
-      <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path(project_id: params[:project_id], project: project) ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn fa fa-plus btn-primary w-100 some-button'} %>
+        <% project_params = {project_id: params[:project_id], project: project} %>
       <% else %>
-       <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn fa fa-plus btn-primary w-100 some-button'} %>
-      <%end%>
+        <% project_params = {} %>
+      <% end %>
+      <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path(project_params) ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn fa fa-plus btn-primary w-100 some-button'} %>
     </div>
   </div>
 </div>
