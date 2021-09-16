@@ -25,6 +25,14 @@
       </div>
       <div class="row mb-3 asterick">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
+          <%= form.label t('issues.estimated_time'), class: 'col-form-label col-form-label-md' %>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+          <%= form.text_field :estimated_time, class: 'form-control form-control-md',required: true %>
+        </div>
+      </div>
+      <div class="row mb-3 asterick">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
           <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">

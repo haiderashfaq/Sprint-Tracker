@@ -11,6 +11,7 @@ class Ability
       admin_permissions_for_sprint
       admin_permissions_for_project(user)
       admin_permissions_for_issues(user)
+      admin_permissions_for_time_logs(user)
     elsif user.member?
       member_permsisions_for_users(user)
       member_permissions_for_issues(user)
@@ -20,6 +21,7 @@ class Ability
       creator_permissions_for_issues(user)
       reviewer_permissions_for_issues(user)
       assignee_permissions_for_issues(user)
+      member_permissions_for_time_logs(user)
     end
   end
 

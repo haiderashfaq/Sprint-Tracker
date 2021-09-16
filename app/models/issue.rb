@@ -16,6 +16,7 @@ class Issue < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   belongs_to :reviewer, class_name: 'User', optional: true
   belongs_to :project
+  has_many :time_logs
   scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
 
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
