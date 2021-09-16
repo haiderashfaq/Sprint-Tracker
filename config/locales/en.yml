@@ -69,7 +69,7 @@ en:
     deletion_error: "Delete all sprints before deleting project"
     backlog: "Backlog"
     active_sprint: "Active Sprint"
-    active_sprint_absent: "No active sprint present. Start in"
+    active_sprint_absent: "No active sprint present. Start in "
   
   sprints:
     label: 'Sprint'

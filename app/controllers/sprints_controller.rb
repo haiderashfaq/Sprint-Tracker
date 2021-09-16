@@ -117,6 +117,18 @@ class SprintsController < ApplicationController
     end
   end
 
+  # GET sprints/:sequence_num/report
+  def report
+    issues_unresolved = @sprint.sprintreport.where.not(status: 'closed').pluck(:issue_id)
+    issues_resolved = @sprint.sprintreport.where(status: 'closed').pluck(:issue_id)
+    @issues_unresolved = Issue.where(id: issues_unresolved)
+    @issues_resolved = Issue.where(id: issues_resolved)
+    binding.pry
+    respond_to do |format|
+      format.html
+    end
+  end
+
   private
 
   def sprint_params

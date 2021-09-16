@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         patch 'start_sprint'
         get 'complete_sprint'
         post 'complete_sprint'
+        get 'report'
       end
     end
     resources :issues do

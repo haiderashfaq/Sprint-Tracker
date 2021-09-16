@@ -1,5 +1,5 @@
 <div class="container">
-  <h1><%= sprint.name %></h1>
+  <h1><%= @sprint.name %></h1>
   <h3><%= t('sprints.report') %></h3>
   <hr />
   <h6><%= t('issues.completed') %></h6>
@@ -13,9 +13,9 @@
       </tr>
     </thead>
     <tbody>
-      <% issues_resolved.each do |issue|%>
+      <% @issues_resolved.each do |issue|%>
         <tr>
-          <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
+          <td><%= issue.title %></td>
           <td><%= issue.status %></td>
           <td><%= issue.priority %></td>
           <td><%= issue.category %></td>
@@ -35,9 +35,9 @@
       </tr>
     </thead>
     <tbody>
-      <% issues_unresolved.each do |issue|%>
+      <% @issues_unresolved.each do |issue|%>
         <tr>
-          <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
+          <td><%= issue.title %></td>
           <td><%= issue.status %></td>
           <td><%= issue.priority %></td>
           <td><%= issue.category %></td>
@@ -48,6 +48,6 @@
   <hr />
   <h6><%= t('sprints.burndown_chart') %></h6>
   <%= line_chart [
-    { name: t('shared.est_end_date'), data: issues_resolved.group(:estimated_end_date).count }, 
-    { name: t('shared.end_date'), data: issues_resolved.group(:actual_end_date).count }] %>
+    { name: t('shared.est_end_date'), data: @issues_resolved.group(:estimated_end_date).count }, 
+    { name: t('shared.end_date'), data: @issues_resolved.group(:actual_end_date).count }] %>
 </div>

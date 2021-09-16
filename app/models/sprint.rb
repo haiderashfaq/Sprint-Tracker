@@ -5,6 +5,7 @@ class Sprint < ApplicationRecord
   sequenceid :project, :sprints
 
   has_many :issues
+  has_many :sprintreport
 
   include DateValidations
   VALID_STATUSES = %w[Planning Active Closed].freeze
@@ -25,9 +26,26 @@ class Sprint < ApplicationRecord
 
   def self.complete_sprint(sprint, project, issues, issues_dest_id)
     Sprint.transaction do
+      Sprint.generate_report(sprint)
+      issues.each do |issue|
+        Sprintreport.where(sprint: sprint, issue: issue)&.update(status: "moved", moved_to_id: issues_dest_id)
+      end
       issues_dest_id.blank? ? issues.update(sprint: nil) : issues.update(sprint_id: issues_dest_id)
       project.update(active_sprint: nil)
       sprint.update(status: VALID_STATUSES[2])
+    end
+  end
+
+  def self.generate_report(sprint)
+    sprint.transaction do
+      sprint.issues.each do |issue|
+        sprintreport = Sprintreport.new
+        sprintreport.sprint = sprint
+        sprintreport.issue = issue
+        sprintreport.issue = issue
+        sprintreport.status = issue.status == 'Resolved' ? 'closed' : 'in_progress'
+        sprintreport.save
+      end
     end
   end
 end

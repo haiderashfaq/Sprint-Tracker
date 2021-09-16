@@ -41,7 +41,7 @@ $(document).ready(function() {
         checked = true;
       }
     })
-    checked ? $(".add-issues").show() : $(".add-issues").hide()
+    checked ? $(".add-issues").prop("disabled", false) : $(".add-issues").prop("disabled", true)
   });
 
   $('body').on('click', '.add-issues-to-sprint', function() {

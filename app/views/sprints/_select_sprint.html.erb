@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= form.submit t('sprints.add_issues').pluralize, data: { remote: true }, class: 'btn btn-primary add-issues-to-sprint' %>
+        <%= form.submit t('sprints.add_issues'), data: { remote: true }, class: 'btn btn-primary add-issues-to-sprint' %>
         <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.close') %></button>
       </div>
     <% end %>

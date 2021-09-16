@@ -7,7 +7,7 @@
       <% sprints.each_with_index do |sprint, index| %>
         <tr id="sprint_<%=sprint.id%>">
           <td>
-            <b><%= sprint.name %></b>
+            <b><%= link_to sprint.name, sprint %></b>
             <small class="fs-6 fw-lighter" id="no_of_issues">
               <%= sprint.issues.size %>
               <%= t('issues.issue_label').pluralize %>
@@ -24,9 +24,9 @@
   </table>
 </div>
 <div class="container mt-3">
-  <div class="mb-3 d-flex justify-content-start">
+  <div class="mb-3 d-flex justify-content-between">
     <h5><%= t('issues.issue_label').pluralize %></h5>
-    <%= submit_tag t('issues.add_issues'), data: { remote: true }, class: "btn btn-primary add-issues" %>
+    <%= submit_tag t('issues.add_issues'), data: { remote: true }, class: "btn btn-primary add-issues", disabled: true %>
   </div>
   <table class="table table-hover border-primary text-center my-3" id="issues-datatable" data-source="<%= issues_path(format: :json) %>">
     <thead class="text-light bg-primary">

@@ -3,5 +3,6 @@
   $('#modal').modal('show');
 <% elsif request.post? %>
   $('#modal').modal('hide');
-  $('body').html("<%= escape_javascript render( 'sprint_report', sprint: @sprint, issues_resolved: @issues_resolved, issues_unresolved: @issues_unresolved) %>")
+  let url = window.location.origin + "/sprints/" + "<%= @sprint.sequence_num %>" + "/report"
+  window.location.replace(url);
 <% end %>

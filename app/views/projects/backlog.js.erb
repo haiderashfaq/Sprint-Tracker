@@ -1,6 +1,5 @@
 <% if @sprints.any? %>
   $('#nav-backlog').html('<%= escape_javascript (render "backlog", project: @project, sprints: @sprints, issues: @issues) %>');
-  $('.add-issues').hide();
 
   $('.add-issues').on('click', function() {
     $('#modal').html('<%= escape_javascript (render "sprints/select_sprint", sprints: @sprints) %>');
