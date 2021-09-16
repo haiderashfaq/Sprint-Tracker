@@ -60,6 +60,7 @@ en:
     assignee: 'Assignee'
     reviewer: 'Reviewer'
     creator: 'Creator'
+    deletion_error: "Delete all issues before deleting project"
   
   projects:
     project_label: 'Project'
