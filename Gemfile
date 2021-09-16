@@ -32,6 +32,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cancancan', '= 3.3.0'
 # Use audit for maintaining histories of issues
 gem 'audited', '= 5.0'
+# gem to create charts and graphs
+gem 'chartkick'
+# help out chartkick
+gem 'groupdate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

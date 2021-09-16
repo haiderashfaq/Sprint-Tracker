@@ -10,6 +10,7 @@ class Issue < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   belongs_to :reviewer, class_name: 'User', optional: true
   belongs_to :sprint, optional: true
+  belongs_to :project, optional: true
 
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze

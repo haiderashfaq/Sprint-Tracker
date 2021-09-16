@@ -68,6 +68,17 @@ class IssuesController < ApplicationController
     end
   end
 
+  # POST issues/add_issues
+  def add_issues_to_sprint
+    issue_ids = params[:issue_ids].split(',')
+    @issues = Issue.where(id: issue_ids)
+    @sprint_id = params[:sprint_id]
+
+    respond_to do |format|
+      format.js if @issues.update(sprint_id: @sprint_id)
+    end
+  end
+
   private
 
   # Only allow a list of trusted parameters through.

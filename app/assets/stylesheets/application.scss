@@ -100,3 +100,8 @@ $a-color: #105cb6;
   }
 
 }
+
+.bg-secondary {
+  --bs-bg-opacity: .25;
+  background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+}

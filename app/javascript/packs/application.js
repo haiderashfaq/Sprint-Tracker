@@ -10,9 +10,10 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import dt from "datatables.net";
-import 'datatables.net-bs5'; 
+import 'datatables.net-bs5';
+import "chartkick/chart.js"
 
-require ('../app');
+require('../app');
 require('select2')
 require('datatables.net-bs5')
 require("bootstrap")
@@ -21,13 +22,12 @@ require("flatpickr");
 global.$ = global.jQuery = require("jquery");
 
 document.addEventListener("turbolinks:load", function() {
-  $(function () {
+  $(function() {
     $('[data-toggle="tooltip"]').tooltip()
     $('[data-toggle="popover"]').popover()
   })
 })
 
 Rails.start()
-// Turbolinks.start()
+  // Turbolinks.start()
 ActiveStorage.start()
-

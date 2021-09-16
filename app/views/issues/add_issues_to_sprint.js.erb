@@ -1,0 +1,6 @@
+$('#modal').modal('hide');
+<% @issues.each do |issue| %>
+  $("#issue_<%= issue.id %>").remove()
+<% end %>
+$("#sprint_<%= @sprint_id %> #no_of_issues").html("<%= escape_javascript @issues[0].sprint.issues.size %>")
+$("#sprint_<%= @sprint_id %> #no_of_issues").append("<%= escape_javascript ' '+t('issues.issue_label').pluralize %>")

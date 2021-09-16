@@ -78,6 +78,45 @@ class SprintsController < ApplicationController
     end
   end
 
+  # GET sprints/:sequence_num/start_sprint
+  # PATCH sprints/:sequence_num/start_sprint
+  def start_sprint
+    if request.get?
+      respond_to do |format|
+        format.js
+      end
+    elsif request.patch?
+      respond_to do |format|
+        if Sprint.activate_sprint(@sprint)
+          format.js
+        else
+          format.js { flash.now[:error] = @sprint.errors.full_messages }
+        end
+      end
+    end
+  end
+
+  # GET sprints/:sequence_num/complete_sprint
+  # POST sprints/:sequence_num/complete_sprint
+  def complete_sprint
+    @project = @sprint.project
+    @issues_unresolved = @sprint.issues.where.not(status: 'Resolved')
+    @issues_resolved = @sprint.issues.where(status: 'Resolved')
+    if request.get?
+      respond_to do |format|
+        format.js
+      end
+    elsif request.post?
+      respond_to do |format|
+        if Sprint.complete_sprint(@sprint, @project, @issues_unresolved, params[:issues_dest])
+          format.js
+        else
+          format.js { flash.now[:error] = @sprint.errors.full_messages }
+        end
+      end
+    end
+  end
+
   private
 
   def sprint_params

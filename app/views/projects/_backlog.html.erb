@@ -1,0 +1,53 @@
+<div class="container mt-3">
+  <div class="mb-3 d-flex justify-content-start">
+    <h5><%= t('sprints.label').pluralize %></h5>
+  </div>
+  <table class="table table-borderless table-striped my-3" id="inactive-sprints" %>
+    <tbody>
+      <% sprints.each_with_index do |sprint, index| %>
+        <tr id="sprint_<%=sprint.id%>">
+          <td>
+            <b><%= sprint.name %></b>
+            <small class="fs-6 fw-lighter" id="no_of_issues">
+              <%= sprint.issues.size %>
+              <%= t('issues.issue_label').pluralize %>
+            </small>
+          </td>
+          <td class="text-end">
+            <% if project.active_sprint.nil? %>
+              <%= link_to t('sprints.start'), start_sprint_sprint_path(sprint), data: { remote: true, method: :get }, class: "btn btn-outline-primary"+( index == 0? "" : " disabled"), style: ( index == 0? {} : { "pointer-events:" => :none} ) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="container mt-3">
+  <div class="mb-3 d-flex justify-content-start">
+    <h5><%= t('issues.issue_label').pluralize %></h5>
+    <%= submit_tag t('issues.add_issues'), data: { remote: true }, class: "btn btn-primary add-issues" %>
+  </div>
+  <table class="table table-hover border-primary text-center my-3" id="issues-datatable" data-source="<%= issues_path(format: :json) %>">
+    <thead class="text-light bg-primary">
+      <tr>
+        <th><%= check_box_tag "check all" %></th>
+        <th><%= t('issues.title') %></th>
+        <th><%= t('issues.status') %></th>
+        <th><%= t('issues.priority') %></th>
+        <th><%= t('issues.category') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% issues.each do |issue| %>
+        <tr id="issue_<%=issue.id%>">
+          <td><%= check_box_tag "issue_#{issue.id}", issue.id, false, class:"issue-check-box" %></td>
+          <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
+          <td><%= issue.status %></td>
+          <td><%= issue.priority %></td>
+          <td><%= issue.category %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

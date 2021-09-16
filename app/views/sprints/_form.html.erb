@@ -1,9 +1,10 @@
 <% sprint_path_value = local_assigns[:project] ? [project, sprint] : sprint %>
+<% form_action = params[:action] == "start_sprint" ? start_sprint_sprint_path : sprint_path_value %>
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header"></div>
     <div class="modal-flash-messages"></div>
-    <%= form_with model: sprint_path_value, local: false do |form| %>
+    <%= form_with model: sprint_path_value, url: form_action, local: false do |form| %>
       <div class="modal-body">
         <div class="row mb-3">
           <div class="col-4">
@@ -65,7 +66,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= form.submit class: 'btn btn-primary bi bi-check', remote: true %>
+        <%= form.submit (t('sprints.start') if params[:action] == "start_sprint"), class: 'btn btn-primary bi bi-check', remote: true %>
         <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
       </div>
     <% end %>

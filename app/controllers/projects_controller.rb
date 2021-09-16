@@ -21,12 +21,10 @@ class ProjectsController < ApplicationController
     @project.creator = current_user
     respond_to do |format|
       if @project.save
-        ProjectsUser.create(project: @project, user: @project.manager)
         format.html { redirect_to @project, notice: t('shared.success.create', resource_label: t('projects.project_label')) }
       else
         format.html do
           flash.now[:error] = @project.errors.full_messages
-          flash.now[:error] << t('shared.failure.create', resource_label: t('projects.project_label'))
           render :new
         end
       end
@@ -48,7 +46,6 @@ class ProjectsController < ApplicationController
       else
         format.html do
           flash.now[:error] = @project.errors.full_messages
-          flash.now[:error] << t('shared.failure.update', resource_label: t('projects.project_label'))
           render :edit
         end
       end
@@ -57,7 +54,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num
   def show
-    binding.pry
     respond_to do |format|
       format.js
       format.html
@@ -71,10 +67,33 @@ class ProjectsController < ApplicationController
         format.html { redirect_to projects_url, alert: t('shared.success.delete', resource_label: t('projects.project_label')) }
       else
         format.html do
-          flash.now[:error] = t('shared.failure.delete', resource_label: t('projects.project_label'))
+          flash.now[:error] = @project.errors.full_messages
           render :show
         end
       end
+    end
+  end
+
+  # GET /projects/:sequence_num/backlog
+  def backlog
+    @sprints = @project.sprints.includes(:issues).where(status: 'Planning').order(:start_date, :created_at)
+    # @sprints = @project.sprints.joins(:issues).group(:id).select('sprints.*, count(*) AS total_issues').where(status: 'Planning').order(:start_date, :creatd_at)
+    @issues = @project.issues.where(sprint: nil)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def active_sprint
+    @active_sprint = @project.active_sprint
+    unless @active_sprint.nil?
+      @issues_to_do = @active_sprint.issues.where(status: 'Open')
+      @issues_in_progress = @active_sprint.issues.where(status: 'In Progress')
+      @issues_resolved = @active_sprint.issues.where(status: 'Resolved')
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
