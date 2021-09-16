@@ -1,23 +1,6 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
-  # def show
-  # binding.pry
-  # self.resource = resource_class.unscoped.find_by_confirmation_token(params[:confirmation_token]) if params[:confirmation_token].present?
-  # #super if resource.nil? or resource.confirmed?
-
-  # if resource.errors.empty?
-  #   set_flash_message!(:notice, :confirmed)
-  #   respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
-  # else
-  #   respond_with_navigational(resource.errors, status: :unprocessable_entity){ render :new }
-  # end
-  # end
-  # def show
-  #   binding.pry
-  #   respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
-  # end
-
   protected
 
   def after_confirmation_path_for(resource_name, resource)

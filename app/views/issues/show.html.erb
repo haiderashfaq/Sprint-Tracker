@@ -7,16 +7,17 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" aria-controls="history" aria-selected="false"><%= t('issues.history_label') %></button>
     </li>
-    <li>
-      <%= link_to t('time_logs.label').pluralize(), [@issue, :time_logs], remote: true, class: 'nav-link', id: "nav-time_logs-tab", data: {bs_toggle: "tab", bs_target: "#nav-time_logs"}, type: "button", role: 'tab', aria_controls: "nav-sprints", aria_selected: false %>
+    <li class="nav-item" role="presentation">
+      <%= link_to t('time_logs.label').pluralize(), [@issue, :time_logs], remote: true, class: 'nav-link', id: "nav-time_logs-tab", data: { bs_toggle: "tab", bs_target: "#nav-time_logs" }, type: "button", role: 'tab', aria_controls: "nav-time_logs", aria_selected: false %>
     </li>
   </ul>
   <div class="tab-content" id="issue_content">
     <div class="tab-pane fade show active" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
       <%= render partial: "show", locals: { issue: @issue } %>
     </div>
-    <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab"><%= render partial: "history", locals: { issue: @issue } %></div>
-    <div class="tab-pane fade" id="nav-time_logs" role="tabpanel" aria-labelledby="nav-time_logs-tab"></div>
+    <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+      <%= render partial: "history", locals: { issue: @issue } %>    
+    </div>
+    <div class="tab-pane fade" id="nav-time_logs" role="tabpanel" aria-labelledby="nav-time_logs-tab">  12345678</div>
   </div>
 </div>
-  <%= link_to 'Click Me', new_issue_time_log_path(issue_id: @issue.id), remote: true %>
