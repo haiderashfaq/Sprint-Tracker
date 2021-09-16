@@ -256,7 +256,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   web-console (>= 4.1.0)
   webpacker (= 5.4.2)
-  will_paginate (~> 3.3.1)
+  will_paginate (= 3.3.1)
 
 RUBY VERSION
    ruby 2.7.1p83

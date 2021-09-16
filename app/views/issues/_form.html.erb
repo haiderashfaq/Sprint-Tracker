@@ -28,7 +28,7 @@
           <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :status, Issue::STATUS , { required: true }, {class: "js-select-field form-select form-select-lg"} %>
+          <%= form.select :status, Issue::STATUS , { required: true }, {class: "js-select-form-field form-select form-select-lg"} %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -36,7 +36,7 @@
           <%= form.label t('issues.priority'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :priority, Issue::PRIORITY, { required: true }, {class: 'js-select-field form-select form-select-lg4'} %>
+          <%= form.select :priority, Issue::PRIORITY, { required: true }, {class: 'js-select-form-field form-select form-select-lg4'} %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -44,7 +44,7 @@
           <%= form.label t('issues.category'), class: 'col-form-label col-form-label-md'  %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :category, Issue::CATEGORY, { required: true }, {class: "js-select-field form-select form-select-lg"} %>
+          <%= form.select :category, Issue::CATEGORY, { required: true }, {class: "js-select-form-field form-select form-select-lg"} %>
         </div>
       </div>
       <div class="row g-3 align-items-center mb-3 asterick">
@@ -60,7 +60,7 @@
           <%= form.label t('issues.estimated_end_date'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime' ,required: true %>
+          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime icon-calendar' ,required: true %>
         </div>
       </div>
       <div class="row g-3 align-items-center mb-3 asterick">
@@ -85,9 +85,9 @@
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
           <% if project.nil? %>
-          <%= form.select :project_id, projects.map{|project| [project.name, project.id] } , { required: true }, {class: "js-select-field form-select form-select-lg"}  %>
+          <%= form.select :project_id, projects.map{|project| [project.name, project.id] } , { required: true }, {class: "js-select-form-field form-select form-select-lg"}  %>
           <% else %>
-          <%= form.select :project_name, [project.id,project.name],{ required: true, selected: [project.id, project.name]}, {class: "js-select-pa form-select form-select-lg",disabled: true}%>
+          <%= form.select :project_name, [project.id,project.name],{ required: true, selected: [project.id, project.name]}, {class: "js-select-form-field form-select form-select-lg",disabled: true}%>
           <% end %>
         </div>
       </div>
@@ -96,7 +96,7 @@
           <%= form.label t('issues.reviewer'), class: 'col-form-label col-form-label-md'  %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :reviewer_id, users.map{|user| [user.name, user.id] } ,{}, {class: "js-select-field form-select form-select-lg"}  %>
+          <%= form.select :reviewer_id, users.map{|user| [user.name, user.id] } ,{}, {class: "js-select-form-field form-select form-select-lg"}  %>
         </div>
       </div>
       <div class="row g-3  mb-3">
@@ -104,7 +104,7 @@
           <%= form.label t('issues.assignee'), class: 'col-form-label col-form-label-md'  %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :assignee_id, users.map{|user| [user.name, user.id] } ,{}, {class: "js-select-field form-select form-select-lg"}  %>
+          <%= form.select :assignee_id, users.map{|user| [user.name, user.id] } ,{}, {class: "js-select-form-field form-select form-select-lg"}  %>
         </div>
       </div>
       <div class="modal-footer">

@@ -76,10 +76,11 @@
       </div>
     </div>
   </div>
-  <div class="home-content ms-4">
+  <div class="home-content">
     <%= render partial: 'layouts/signed_in_navbar' %>
     <%= render partial: 'shared/flash_messages' %>
-    <div class="container"> </div>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </div>
 </div>

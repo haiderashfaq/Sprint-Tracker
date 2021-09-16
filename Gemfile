@@ -23,7 +23,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # pagination
-gem 'will_paginate', '~> 3.3.1'
+gem 'will_paginate', '= 3.3.1'
 # gems for sequence of ids
 gem 'sequenceid', '=0.0.7', git: "https://github.com/alisyed/sequenceid.git", branch: 'feature/change_activerecord_base_to_applicationrecord_in_sti_parent_class_method'
 # Reduces boot times through caching; required in config/boot.rb

@@ -9,17 +9,21 @@ $(document).ready(function() {
     $(className).prop( "disabled", true );
   });
 
-  $(".js-select-field").select2({
-    dropdownParent: $('#modal')
-  });
-
   $('.js-select-field').select2({
     width: 200
   });
 
-  $('body').on('select2:open', '.js-select-field', () => {
-  document.querySelector('.select2-search__field').focus();
+  $(document).on('select2:select',".js-select-field", function (e){
+    var select_container_id = e.params.data["id"];
+    $('.btn-filter').show();
+    $("#"+select_container_id).addClass('show');
+    $( ".js-"+select_container_id+"-field").prop( "disabled", false );
   });
+
+  $('body').on('select2:open', '.js-select-field', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
+
   dateTimeFunc();
   $("#modal").on('shown.bs.modal', dateTimeFunc);
 
@@ -35,20 +39,9 @@ $(document).ready(function() {
   $('#menu-btn').on('click', function(){
     $('#sidebar').toggleClass("active");
   });
-
-  $(document).on('select2:select',".js-filter-field", function (e){
-      var data = e.params.data;
-      var id = "#"+e.params.data["id"]
-      $('.btn-filter').show();
-      $(id).css('display', 'flex');
-      $( id+"_id" ).prop( "disabled", false );
-      $( ".js-"+e.params.data["id"]+"-field").prop( "disabled", false );
-  });
-
 });
 var dateTimeFunc =  function(){
   $(".js-flatpickr-datetime").flatpickr({
     enableTime: true
   });
 }
-

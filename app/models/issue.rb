@@ -19,5 +19,4 @@ class Issue < ApplicationRecord
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
   CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
-
 end

@@ -21,12 +21,4 @@ document.addEventListener("turbolinks:load", function() {
 })
 
 Rails.start()
-// Turbolinks.start()
 ActiveStorage.start()
-
-$('.js-select-field').on('select2:select', function (e) {
-  debugger
-    var data = e.params.data;
-    console.log(data);
-});
-
