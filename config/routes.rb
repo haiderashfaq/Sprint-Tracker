@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     path_names: { sign_up: 'new' }
 
   root to: 'dashboard#home'
-
   constraints(subdomain: /^(?!www\Z)(\w+)/) do
     resources :projects do
       resources :sprints
@@ -17,5 +16,5 @@ Rails.application.routes.draw do
     end
     resources :users do
     end
-  end
+end
 end

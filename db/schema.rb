@@ -89,39 +89,15 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
     t.index ["manager_id"], name: "index_projects_on_manager_id"
   end
 
-  create_table "sprints", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.datetime "estimated_start_date"
-    t.datetime "estimated_end_date"
-    t.integer "sequence_num", null: false
+  create_table "projects_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "company_id", null: false
-    t.bigint "creator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_sprints_on_company_id"
-    t.index ["creator_id"], name: "index_sprints_on_creator_id"
-    t.index ["project_id"], name: "index_sprints_on_project_id"
-    t.index ["sequence_num"], name: "index_sprints_on_sequence_num"
-  end
-
-  create_table "time_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.date "date"
-    t.decimal "logged_time", precision: 10, scale: 2, null: false
-    t.text "work_description", null: false
-    t.bigint "company_id", null: false
-    t.bigint "issue_id", null: false
-    t.bigint "assignee_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "sequence_num", null: false
-    t.index ["assignee_id"], name: "index_time_logs_on_assignee_id"
-    t.index ["company_id"], name: "index_time_logs_on_company_id"
-    t.index ["issue_id"], name: "index_time_logs_on_issue_id"
-    t.index ["sequence_num", "issue_id"], name: "index_time_logs_on_sequence_num_and_issue_id", unique: true
+    t.index ["company_id"], name: "index_projects_users_on_company_id"
+    t.index ["project_id"], name: "index_projects_users_on_project_id"
+    t.index ["user_id"], name: "index_projects_users_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -130,6 +106,10 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
@@ -153,6 +133,12 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users", column: "creator_id"
   add_foreign_key "projects", "users", column: "manager_id"
+<<<<<<< HEAD
+=======
+  add_foreign_key "projects_users", "companies"
+  add_foreign_key "projects_users", "projects"
+  add_foreign_key "projects_users", "users"
+>>>>>>> 32d02a7cdf070eafa5cd0cff9d9eb339c157b51e
   add_foreign_key "sprints", "companies"
   add_foreign_key "sprints", "projects"
   add_foreign_key "sprints", "users", column: "creator_id"
