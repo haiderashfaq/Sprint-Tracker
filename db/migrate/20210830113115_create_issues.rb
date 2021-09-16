@@ -3,6 +3,7 @@ class CreateIssues < ActiveRecord::Migration[6.1]
     create_table :issues do |t|
       t.string :title, null: false
       t.text :description, null: false
+      t.decimal :estimated_time, precision: 10, scale: 2, null: false
       t.string :status, null: false, index: true
       t.string :priority, null: false, index: true
       t.string :category, null: false, index: true
