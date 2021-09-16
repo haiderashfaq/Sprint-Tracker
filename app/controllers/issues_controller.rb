@@ -16,6 +16,13 @@ class IssuesController < ApplicationController
     end
   end
 
+  def history
+    @issue = @issues.find_by(sequence_num: params[:issue])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /issues/:sequence_num
   def show
     respond_to do |format|
