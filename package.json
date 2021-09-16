@@ -10,6 +10,8 @@
     "bootstrap": "^5.1.0",
     "bootstrap-icons": "^1.5.0",
     "boxicons": "^2.0.9",
+    "chart.js": "^3.5.1",
+    "chartkick": "^4.0.5",
     "datatables.net-bs5": "^1.10.25",
     "flatpickr": "^4.6.9",
     "jquery": "^3.6.0",

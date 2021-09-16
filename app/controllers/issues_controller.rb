@@ -4,7 +4,8 @@ class IssuesController < ApplicationController
 
   # GET /issues
   def index
-    @issues = @issues.includes(:creator, :reviewer).paginate(page: params[:page])
+    @issues = @issues.includes(:creator, :reviewer, :assignee).paginate(page: params[:page])
+    binding.pry
     respond_to do |format|
       format.html
     end
@@ -64,6 +65,22 @@ class IssuesController < ApplicationController
         flash.now[:error] = t('shared.failure.delete', resource_label: t('issues.issue_label'))
         format.html { render :show }
       end
+    end
+  end
+
+  def fetch_resource_issues
+    if params[:assignee_id].present?
+      @issues = Issue.joins(:assignee).where(assignee_id: current_user.id)
+    elsif params[:creator_id].present?
+      @issues = Issue.joins(:creator).where(creator_id: current_user.id)
+    elsif params[:reviewer_id].present?
+      @issues = Issue.joins(:reviewer).where(reviewer_id: current_user.id)
+    else
+      @issues = Issue.joins(:assignee).where(assignee_id: current_user.id)
+    end
+    @issues = @issues.paginate(page: params[:page])
+    respond_to do |format|
+      format.html { render :index }
     end
   end
 

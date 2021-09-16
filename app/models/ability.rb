@@ -79,6 +79,6 @@ class Ability
   end
 
   def member_permissions_for_issues(user)
-    can :create, Issue, company_id: user.company_id
+    can %i[read fetch_resource_issues], Issue, company_id: user.company_id
   end
 end

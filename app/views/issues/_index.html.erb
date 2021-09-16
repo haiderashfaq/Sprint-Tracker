@@ -1,0 +1,50 @@
+<div class="container">
+  <ul class="nav nav-tabs bg-gray" id="issue" role="tablist">
+    <li class="nav-item" role="presentation">
+      <%=link_to "Assigned Issues", fetch_resource_issues_path(:assignee_id => { :assignee_id => current_user.id }) , class: "nav-link active"%>
+    </li>
+    <li class="nav-item" role="presentation">
+      <%=link_to "Creator Issues", fetch_resource_issues_path , class: "nav-link"%>
+    </li>
+    <li class="nav-item" role="presentation">
+      <%=link_to "Reviewed Issues", fetch_resource_issues_path , class: "nav-link"%>
+    </li>
+  </ul>
+  <div class="tab-content" id="issue_content">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="homee-tab"></div>
+</div>
+<div class="container">
+  <br>
+  <div class="row d-flex">
+    <div class="col-10 justify-content-start"><h2 >Issues</h2></div>
+    <% if can? :create, Issue %>
+      <div class="col-2 justify-content-end"><%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path ,  class: "btn fa fa-plus btn-primary w-100 some-button"%>   
+      </div>
+    <%end%>
+  </div>
+  <br/>
+  <table class="table table-hover border-primary text-center" id="issues-datatable" data-source="<%= issues_path(format: :json) %>">
+    <thead class="text-light bg-primary">
+      <tr>
+        <th><%= t('issues.title') %></th>
+        <th><%= t('issues.status') %></th>
+        <th><%= t('issues.priority') %></th>
+        <th><%= t('issues.category') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @issues.each do |issue| %>
+        <tr>
+          <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
+          <td><%= issue.status %></td>
+          <td><%= issue.priority %></td>
+          <td><%= issue.category %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%= js_paginate @issues %>
+</div>
+<div class="mt-5">
+  <%= pie_chart @issues.group(:status).count %>
+</div>

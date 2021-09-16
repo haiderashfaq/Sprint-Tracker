@@ -14,7 +14,12 @@ Rails.application.routes.draw do
       resources :projects_users
       resources :issues
     end
-    resources :issues
+    resources :issues do
+      collection do
+        get 'fetch_resource_issues', as: 'fetch_resource'
+      end
+    end
+    resources :dashboard
     resources :users do
     end
   end

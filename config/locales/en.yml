@@ -57,6 +57,9 @@ en:
     actual_end_date: 'Actual End Date'
     no_histoires: 'No Histories yet!'
     history_label: 'History'
+    created_issue: Created Issue
+    assigned_issue: Assigned Issue
+    reviewed_issue: Reviewed Issue
   projects:
     project_label: 'Project'
     manager: "Project Manager"

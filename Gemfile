@@ -12,6 +12,8 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'mysql2', '~> 0.5'
 # Use devise for authentication
 gem 'devise', '=4.8.0'
+# Use charkick to generate charts
+gem 'chartkick', '=3.4.2'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets

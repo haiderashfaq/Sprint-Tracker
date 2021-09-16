@@ -11,6 +11,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import dt from "datatables.net";
 import 'datatables.net-bs5'; 
+import "chartkick/chart.js";
 
 require ('../app');
 require('select2')

@@ -14,4 +14,5 @@ class Issue < ApplicationRecord
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
   CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
 
+  scope :creator, ->(creator) { where creator: creator }
 end

@@ -23,6 +23,11 @@ $(document).ready(function() {
       $('#sidebar').toggleClass("active");
     });
 
+    // $(".nav .nav-link").on("click", function(){
+    // $(".nav").find(".active").removeClass("active");
+    // $(this).addClass("active");
+    // });
+
     // $('#users-datatable').DataTable().ajax.reload();
     // $('#users-datatable').dataTable({
     //     "processing": true,

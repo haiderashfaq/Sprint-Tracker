@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates_format_of :email, with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }, unless: -> { new_member }
   validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
-  validates :name, presence: true, length: { minimum: 2, maximum: 22 }
+  validates :name, presence: true, length: { minimum: 2, maximum: 40 }
 
   ROLE_ID = { admin: 1, member: 2 }.freeze
   validates :role_id, presence: true, inclusion: { in: ROLE_ID.values }
