@@ -1,0 +1,11 @@
+<tr id="projects_user_<%= projects_user.id %>">
+  <!-- TO DO !!! Replace Manager Email by Manager name when user is uptodate -->
+  <td><%= projects_user.user.email %></td>
+  <td>
+    <% if can? :destroy, projects_user %>
+      <%= link_to '', [project, projects_user],
+                method: :delete, remote: true,
+                data: { confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
+    <% end %>
+  </td>
+</tr>

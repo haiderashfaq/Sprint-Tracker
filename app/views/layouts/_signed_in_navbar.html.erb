@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-sm navbar-dark"
+style="background-color:#0062cc">
+  <div class="container">
+    <a href="#" class="navbar-brand mb-0 h1">
+      <%= image_tag("logo.png", width: 30) %>
+      Flash
+    </a>
+    <button 
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#home_navbar"
+    class="navbar-toggler"
+    aria-controls="home_navbar"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="home_navbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item active">
+          <a class="nav-link active">
+            <%= Company.current_company.name %>
+          </a>
+        </li>
+      </ul>
+      <form class="d-flex">
+      	<input class="form-control me-sm-2" type="text" placeholder="Search">
+      	<button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
