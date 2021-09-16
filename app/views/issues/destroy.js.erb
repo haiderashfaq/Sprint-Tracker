@@ -4,4 +4,4 @@
     $('#issues_datatable_space').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: 'issues.issue_label' }) %>");
   }
 <% end %>
-$('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+$('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");

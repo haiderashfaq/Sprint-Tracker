@@ -5,13 +5,16 @@
      <%= link_to t('issues.issue_label'), issue_path, remote: true, class: 'nav-link active', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues",aria_selected: true  %>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" aria-controls="history" aria-selected="false"><%= t('issues.history_label') %></button>
+      <%= link_to t('issues.history_label'), history_path(issue: @issue), remote: true, class: 'nav-link', id: "nav-history-tab", data: {bs_toggle: "tab", bs_target: "#nav-history"}, type: "button", role: 'tab', aria_controls: "nav-history" ,aria_selected: true %>
+      
     </li>
   </ul>
   <div class="tab-content" id="issue_content">
     <div class="tab-pane fade show active" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
       <%= render partial: "show", locals: { issue: @issue } %>
     </div>
-    <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab"><%= render partial: "history", locals: { issue: @issue } %></div>
+    <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
+      <div id="history"></div>
+    </div>
   </div>
 </div>

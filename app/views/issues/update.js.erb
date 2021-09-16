@@ -4,6 +4,6 @@
   $('#formCloseBtn').click();
   $('#issue_<%= @issue.sequence_num %>').replaceWith("<%= escape_javascript render 'issue_datatable_row', issue: @issue %>");
   $('#issue_show').replaceWith("<%= escape_javascript render(:partial => 'issues/show',  :locals=>{ issue: @issue} ) %>");
-  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% end %>
 
