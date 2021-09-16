@@ -21,7 +21,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    binding.pry
     @user.new_member = true
     respond_to do |format|
       if @user.save

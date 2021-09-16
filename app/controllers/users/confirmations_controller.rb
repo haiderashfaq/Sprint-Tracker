@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
-<<<<<<< HEAD
-=======
   # def show
   # binding.pry
   # self.resource = resource_class.unscoped.find_by_confirmation_token(params[:confirmation_token]) if params[:confirmation_token].present?

@@ -6,7 +6,9 @@ class User < ApplicationRecord
   has_many :assigned_issues, class_name: 'Issue', foreign_key: 'assignee_id', dependent: :nullify
   has_many :created_issues, class_name: 'Issue', foreign_key: 'creator_id', dependent: :nullify
   has_many :reviewed_issues, class_name: 'Issue', foreign_key: 'reviewer_id', dependent: :nullify
-  has_many :time_logs
+  has_many :projects_users
+  has_many :projects, through: :projects_users
+
   belongs_to :company
   accepts_nested_attributes_for :company
   validates :email, presence: true, uniqueness: { scope: :company_id }
@@ -14,12 +16,13 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }, unless: -> { new_member }
   validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
   validates :name, presence: true, length: { minimum: 2, maximum: 22 }
+
   ROLE_ID = { admin: 1, member: 2 }.freeze
   validates :role_id, presence: true, inclusion: { in: ROLE_ID.values }
 
   attr_accessor :new_member
 
-  def encrypted_password?
+  def has_password?
     encrypted_password.present?
   end
 

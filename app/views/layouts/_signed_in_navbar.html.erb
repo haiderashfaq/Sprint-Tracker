@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark"
-style="background-color:#0062cc">
+<nav class="navbar navbar-expand-sm navbar-light bigBar">
   <div class="container">
     <a href="#" class="navbar-brand mb-0 h1">
       <%= image_tag("logo.png", width: 30) %>
@@ -20,7 +19,7 @@ style="background-color:#0062cc">
       <ul class="navbar-nav me-auto">
         <li class="nav-item active">
           <a class="nav-link active">
-            <%= Company.current_company.name %>
+            <%= @current_company.name %>
           </a>
         </li>
       </ul>

@@ -1,0 +1,9 @@
+<% if @issue.errors.present? %>
+  $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% else %>
+  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  $('#no-resource').remove();
+  $('#issues_datatable_body').append("<%= escape_javascript render 'issue_datatable_row', issue: @issue %>");
+  $('#formCloseBtn').click();
+<% end %>
+  

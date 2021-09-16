@@ -2,6 +2,9 @@
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+<h2>t('password.forgot_password')</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
 
   <div class="field">
     <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "form-control form-control-user form mt-3 mb-3", placeholder: t('shared.email'), required: true%>

@@ -1,10 +1,8 @@
-<% binding.pry %>
-<% if resource.encrypted_password? %>
-  <h2> Change password </h2>
+<% if resource.has_password? %>
+  <h2><%= t('password.change_password') %></h2>
 <% else %>
-  <h2> New password </h2>
+  <h2><%= t('password.new_password')%> </h2>
 <% end %>
-
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -12,6 +10,10 @@
 
   <div class="field">
     <%= f.label :password, "New password" %><br />
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="field">
+    <%= f.label t('password.new_password')  %><br />
     <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em><br />
     <% end %>

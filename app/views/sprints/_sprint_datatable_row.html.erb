@@ -12,8 +12,8 @@
     <% if can? :edit, Sprint %>
       <%= link_to ' ', [:edit, project, sprint], remote: true, class:"bi bi-pencil" %>
     <% end %>
-    <% if can? :destroy, Sprint %>
-      <%= link_to ' ', [project, sprint],
+    <% if can? :destroy, project => Sprint %>
+      <%= link_to '', [project, sprint],
                 method: :delete, remote: true,
                 data: { confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
     <% end %>

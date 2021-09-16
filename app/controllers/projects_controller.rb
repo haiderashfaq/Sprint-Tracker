@@ -1,9 +1,12 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource find_by: :sequence_num
+
+  load_and_authorize_resource find_by: :sequence_num, through: :current_company
+  load_resource :issues, find_by: :sequence_num, through: :project
 
   # GET /projects
   def index
-    @projects = @projects.paginate(page: params[:page])
+    binding.pry
+    @projects = @projects.includes(:issues).paginate(page: params[:page])
     respond_to do |format|
       format.html
     end
@@ -25,7 +28,6 @@ class ProjectsController < ApplicationController
       else
         format.html do
           flash.now[:error] = @project.errors.full_messages
-          flash.now[:error] << t('shared.failure.create', resource_label: t('projects.project_label'))
           render :new
         end
       end
@@ -47,7 +49,6 @@ class ProjectsController < ApplicationController
       else
         format.html do
           flash.now[:error] = @project.errors.full_messages
-          flash.now[:error] << t('shared.failure.update', resource_label: t('projects.project_label'))
           render :edit
         end
       end
@@ -68,7 +69,10 @@ class ProjectsController < ApplicationController
       if @project.destroy
         format.html { redirect_to projects_url, alert: t('shared.success.delete', resource_label: t('projects.project_label')) }
       else
-        format.html { render :show, alert: t('shared.failure.delete', resource_label: t('projects.project_label')) }
+        format.html do
+          flash.now[:error] = @project.errors.full_messages
+          render :show
+        end
       end
     end
   end
