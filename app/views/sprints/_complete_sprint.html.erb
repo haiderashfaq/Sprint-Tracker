@@ -1,0 +1,30 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2><%= t('sprints.complete') %>:
+        <%= sprint.name %></h2>
+    </div>
+    <div class="modal-flash-messages"></div>
+    <%= form_with url: complete_sprint_sprint_path, local: false do |form| %>
+      <div class="modal-body">
+        <ul>
+          <li><%= issues_resolved.size %> <%= t('issues.completed') %></li>
+          <li><%= issues_unresolved.size %> <%= t('issues.not_completed') %></li>
+        </ul>
+        <p><%= t('issues.unresolved_issues_msg') %>:</p>
+        <div class="row g-3 align-items-center mb-3">
+          <div class="col-3 asterick">
+            <%= form.label t('issues.move'), class: 'col-form-label col-form-label-md control-label' %>
+          </div>
+          <div class="col-6">
+            <%= form.select :issues_dest, project.sprints.where(status: "Planning").map { |sprint| [sprint.name, sprint.id]}, { required: true, prompt: "Backlog" }, { class: "form-select form-select-md" } %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= form.submit t('sprints.complete'), class: "btn btn-primary" %>
+        <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
+      </div>
+    <% end %>
+  </div>
+</div>

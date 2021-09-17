@@ -13,7 +13,7 @@ import dt from "datatables.net";
 import 'datatables.net-bs5'; 
 import "chartkick/chart.js";
 
-require ('../app');
+require('../app');
 require('select2')
 require('datatables.net-bs5')
 require("bootstrap")
@@ -21,13 +21,12 @@ require("../app.js")
 require("flatpickr");
 
 document.addEventListener("turbolinks:load", function() {
-  $(function () {
+  $(function() {
     $('[data-toggle="tooltip"]').tooltip()
     $('[data-toggle="popover"]').popover()
   })
 })
 
 Rails.start()
-// Turbolinks.start()
+  // Turbolinks.start()
 ActiveStorage.start()
-

@@ -8,6 +8,7 @@ class IssuesController < ApplicationController
     binding.pry
     respond_to do |format|
       format.html
+      format.js
     end
   end
 
@@ -68,6 +69,7 @@ class IssuesController < ApplicationController
     end
   end
 
+
   def fetch_resource_issues
     if params[:assignee_id].present?
       @issues = Issue.joins(:assignee).where(assignee_id: current_user.id)
@@ -81,6 +83,17 @@ class IssuesController < ApplicationController
     @issues = @issues.paginate(page: params[:page])
     respond_to do |format|
       format.html { render :index }
+    end
+  end
+
+  # POST issues/add_issues
+  def add_issues_to_sprint
+    issue_ids = params[:issue_ids].split(',')
+    @issues = Issue.where(id: issue_ids)
+    @sprint_id = params[:sprint_id]
+
+    respond_to do |format|
+      format.js if @issues.update(sprint_id: @sprint_id)
     end
   end
 

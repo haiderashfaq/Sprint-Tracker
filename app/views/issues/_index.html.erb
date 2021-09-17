@@ -47,4 +47,8 @@
 </div>
 <div class="mt-5">
   <%= pie_chart @issues.group(:status).count %>
+  <% binding.pry %>
+  <%= line_chart [
+    { name: t('shared.est_end_date'), data: @issues.group(:estimated_end_date).count }, 
+    { name: t('shared.end_date'), data: @issues.group(:actual_end_date).count }] %>
 </div>

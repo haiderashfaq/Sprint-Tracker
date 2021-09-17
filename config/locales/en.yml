@@ -60,13 +60,31 @@ en:
     created_issue: Created Issue
     assigned_issue: Assigned Issue
     reviewed_issue: Reviewed Issue
+    add_issues: "Add Issues"
+    completed: "Completed Issues"
+    not_completed: "Issues Not Completed"
+    unresolved_issues_msg: "Select where all unresolved issues should be moved"
+    move: "Move Issue to:"
+
   projects:
     project_label: 'Project'
     manager: "Project Manager"
     deletion_error: "Delete all sprints before deleting project"
+    backlog: "Backlog"
+    active_sprint: "Active Sprint"
+    active_sprint_absent: "No active sprint present. Start in "
   
   sprints:
     label: 'Sprint'
+    add_issues: 'Add Issues to Sprint'
+    start: "Start Sprint"
+    active_sprint_exists: "already has an active sprint"
+    to_do: "To Do"
+    in_progress: "In Progress"
+    done: "Done"
+    complete: "Complete Sprint"
+    report: "Status Report"
+    burndown_chart: "Burndown Chart"
 
   users:
     label: 'User'
@@ -94,6 +112,7 @@ en:
     back: 'Back'
     role: 'Role'
     cancel: "Cancel"
+    status: 'Status'
     due_on: "Due On"
     member: "Member"
     delete: 'Delete'
@@ -115,8 +134,8 @@ en:
     est_start_date: "Estimated Start Date"
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
+    select_resource: "Select %{resource_label}"
     success:
-
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"
       create: "%{resource_label} Created Successfully"
@@ -130,11 +149,12 @@ en:
 
 
   roles:
-    admin: "Admin"
-    account_owner: "Account Owner"
-    member: "Member"
+    admin: Admin
+    account_owner: Account Owner
+    member: Member
 
   helpers:        
     submit:
       create: "Create %{model}"
       update: "Update %{model}"
+      start_sprint: "Start %{model}"

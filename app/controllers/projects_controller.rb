@@ -74,6 +74,29 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET /projects/:sequence_num/backlog
+  def backlog
+    @sprints = @project.sprints.includes(:issues).where(status: 'Planning').order(:start_date, :created_at)
+    # @sprints = @project.sprints.joins(:issues).group(:id).select('sprints.*, count(*) AS total_issues').where(status: 'Planning').order(:start_date, :creatd_at)
+    @issues = @project.issues.where(sprint: nil)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def active_sprint
+    @active_sprint = @project.active_sprint
+    unless @active_sprint.nil?
+      @issues_to_do = @active_sprint.issues.where(status: 'Open')
+      @issues_in_progress = @active_sprint.issues.where(status: 'In Progress')
+      @issues_resolved = @active_sprint.issues.where(status: 'Resolved')
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def project_params

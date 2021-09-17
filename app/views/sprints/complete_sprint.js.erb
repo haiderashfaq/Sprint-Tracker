@@ -1,0 +1,8 @@
+<% if request.get? %>
+  $('#modal').html("<%= escape_javascript render( 'complete_sprint', sprint: @sprint, project: @project, issues_resolved: @issues_resolved, issues_unresolved: @issues_unresolved) %>");
+  $('#modal').modal('show');
+<% elsif request.post? %>
+  $('#modal').modal('hide');
+  let url = window.location.origin + "/sprints/" + "<%= @sprint.sequence_num %>" + "/report"
+  window.location.replace(url);
+<% end %>

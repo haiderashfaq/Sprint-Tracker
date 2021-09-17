@@ -12,8 +12,8 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'mysql2', '~> 0.5'
 # Use devise for authentication
 gem 'devise', '=4.8.0'
-# Use charkick to generate charts
-gem 'chartkick', '=3.4.2'
+# Use charkick to generate charts and graphs
+gem 'chartkick', '=4.0.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -34,6 +34,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cancancan', '= 3.3.0'
 # Use audit for maintaining histories of issues
 gem 'audited', '= 5.0'
+# help out chartkick
+gem 'groupdate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

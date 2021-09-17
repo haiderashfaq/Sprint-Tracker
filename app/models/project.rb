@@ -2,9 +2,11 @@ class Project < ApplicationRecord
   belongs_to :company
   belongs_to :manager, class_name: 'User'
   belongs_to :creator, class_name: 'User'
+  belongs_to :active_sprint, class_name: 'Sprint', optional: true
 
   has_many :sprints
   has_many :projects_users
+  has_many :issues
   has_many :users, through: :projects_users, dependent: :destroy
 
   include DateValidations

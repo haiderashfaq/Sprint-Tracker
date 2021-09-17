@@ -5,6 +5,7 @@ class ProjectsUsersController < ApplicationController
 
   # GET /projects/:sequence_num/projects_users
   def index
+    binding.pry
     @projects_users = @projects_users.includes(:user).paginate(page: params[:page])
     respond_to do |format|
       format.js
