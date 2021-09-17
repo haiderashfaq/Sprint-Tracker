@@ -31,7 +31,7 @@ class Ability
   end
 
   def admin_permissions_for_projects_users(user)
-    can %i[read create destroy], ProjectsUser, company_id: user.company_id
+    can :manage, ProjectsUser, company_id: user.company_id
   end
 
   def admin_permissions_for_issues(user)

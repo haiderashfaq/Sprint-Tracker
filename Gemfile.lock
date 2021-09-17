@@ -104,8 +104,6 @@ GEM
     ffi (1.15.3)
     globalid (0.5.2)
       activesupport (>= 5.0)
-    groupdate (5.2.2)
-      activesupport (>= 5)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -242,10 +240,9 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   cancancan (= 3.3.0)
   capybara (>= 3.26)
-  chartkick
+  chartkick (= 4.0.5)
   devise (= 4.8.0)
   faker (= 2.19.0)
-  groupdate
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mysql2 (~> 0.5)

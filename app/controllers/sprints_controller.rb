@@ -23,15 +23,12 @@ class SprintsController < ApplicationController
   # POST /projects/:sequence_num/sprints/new
   def create
     @sprint.creator = current_user
-    @sprint.status = 'Planning'
+    @sprint.status = PLANNING
     respond_to do |format|
       if @sprint.save
         format.js { flash.now[:notice] = t('shared.success.create', resource_label: t('sprints.label')) }
       else
-        format.js do
-          flash.now[:error] = @sprint.errors.full_messages
-          flash.now[:error] << t('shared.failure.create', resource_label: t('sprints.label'))
-        end
+        format.js { flash.now[:error] = @sprint.errors.full_messages }
       end
     end
   end
@@ -49,10 +46,7 @@ class SprintsController < ApplicationController
       if @sprint.update(sprint_params)
         format.js { flash.now[:notice] = t('shared.success.update', resource_label: t('sprints.label')) }
       else
-        format.js do
-          flash.now[:error] = @sprint.errors.full_messages
-          flash.now[:error] << t('shared.failure.create', resource_label: t('sprints.label'))
-        end
+        format.js { flash.now[:error] = @sprint.errors.full_messages }
       end
     end
   end
@@ -78,52 +72,47 @@ class SprintsController < ApplicationController
     end
   end
 
-  # GET sprints/:sequence_num/start_sprint
+  # GET sprints/:sequence_num/start_sprint_info
+  def start_sprint_info
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # PATCH sprints/:sequence_num/start_sprint
   def start_sprint
-    if request.get?
-      respond_to do |format|
-        format.js
-      end
-    elsif request.patch?
-      respond_to do |format|
-        if Sprint.activate_sprint(@sprint)
-          format.js
-        else
-          format.js { flash.now[:error] = @sprint.errors.full_messages }
-        end
+    respond_to do |format|
+      if Sprint.activate_sprint(@sprint)
+        format.js { flash.now[:notice] = t('sprints.started') }
+      else
+        format.js { flash.now[:error] = @sprint.errors.full_messages }
       end
     end
   end
 
-  # GET sprints/:sequence_num/complete_sprint
+  # GET sprints/:sequence_num/complete_sprint_info
+  def complete_sprint_info
+    @project, @issues_unresolved, @issues_resolved = Sprint.get_project_resolved_and_unresolved_issues(@sprint)
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # POST sprints/:sequence_num/complete_sprint
   def complete_sprint
-    @project = @sprint.project
-    @issues_unresolved = @sprint.issues.where.not(status: 'Resolved')
-    @issues_resolved = @sprint.issues.where(status: 'Resolved')
-    if request.get?
-      respond_to do |format|
+    @project, @issues_unresolved, @issues_resolved = Sprint.get_project_resolved_and_unresolved_issues(@sprint)
+    respond_to do |format|
+      if Sprint.complete_sprint(@sprint, @project, @issues_unresolved, params[:issues_dest])
         format.js
-      end
-    elsif request.post?
-      respond_to do |format|
-        if Sprint.complete_sprint(@sprint, @project, @issues_unresolved, params[:issues_dest])
-          format.js
-        else
-          format.js { flash.now[:error] = @sprint.errors.full_messages }
-        end
+      else
+        format.js { flash.now[:error] = @sprint.errors.full_messages }
       end
     end
   end
 
   # GET sprints/:sequence_num/report
   def report
-    issues_unresolved = @sprint.sprintreport.where.not(status: 'closed').pluck(:issue_id)
-    issues_resolved = @sprint.sprintreport.where(status: 'closed').pluck(:issue_id)
-    @issues_unresolved = Issue.where(id: issues_unresolved)
-    @issues_resolved = Issue.where(id: issues_resolved)
-    binding.pry
+    @issues_resolved, @issues_unresolved = Sprint.report_content(@sprint)
     respond_to do |format|
       format.html
     end

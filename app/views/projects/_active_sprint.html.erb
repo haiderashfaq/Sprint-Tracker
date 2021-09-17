@@ -3,10 +3,10 @@
     <h3>
       <%= sprint.name %>
     </h3>
-    <%= link_to(t('sprints.complete'), complete_sprint_sprint_path(sprint), data: { remote: true, method: :get }, class: "btn btn-outline-primary") %>
+    <%= link_to(t('sprints.complete'), complete_sprint_info_sprint_path(sprint), data: { remote: true, method: :get }, class: "btn btn-outline-primary") %>
   </div>
   <div class="row my-3">
-    <div class="col-3 card bg-secondary mx-1">
+    <div class="col-3 card card-bg mx-1">
       <div class="card-body">
         <h6 class="card-title"><%= t('sprints.to_do').capitalize %></h6>
         <% issues_to_do.each do |issue| %>
@@ -23,7 +23,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-3 card bg-secondary mx-1">
+    <div class="col-3 card card-bg mx-1">
       <div class="card-body">
         <h6 class="card-title"><%= t('sprints.in_progress').capitalize %></h6>
         <% issues_in_progress.each do |issue| %>
@@ -40,7 +40,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-3 card bg-secondary mx-1">
+    <div class="col-3 card card-bg mx-1">
       <div class="card-body">
         <h6 class="card-title"><%= t('sprints.done').capitalize %></h6>
         <% issues_resolved.each do |issue| %>

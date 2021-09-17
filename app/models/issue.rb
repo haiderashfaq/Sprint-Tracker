@@ -15,4 +15,12 @@ class Issue < ApplicationRecord
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
   CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
+
+  def self.get_errors_of_collection(issues)
+    errors = []
+    issues.each do |issue|
+      errors.concat(issue.errors.full_messages)
+    end
+    errors
+  end
 end

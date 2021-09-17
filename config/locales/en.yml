@@ -36,11 +36,13 @@ en:
     portfolio: Portfolio
     setting: Setting
     reports: Reports
+
   password:
     label: Password
     forgot_password: Forgot your password?
     change_password: Change password
     new_password: New password
+  
   issues:
     issue_label: 'Issue'
     issues_label: 'Issues'
@@ -62,6 +64,7 @@ en:
     not_completed: "Issues Not Completed"
     unresolved_issues_msg: "Select where all unresolved issues should be moved"
     move: "Move Issue to:"
+    issues_added_success: "Issues added Successfully to Sprint"
 
   projects:
     project_label: 'Project'
@@ -82,7 +85,8 @@ en:
     complete: "Complete Sprint"
     report: "Status Report"
     burndown_chart: "Burndown Chart"
-
+    started: "Sprint Started Successfully"
+    
   users:
     label: 'User'
     log_in: "Log In"

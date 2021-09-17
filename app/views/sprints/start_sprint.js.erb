@@ -1,13 +1,7 @@
-<% if request.get? %>
-  $('#modal').html("<%= escape_javascript render('form', sprint: @sprint) %>");
-  $('#modal .modal-header').html("<h1><%= t('shared.edit_resource', resource_label: t('sprints.label')) %></h1>");
-  $('#modal').modal('show');
-<% elsif request.patch? %>
-  <% if @sprint.errors.any? %>
-    $('#modal .modal-flash-messages').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
-  <% else %>
-    $('#modal').modal('hide');
-    $("#sprint_<%= @sprint.id %>").remove();
-  <% end %>
+<% if @sprint.errors.any? %>
+  $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+<% else %>
+  $('#modal').modal('hide');
+  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $("#sprint_<%= @sprint.id %>").remove();
 <% end %>
-

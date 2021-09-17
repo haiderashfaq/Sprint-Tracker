@@ -75,7 +75,12 @@ class IssuesController < ApplicationController
     @sprint_id = params[:sprint_id]
 
     respond_to do |format|
-      format.js if @issues.update(sprint_id: @sprint_id)
+      if @issues.update(sprint_id: @sprint_id)
+        format.js { flash.now[:notice] = t('issues.issues_added_success') }
+      else
+        @errors = Issue.get_errors_of_collection(@issues)
+        format.js { flash.now[:error] = @errors }
+      end
     end
   end
 

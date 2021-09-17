@@ -1,7 +1,7 @@
 <% sprint_path_value = local_assigns[:project] ? project_sprint_path(project, sprint) : sprint_path(sprint) %>
 <tr id="sprint_<%= sprint.sequence_num %>">
   <td><%= sprint.name %></td>
-  <td><%= sprint.creator.email %></td>
+  <td><%= sprint.creator.name %></td>
   <td><%= sprint.start_date&.to_formatted_s(:long) %></td>
   <td><%= sprint.end_date&.to_formatted_s(:long) %></td>
   <td><%= sprint.estimated_start_date&.to_formatted_s(:long) %></td>
@@ -10,7 +10,7 @@
     <% if can? :show, sprint %>
       <%= link_to '', sprint_path_value, class:"bi bi-eye pe-1" %>
     <% end %>
-    <% if !params[:project_id].nil? %>
+    <% if params[:project_id].present? %>
       <% if can? :edit, sprint %>
         <%= link_to '', [:edit, project, sprint], remote: true, class:"bi bi-pencil pe-1" %>
       <% end %>

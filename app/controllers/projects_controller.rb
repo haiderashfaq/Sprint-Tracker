@@ -76,10 +76,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num/backlog
   def backlog
-    @sprints = @project.sprints.includes(:issues).where(status: 'Planning').order(:start_date, :created_at)
-    # @sprints = @project.sprints.joins(:issues).group(:id).select('sprints.*, count(*) AS total_issues').where(status: 'Planning').order(:start_date, :creatd_at)
-    @issues = @project.issues.where(sprint: nil)
-
+    @sprints, @issues = Project.get_sprints_and_issues(@project)
     respond_to do |format|
       format.js
     end

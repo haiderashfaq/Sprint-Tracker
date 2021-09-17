@@ -1,5 +1,5 @@
 <% sprint_path_value = local_assigns[:project] ? [project, sprint] : sprint %>
-<% form_action = params[:action] == "start_sprint" ? start_sprint_sprint_path : sprint_path_value %>
+<% form_action = params[:action] == "start_sprint_info" ? start_sprint_sprint_path : sprint_path_value %>
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header"></div>
@@ -28,7 +28,7 @@
               <%= form.label t('projects.project_label'), class: 'col-form-label col-form-label-md control-label' %>
             </div>
             <div class="col-8">
-              <%= form.select :project_id, @projects.map{ |project| [project.name, project.id] }, { required: true }, { class: "form-select form-select-md js-select-field-single" } %>
+              <%= form.select :project_id, project_options_to_add_sprint(projects), { required: true }, { class: "form-select form-select-md js-select-field-single" } %>
             </div>
           </div>
         <% end %>
@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= form.submit (t('sprints.start') if params[:action] == "start_sprint"), class: 'btn btn-primary bi bi-check', remote: true %>
+        <%= form.submit (t('sprints.start') if params[:action] == "start_sprint_info"), class: 'btn btn-primary bi bi-check', remote: true %>
         <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
       </div>
     <% end %>
