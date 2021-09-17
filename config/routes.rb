@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     resources :users do
     end
   end
+
+  get "/history", to: "issues#history"
 end

@@ -1,0 +1,11 @@
+$("#modal").html("<%= escape_javascript render('form', project: @project, issue: @issue, projects: @projects, users: @users )%>");
+$("#modal").modal('show');
+
+$('#modal').on('shown.bs.modal', function(){
+  $(".js-select-form-field").select2({
+  	dropdownParent: $('#modal')
+  });
+  $('body').on('select2:open', '.js-select-form-field', () => {
+    document.querySelector('.select2-search__field').focus();
+  });  
+})

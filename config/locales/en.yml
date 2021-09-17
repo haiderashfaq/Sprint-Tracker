@@ -57,10 +57,20 @@ en:
     actual_end_date: 'Actual End Date'
     no_histoires: 'No Histories yet!'
     history_label: 'History'
+    assignee: 'Assignee'
+    reviewer: 'Reviewer'
+    creator: 'Creator'
+    deletion_error: "Delete all issues before deleting project"
+  
   projects:
     project_label: 'Project'
     manager: "Project Manager"
     deletion_error: "Delete all sprints before deleting project"
+  filter:
+    add: 'Add filter'
+    filter_label: 'Filter'
+    creator: 'Creator'
+
   
   sprints:
     label: 'Sprint'
@@ -77,6 +87,12 @@ en:
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
+    creator: "Created By"
+    started_on: "Started On"
+    starting_on: "Starting On"
+    ended_on: "Ended On"
+    due_on: "Due On"
+    project_id: "Project_id"
 
   shared:
     name: "Name"
@@ -112,6 +128,7 @@ en:
     est_start_date: "Estimated Start Date"
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
+    cancel: 'Cancel'
     success:
 
       add: "%{resource_label} added Successfully"

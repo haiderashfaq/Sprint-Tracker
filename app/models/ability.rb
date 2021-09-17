@@ -39,7 +39,7 @@ class Ability
   end
 
   def admin_permissions_for_project(user)
-    can %i[update read create delete], Project, company_id: user.company_id
+    can :manage, Project, company_id: user.company_id
   end
 
   def admin_permissions_for_sprint

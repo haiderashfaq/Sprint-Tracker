@@ -1,29 +1,3 @@
-<div class="container">
-  <br>
-  <div class="row d-flex">
-    <div class="col-10 justify-content-start"><h2 >Issues</h2></div>
-    <div class="col-2 justify-content-end"><%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path ,  class: "btn fa fa-plus btn-primary w-100 some-button" %></div>
-  </div>
-  <br/>
-  <table class="table table-hover border-primary text-center" id="issues-datatable" data-source="<%= issues_path(format: :json) %>">
-    <thead class="text-light bg-primary">
-      <tr>
-        <th><%= t('issues.title') %></th>
-        <th><%= t('issues.status') %></th>
-        <th><%= t('issues.priority') %></th>
-        <th><%= t('issues.category') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @issues.each do |issue| %>
-        <tr>
-          <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
-          <td><%= issue.status %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.category %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<%= will_paginate @issues %>
-</div>
+<%= render partial: "issues/header", locals: {project: @project} %>
+ <div class="row mb-3"><%= render :partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects} %></div>
+<%= render partial: "issues/table", locals: { issues: @issues} %>
