@@ -1,12 +1,25 @@
 class IssuesController < ApplicationController
-  load_and_authorize_resource find_by: :sequence_num, through: :current_company
+
+  load_and_authorize_resource :project, find_by: :sequence_num, through: :current_company, if: -> { params[:project_id].present? }
+  load_and_authorize_resource :issue, find_by: :sequence_num, through: :project, if: -> { params[:project_id].present? }
+  load_and_authorize_resource :issue, find_by: :sequence_num, through: :current_company, if: -> { params[:project_id].blank? }
   before_action :set_creator, only: :create
+  before_action :fetch_required_data, only: [:new, :edit, :index]
 
   # GET /issues
   def index
-    @issues = @issues.includes(:creator, :reviewer).paginate(page: params[:page])
+    @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page])
+    @issues = FilteringParams.new(@issues, params).filter_params
     respond_to do |format|
+      format.js
       format.html
+      format.js
+    end
+  end
+
+  def history
+    @issue = @issues.find_by(sequence_num: params[:issue])
+    respond_to do |format|
       format.js
     end
   end
@@ -15,19 +28,21 @@ class IssuesController < ApplicationController
   def show
     respond_to do |format|
       format.html
+      format.js
     end
   end
 
   # GET /issues/new
   def new
     respond_to do |format|
-      format.html
+      format.js
     end
   end
 
   # GET issues/:sequence_num/edit
   def edit
     respond_to do |format|
+      format.js
       format.html
     end
   end
@@ -36,11 +51,11 @@ class IssuesController < ApplicationController
   def create
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @issue, notice: t('shared.success.create', resource_label: t('issues.issue_label'))  }
+        flash.now[:notice] = t('shared.success.create', resource_label: t('issues.issue_label'))
       else
-        flash.now[:error] = t('shared.failure.create', resource_label: t('issues.issue_label'))
-        format.html { render :new }
+        flash.now[:error] = @issue.errors.full_messages
       end
+      format.js
     end
   end
 
@@ -48,11 +63,11 @@ class IssuesController < ApplicationController
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue, notice: t('shared.success.update', resource_label: t('issues.issue_label')) }
+        flash.now[:notice] = t('shared.success.update', resource_label: t('issues.issue_label'))
       else
-        flash.now[:error] = t('shared.failure.update', resource_label: t('issues.issue_label'))
-        format.html { render :edit }
+        flash.now[:error] = @issue.errors.full_messages
       end
+      format.js
     end
   end
 
@@ -60,9 +75,11 @@ class IssuesController < ApplicationController
   def destroy
     respond_to do |format|
       if @issue.destroy
-        format.html { redirect_to issues_url, notice: t('shared.success.delete', resource_label: t('issues.issue_label')) }
+        format.js { flash.now[:notice] = t('shared.success.delete', resource_label: t('issues.issue_label')) }
+        format.html { redirect_to issues_url }
       else
         flash.now[:error] = t('shared.failure.delete', resource_label: t('issues.issue_label'))
+        format.js
         format.html { render :show }
       end
     end
@@ -89,10 +106,15 @@ class IssuesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def issue_params
     params.require(:issue).permit(:title, :description, :status, :category, :estimated_time, :priority, :estimated_end_date,
-                                  :estimated_start_date, :actual_start_date, :actual_end_date)
+                                  :estimated_start_date, :actual_start_date, :actual_end_date, :reviewer_id, :creator_id, :assignee_id, :project_id)
   end
 
   def set_creator
     @issue.creator = current_user
+  end
+
+  def fetch_required_data
+    @projects = @current_company.projects
+    @users = @current_company.users
   end
 end

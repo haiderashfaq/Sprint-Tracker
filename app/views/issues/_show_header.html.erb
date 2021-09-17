@@ -1,0 +1,21 @@
+<div class="container mt-3 mb-4">
+<hr/>
+  <div class="row bm-3 d-flex">
+    <div class="col-8">
+      <h1><%= t('issues.issue_label') %></h1>
+    </div>
+    <% if can? :update, issue %>
+      <div class="col-2 justify-content-end">
+        <%= link_to t('shared.edit_resource', resource_label: t('issues.issue_label')), edit_issue_path(issue) ,{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn bi bi-pencil btn-primary w-100 some-button'} %>
+      </div>
+    <% end %>
+    <% if can? :destroy, issue %>
+      <div class="col-2 justify-content-end">
+        <%= link_to t('shared.delete'), issue_path(issue),
+        method: :delete,
+        data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 bi bi-trash" %>
+      </div>
+    <% end %>
+  </div>
+  <hr/>
+</div>

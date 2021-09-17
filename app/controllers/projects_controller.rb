@@ -1,9 +1,12 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource find_by: :sequence_num
+
+  load_and_authorize_resource find_by: :sequence_num, through: :current_company
+  load_resource :issues, find_by: :sequence_num, through: :project
 
   # GET /projects
   def index
-    @projects = @projects.paginate(page: params[:page])
+    binding.pry
+    @projects = @projects.includes(:issues).paginate(page: params[:page])
     respond_to do |format|
       format.html
     end
