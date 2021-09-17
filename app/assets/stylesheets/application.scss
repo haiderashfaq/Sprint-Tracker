@@ -8,6 +8,10 @@
 
 $a-color: #105cb6;
 $gray-color: #000000;
+@import 'dashboard';
+@import 'boxicons/css/boxicons.css';
+
+$secondary-color: #999999;
 $hover-color: #000033;
 $a-border-color: #2e6ab1;
 $secondary-color: #999999;
@@ -103,10 +107,12 @@ $disable-border-color: #dddddd;
     content: "*";
     color: red;
   }
-
 }
 
 .bg-secondary {
   --bs-bg-opacity: .25;
   background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+}
+.show{
+  display: flex;
 }

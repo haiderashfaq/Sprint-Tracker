@@ -2,7 +2,7 @@
 <div class="container">
   <% issue.audits.includes(:user).drop(1).each do |audit| %>
     <!-- TO DO !!! Replace user email by user name when user is uptodate -->
-    <%= link_to audit&.user&.email %> 
+    <%= link_to audit&.user&.name, user_path(audit&.user&.sequence_num) %> 
     <%= distance_of_time_in_words(audit.created_at, Time.zone.now) %> ago
     <hr class="mt-1"/>
     <ul>

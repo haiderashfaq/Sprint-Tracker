@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
   <ul class="nav nav-tabs bg-gray" id="issue" role="tablist">
     <li class="nav-item" role="presentation">
@@ -52,3 +53,5 @@
     { name: t('shared.est_end_date'), data: @issues.group(:estimated_end_date).count }, 
     { name: t('shared.end_date'), data: @issues.group(:actual_end_date).count }] %>
 </div>
+<%= render partial: "issues/header" %>
+<%= render partial: "issues/table", locals: { issues: issues } %>
