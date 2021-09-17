@@ -1,11 +1,9 @@
 class ProjectsController < ApplicationController
-
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
   load_resource :issues, find_by: :sequence_num, through: :project
 
   # GET /projects
   def index
-    binding.pry
     @projects = @projects.includes(:issues).paginate(page: params[:page])
     respond_to do |format|
       format.html
@@ -74,6 +72,26 @@ class ProjectsController < ApplicationController
           render :show
         end
       end
+    end
+  end
+
+  # GET /projects/:sequence_num/backlog
+  def backlog
+    @sprints, @issues = Project.get_sprints_and_issues(@project)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def active_sprint
+    @active_sprint = @project.active_sprint
+    unless @active_sprint.nil?
+      @issues_to_do = @active_sprint.issues.where(status: 'Open')
+      @issues_in_progress = @active_sprint.issues.where(status: 'In Progress')
+      @issues_resolved = @active_sprint.issues.where(status: 'Resolved')
+    end
+    respond_to do |format|
+      format.js
     end
   end
 

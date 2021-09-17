@@ -11,6 +11,7 @@
   <body>
     <% if user_signed_in? %>
       <%= render partial: 'layouts/signed_in_sidebar' %>
+      <div class="modal fade" id="modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true"></div>
     <% else%>
       <%= render partial: 'layouts/signed_out_navbar' %>
       <div class="home-content-below-navbar">
@@ -20,7 +21,5 @@
         <%= yield %>
       </div>
     <% end %>
-      <div class="modal fade" id="modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-      </div>
   </body>
 </html>

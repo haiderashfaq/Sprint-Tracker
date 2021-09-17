@@ -24,6 +24,8 @@
       <%= link_to t('sprints.label').pluralize(), [@project, :sprints], remote: true, class: 'nav-link', id: "nav-sprints-tab", data: {bs_toggle: "tab", bs_target: "#nav-sprints"}, type: "button", role: 'tab', aria_controls: "nav-sprints", aria_selected: false %>
       <%= link_to t('issues.issue_label').pluralize(), project_issues_path(@project), remote: true, class: 'nav-link', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues", aria_selected: false %>
       <%= link_to t('users.label').pluralize(), [@project, :projects_users], remote: true, class: 'nav-link', id: "nav-users-tab", data: {bs_toggle: "tab", bs_target: "#nav-users"}, type: "button", role: 'tab', aria_controls: "nav-users", aria_selected: false %>
+      <%= link_to t('projects.backlog').pluralize(), [:backlog, @project], remote: true, class: 'nav-link', id: "nav-backlog-tab", data: {bs_toggle: "tab", bs_target: "#nav-backlog"}, type: "button", role: 'tab', aria_controls: "nav-backlog", aria_selected: false %>
+      <%= link_to t('projects.active_sprint').pluralize(), [:active_sprint, @project], remote: true, class: 'nav-link', id: "nav-active-sprint-tab", data: {bs_toggle: "tab", bs_target: "#nav-active-sprint"}, type: "button", role: 'tab', aria_controls: "nav-active-sprint", aria_selected: false %>
     </div>
   </nav>
   <div class="tab-content" id="tab-tabContent">
@@ -41,5 +43,7 @@
     </div>
     <div class="tab-pane fade" id="nav-sprints" role="tabpanel" aria-labelledby="nav-sprints-tab"></div>
     <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab"></div>
+    <div class="tab-pane fade" id="nav-backlog" role="tabpanel" aria-labelledby="nav-backlog-tab"></div>
+    <div class="tab-pane fade" id="nav-active-sprint" role="tabpanel" aria-labelledby="nav-active-sprint-tab"></div>
   </div>
 </div>

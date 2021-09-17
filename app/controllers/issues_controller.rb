@@ -13,6 +13,7 @@ class IssuesController < ApplicationController
     respond_to do |format|
       format.js
       format.html
+      format.js
     end
   end
 
@@ -80,6 +81,22 @@ class IssuesController < ApplicationController
         flash.now[:error] = t('shared.failure.delete', resource_label: t('issues.issue_label'))
         format.js
         format.html { render :show }
+      end
+    end
+  end
+
+  # POST issues/add_issues
+  def add_issues_to_sprint
+    issue_ids = params[:issue_ids].split(',')
+    @issues = Issue.where(id: issue_ids)
+    @sprint_id = params[:sprint_id]
+
+    respond_to do |format|
+      if @issues.update(sprint_id: @sprint_id)
+        format.js { flash.now[:notice] = t('issues.issues_added_success') }
+      else
+        @errors = Issue.get_errors_of_collection(@issues)
+        format.js { flash.now[:error] = @errors }
       end
     end
   end

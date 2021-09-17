@@ -8,9 +8,10 @@ class Ability
 
     if user.admin?
       admin_permissions_for_users(user)
-      admin_permissions_for_sprint
+      admin_permissions_for_sprint(user)
       admin_permissions_for_project(user)
       admin_permissions_for_issues(user)
+      admin_permissions_for_projects_users(user)
     elsif user.member?
       member_permsisions_for_users(user)
       member_permissions_for_issues(user)
@@ -31,7 +32,7 @@ class Ability
   end
 
   def admin_permissions_for_projects_users(user)
-    can %i[read create destroy], ProjectsUser, company_id: user.company_id
+    can :manage, ProjectsUser, company_id: user.company_id
   end
 
   def admin_permissions_for_issues(user)
@@ -42,8 +43,8 @@ class Ability
     can :manage, Project, company_id: user.company_id
   end
 
-  def admin_permissions_for_sprint
-    can %i[read create update destroy], Sprint
+  def admin_permissions_for_sprint(user)
+    can :manage, Sprint, company_id: user.company_id
   end
 
   # member permissions
@@ -62,8 +63,8 @@ class Ability
   end
 
   def member_permissions_for_sprint(user)
-    can %i[read create update destroy], Sprint, project: { manager: user }
-    can :read, Sprint
+    can %i[read create update destroy start_sprint start_sprint_info complete_sprint complete_sprint_info], Sprint, project: { manager: user }
+    can :read, Sprint, project: { projects_users: user }
   end
 
   def creator_permissions_for_issues(user)

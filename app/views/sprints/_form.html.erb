@@ -1,8 +1,10 @@
+<% sprint_path_value = local_assigns[:project] ? [project, sprint] : sprint %>
+<% form_action = params[:action] == "start_sprint_info" ? start_sprint_sprint_path : sprint_path_value %>
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header"></div>
     <div class="modal-flash-messages"></div>
-    <%= form_with model: [project, sprint], local: false do |form| %>
+    <%= form_with model: sprint_path_value, url: form_action, local: false do |form| %>
       <div class="modal-body">
         <div class="row mb-3">
           <div class="col-4">
@@ -20,12 +22,22 @@
             <%= form.text_area :description, class: 'form-control form-control-md' %>
           </div>
         </div>
+        <% if local_assigns[:project].nil? and params[:action] == "new" %>
+          <div class="row mb-3">
+            <div class="col-4">
+              <%= form.label t('projects.project_label'), class: 'col-form-label col-form-label-md control-label' %>
+            </div>
+            <div class="col-8">
+              <%= form.select :project_id, project_options_to_add_sprint(projects), { required: true }, { class: "form-select form-select-md js-select-field-single" } %>
+            </div>
+          </div>
+        <% end %>
         <div class="row mb-3">
           <div class="col-4">
             <%= form.label t('shared.start_date') %>
           </div>
           <div class="col-8">
-            <%= form.date_field :start_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
+            <%= form.datetime_field :start_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
           </div>
         </div>
         <div class="row mb-3">
@@ -33,7 +45,7 @@
             <%= form.label t('shared.end_date'), class: 'col-form-label col-form-label-md control-label' %>
           </div>
           <div class="col-8">
-            <%= form.date_field :end_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
+            <%= form.datetime_field :end_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
           </div>
         </div>
         <div class="row mb-3">
@@ -41,7 +53,7 @@
             <%= form.label t('shared.est_start_date'), class: 'col-form-label col-form-label-md control-label' %>
           </div>
           <div class="col-8">
-            <%= form.date_field :estimated_start_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
+            <%= form.datetime_field :estimated_start_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
           </div>
         </div>
         <div class="row mb-3">
@@ -49,12 +61,12 @@
             <%= form.label t('shared.est_end_date'), class: 'col-form-label col-form-label-md control-label' %>
           </div>
           <div class="col-8">
-            <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
+            <%= form.datetime_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <%= form.submit class: 'btn btn-primary bi bi-check', remote: true %>
+        <%= form.submit (t('sprints.start') if params[:action] == "start_sprint_info"), class: 'btn btn-primary bi bi-check', remote: true %>
         <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
       </div>
     <% end %>

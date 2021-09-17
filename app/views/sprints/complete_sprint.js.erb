@@ -1,0 +1,7 @@
+<% if @sprint.errors.any? %>
+  $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+<% else %>
+  $('#modal').modal('hide');
+  let url = window.location.origin + "/sprints/" + "<%= @sprint.sequence_num %>" + "/report"
+  window.location.replace(url);
+<% end %>

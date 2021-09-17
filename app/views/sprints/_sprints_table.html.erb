@@ -12,7 +12,11 @@
   </thead>
   <tbody id="sprints_datatable_body">
     <% sprints.each do |sprint| %>
-      <%= render 'sprint_datatable_row', sprint: sprint, project: project %>
+      <% if params[:project_id].nil? %>
+        <%= render 'sprint_datatable_row', sprint: sprint %>
+      <% else %>
+        <%= render 'sprint_datatable_row', sprint: sprint, project: project %>
+      <% end %>
     <% end %>
   </tbody>
 </table>
