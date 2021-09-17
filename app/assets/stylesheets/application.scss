@@ -105,14 +105,11 @@ $disable-border-color: #dddddd;
   }
 }
 
-<<<<<<< HEAD
-}
-
 .card-bg {
   --bs-bg-opacity: .25;
   background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
 }
-
+  
 .show{
   display: flex;
 }
