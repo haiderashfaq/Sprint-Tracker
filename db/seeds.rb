@@ -42,7 +42,7 @@ VALID_STATUSES = { 1 => 'Planning', 2 => 'Active', 3 => 'Closed'}.freeze
   unless p.blank?
     user = u[rand(1..u.count)-1]
     unless user.blank? and u.blank?
-      issue = Issue.create!(title: Faker::Company.name, description: Faker::Quote.matz, estimated_time: "100.00", status: STATUS[rand(1..4)], priority: "High", category: "Hotfix", start_date: rand(1..15).days.ago, end_date: rand(-15..0).days.ago, estimated_start_date: rand(1..15).days.ago, estimated_end_date: rand(-15..0).days.ago,  creator: user, assignee_id: u[rand(1..u.count)-1].id, reviewer_id: u[rand(1..u.count)-1].id, project: p[rand(1..p.count)-1])
+      issue = Issue.create!(title: Faker::Company.name, description: Faker::Quote.matz, estimated_time: "100.00", status: STATUS[rand(1..4)], priority: "High", category: "Hotfix", actual_start_date: rand(1..15).days.ago, actual_end_date: rand(-15..0).days.ago, estimated_start_date: rand(1..15).days.ago, estimated_end_date: rand(-15..0).days.ago,  creator: user, assignee_id: u[rand(1..u.count)-1].id, reviewer_id: u[rand(1..u.count)-1].id, project: p[rand(1..p.count)-1])
 
       (0..rand(1..10)).each do |i|
         user = u[rand(1..u.count)-1]
