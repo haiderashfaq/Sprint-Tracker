@@ -56,27 +56,26 @@ class TimeLogsController < ApplicationController
       if @time_log.update(time_log_params)
         format.js { flash.now[:notice] = t('shared.success.update', resource_label: t('time_logs.timelogs_label')) }
       else
-        flash.now[:error] = @sprint.errors.full_messages
-        flash.now[:error] << t('shared.failure.create', resource_label: t('sprints.label'))
+        flash.now[:error] = @time_log.errors.full_messages
+        flash.now[:error] << t('shared.failure.create', resource_label: t('time_logs.label'))
       end
     end
   end
 
   # DELETE /time_logs/1 or /time_logs/1.json
   def destroy
-    @time_log.destroy
     respond_to do |format|
-      format.js { flash.now[:notice] = t('shared.success.delete', resource_label: t('sprints.label')) }
+      if @time_log.destroy
+        format.js { flash.now[:notice] = t('shared.success.delete', resource_label: t('time_logs.label')) }
+      else
+        format.js { flash.now[:notice] = t('shared.failure.delete', resource_label: t('time_logs.label')) }
+      end
     end
   end
 
   private
 
-    def set_time_log
-      @time_log = TimeLog.find(params[:id])
-    end
-
-    def time_log_params
-      params.require(:time_log).permit(:name, :date, :logged_time, :work_description)
-    end
+  def time_log_params
+    params.require(:time_log).permit(:name, :date, :logged_time, :work_description)
+  end
 end

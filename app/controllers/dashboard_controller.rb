@@ -10,6 +10,4 @@ class DashboardController < ApplicationController
       format.html
     end
   end
-  def home
-  end
 end
