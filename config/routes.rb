@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       end
     end
     resources :issues do
+      resources :time_logs
       collection do
         post 'add_issues_to_sprint'
         get 'fetch_resource_issues', as: 'fetch_resource'
@@ -37,6 +38,5 @@ Rails.application.routes.draw do
     resources :users do
     end
   end
-
   get "/history", to: "issues#history"
 end

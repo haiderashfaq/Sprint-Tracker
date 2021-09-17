@@ -17,8 +17,10 @@
         <tr id="no-resource"><td colspan="5"><%= render partial: 'shared/no_resource_present', locals: { record: 'issues.issue_label' } %><td></tr>
       </div>
       <% else %>
+<%binding.pry%>
+
         <% issues.each do |issue| %>
-          <%= render 'issue_datatable_row', issue:issue %>
+          <%= render 'issues/issue_datatable_row', issue:issue %>
         <% end %>
       <% end %>
     </tbody>

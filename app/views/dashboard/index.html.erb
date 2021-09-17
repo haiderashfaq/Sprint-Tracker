@@ -18,10 +18,10 @@
     <%= line_chart [
     { name: t('shared.est_end_date'), data: Project.fetch_issues.group(:estimated_end_date).count }, 
     { name: t('shared.end_date'), data: Project.fetch_issues.group(:actual_end_date).count }] %>
-  <% else %>
+  <% elsif %>
     <% @issues= Issue.joins(:assignee) %>
     <% @issues= @issues.paginate(page: params[:page]) %>
-    <%= render 'issues/index', locals: { issues: @issues } %>
+    <%= render 'issues/index', issues: @issues %>
   <% end %>
 </div>
 

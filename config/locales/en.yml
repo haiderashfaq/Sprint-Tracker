@@ -108,6 +108,12 @@ en:
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
+
+  time_logs:
+    label: 'Time log'
+    assignee: Assignee
+    date: Date
+    description: Description
     creator: "Created By"
     started_on: "Started On"
     starting_on: "Starting On"

@@ -19,6 +19,7 @@ class Issue < ApplicationRecord
   belongs_to :project, optional: true
   has_many :time_logs, dependent: :destroy
   belongs_to :project
+  has_many :time_logs, dependent: :destroy
   scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
 
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
