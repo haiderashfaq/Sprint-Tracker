@@ -11,6 +11,7 @@ class Ability
       admin_permissions_for_sprint
       admin_permissions_for_project(user)
       admin_permissions_for_issues(user)
+      admin_permissions_for_projects_users(user)
     elsif user.member?
       member_permsisions_for_users(user)
       member_permissions_for_issues(user)

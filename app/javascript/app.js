@@ -1,6 +1,5 @@
 require('select2')
 $(document).ready(function() {
-<<<<<<< HEAD
   $(".js-select-field-single").select2({});
 
   $('body').on('select2:open', '.js-select-field-single', () => {
@@ -21,103 +20,45 @@ $(document).ready(function() {
   dateTimeFunc();
   $("#modal").on('shown.bs.modal', dateTimeFunc);
 
-  $('body').on('click', '#check_all', function() {
-    if ($('#check_all').prop("checked")) {
-      $(".issue-check-box").each(function() {
-        $(this).prop("checked", true);
-        $(this).trigger('change');
-      })
-    } else {
-      $(".issue-check-box").each(function() {
-        $(this).prop("checked", false);
-        $(this).trigger('change');
-      })
-    }
-  });
-
-  $('body').on('change', ".issue-check-box", function() {
-    let checked = false;
-    $(".issue-check-box").each(function() {
-      if ($(this).prop("checked")) {
-        checked = true;
-      }
-    })
-    checked ? $(".add-issues").prop("disabled", false) : $(".add-issues").prop("disabled", true)
-  });
-
-  $('body').on('click', '.add-issues-to-sprint', function() {
-    let issue_ids = [];
-    $('.issue-check-box').each(function() {
-      if ($(this).prop("checked")) {
-        issue_ids.push($(this).val());
-      }
-    });
-    $('.issue_ids').val(issue_ids);
-  });
-
-  $('#menu-btn').on('click', function() {
-    $('#sidebar').toggleClass("active");
-  });
-
-  $('.js-remove-filter').on('click', function(e){
+  $('.js-remove-filter').on('click', function(e) {
     e.preventDefault();
     var parent = this.parentNode.parentNode.id;
-    var id ="#"+parent
-    var className = ".js-"+parent+"-field"
+    var id = "#" + parent
+    var className = ".js-" + parent + "-field"
     $(id).hide();
-    $(className).prop( "disabled", true );
+    $(className).prop("disabled", true);
   });
-
 
   $('.js-select-field').select2({
     width: 200
   });
 
-  $(document).on('select2:select',".js-select-field", function (e){
+  $(document).on('select2:select', ".js-select-field", function(e) {
     var select_container_id = e.params.data["id"];
     $('.btn-filter').show();
-    $("#"+select_container_id).addClass('show');
-    $( ".js-"+select_container_id+"-field").prop( "disabled", false );
+    $("#" + select_container_id).addClass('show');
+    $(".js-" + select_container_id + "-field").prop("disabled", false);
   });
 
   $('body').on('select2:open', '.js-select-field', () => {
     document.querySelector('.select2-search__field').focus();
   });
 
-  $('[data-toggle="tooltip"]').tooltip()
-  $('[data-toggle="popover"]').popover()
+  dateTimeFunc();
+  $("#modal").on('shown.bs.modal', dateTimeFunc);
 
-  var dateTimeFunc = function() {
+  $('.js-registration-form .js-name-field').on('keyup', function() {
+    var subdomain = $("#name").val().toLowerCase();
+    $('#subdomain').val(subdomain.replace(/[^a-z0-9]/g, '').substring(0, 25));
+  });
+
+  $('#menu-btn').on('click', function() {
+    $('#sidebar').toggleClass("active");
+  });
+});
+
+var dateTimeFunc = function() {
   $(".js-flatpickr-datetime").flatpickr({
     enableTime: true
   });
-    // $(".nav .nav-link").on("click", function(){
-    // $(".nav").find(".active").removeClass("active");
-    // $(this).addClass("active");
-    // });
-
-    // $('#users-datatable').DataTable().ajax.reload();
-    // $('#users-datatable').dataTable({
-    //     "processing": true,
-    //     "serverSide": true,
-    //     "ajax": {
-    //       "url": $('#users-datatable').data('source')
-    //     },
-    //     "pagingType": "full_numbers",
-    //     "columns": [
-    //       {"data": "name"},
-    //       {"data": "email"},
-    //       {"data": "role_id"}
-    //     ]
-    //     // pagingType is optional, if you want full pagination controls.
-    //     // Check dataTables documentation to learn more about
-    //     // available options.
-    //   });
-    // jQuery(document).ready(function() {
-    //  $('#issues-datatable').dataTable({
-    //     "paging": false,
-    //     "searching": false,
-    //     "info": false
-    //   });
-    // });
 }
