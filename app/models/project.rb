@@ -5,6 +5,8 @@ class Project < ApplicationRecord
   belongs_to :active_sprint, class_name: 'Sprint', optional: true
 
   # validate :start_date_before_end_date
+  before_destroy :check_for_sprints, :check_for_issues
+
   validates :name, :manager, :creator, presence: true
   validates :name, length: { maximum: 100, minimum: 4 }
   has_many :issues
@@ -21,7 +23,6 @@ class Project < ApplicationRecord
   validates :name, length: { maximum: 100, minimum: 4 }
   validate_dates :start_date, :end_date
 
-  before_destroy :check_for_sprints, :check_for_issues
 
   def sprints_and_issues
     sprints = self.sprints.includes(:issues).where(status: Sprint::STATUS[:PLANNING]).order(:start_date, :created_at)
