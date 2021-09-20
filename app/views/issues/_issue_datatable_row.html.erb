@@ -1,7 +1,8 @@
 <tr id="issue_<%= issue.sequence_num %>">
   <div id="issues_datatable_space"></div>
+  <td><span class="badge rounded-pill bg-<%= badge_pill_selection(issue.status) %>">
+      <%= issue.status %></span></td>
   <td><%= link_to issue.title, issue_path(issue) %></td>
-  <td><%= issue.status %></td>
   <td><%= issue.priority %></td>
   <td><%= issue.category %></td>
   <td>

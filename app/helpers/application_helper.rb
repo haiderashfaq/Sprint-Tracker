@@ -29,6 +29,14 @@ module ApplicationHelper
     end
   end
 
+  def issues_priority_pill_selection(priority)
+    case priority
+    when Issue::PRIORITY[:Low] then 'success'
+    when Issue::PRIORITY[:Medium] then 'warning'
+    when Issue::PRIORITY[:High] then 'danger'
+    end
+  end
+
   def js_paginate(collection, params = {})
     will_paginate collection, params.merge(renderer: RemoteLinkPaginationHelper::LinkRenderer)
   end

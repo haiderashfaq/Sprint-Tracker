@@ -1,12 +1,13 @@
 <% sprint_path_value = local_assigns[:project] ? project_sprint_path(project, sprint) : sprint_path(sprint) %>
 <tr id="sprint_<%= sprint.sequence_num %>">
+  <td><span class="badge rounded-pill bg-<%= badge_pill_selection(sprint.status) %>">
+      <%= sprint.status %></span></td>
   <td><%= link_to sprint.name, sprint %></td>
   <td><%= sprint.creator.name %></td>
   <td><%= sprint.start_date&.to_formatted_s(:long) %></td>
   <td><%= sprint.end_date&.to_formatted_s(:long) %></td>
   <td><%= sprint.estimated_start_date&.to_formatted_s(:long) %></td>
   <td><%= sprint.estimated_end_date&.to_formatted_s(:long) %></td>
-  <td><%= sprint.status %></td>
   <td>
     <% if params[:project_id].present? %>
       <% if can? :edit, sprint %>

@@ -2,8 +2,9 @@ class ProjectsUser < ApplicationRecord
   belongs_to :project
   belongs_to :user
 
-  validates_uniqueness_of :user_id, { scope: :project_id, message: I18n.t('users.duplicate_error') }
   before_destroy :check_user_responsibilities
+  before_create :user_manager_or_creator
+  validates_uniqueness_of :user_id, { scope: :project_id, message: I18n.t('users.duplicate_error') }
 
   def self.create_projects_users(project, user_ids)
     projects_users_attrs = []
@@ -31,9 +32,16 @@ class ProjectsUser < ApplicationRecord
   private
 
   def check_user_responsibilities
-    return unless Issue.where(assignee_id: user_id).or(reviewer_id: user_id).blank?
+    return unless Issue.where(assignee_id: user_id, reviewer_id: user_id).present?
 
-    errors.add(base: I18n.t('users.project_user_destroy_error'))
+    errors.add :base, I18n.t('users.project_user_destroy_error')
+    throw :abort
+  end
+
+  def user_manager_or_creator
+    return unless project.manager == user || project.creator == user
+
+    errors.add :base, I18n.t('projects.manager_as_member_error')
     throw :abort
   end
 end

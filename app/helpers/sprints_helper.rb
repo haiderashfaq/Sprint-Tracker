@@ -10,4 +10,12 @@ module SprintsHelper
   def sprint_options_to_add_issues(sprints)
     sprints.map { |sprint| [sprint.name, sprint.sequence_num] }
   end
+
+  def badge_pill_selection(status)
+    case status
+    when Sprint::STATUS[:PLANNING] then 'primary'
+    when Sprint::STATUS[:ACTIVE] then 'danger'
+    when Sprint::STATUS[:CLOSED] then 'success'
+    end
+  end
 end
