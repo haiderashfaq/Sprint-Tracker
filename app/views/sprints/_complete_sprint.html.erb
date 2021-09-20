@@ -17,7 +17,7 @@
             <%= form.label t('issues.move'), class: 'col-form-label col-form-label-md control-label' %>
           </div>
           <div class="col-6">
-            <%= form.select :issues_dest, project.sprints.where(status: "Planning").map { |sprint| [sprint.name, sprint.id]}, { required: true, prompt: "Backlog" }, { class: "form-select form-select-md" } %>
+            <%= form.select :issues_dest, complete_sprint_drop_down_options(project), { required: true, prompt: "Backlog" }, { class: "form-select form-select-md" } %>
           </div>
         </div>
       </div>

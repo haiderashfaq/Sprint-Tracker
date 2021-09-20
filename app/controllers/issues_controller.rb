@@ -86,7 +86,6 @@ class IssuesController < ApplicationController
 
 
   def fetch_resource_issues
-    binding.pry
     if params[:assignee_id].present?
       @issues = Issue.joins(:assignee).where(assignee_id: current_user.id)
     elsif params[:creator_id].present?
@@ -98,7 +97,7 @@ class IssuesController < ApplicationController
     end
     @issues = @issues.paginate(page: params[:page])
     respond_to do |format|
-      format.html { render :index }
+      format.js
     end
   end
 
@@ -109,7 +108,12 @@ class IssuesController < ApplicationController
     @sprint_id = params[:sprint_id]
 
     respond_to do |format|
-      format.js if @issues.update(sprint_id: @sprint_id)
+      if @issues.update(sprint_id: @sprint_id)
+        format.js { flash.now[:notice] = t('issues.issues_added_success') }
+      else
+        @errors = Issue.get_errors_of_collection(@issues)
+        format.js { flash.now[:error] = @errors }
+      end
     end
   end
 
@@ -118,7 +122,7 @@ class IssuesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def issue_params
     params.require(:issue).permit(:title, :description, :status, :category, :estimated_time, :priority, :estimated_end_date,
-    :estimated_start_date, :actual_start_date, :actual_end_date, :reviewer_id, :creator_id, :assignee_id, :project_id)
+                                  :estimated_start_date, :actual_start_date, :actual_end_date, :reviewer_id, :creator_id, :assignee_id, :project_id)
   end
 
   def set_creator

@@ -17,7 +17,7 @@ $a-border-color: #2e6ab1;
 $secondary-color: #999999;
 $disable-border-color: #dddddd;
 
-.progress {width: 66%;}
+.progress {width: 64%;}
 
 .select2-container--open {
   z-index: 9999999
@@ -109,10 +109,11 @@ $disable-border-color: #dddddd;
   }
 }
 
-.bg-secondary {
+.card-bg {
   --bs-bg-opacity: .25;
   background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
 }
+  
 .show{
   display: flex;
 }

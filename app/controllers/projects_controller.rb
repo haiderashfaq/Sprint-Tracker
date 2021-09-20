@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
   load_resource :issues, find_by: :sequence_num, through: :project
 
@@ -78,10 +77,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num/backlog
   def backlog
-    @sprints = @project.sprints.includes(:issues).where(status: 'Planning').order(:start_date, :created_at)
-    # @sprints = @project.sprints.joins(:issues).group(:id).select('sprints.*, count(*) AS total_issues').where(status: 'Planning').order(:start_date, :creatd_at)
-    @issues = @project.issues.where(sprint: nil)
-
+    @sprints, @issues = Project.get_sprints_and_issues(@project)
     respond_to do |format|
       format.js
     end

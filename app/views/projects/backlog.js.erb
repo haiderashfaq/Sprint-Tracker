@@ -5,6 +5,40 @@
     $('#modal').html('<%= escape_javascript (render "sprints/select_sprint", sprints: @sprints) %>');
     $('#modal').modal('show');
   });
+
+  $('body').on('click', '#check_all', function() {
+    if ($('#check_all').prop("checked")) {
+      $(".issue-check-box").each(function() {
+        $(this).prop("checked", true);
+        $(this).trigger('change');
+      })
+    } else {
+      $(".issue-check-box").each(function() {
+        $(this).prop("checked", false);
+        $(this).trigger('change');
+      })
+    }
+  });
+
+  $('body').on('change', ".issue-check-box", function() {
+    let checked = false;
+    $(".issue-check-box").each(function() {
+      if ($(this).prop("checked")) {
+        checked = true;
+      }
+    })
+    checked ? $(".add-issues").prop("disabled", false) : $(".add-issues").prop("disabled", true)
+  });
+
+  $('body').on('click', '.add-issues-to-sprint', function() {
+    let issue_ids = [];
+    $('.issue-check-box').each(function() {
+      if ($(this).prop("checked")) {
+        issue_ids.push($(this).val());
+      }
+    });
+    $('.issue_ids').val(issue_ids);
+  });
 <% else %>
   $('#nav-backlog').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: 'sprints.label' }) %>");
 <% end %>

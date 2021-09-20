@@ -1,0 +1,83 @@
+<div class="tab-content" id="tab-tabContent">
+  <div class="tab-pane fade show active" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
+    <% @issues= Issue.joins(:assignee) %>
+    <% @issues= @issues.paginate(page: params[:page]) %>
+    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @issues } %>
+  </div>
+  <div class="tab-pane fade" id="nav-creator" role="tabpanel" aria-labelledby="nav-creator-tab"></div>
+  <div class="tab-pane fade" id="nav-reviewer" role="tabpanel" aria-labelledby="nav-reviewer-tab"></div>
+    <div class="tab-pane fade" id="multiCollapse4" role="tabpanel" aria-labelledby="multiCollapse4">
+      <div class="container ms-5">    
+        <div class="row">
+          <div class="col-sm-1 col-md-3">
+            <div class="card mt-4 dashboard-card-border">
+              <div class="card-body">
+                <h6 class="card-title ms-2">Total Sprints</h6>
+                <div class="text-7xl royal-blue"><%= Dashboard.fetch_sprints.count %>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <div class="text-md me-1">Completed:
+                  </div>
+                  <h6><%= Dashboard.fetch_sprints.where(status: "CLOSED").count %></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1 col-md-3">
+          <div class="card mt-4 dashboard-card-border">
+            <div class="card-body">
+              <h6 class="card-title ms-2">Total Projects</h6>
+              <div class="text-7xl medium-green"><%= Dashboard.fetch_projects.count %></div>
+              <div class="d-flex justify-content-center">
+                <div class="text-md me-1">Closed:</div>
+                <h6>0</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1 col-md-3">
+          <div class="card mt-4 dashboard-card-border">
+            <div class="card-body">
+              <h6 class="card-title ms-2">Total Issues</h6>
+              <div class="text-7xl orange"><%= Dashboard.fetch_issues.count %></div>
+              <div class="d-flex justify-content-center">
+                <div class="text-md me-1">Closed:</div>
+                <h6><%= Dashboard.fetch_issues.where(status: "CLOSED").count %></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1 col-md-3">
+          <div class="card mt-4 dashboard-card-border">
+            <div class="card-body">
+              <h6 class="card-title ms-2">In Progress Issues</h6>
+              <div class="text-7xl tomato"><%= Dashboard.fetch_issues.where(status: "In Progress").count %></div>
+              <div class="d-flex justify-content-center">
+                <div class="text-md me-1">High Priority:</div>
+                <h6><%= Dashboard.fetch_issues.where(status: "In Progress").where(priority: "High").count %></h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-index bg-white mt-5 ps-0">
+          <h6 class="card-title ms-4 mt-2">Projects</h6>
+          <ul class="nav_list ps-0">
+            <% counter = 0 %>
+            <% Dashboard.fetch_projects.each do |project| %>
+              <%counter += 1 %>
+              <li>
+                <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">
+                  <i class="bi bi-journal-richtext"></i>
+                  <span class="links-name"><%= t('projects.project_label') + ' ' + counter.to_s %></span>
+                </a>
+                <span class="tooltip"><%= t('projects.project_label') + ' ' + counter.to_s %></span>
+              </li>
+            <% end%>
+          </ul>
+        </div>
+        <%= render partial: "project_collapse" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+class Dashboard
+
+  def self.issues_estimated_time(project)
+    total_time = 0
+    project.issues.each do |issue|
+      total_time += issue.estimated_time
+    end
+    total_time
+  end
+
+  def self.issues_logged_time(project)
+    total_time = 0
+    if project.active_sprint.present?
+      project.active_sprint.issues.each do |issue|
+        total_time += Issue.time_logs_sum(issue)
+      end
+    end
+    total_time
+  end
+
+  def self.fetch_project_issues(project)
+    if project.active_sprint.present?
+      project.active_sprint.issues
+    end
+  end
+
+  def self.fetch_projects
+    #@projects = Project.joins('INNER JOIN issues ON issues.project_id = projects.id')
+    Project.all
+  end
+
+  def self.fetch_sprints
+    Sprint.all
+  end
+
+  def self.fetch_issues
+    Issue.all
+  end
+
+  def self.fetch_sprint_issues(project)
+    if project.active_sprint.present?
+      project.active_sprint.issues
+    end
+  end
+end

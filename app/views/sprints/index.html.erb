@@ -12,7 +12,7 @@
 </div>
 <div class="container mt-3">
   <div class="text-center" id="sprints_datatable_space">
-    <% if @sprints.exists? %>
+    <% if @sprints.any? %>
       <%= render('sprints_table', sprints: @sprints) %>
     <% else %>
       <%= render 'shared/no_resource_present', record: 'sprints.label' %>

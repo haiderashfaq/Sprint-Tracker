@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_destroy :can_destroy?, prepend: true
   sequenceid :company, :users
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
@@ -65,5 +66,21 @@ class User < ApplicationRecord
 
   def will_save_change_to_email?
     false
+  end
+
+  private
+
+  def can_destroy?
+    binding.pry
+    if assigned_issues.present?
+      self.errors.add(:base, "Can't be destroyed because User is assigned an issue")
+      throw :abort
+    elsif reviewed_issues.present?
+      self.errors.add(:base, "Can't be destroyed because User is reviewing an issue")
+      throw :abort
+    elsif time_logs.present?
+      self.errors.add(:base, "Can't be destroyed because User is working on an issue")
+      throw :abort
+    end
   end
 end

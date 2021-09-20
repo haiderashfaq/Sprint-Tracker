@@ -20,9 +20,9 @@ Rails.application.routes.draw do
     end
     resources :sprints do
       member do
-        get 'start_sprint'
+        get 'start_sprint_info'
         patch 'start_sprint'
-        get 'complete_sprint'
+        get 'complete_sprint_info'
         post 'complete_sprint'
         get 'report'
       end

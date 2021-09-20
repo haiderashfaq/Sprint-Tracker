@@ -34,17 +34,23 @@ class TimeLogsController < ApplicationController
   # POST /time_logs or /time_logs.json
   #redirect_to issue_time_logs_url,
   def create
-    @time_log = TimeLog.new(time_log_params)
-    @time_log.issue = Issue.find_by(sequence_num: params[:issue_id])
-    @time_log.assignee_id = current_user.id
+    if !DateTime.parse(params[:time_log][:date]).to_date.respond_to?(:strftime)
+      respond_to do |format|
+        format.js { flash.now[:error] = "Please enter a valid date" }
+      end
+    else
+      @time_log = TimeLog.new(time_log_params)
+      @time_log.issue = Issue.find_by(sequence_num: params[:issue_id])
+      @time_log.assignee_id = current_user.id
 
-    respond_to do |format|
-      if @time_log.save
-        format.js { flash.now[:notice] = t('shared.success.create', resource_label: t('time_logs.label')) }
-      else
-        format.js do
-          flash.now[:error] = @time_log.errors.full_messages
-          flash.now[:error] << t('shared.failure.create', resource_label: t('time_logs.label'))
+      respond_to do |format|
+        if @time_log.save
+          format.js { flash.now[:notice] = t('shared.success.create', resource_label: t('time_logs.label')) }
+        else
+          format.js do
+            flash.now[:error] = @time_log.errors.full_messages
+            flash.now[:error] << t('shared.failure.create', resource_label: t('time_logs.label'))
+          end
         end
       end
     end

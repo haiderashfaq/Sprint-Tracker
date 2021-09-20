@@ -1,24 +1,24 @@
-<div class="container">
-  <% if can? :manage, Project, company_id: current_user.company_id %>
-    <% estimated_time = Project.issues_estimated_time %>
-    <% logged_time = Project.issues_logged_time %>
-    <% binding.pry %>
+<% if can? :manage, Project, company_id: current_user.company_id %>
+  <div class="dashboard-container">
+    <%= render partial: "navbar" %>
+    <%= render partial: "tab_content" %>
 
-    <% total_logged_time = Project.issues_logged_time %>
-    <% estimated_time = Project.issues_estimated_time %>
-    <% if total_logged_time.present? and estimated_time.present? %>
-    <% value = Issue.time_progression(total_logged_time,estimated_time) %>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: <%= value %>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%= value %></div>
-        <% if total_logged_time > estimated_time%>
-          <div class="progress-bar bg-danger" role="progressbar" style="width: <%=100- value %>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"><%= 100- value %></div>
-        <% end %>
-      </div>
-    <% end %>
-    <%= line_chart [
-    { name: t('shared.est_end_date'), data: Project.fetch_issues.group(:estimated_end_date).count }, 
-    { name: t('shared.end_date'), data: Project.fetch_issues.group(:actual_end_date).count }] %>
   <% elsif %>
+    <div class="container">
+  <ul class="nav nav-tabs bg-gray" id="issue" role="tablist">
+   <li class="nav-item" role="presentation">
+      <%=link_to "Assigned Issues", fetch_resource_issues_path(:assignee_id => { :tab => 1}) , class: "nav-link active"%>
+    </li>
+    <li class="nav-item" role="presentation">
+      <%=link_to "Creator Issues", fetch_resource_issues_path(:creator_id => { :tab => 2 }) , class: "nav-link"%>
+    </li>
+    <li class="nav-item" role="presentation">
+      <%=link_to "Reviewed Issues", fetch_resource_issues_path(:reviewer_id => { :tab => 3 }) , class: "nav-link"%>
+    </li>
+  </ul>
+  <div class="tab-content" id="issue_content">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="homee-tab"></div>
+</div>
     <% @issues= Issue.joins(:assignee) %>
     <% @issues= @issues.paginate(page: params[:page]) %>
     <%= render 'issues/index', issues: @issues %>

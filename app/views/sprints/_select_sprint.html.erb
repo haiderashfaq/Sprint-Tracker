@@ -7,7 +7,7 @@
     <%= form_with url: add_issues_to_sprint_issues_path, local: false do |form| %>
       <div class="modal-body">
         <div class="col-12">
-          <%= form.select :sprint_id, sprints.map{ |sprint| [sprint.name, sprint.sequence_num] }, {required: true}, { class: "form-select form-select-md js-select-field-single" } %>
+          <%= form.select :sprint_id, sprint_options_to_add_issues(sprints), {required: true}, { class: "form-select form-select-md js-select-field-single" } %>
           <%= form.hidden_field :issue_ids, class: "issue_ids" %>
         </div>
       </div>

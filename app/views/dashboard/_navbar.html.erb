@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs bg-gray ms-5" id="issue" role="tablist">
+  <li class="nav-item" role="presentation">
+    <%=link_to "Assigned Issues", fetch_resource_issues_path(:assignee_id => { :tab => 1}), remote: true, class: 'nav-link active nav-link-settings', id: "nav-assignee-tab", data: {bs_toggle: "tab", bs_target: "#nav-assignee"},  type: "button", role: 'tab', aria_controls: "nav-assignee", aria_selected: true%>
+  </li>
+  <li class="nav-item" role="presentation">
+    <%=link_to "Creator Issues", fetch_resource_issues_path(:creator_id => { :tab => 2 }), remote: true , class: 'nav-link nav-link-settings', id: "nav-creator-tab", data: {bs_toggle: "tab", bs_target: "#nav-creator"},  type: "button", role: 'tab', aria_controls: "nav-creator", aria_selected: true%>
+  </li>
+  <li class="nav-item" role="presentation">
+    <%=link_to "Reviewed Issues", fetch_resource_issues_path(:reviewer_id => { :tab => 3 }), remote:true, class: 'nav-link nav-link-settings', id: "nav-reviewer-tab", data: {bs_toggle: "tab", bs_target: "#nav-reviewer"},  type: "button", role: 'tab', aria_controls: "nav-reviewer", aria_selected: true%>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link nav-link-settings" data-bs-toggle="tab" data-bs-target="#multiCollapse4" role="button" aria-expanded="false" aria-controls="multiCollapse4">View Projects</a>
+  </li>
+</ul>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_124738) do
+ActiveRecord::Schema.define(version: 2021_09_16_104336) do
 
   create_table "audits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "auditable_id"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sequence_num", null: false
     t.bigint "project_id"
+    t.bigint "sprint_id"
     t.index ["assignee_id"], name: "index_issues_on_assignee_id"
     t.index ["category"], name: "index_issues_on_category"
     t.index ["company_id"], name: "index_issues_on_company_id"
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
     t.index ["project_id"], name: "index_issues_on_project_id"
     t.index ["reviewer_id"], name: "index_issues_on_reviewer_id"
     t.index ["sequence_num", "company_id"], name: "index_issues_on_sequence_num_and_company_id", unique: true
+    t.index ["sprint_id"], name: "index_issues_on_sprint_id"
     t.index ["status"], name: "index_issues_on_status"
   end
 
@@ -84,6 +86,8 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sequence_num", null: false
+    t.bigint "active_sprint_id"
+    t.index ["active_sprint_id"], name: "index_projects_on_active_sprint_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["creator_id"], name: "index_projects_on_creator_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"
@@ -100,6 +104,20 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
     t.index ["user_id"], name: "index_projects_users_on_user_id"
   end
 
+  create_table "sprintreports", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "sprint_id", null: false
+    t.bigint "moved_to_id"
+    t.string "status"
+    t.bigint "issue_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_sprintreports_on_company_id"
+    t.index ["issue_id"], name: "index_sprintreports_on_issue_id"
+    t.index ["moved_to_id"], name: "index_sprintreports_on_moved_to_id"
+    t.index ["sprint_id"], name: "index_sprintreports_on_sprint_id"
+  end
+
   create_table "sprints", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -113,6 +131,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
     t.bigint "creator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
     t.index ["company_id"], name: "index_sprints_on_company_id"
     t.index ["creator_id"], name: "index_sprints_on_creator_id"
     t.index ["project_id"], name: "index_sprints_on_project_id"
@@ -167,6 +186,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_124738) do
   add_foreign_key "projects_users", "companies"
   add_foreign_key "projects_users", "projects"
   add_foreign_key "projects_users", "users"
+  add_foreign_key "sprintreports", "companies"
   add_foreign_key "sprints", "companies"
   add_foreign_key "sprints", "projects"
   add_foreign_key "sprints", "users", column: "creator_id"

@@ -9,6 +9,7 @@ class Project < ApplicationRecord
   validates :name, length: { maximum: 100, minimum: 4 }
   has_many :issues
 
+
   has_many :sprints
   has_many :projects_users
   has_many :issues
@@ -22,27 +23,10 @@ class Project < ApplicationRecord
 
   before_destroy :check_for_sprints, :check_for_issues
 
-  def self.issues_estimated_time
-    @projects = Project.joins('INNER JOIN issues ON issues.project_id = projects.id')
-    total_time = 0
-    @projects[0].issues.each do |issue|
-        total_time += issue.estimated_time
-      end
-    total_time
-  end
-
-  def self.issues_logged_time
-    @projects = Project.joins('INNER JOIN issues ON issues.project_id = projects.id')
-    total_time = 0
-    @projects[0].issues.each do |issue|
-      total_time += Issue.time_logs_sum(issue)
-    end
-    total_time
-  end
-
-  def self.fetch_issues
-    @projects = Project.joins('INNER JOIN issues ON issues.project_id = projects.id')
-    @projects[0].issues
+  def self.get_sprints_and_issues(project)
+    sprints = project.sprints.includes(:issues).where(status: 'Planning').order(:start_date, :created_at)
+    issues = project.issues.where(sprint: nil)
+    [sprints, issues]
   end
 
   private
