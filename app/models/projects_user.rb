@@ -29,17 +29,21 @@ class ProjectsUser < ApplicationRecord
     error_messages_and_valid_users(projects_users)
   end
 
+  def self.company_users(current_company, project)
+    current_company.users.left_outer_joins(:projects_users).where(projects_users: { id: nil }).where.not(projects_users: [project.manager, project.creator])
+  end
+
   private
 
   def check_user_responsibilities
-    return unless Issue.where(assignee_id: user_id, reviewer_id: user_id).present?
+    return if Issue.where(assignee_id: user_id).or(Issue.where(reviewer_id: user_id)).blank?
 
     errors.add :base, I18n.t('users.project_user_destroy_error')
     throw :abort
   end
 
   def user_manager_or_creator
-    return unless project.manager == user || project.creator == user
+    return unless project.manager_id == user_id || project.creator_id == user_id
 
     errors.add :base, I18n.t('projects.manager_as_member_error')
     throw :abort

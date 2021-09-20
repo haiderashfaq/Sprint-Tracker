@@ -2,7 +2,7 @@ require 'will_paginate/view_helpers/link_renderer'
 require 'will_paginate/view_helpers/action_view'
 require 'will_paginate/array'
 
-module WillPaginate
+module RemoteWillPaginate
   module ActionView
     class LinkRenderer
       def link(text, target, attributes = {})
