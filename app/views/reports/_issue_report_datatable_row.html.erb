@@ -1,0 +1,16 @@
+<tr id="issue_report_<%= issue_report.sequence_num %>">
+  <div id="issue_reports_datatable_space"></div>
+  <% if issue_report.assignee.present? %>
+    <% assignee_name = link_to issue_report.assignee.name, user_path(issue_report.assignee.sequence_num) %>
+  <% else %>
+    <% assignee_name = 'No user assigned' %>
+  <% end %>
+  <td><span class="badge rounded-pill bg-<%= badge_pill_selection(issue_report.status) %>">
+    <%= issue_report.status %></span></td>
+  <td><%= link_to issue_report.title, issue_path(issue_report) %></td>
+  <td><%= assignee_name %> </td>
+  <td><%= issue_report.priority %></td>
+  <td><%= issue_report.category %></td>
+  <td><%= issue_report.estimated_time %></td>
+  <td><%= issue_report.total_time_spent %></td>
+</tr>

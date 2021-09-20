@@ -31,17 +31,17 @@
 
 en:
   sidebar:
-    dashboard: Dashboard
+    dashboard: 'Dashboard'
     # To do remove if unused
-    portfolio: Portfolio
-    setting: Setting
-    reports: Reports
+    portfolio: 'Portfolio'
+    setting: 'Setting'
+    reports: 'Reports'
 
   password:
-    label: Password
-    forgot_password: Forgot your password?
-    change_password: Change password
-    new_password: New password
+    label: 'Password'
+    forgot_password: 'Forgot your password?'
+    change_password: 'Change password'
+    new_password: 'New password'
   
   issues:
     issue_label: 'Issue'
@@ -93,8 +93,10 @@ en:
     report: "Status Report"
     burndown_chart: "Burndown Chart"
     started: "Sprint Started Successfully"
+    name: 'Name'
     
   users:
+    user_label: 'User'
     label: 'User'
     log_in: "Log In"
     profile: "Profile"
@@ -107,12 +109,26 @@ en:
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
+
+  time_logs:
+    label: 'Time log'
+    assignee: 'Assignee'
+    date: 'Date'
+    description: 'Description'
     creator: "Created By"
     started_on: "Started On"
     starting_on: "Starting On"
     ended_on: "Ended On"
     due_on: "Due On"
     project_id: "Project_id"
+
+  reports:
+    sprint_report: 'Sprint Report'
+    total_estimated_time: 'Total Estimated Time'
+    assigned_issues: 'Assigned Issues'
+    resolved_issues: 'Resolved Issues'
+    time_spent: 'Time Spent'
+    issue_report: 'Issue Report'
 
   shared:
     name: "Name"
@@ -155,6 +171,7 @@ en:
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
     select_resource: "Select %{resource_label}"
+    to_csv: 'Export CSV'
     success:
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"
@@ -169,9 +186,9 @@ en:
 
 
   roles:
-    admin: Admin
-    account_owner: Account Owner
-    member: Member
+    admin: 'Admin'
+    account_owner: 'Account Owner'
+    member: 'Member'
 
   helpers:        
     submit:

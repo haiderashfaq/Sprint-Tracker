@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :reviewed_issues, class_name: 'Issue', foreign_key: 'reviewer_id', dependent: :nullify
   has_many :projects_users
   has_many :projects, through: :projects_users
+  has_many :time_logs, class_name: 'TimeLog', foreign_key: 'assignee_id', dependent: :nullify
 
   belongs_to :company
   accepts_nested_attributes_for :company

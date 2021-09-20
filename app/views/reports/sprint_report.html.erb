@@ -1,0 +1,8 @@
+<div class = "contianer">
+	<%= render(:partial => 'reports/sprint_filter',  :locals=>{sprints: @sprints} ) %>
+	<div id="header"></div>
+	<% if @sprint.present? %>
+		<%= render partial: 'reports/sprint_report_header',  :locals=>{ sprint_id: @sprint.id } %>
+	<% end %>
+  <%= render partial: "reports/sprint_report_table", locals: { sprint_report_attributes: @sprint_report_attributes } %>
+</div>

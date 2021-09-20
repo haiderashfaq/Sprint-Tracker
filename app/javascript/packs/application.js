@@ -14,5 +14,5 @@ require("bootstrap")
 require("../app.js")
 require("flatpickr");
 
-Rails.start()
 ActiveStorage.start()
+Rails.start()

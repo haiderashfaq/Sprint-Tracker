@@ -8,6 +8,9 @@
       <%= link_to t('issues.history_label'), history_path(issue: @issue), remote: true, class: 'nav-link', id: "nav-history-tab", data: {bs_toggle: "tab", bs_target: "#nav-history"}, type: "button", role: 'tab', aria_controls: "nav-history" ,aria_selected: true %>
       
     </li>
+    <li class="nav-item" role="presentation">
+      <%= link_to t('time_logs.label').pluralize(), [@issue, :time_logs], remote: true, class: 'nav-link', id: "nav-time_logs-tab", data: { bs_toggle: "tab", bs_target: "#nav-time_logs" }, type: "button", role: 'tab', aria_controls: "nav-time_logs", aria_selected: false %>
+    </li>
   </ul>
   <div class="tab-content" id="issue_content">
     <div class="tab-pane fade show active" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
@@ -16,5 +19,6 @@
     <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
       <div id="history"></div>
     </div>
+    <div class="tab-pane fade" id="nav-time_logs" role="tabpanel" aria-labelledby="nav-time_logs-tab">  12345678</div>
   </div>
 </div>

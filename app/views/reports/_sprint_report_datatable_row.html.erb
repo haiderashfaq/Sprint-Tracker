@@ -1,0 +1,14 @@
+<% if sprint_report.assignee.nil? %>
+  <% assignee_id = "nil" %>
+  <% assignee_name = "No Assignee" %>
+<% else %>
+  <% assignee_id = sprint_report.assignee.sequence_num %>
+  <% assignee_name = link_to sprint_report.assignee.name, user_path(assignee_id) %>
+<% end %>
+<tr>
+    <td><%= assignee_name %></td>
+    <td><%= sprint_report.total_issues %></td>
+    <td><%= sprint_report.resolved_issues %></td>
+    <td><%= sprint_report.total_estimated_time %></td>
+    <td><%= sprint_report.total_time_spent %></td>
+</tr>

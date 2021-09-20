@@ -33,9 +33,16 @@ Rails.application.routes.draw do
         post 'add_issues_to_sprint'
       end
     end
+    resources :issues do
+      resources :time_logs
+    end
     resources :users do
     end
   end
 
-  get "/history", to: "issues#history"
+  get '/history', to: 'issues#history'
+  resources :reports, only: :index
+  get '/sprint/report', to: 'reports#sprint_report'
+  get '/issue/report', to: 'reports#issue_report'
+
 end

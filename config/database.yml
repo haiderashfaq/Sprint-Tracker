@@ -15,6 +15,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
+  variables:
+    sql_mode: TRADITIONAL
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -53,3 +55,6 @@ production:
   database: Sprint_Tracker_production
   username: Sprint_Tracker
   password: <%= ENV['SPRINT_TRACKER_DATABASE_PASSWORD'] %>
+
+
+

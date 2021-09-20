@@ -1,11 +1,5 @@
 require('select2')
 $(document).ready(function() {
-  $(".js-select-field-single").select2({});
-
-  $('body').on('select2:open', '.js-select-field-single', () => {
-    document.querySelector('.select2-search__field').focus();
-  });
-
   $('#issues-datatable').dataTable({
     "paging": false,
     "searching": false,
@@ -30,21 +24,27 @@ $(document).ready(function() {
     width: 200
   });
 
-  $(document).on('select2:select', ".js-select-field", function(e) {
+  $(document).on('select2:select', ".js-sprint-field", function(e) {
+    $('#no-resource').remove();
+    $('.btn-sprint-filter').click();
+  });
+   $('.js-sprint-field').select2({
+    width: 200
+  });
+  dateTimeFunc();
+
+  $("#modal").on('shown.bs.modal', dateTimeFunc);
+  $('#menu-btn').on('click', function() {
+    $('#sidebar').toggleClass("active");
+  });
+
+   $(document).on('select2:select', ".js-select-field", function(e) {
     var select_container_id = e.params.data["id"];
     $('.btn-filter').show();
     $("#" + select_container_id).addClass('show');
     $(".js-" + select_container_id + "-field").prop("disabled", false);
   });
 
-
-  dateTimeFunc();
-  $("#modal").on('shown.bs.modal', dateTimeFunc);
-
-
-  $('#menu-btn').on('click', function() {
-    $('#sidebar').toggleClass("active");
-  });
 });
 
 var dateTimeFunc = function() {
@@ -52,3 +52,14 @@ var dateTimeFunc = function() {
     enableTime: true
   });
 }
+
+window.addEventListener("ajax:success", (event) =>{
+  $('#modal').on('shown.bs.modal', function(){
+    $(".js-select-form-field").select2({
+      dropdownParent: $('#modal')
+    });
+    $('body').on('select2:open', '.js-select-form-field', () => {
+      document.querySelector('.select2-search__field').focus();
+    });  
+  });
+});

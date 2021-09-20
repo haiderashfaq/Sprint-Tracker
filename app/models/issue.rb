@@ -8,6 +8,15 @@ class Issue < ApplicationRecord
 
   include DateValidations
 
+  belongs_to :company
+  belongs_to :project, optional: true
+  belongs_to :sprint, optional: true
+  audited associated_with: :company
+  belongs_to :creator, class_name: 'User'
+  belongs_to :assignee, class_name: 'User', optional: true
+  belongs_to :reviewer, class_name: 'User', optional: true
+  has_many :time_logs, dependent: :destroy
+
   sequenceid :company, :issues
   validates :title, length: { minimum: 4, maximum: 255 }
   validates :description, length: { minimum: 6, maximum: 5000 }
@@ -16,19 +25,30 @@ class Issue < ApplicationRecord
   validate_dates :actual_start_date, :actual_end_date
   scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
 
-  belongs_to :company
-  belongs_to :project
-  belongs_to :sprint, optional: true
-  audited associated_with: :company
-  belongs_to :creator, class_name: 'User'
-  belongs_to :assignee, class_name: 'User', optional: true
-  belongs_to :reviewer, class_name: 'User', optional: true
 
+
+  def total_time_spent
+    time_logs.sum(:logged_time)
+  end
+
+  def self.time_progression(logged_time_sum, issue_estimated_time)
+    progress_ratio = [logged_time_sum, issue_estimated_time].min / [logged_time_sum, issue_estimated_time].max
+    progress_ratio.to_f * 100
+  end
+  
   def self.get_errors_of_collection(issues)
     errors = []
     issues.each do |issue|
       errors.concat(issue.errors.full_messages)
     end
     errors
+  end
+
+   def assignee_name
+    if(assignee.present?)
+      assignee.name
+    else
+      "no user assigned"
+    end
   end
 end

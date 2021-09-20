@@ -1,0 +1,17 @@
+<table class="table table-striped table-bordered table-hover" id="time_logs-datatable" data-source="<%= users_path(format: :json) %>">   
+  <thead class="bg-primary text-light">   
+    <tr>    
+      <th><%= t('time_logs.assignee') %></th>   
+      <th><%= t('time_logs.label') %></th>   
+      <th><%= t('time_logs.date') %></th>
+      <th><%= t('time_logs.description') %></th>      
+      <th><%= t('issues.issue_label') %></th>
+      <th><%= t('shared.actions') %></th>
+    </tr>   
+  </thead>   
+  <tbody id="time_logs_datatable_body">
+    <% time_logs.each do |time_log| %> 
+    <%= render 'time_logs_datatable_row', time_log: time_log, issue: time_log.issue %> 
+    <% end %>   
+  </tbody>
+</table>
