@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  searchkick suggest: [:name]
+
   belongs_to :company
   belongs_to :manager, class_name: 'User'
   belongs_to :creator, class_name: 'User'
@@ -8,7 +10,6 @@ class Project < ApplicationRecord
   validates :name, :manager, :creator, presence: true
   validates :name, length: { maximum: 100, minimum: 4 }
   has_many :issues
-
 
   has_many :sprints
   has_many :projects_users
