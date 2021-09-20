@@ -1,7 +1,7 @@
 <% if @time_log.errors.present? %>
   $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% else %>
-  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
   if ($("#time_logs-datatable").length == 0){
     $("#time_logs_datatable_space").html("<%= escape_javascript render('time_logs_table', time_logs: [@time_log], issue: @issue) %>")
   }

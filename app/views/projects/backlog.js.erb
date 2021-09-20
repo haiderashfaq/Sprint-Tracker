@@ -38,6 +38,7 @@
       }
     });
     $('.issue_ids').val(issue_ids);
+    $('#check_all').click();
   });
 <% else %>
   $('#nav-backlog').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: 'sprints.label' }) %>");

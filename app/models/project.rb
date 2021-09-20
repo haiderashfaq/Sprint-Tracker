@@ -23,9 +23,9 @@ class Project < ApplicationRecord
 
   before_destroy :check_for_sprints, :check_for_issues
 
-  def self.get_sprints_and_issues(project)
-    sprints = project.sprints.includes(:issues).where(status: 'Planning').order(:start_date, :created_at)
-    issues = project.issues.where(sprint: nil)
+  def sprints_and_issues
+    sprints = self.sprints.includes(:issues).where(status: Sprint::STATUS[:PLANNING]).order(:start_date, :created_at)
+    issues = self.issues.where(sprint: nil)
     [sprints, issues]
   end
 

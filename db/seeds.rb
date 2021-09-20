@@ -47,10 +47,10 @@ VALID_STATUSES = { 1 => 'Planning', 2 => 'Active', 3 => 'Closed'}.freeze
       (0..rand(1..10)).each do |i|
         user = u[rand(1..u.count)-1]
         TimeLog.create!(date: rand(1..15).days.ago, logged_time: Faker::Number.between(from: 0.0, to: 100.0).round(2) , work_description: Faker::Quote.matz, assignee: user, issue:issue)
-        
+
       end
-      pu = ProjectsUser.new(project: p[rand(1..p.count)-1], user: u[rand(1..u.count)-1])
-      pu.save(validate: false)
+      # pu = ProjectsUser.new(project: p[rand(1..p.count)-1], user: u[rand(1..u.count)-1])
+      # pu.save(validate: false)
     end
   end
 end
@@ -226,4 +226,3 @@ end
 # end
 
 # binding.pry
-

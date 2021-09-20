@@ -71,7 +71,6 @@ class User < ApplicationRecord
   private
 
   def can_destroy?
-    binding.pry
     if assigned_issues.present?
       self.errors.add(:base, "Can't be destroyed because User is assigned an issue")
       throw :abort

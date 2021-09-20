@@ -77,18 +77,17 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num/backlog
   def backlog
-    @sprints, @issues = Project.get_sprints_and_issues(@project)
+    @sprints, @issues = @project.sprints_and_issues
     respond_to do |format|
       format.js
     end
   end
 
+  # GET /projects/:sequence_num/active_sprint
   def active_sprint
     @active_sprint = @project.active_sprint
     unless @active_sprint.nil?
-      @issues_to_do = @active_sprint.issues.where(status: 'Open')
-      @issues_in_progress = @active_sprint.issues.where(status: 'In Progress')
-      @issues_resolved = @active_sprint.issues.where(status: 'Resolved')
+      @issues_to_do, @issues_in_progress, @issues_resolved, @issues_closed = @active_sprint.categorized_issues
     end
     respond_to do |format|
       format.js

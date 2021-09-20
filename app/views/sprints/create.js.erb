@@ -1,7 +1,7 @@
 <% if @sprint.errors.present? %>
   $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% else %>
-  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 
   if ($("#sprints_datatable").length == 0){
     $("#sprints_datatable_space").html("<%= escape_javascript render('sprints_table', sprints: [@sprint], project: @project) %>")
