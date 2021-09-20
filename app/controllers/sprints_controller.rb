@@ -82,7 +82,7 @@ class SprintsController < ApplicationController
   # PATCH sprints/:sequence_num/start_sprint
   def start_sprint
     respond_to do |format|
-      if Sprint.activate_sprint(@sprint)
+      if @sprint.activate_sprint
         format.js { flash.now[:notice] = t('sprints.started') }
       else
         format.js { flash.now[:error] = @sprint.errors.full_messages }
@@ -92,7 +92,7 @@ class SprintsController < ApplicationController
 
   # GET sprints/:sequence_num/complete_sprint_info
   def complete_sprint_info
-    @project, @issues_unresolved, @issues_resolved = Sprint.get_project_resolved_and_unresolved_issues(@sprint)
+    @issues_unresolved, @issues_resolved = @sprint.resolved_and_unresolved_issues
     respond_to do |format|
       format.js
     end
@@ -100,9 +100,9 @@ class SprintsController < ApplicationController
 
   # POST sprints/:sequence_num/complete_sprint
   def complete_sprint
-    @project, @issues_unresolved, @issues_resolved = Sprint.get_project_resolved_and_unresolved_issues(@sprint)
+    @issues_unresolved, @issues_resolved = @sprint.resolved_and_unresolved_issues
     respond_to do |format|
-      if Sprint.complete_sprint(@sprint, @project, @issues_unresolved, params[:issues_dest])
+      if @sprint.complete_sprint(@issues_unresolved, params[:issues_dest])
         format.js
       else
         format.js { flash.now[:error] = @sprint.errors.full_messages }
@@ -112,7 +112,7 @@ class SprintsController < ApplicationController
 
   # GET sprints/:sequence_num/report
   def report
-    @issues_resolved, @issues_unresolved = Sprint.report_content(@sprint)
+    @issues_resolved, @issues_unresolved = @sprint.report_content
     respond_to do |format|
       format.html
     end

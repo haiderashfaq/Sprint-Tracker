@@ -6,14 +6,14 @@
     <%= link_to(t('sprints.complete'), complete_sprint_info_sprint_path(sprint), data: { remote: true, method: :get }, class: "btn btn-outline-primary") %>
   </div>
   <div class="row my-3">
-    <div class="col-3 card card-bg mx-1">
+    <div class="col-2 card card-bg mx-1">
       <div class="card-body">
-        <h6 class="card-title"><%= t('sprints.to_do').capitalize %></h6>
+        <h6 class="card-title"><%= t('shared.to_do').capitalize %></h6>
         <% issues_to_do.each do |issue| %>
           <div class="card border-secondary my-1">
             <div class="card-body">
               <div class="card-title">
-                <%= issue.title %>
+                <%= link_to issue.title, issue %>
               </div>
               <div class="card-subtitle mb-2 text-muted">
                 <%= issue.priority %>
@@ -23,14 +23,14 @@
         <% end %>
       </div>
     </div>
-    <div class="col-3 card card-bg mx-1">
+    <div class="col-2 card card-bg mx-1">
       <div class="card-body">
-        <h6 class="card-title"><%= t('sprints.in_progress').capitalize %></h6>
+        <h6 class="card-title"><%= t('shared.in_progress').capitalize %></h6>
         <% issues_in_progress.each do |issue| %>
           <div class="card border-secondary my-1">
             <div class="card-body">
               <div class="card-title">
-                <%= issue.title %>
+                <%= link_to issue.title, issue %>
               </div>
               <div class="card-subtitle mb-2 text-muted">
                 <%= issue.priority %>
@@ -40,14 +40,31 @@
         <% end %>
       </div>
     </div>
-    <div class="col-3 card card-bg mx-1">
+    <div class="col-2 card card-bg mx-1">
       <div class="card-body">
-        <h6 class="card-title"><%= t('sprints.done').capitalize %></h6>
+        <h6 class="card-title"><%= t('shared.resolved').capitalize %></h6>
         <% issues_resolved.each do |issue| %>
           <div class="card border-secondary my-1">
             <div class="card-body">
               <div class="card-title">
-                <%= issue.title %>
+                <%= link_to issue.title, issue %>
+              </div>
+              <div class="card-subtitle mb-2 text-muted">
+                <%= issue.priority %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-2 card card-bg mx-1">
+      <div class="card-body">
+        <h6 class="card-title"><%= t('shared.closed').capitalize %></h6>
+        <% issues_closed.each do |issue| %>
+          <div class="card border-secondary my-1">
+            <div class="card-body">
+              <div class="card-title">
+                <%= link_to issue.title, issue %>
               </div>
               <div class="card-subtitle mb-2 text-muted">
                 <%= issue.priority %>
