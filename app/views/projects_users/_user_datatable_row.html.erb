@@ -1,5 +1,5 @@
 <tr id="projects_user_<%= projects_user.id %>">
-  <td><%= projects_user.user.name %></td>
+  <td><%= link_to projects_user.user.name, projects_user.user %></td>
   <td>
     <% if can? :destroy, projects_user %>
       <%= link_to '', [project, projects_user],

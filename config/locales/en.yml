@@ -77,7 +77,7 @@ en:
     deletion_error: "Delete all sprints before deleting project"
     backlog: "Backlog"
     active_sprint: "Active Sprint"
-    active_sprint_absent: "No active sprint present. Start in "
+    active_sprint_absent: 'No active sprint present. Start in  '
 
   filter:
     add: 'Add filter'
@@ -89,9 +89,6 @@ en:
     add_issues: 'Add Issues to Sprint'
     start: "Start Sprint"
     active_sprint_exists: "already has an active sprint"
-    to_do: "To Do"
-    in_progress: "In Progress"
-    done: "Done"
     complete: "Complete Sprint"
     report: "Status Report"
     burndown_chart: "Burndown Chart"
@@ -105,6 +102,7 @@ en:
     sign_up: "Sign Up"
     duplicate_error: "User already exists"
     no_user_error: "User with id: %{id} doesn't exists"
+    project_user_destroy_error: "User is assignee or reviewer of an Issue"
 
   companies:
     company_label: 'Company'
@@ -128,6 +126,8 @@ en:
     edit: 'Edit'
     back: 'Back'
     role: 'Role'
+    to_do: "To Do"
+    closed: "Closed"
     cancel: "Cancel"
     status: 'Status'
     due_on: "Due On"
@@ -136,12 +136,14 @@ en:
     actions: "Actions"
     details: "Details"
     desc: "Description"
+    resolved: "Resolved"
     end_date: "End Date"
     ended_on: "Ended On"
     creator: "Created By"
     dashboard: "Dashboard"
     start_date: "Start Date"
     started_on: "Started On"    
+    in_progress: "In Progress"
     starting_on: "Starting On"
     manager: "Project Manager"
     cancel: 'Cancel'

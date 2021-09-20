@@ -1,2 +1,2 @@
-$('#modal').html("<%= escape_javascript render( 'complete_sprint', sprint: @sprint, project: @project, issues_resolved: @issues_resolved, issues_unresolved: @issues_unresolved) %>");
+$('#modal').html("<%= escape_javascript render( 'complete_sprint', sprint: @sprint, project: @sprint.project, issues_resolved: @issues_resolved, issues_unresolved: @issues_unresolved) %>");
 $('#modal').modal('show');

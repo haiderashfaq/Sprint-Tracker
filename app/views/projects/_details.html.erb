@@ -4,13 +4,13 @@
       <p><strong><%= t('shared.creator') %>:</strong></p>
     </div>
     <div class="col-3">
-      <p><%= @project.creator.name %></p>
+      <p><%= link_to @project.creator.name, @project.creator %></p>
     </div>
     <div class="col-3 ">
       <p><strong><%= t('projects.manager') %>:</strong></p>
     </div>
     <div class="col-3">
-      <p><%= @project.manager.name %></p>
+      <p><%= link_to @project.manager.name, @project.manager %></p>
     </div>
   </div>
   <div class="row bm-3">
