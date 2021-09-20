@@ -41,14 +41,6 @@ class Issue < ApplicationRecord
     time_logs.sum(:logged_time)
   end
 
-  def self.time_logs_sum(issue)
-    #@projects = Project.joins('INNER JOIN issues ON issues.project_id = projects.id')
-    issue_time_logs = TimeLog.joins('INNER JOIN issues ON time_logs.issue_id = issues.id')
-    # @issue_time_logs = Issue.joins(:time_logs)
-    issue_time_logs = issue_time_logs.where('issue_id = ?', issue.id)
-    issue_time_logs.map(&:logged_time).sum
-  end
-
   def self.time_progression(logged_time_sum, issue_estimated_time)
     progress_ratio = [logged_time_sum, issue_estimated_time].min / [logged_time_sum, issue_estimated_time].max
     progress_ratio.to_f * 100
