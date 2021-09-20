@@ -4,7 +4,7 @@
     <div class="modal-flash-messages"></div>
     <%= form_with model:([@issue, @time_log]), local:false  do |form| %>
       <div class="modal-body">
-        <% total_logged_time = Issue.time_logs_sum(@issue) %>
+        <% total_logged_time = @issue.total_spent_time %>
         <% value = Issue.time_progression(total_logged_time,@issue.estimated_time) %>
         <div class="d-flex">
           <i class='bx bx-alarm'></i>
