@@ -1,27 +1,13 @@
-<% if can? :manage, Project, company_id: current_user.company_id %>
+<% if can? :manage, Project %>
   <div class="dashboard-container">
     <%= render partial: "navbar" %>
     <%= render partial: "tab_content" %>
-
-  <% elsif %>
-    <div class="container">
-  <ul class="nav nav-tabs bg-gray" id="issue" role="tablist">
-   <li class="nav-item" role="presentation">
-      <%=link_to "Assigned Issues", fetch_resource_issues_path(:assignee_id => { :tab => 1}) , class: "nav-link active"%>
-    </li>
-    <li class="nav-item" role="presentation">
-      <%=link_to "Creator Issues", fetch_resource_issues_path(:creator_id => { :tab => 2 }) , class: "nav-link"%>
-    </li>
-    <li class="nav-item" role="presentation">
-      <%=link_to "Reviewed Issues", fetch_resource_issues_path(:reviewer_id => { :tab => 3 }) , class: "nav-link"%>
-    </li>
-  </ul>
-  <div class="tab-content" id="issue_content">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="homee-tab"></div>
-</div>
-    <% @issues= Issue.joins(:assignee) %>
-    <% @issues= @issues.paginate(page: params[:page]) %>
-    <%= render 'issues/index', issues: @issues %>
+  <% elsif can? :edit, Project%>
+    <%= render partial: "navbar" %>
+    <%= render partial: "tab_content_project_lead" %>
+  <% elsif can? :read, Project%>
+    <%= render partial: "navbar" %>
+    <%= render partial: "tab_content" %>
   <% end %>
 </div>
 

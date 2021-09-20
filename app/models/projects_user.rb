@@ -31,7 +31,7 @@ class ProjectsUser < ApplicationRecord
   private
 
   def check_user_responsibilities
-    return unless Issue.where(assignee_id: user_id).or(reviewer_id: user_id).blank?
+    return unless Issue.where(assignee_id: user_id).or(Issue.where(reviewer_id: user_id)).blank?
 
     errors.add(base: I18n.t('users.project_user_destroy_error'))
     throw :abort

@@ -1,6 +1,8 @@
 <div id="issues-table">
   <div class="container">
-    <div id="flash_messages"></div>
+    <div class="m-5">
+      <%= pie_chart issues.group(:status).count, colors: [ '#e34','#17f','#285','#1df' ], id: chart_id %>
+    </div>
     <table class="table table-hover border-primary text-center" id="issues_datatable">
       <thead class="text-light bg-primary">
         <tr>

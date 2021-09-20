@@ -1,10 +1,12 @@
 <% if params[:assignee_id].present? %>
-$('#nav-assignee').html("<%= escape_javascript render(:partial => 'issues/table',  :locals=>{ issues: @issues} ) %>");
+$('#nav-assignee').html("<%= escape_javascript render(:partial => 'issues/dashboard_issue_table',  :locals=>{ issues: @issues, chart_id: 'assignee_issues'} ) %>");
 <% elsif params[:creator_id].present? %>
-$('#nav-creator').html("<%= escape_javascript render(:partial => 'issues/table',  :locals=>{ issues: @issues} ) %>");
+$('#nav-creator').html("<%= escape_javascript render(:partial => 'issues/dashboard_issue_table',  :locals=>{ issues: @issues , chart_id: 'creator_issues'} ) %>");
 <% elsif params[:reviewer_id].present? %>
-$('#nav-reviewer').html("<%= escape_javascript render(:partial => 'issues/table',  :locals=>{ issues: @issues} ) %>");
+$('#nav-reviewer').html("<%= escape_javascript render(:partial => 'issues/dashboard_issue_table',  :locals=>{ issues: @issues, chart_id: 'reviewer_issues'} ) %>");
 <% else %>
-$('#nav-assignee').html("<%= escape_javascript render(:partial => 'issues/table',  :locals=>{ issues: @issues} ) %>");
+$('#nav-assignee').html("<%= escape_javascript render(:partial => 'issues/dashboard_issue_table',  :locals=>{ issues: @issues , chart_id: 'assignee_issues'} ) %>");
 <% end %>
+
+
 

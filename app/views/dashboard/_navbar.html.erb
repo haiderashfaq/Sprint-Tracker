@@ -8,7 +8,9 @@
   <li class="nav-item" role="presentation">
     <%=link_to "Reviewed Issues", fetch_resource_issues_path(:reviewer_id => { :tab => 3 }), remote:true, class: 'nav-link nav-link-settings', id: "nav-reviewer-tab", data: {bs_toggle: "tab", bs_target: "#nav-reviewer"},  type: "button", role: 'tab', aria_controls: "nav-reviewer", aria_selected: true%>
   </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link nav-link-settings" data-bs-toggle="tab" data-bs-target="#multiCollapse4" role="button" aria-expanded="false" aria-controls="multiCollapse4">View Projects</a>
-  </li>
+  <% if can? :edit, Project%>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link nav-link-settings" data-bs-toggle="tab" data-bs-target="#multiCollapse4" role="button" aria-expanded="false" aria-controls="multiCollapse4">View Projects</a>
+    </li>
+  <% end %>
 </ul>

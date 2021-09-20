@@ -54,6 +54,7 @@ en:
     category: 'Category'
     priority: 'Priority'
     title: 'Title'
+    high: High
     create_issue: "Create Issue"
     actual_start_date: 'Actual Start Date'
     actual_end_date: 'Actual End Date'
@@ -167,6 +168,8 @@ en:
     create_new_resource: "Add New %{resource_label}"
     select_resource: "Select %{resource_label}"
     cancel: 'Cancel'
+    total: Total
+    completed: Completed
     success:
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"

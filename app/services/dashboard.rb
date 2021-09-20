@@ -42,4 +42,9 @@ class Dashboard
       project.active_sprint.issues
     end
   end
+
+  def project_lead_fetch_sprints
+    Project.all.where(manager: current_user)
+  end
+
 end

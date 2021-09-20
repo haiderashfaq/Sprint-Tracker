@@ -2,7 +2,7 @@
 <% Dashboard.fetch_projects.each do |project| %>
   <div class="container ms-5">
     <div class="row">
-      <div class="d-flex justify-content-center margin-5">
+      <div class="d-flex justify-content-center margin-5 ms-5">
         <div class="col-sm-1 col-md-6 col-lg-7">
           <%counter += 1 %>
           <div class="card mt-4 dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
@@ -31,10 +31,10 @@
           <div class="col-sm-1 col-md-3 ms-4 pe-2">
             <div class="card mt-4 dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
               <div class="card-body">
-                <h6 class="card-title ms-2">Total Issues</h6>
+                <h6 class="card-title ms-2"><%= t('shared.total') + ' ' + t('issues.issues_label') %></h6>
                 <div class="text-7xl orange"><%= Dashboard.fetch_sprint_issues(project).count %></div>
                 <div class="d-flex justify-content-center">
-                <div class="text-md me-1">Closed:</div>
+                <div class="text-md me-1"><%= t('shared.closed') + ':'%></div>
                   <h6><%= Dashboard.fetch_sprint_issues(project).where(status: "CLOSED").count %></h6>
                 </div>
               </div>
@@ -42,10 +42,10 @@
 
             <div class="card mt-2 dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
               <div class="card-body">
-                <h6 class="card-title ms-2">In Progress Issues</h6>
+                <h6 class="card-title ms-2"><%= t('shared.in_progress') + ' ' + t('issues.issues_label') %></h6>
                 <div class="text-7xl tomato"><%= Dashboard.fetch_sprint_issues(project).where(status: "In Progress").count %></div>
                 <div class="d-flex justify-content-center">
-                  <div class="text-md me-1">High Priority:</div>
+                  <div class="text-md me-1"><%= t('issues.high') + ' ' + t('issues.priority') + ':'%></div>
                   <h6><%= Dashboard.fetch_sprint_issues(project).where(status: "In Progress").where(priority: "High").count %></h6>
                 </div>
               </div>

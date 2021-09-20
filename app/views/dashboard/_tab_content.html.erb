@@ -2,21 +2,22 @@
   <div class="tab-pane fade show active" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
     <% @issues= Issue.joins(:assignee) %>
     <% @issues= @issues.paginate(page: params[:page]) %>
-    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @issues } %>
+    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @issues, chart_id: 'assignee_issues' } %>
   </div>
   <div class="tab-pane fade" id="nav-creator" role="tabpanel" aria-labelledby="nav-creator-tab"></div>
   <div class="tab-pane fade" id="nav-reviewer" role="tabpanel" aria-labelledby="nav-reviewer-tab"></div>
+  <% if can? :manage, Project, company_id: current_user.company_id %>
     <div class="tab-pane fade" id="multiCollapse4" role="tabpanel" aria-labelledby="multiCollapse4">
       <div class="container ms-5">    
         <div class="row">
           <div class="col-sm-1 col-md-3">
             <div class="card mt-4 dashboard-card-border">
               <div class="card-body">
-                <h6 class="card-title ms-2">Total Sprints</h6>
+                <h6 class="card-title ms-2"><%= t('shared.total') + ' ' + t('sprints.label').pluralize %></h6>
                 <div class="text-7xl royal-blue"><%= Dashboard.fetch_sprints.count %>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <div class="text-md me-1">Completed:
+                  <div class="text-md me-1"><%= t('shared.completed') + ':' %>
                   </div>
                   <h6><%= Dashboard.fetch_sprints.where(status: "CLOSED").count %></h6>
               </div>
@@ -26,10 +27,10 @@
         <div class="col-sm-1 col-md-3">
           <div class="card mt-4 dashboard-card-border">
             <div class="card-body">
-              <h6 class="card-title ms-2">Total Projects</h6>
+              <h6 class="card-title ms-2"><%= t('shared.total') + ' ' + t('projects.project_label').pluralize %></h6>
               <div class="text-7xl medium-green"><%= Dashboard.fetch_projects.count %></div>
               <div class="d-flex justify-content-center">
-                <div class="text-md me-1">Closed:</div>
+                <div class="text-md me-1"><%= t('shared.closed') + ':'%></div>
                 <h6>0</h6>
               </div>
             </div>
@@ -38,10 +39,10 @@
         <div class="col-sm-1 col-md-3">
           <div class="card mt-4 dashboard-card-border">
             <div class="card-body">
-              <h6 class="card-title ms-2">Total Issues</h6>
+              <h6 class="card-title ms-2"><%= t('shared.total') + ' ' + t('issues.issue_label').pluralize %></h6>
               <div class="text-7xl orange"><%= Dashboard.fetch_issues.count %></div>
               <div class="d-flex justify-content-center">
-                <div class="text-md me-1">Closed:</div>
+                <div class="text-md me-1"><%= t('shared.closed') + ':'%></div>
                 <h6><%= Dashboard.fetch_issues.where(status: "CLOSED").count %></h6>
               </div>
             </div>
@@ -50,10 +51,10 @@
         <div class="col-sm-1 col-md-3">
           <div class="card mt-4 dashboard-card-border">
             <div class="card-body">
-              <h6 class="card-title ms-2">In Progress Issues</h6>
+              <h6 class="card-title ms-2"><%= t('shared.in_progress') + ' ' + t('issues.issue_label').pluralize %></h6>
               <div class="text-7xl tomato"><%= Dashboard.fetch_issues.where(status: "In Progress").count %></div>
               <div class="d-flex justify-content-center">
-                <div class="text-md me-1">High Priority:</div>
+                <div class="text-md me-1"><%= t('issues.high') + ' ' + t('issues.priority') + ':'%></div>
                 <h6><%= Dashboard.fetch_issues.where(status: "In Progress").where(priority: "High").count %></h6>
                 </div>
               </div>
@@ -77,6 +78,7 @@
           </ul>
         </div>
         <%= render partial: "project_collapse" %>
+      <% end %>
       </div>
     </div>
   </div>
