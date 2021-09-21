@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
+  root to: 'dashboard#home'
   get '/list_companies', to: 'list_companies#list_companies'
   post '/list_companies', to: 'list_companies#list_companies'
+  get '/history', to: 'issues#history'
 
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations' },
-    path: 'accounts',
-    path_names: { sign_up: 'new' }
-
-  root to: 'dashboard#home'
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations' }, path: 'accounts', path_names: { sign_up: 'new' }
 
   constraints(subdomain: /^(?!www\Z)(\w+)/) do
+    get '/companies/search', to: 'companies#search'
+
     resources :projects do
       member do
         get 'backlog'
@@ -37,9 +37,5 @@ Rails.application.routes.draw do
 
     resources :users do
     end
-
-    get '/companies/search', to: 'companies#search'
-              end
-
-              get "/history", to: "issues#history"
-              end
+  end
+end
