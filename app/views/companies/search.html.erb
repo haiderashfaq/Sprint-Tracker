@@ -1,5 +1,5 @@
 <div class="container pb-5">
-  <h1>SEARCH</h1>
+  <h1><%= t('shared.search').titleize %></h1>
   <div class="row">
     <div class="col">
       <% @results.each do |result| %>
@@ -44,12 +44,12 @@
     </div>
     <div class="col-2">
       <div class="text-start">
-        <h5><%= t('shared.search_result')  %>:</h5>
+        <h5><%= pluralize(@results.total_count, t('shared.search_result'))  %>:</h5>
         <hr />
-        <h6><%= pluralize(@results.count { |result| result.instance_of? Project}, t('projects.project_label')) %></h6>
-        <h6><%= pluralize(@results.count { |result| result.instance_of? Sprint}, t('sprints.label')) %></h6>
-        <h6><%= pluralize(@results.count { |result| result.instance_of? Issue}, t('issues.issue_label')) %></h6>
-        <h6><%= pluralize(@results.count { |result| result.instance_of? User}, t('users.label')) %></h6>
+        <h6><%= pluralize(model_count_in_search_result(@results, "projects"), t('projects.project_label')) %></h6>
+        <h6><%= pluralize(model_count_in_search_result(@results, "sprints"), t('sprints.label')) %></h6>
+        <h6><%= pluralize(model_count_in_search_result(@results, "issues"), t('issues.issue_label')) %></h6>
+        <h6><%= pluralize(model_count_in_search_result(@results, "users"), t('users.label')) %></h6>
       </div>
     </div>
   </div>

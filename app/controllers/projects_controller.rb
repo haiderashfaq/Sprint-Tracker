@@ -77,7 +77,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num/backlog
   def backlog
-    @sprints, @issues = @project.sprints_and_issues
+    @sprints = @project.pending_sprints
+    @issues = @project.backlog_issues
     respond_to do |format|
       format.js
     end
