@@ -34,6 +34,8 @@ gem 'cancancan', '= 3.3.0'
 gem 'audited', '= 5.0'
 # gem to create charts and graphs
 gem 'chartkick', '=4.0.5'
+# use delayed job to send emails using a background job
+gem 'delayed_job_active_record'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

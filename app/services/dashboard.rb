@@ -12,7 +12,7 @@ class Dashboard
     total_time = 0
     if project.active_sprint.present?
       project.active_sprint.issues.each do |issue|
-        total_time += issue.total_spent_time
+        total_time += issue.total_time_spent
       end
     end
     total_time

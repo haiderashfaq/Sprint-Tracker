@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   around_action :set_tenant_id
 
   before_action :authenticate_user!, except: [:list_companies, :home]
+  include SetCurrentUser
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message

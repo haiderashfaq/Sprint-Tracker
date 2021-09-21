@@ -16,6 +16,8 @@ class Issue < ApplicationRecord
   validate_dates :actual_start_date, :actual_end_date
   scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
 
+  before_save :send_alert
+
   belongs_to :company
   belongs_to :project
   belongs_to :sprint, optional: true
@@ -37,7 +39,7 @@ class Issue < ApplicationRecord
   scope :creator, ->(creator) { where creator: creator }
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
 
-  def total_spent_time
+  def total_time_spent
     time_logs.sum(:logged_time)
   end
 
@@ -52,5 +54,13 @@ class Issue < ApplicationRecord
       errors.concat(issue.errors.full_messages)
     end
     errors
+  end
+
+  private
+  def send_alert
+    binding.pry
+    UserMailer.delay.alert(assignee, self, changes, Company.current_company.subdomain)
+    UserMailer.delay.alert(creator, self, changes, Company.current_company.subdomain)
+    UserMailer.delay.alert(reviewer, self, changes, Company.current_company.subdomain)
   end
 end
