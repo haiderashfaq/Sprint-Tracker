@@ -56,7 +56,6 @@
               <div class="d-flex justify-content-center">
                 <div class="text-md me-1"><%= t('issues.high') + ' ' + t('issues.priority') + ':'%></div>
                 <h6><%= Dashboard.fetch_issues.where(status: "In Progress").where(priority: "High").count %></h6>
-                </div>
               </div>
             </div>
           </div>
