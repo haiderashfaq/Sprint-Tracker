@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  searchkick word_middle: %i[name email]
+
   sequenceid :company, :users
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable

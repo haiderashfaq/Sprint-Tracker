@@ -23,10 +23,10 @@
           </a>
         </li>
       </ul>
-      <form class="d-flex">
-      	<input class="form-control me-sm-2" type="text" placeholder="Search">
-      	<button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <%= form_tag companies_search_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query, params[:query], class: "form-control me-sm-2", placeholder: t('shared.search') %>
+        <%= submit_tag t('shared.search'), class: "btn btn-primary my-2 my-sm-0" %>
+      <% end %>
     </div>
   </div>
 </nav>
