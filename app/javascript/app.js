@@ -51,14 +51,14 @@ $(document).ready(function() {
 
 
  $("#menu-btn").click(function() {
-       $("#sidebar").toggleClass("active");
-       var updated = '';
-       if (window.localStorage.getItem('sidebar') === 'active') {
-           updated = 'not_active';
-       } else {
-           updated = 'active';
-       }
-       window.localStorage.setItem('sidebar', updated);
+    $("#sidebar").toggleClass("active");
+    var updated = '';
+    if (window.localStorage.getItem('sidebar') === 'active') {
+       updated = 'not_active';
+    } else {
+       updated = 'active';
+    }
+    window.localStorage.setItem('sidebar', updated);
   });
 });
 

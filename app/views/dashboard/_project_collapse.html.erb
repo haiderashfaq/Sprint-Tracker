@@ -22,7 +22,8 @@
               <% if Dashboard.fetch_project_issues(project).present? %>
                 <%= line_chart [
                 { name: t('shared.est_end_date'), data: Dashboard.fetch_project_issues(project).group(:estimated_end_date).count },
-                { name: t('shared.end_date'), data: Dashboard.fetch_project_issues(project).group(:actual_end_date).count }], xtitle: "Time", ytitle: "Population" %>
+                { name: t('shared.end_date'), data: Dashboard.fetch_project_issues(project).group(:actual_end_date).count }
+                ], xtitle: "Time", ytitle: "Population" %>
               <% end %>
             </div>
           </div>

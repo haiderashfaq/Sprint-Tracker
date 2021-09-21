@@ -25,7 +25,6 @@ class Dashboard
   end
 
   def self.fetch_projects
-    #@projects = Project.joins('INNER JOIN issues ON issues.project_id = projects.id')
     Project.all
   end
 
