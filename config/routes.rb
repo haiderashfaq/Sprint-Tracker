@@ -28,14 +28,18 @@ Rails.application.routes.draw do
         get 'report'
       end
     end
+
     resources :issues do
       collection do
         post 'add_issues_to_sprint'
       end
     end
+
     resources :users do
     end
-  end
 
-  get "/history", to: "issues#history"
-end
+    get '/companies/search', to: 'companies#search'
+              end
+
+              get "/history", to: "issues#history"
+              end
