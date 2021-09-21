@@ -3,7 +3,7 @@ class ProjectsUser < ApplicationRecord
   belongs_to :user
 
   before_destroy :check_user_responsibilities
-  before_create :user_manager_or_creator
+  validate :user_manager_or_creator
   validates_uniqueness_of :user_id, { scope: :project_id, message: I18n.t('users.duplicate_error') }
 
   def self.create_projects_users(project, user_ids)
@@ -29,8 +29,10 @@ class ProjectsUser < ApplicationRecord
     error_messages_and_valid_users(projects_users)
   end
 
-  def self.company_users(current_company, project)
-    current_company.users.left_outer_joins(:projects_users).where(projects_users: { id: nil }).where.not(projects_users: [project.manager, project.creator])
+  def self.users_available_for_project(current_company, project)
+    users = current_company.users.joins("LEFT OUTER JOIN projects_users on users.id = projects_users.user_id and projects_users.project_id = #{project.id}")
+    users.where(projects_users: { id: nil }).where.not(id: [project.manager_id, project.creator_id])
+    # current_company.users.left_outer_joins(:projects_users).where(projects_users: { id: nil }).where.not(projects_users: { project_id: project.id })
   end
 
   private
@@ -46,6 +48,5 @@ class ProjectsUser < ApplicationRecord
     return unless project.manager_id == user_id || project.creator_id == user_id
 
     errors.add :base, I18n.t('projects.manager_as_member_error')
-    throw :abort
   end
 end
