@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
 
     resources :sprints do
+    	resources :issues
       member do
         get 'start_sprint_info'
         patch 'start_sprint'

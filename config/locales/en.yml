@@ -78,6 +78,7 @@ en:
     backlog: "Backlog"
     active_sprint: "Active Sprint"
     active_sprint_absent: 'No active sprint present. Start in  '
+    manager_as_member_error: 'Cannot add Manager/Creator as member'
 
   filter:
     add: 'Add filter'

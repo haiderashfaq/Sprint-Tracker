@@ -34,6 +34,8 @@ gem 'cancancan', '= 3.3.0'
 gem 'audited', '= 5.0'
 # gem to create charts and graphs
 gem 'chartkick', '=4.0.5'
+# gem to search in global context
+gem 'searchkick', '=4.6.0'
 
 
 group :development, :test do

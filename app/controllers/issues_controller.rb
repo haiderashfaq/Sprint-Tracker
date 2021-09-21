@@ -1,13 +1,16 @@
 class IssuesController < ApplicationController
-
   load_and_authorize_resource :project, find_by: :sequence_num, through: :current_company, if: -> { params[:project_id].present? }
   load_and_authorize_resource :issue, find_by: :sequence_num, through: :project, if: -> { params[:project_id].present? }
+  load_and_authorize_resource :sprint, find_by: :sequence_num, if: -> { params[:sprint_id].present? }
+  load_and_authorize_resource :issue, find_by: :sequence_num, through: :sprint, if: -> { params[:sprint_id].present? }
   load_and_authorize_resource :issue, find_by: :sequence_num, through: :current_company, if: -> { params[:project_id].blank? }
+
   before_action :set_creator, only: :create
   before_action :fetch_required_data, only: [:new, :edit, :index]
 
   # GET /issues
   def index
+    binding.pry
     @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page])
     @issues = FilteringParams.new(@issues, params).filter_params
     respond_to do |format|
@@ -106,7 +109,7 @@ class IssuesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def issue_params
     params.require(:issue).permit(:title, :description, :status, :category, :estimated_time, :priority, :estimated_end_date,
-    :estimated_start_date, :actual_start_date, :actual_end_date, :reviewer_id, :creator_id, :assignee_id, :project_id)
+                                  :estimated_start_date, :actual_start_date, :actual_end_date, :reviewer_id, :creator_id, :assignee_id, :project_id)
   end
 
   def set_creator

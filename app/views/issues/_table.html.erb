@@ -1,30 +1,31 @@
 <div id="issues-table">
-<div class="container">
-  <div id="flash_messages"></div>
-  <table class="table table-hover border-primary text-center" id="issues_datatable">
-    <thead class="text-light bg-primary">
-      <tr>
-        <th><%= t('issues.status') %></th>
-        <th><%= t('issues.title') %></th>
-        <th><%= t('issues.assignee') %></th>
-        <th><%= t('issues.priority') %></th>
-        <th><%= t('issues.category') %></th>
-        <th><%= t('shared.actions') %></th>
-      </tr>
-    </thead>
-    <tbody id="issues_datatable_body">
-      <% if issues.empty? %>
-      <div class="container text-center">
-        <tr id="no-resource"><td colspan="6"><%= render partial: 'shared/no_resource_present', locals: { record: 'issues.issue_label' } %></td></tr>
-      </div>
-      <% else %>
-        <% issues.each do |issue| %>
-          <%= render '/issues/issue_datatable_row', issue:issue %>
+  <div class="container">
+    <div id="flash_messages"></div>
+    <table class="table table-hover border-primary text-center" id="issues_datatable">
+      <thead class="text-light bg-primary">
+        <tr>
+          <th><%= t('issues.status') %></th>
+          <th><%= t('issues.title') %></th>
+          <th><%= t('issues.priority') %></th>
+          <th><%= t('issues.category') %></th>
+          <th><%= t('shared.actions') %></th>
+        </tr>
+      </thead>
+      <tbody id="issues_datatable_body">
+        <% if issues.empty? %>
+          <div class="container text-center">
+            <tr id="no-resource">
+              <td colspan="5"><%= render partial: 'shared/no_resource_present', locals: { record: 'issues.issue_label' } %>
+              </td>
+            </tr>
+          </div>
+        <% else %>
+          <% issues.each do |issue| %>
+            <%= render 'issue_datatable_row', issue:issue %>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
-  
-  <%= js_paginate issues %>
+      </tbody>
+    </table>
+    <%= js_paginate issues %>
+  </div>
 </div>
-

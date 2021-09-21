@@ -3,7 +3,7 @@
   <% assignee_name = "No Assignee" %>
 <% else %>
   <% assignee_id = sprint_report.assignee.sequence_num %>
-  <% assignee_name = link_to sprint_report.assignee.name, user_path(assignee_id) %>
+  <% assignee_name = link_to sprint_report.assignee_name, user_path(assignee_id) %>
 <% end %>
 <tr>
     <td><%= assignee_name %></td>
