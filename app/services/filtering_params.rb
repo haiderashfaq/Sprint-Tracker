@@ -17,6 +17,6 @@ class FilteringParams
 
   # A list of the param names that can be used for filtering the Issues
   def slice_params
-    @params&.slice(:priority, :status, :project_id, :creator, :reviewer, :title, :category, :assignee)
+    @params.slice(:priority, :status, :project_id, :creator, :reviewer, :title, :category, :assignee)
   end
 end

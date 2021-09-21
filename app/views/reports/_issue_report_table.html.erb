@@ -18,10 +18,12 @@
       </div>
       <% else %>
         <% issues_report_attributes.each do |issue_report| %>
+          <% issue_report %>
           <%= render partial: "issue_report_datatable_row", locals: { issue_report: issue_report} %>
         <% end %>
-      </tbody>
+    </tbody>
   </table>
-        <%= pie_chart issues_report_attributes&.unscope(:group)&.group(:status)&.count, colors: [ '#e34','#17f','#285','#1df' ] ,class: "mb-5" %>
-      <% end %>
+  <%= will_paginate issues_report_attributes %>
+  <%= pie_chart issues_report_attributes&.unscope(:group)&.group(:status)&.count, colors: [ '#e34','#17f','#285','#1df' ] ,class: "mb-5" %>
+    <% end %>
 </div>

@@ -47,7 +47,7 @@ class Ability
   end
 
   def admin_permissions_for_project(user)
-    can %i[update read create delete backlog], Project, company_id: user.company_id
+    can %i[update read create destroy backlog active_sprint], Project, company_id: user.company_id
   end
 
   def admin_permissions_for_time_logs(user)

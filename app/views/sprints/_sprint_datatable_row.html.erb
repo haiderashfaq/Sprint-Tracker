@@ -1,6 +1,6 @@
 <% sprint_path_value = local_assigns[:project] ? project_sprint_path(project, sprint) : sprint_path(sprint) %>
 <tr id="sprint_<%= sprint.sequence_num %>">
-  <td><span class="badge rounded-pill bg-<%= sprints_badge_pill_selection(sprint.status) %>">
+  <td><span class="badge rounded-pill bg-<%= SprintsHelper::STATUS_COLOR[sprint.status.to_sym] %>">
       <%= sprint.status %></span></td>
   <td><%= link_to sprint.name, sprint %></td>
   <td><%= sprint.creator.name %></td>

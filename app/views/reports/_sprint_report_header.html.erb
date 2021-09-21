@@ -5,12 +5,7 @@
         <h1><%= t('issues.issue_label') %></h1>
       </div>
       <div class="col-3">
-        <% if request&.referer&.split('/')&.include?("sprint") %>
-          <% path = sprint_report_path(format: :csv, sprint_id: sprint_id) %>
-        <% else %>
-          <% path = issue_report_path(format: :csv, sprint_id: sprint_id) %>
-        <% end %>
-        <%= link_to  t('shared.to_csv'),path ,  { class: 'btn btn-primary w-100' } %>
+        <%= link_to  t('shared.to_csv'),csv_link ,  { class: 'btn btn-primary w-100' } %>
       </div>
     </div>
   </div>
