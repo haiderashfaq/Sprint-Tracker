@@ -7,9 +7,10 @@ class IssuesController < ApplicationController
 
   before_action :set_creator, only: :create
   before_action :fetch_required_data, only: [:new, :edit, :index]
+  before_action :add_breadcrumbs, only: [:index, :show]
 
   # GET /issues
-  def index
+  def index  
     @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page])
     @issues = FilteringParams.new(@issues, params).filter_params
     respond_to do |format|
@@ -118,5 +119,18 @@ class IssuesController < ApplicationController
   def fetch_required_data
     @projects = @current_company.projects
     @users = @current_company.users
+  end
+
+  def add_breadcrumbs
+    path = request.url.split('/')
+    path.drop(3).each do |route|
+      if params[:project_id].nil?
+        if route.to_i.zero?
+          add_breadcrumb route.titleize, :"#{route}_path"
+        else
+          add_breadcrumb @issue.title, :issue_path
+        end
+      end
+    end
   end
 end

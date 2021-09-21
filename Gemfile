@@ -36,6 +36,9 @@ gem 'audited', '= 5.0'
 gem 'chartkick', '=4.0.5'
 # gem to search in global context
 gem 'searchkick', '=4.6.0'
+# gem to display path
+gem 'breadcrumbs_on_rails', '=4.1.0'
+
 
 
 group :development, :test do

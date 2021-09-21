@@ -1,7 +1,7 @@
 <tr id="issue_report_<%= issue_report.sequence_num %>">
   <div id="issue_reports_datatable_space"></div>
   <% if issue_report.assignee.present? %>
-    <% assignee_name = link_to issue_report.assignee.name, user_path(issue_report.assignee.sequence_num) %>
+    <% assignee_name = link_to issue_report.assignee_name, user_path(issue_report.assignee.sequence_num) %>
   <% else %>
     <% assignee_name = 'No user assigned' %>
   <% end %>

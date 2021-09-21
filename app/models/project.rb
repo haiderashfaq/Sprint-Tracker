@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-  searchkick
+  #searchkick
 
   before_destroy :check_for_sprints, :check_for_issues
 
