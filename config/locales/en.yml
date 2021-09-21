@@ -78,6 +78,7 @@ en:
     backlog: "Backlog"
     active_sprint: "Active Sprint"
     active_sprint_absent: 'No active sprint present. Start in  '
+    manager_as_member_error: 'Cannot add Manager/Creator as member'
 
   filter:
     add: 'Add filter'
@@ -118,6 +119,8 @@ en:
     name: "Name"
     email: "Email Address"
     role_id: "Role"
+    search: "search"
+    search_result: "Search Results"
     password: "Password"
     password_confirmation: "Password Confirmation"
     profile: "Profile"

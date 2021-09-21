@@ -1,7 +1,7 @@
 <% if @sprint.errors.any? %>
   $('#modal .modal-flash-messages').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% else %>
-  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
   <% if @project.nil? %>
     $("#nav-sprints").load(window.location.href + " #nav-sprints")
   <% else %>
