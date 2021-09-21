@@ -58,9 +58,11 @@ class Issue < ApplicationRecord
 
   private
   def send_alert
-    binding.pry
-    UserMailer.delay.alert(assignee, self, changes, Company.current_company.subdomain)
-    UserMailer.delay.alert(creator, self, changes, Company.current_company.subdomain)
-    UserMailer.delay.alert(reviewer, self, changes, Company.current_company.subdomain)
+    company = Company.current_company
+    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]) or company.users.where(role_id: 1)
+
+    users.each do |user|
+      UserMailer.delay.alert(user, self, Company.current_company.subdomain, Current.user)
+    end
   end
 end

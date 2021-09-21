@@ -1,8 +1,7 @@
 <h1>Issue information</h1>
 
 <p>
-  <% binding.pry %>
-  <%= @greeting %>, <%= link_to "Issue##{@issue.sequence_num.to_s}", issue_url(@issue, subdomain: @subdomain), class: "btn btn-primary w-100 fa fa-plus"  %> was changed
+  <%= @greeting %>, <%= link_to "Issue##{@issue.sequence_num.to_s}", issue_url(@issue, subdomain: @subdomain), class: "btn btn-primary w-100 fa fa-plus"  %> was changed <I style="color:blue">by <%= @current_user.name %> </I>
 
   <div class="container">
     <% audit = @issue.audits.includes(:user).last %>
@@ -12,7 +11,7 @@
       <% audit[:audited_changes].each do |attribute, value| %>
         <li> 
           <b><%= attribute.titleize %></b>
-          updated from <I><%= value[0] %></I> to <I><%= value[1] %></I> <I>by <%= audit.user %> </I>
+          updated from <I><%= value[0] %></I> to <I><%= value[1] %></I> 
         </li>
       <% end %>
     </ul>

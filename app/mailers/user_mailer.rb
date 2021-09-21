@@ -8,13 +8,12 @@ class UserMailer < ApplicationMailer
 
   default from: "flash@info.com"
 
-  def alert(user, issue, changes, subdomain)
-    binding.pry
+  def alert(user, issue, subdomain, current_user)
 
     @greeting = "Hi " + user.name
     @issue = issue
     @subdomain = subdomain
-    @changes = issue
+    @current_user = current_user
 
     mail to: user.email, subject: "Issue Notification"
   end
