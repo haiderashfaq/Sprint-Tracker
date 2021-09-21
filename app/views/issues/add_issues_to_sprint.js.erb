@@ -2,7 +2,7 @@
 $('#modal .modal-flash-messages').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% else %>
   $('#modal').modal('hide');
-  $('#flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
   <% @issues.each do |issue| %>
     $("#issue_<%= issue.id %>").remove()
   <% end %>
