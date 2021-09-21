@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 2021_09_20_143058) do
     t.string "priority", null: false
     t.string "category", null: false
     t.bigint "company_id", null: false
-    t.date "estimated_start_date", null: false
-    t.date "actual_start_date"
-    t.date "estimated_end_date", null: false
-    t.date "actual_end_date"
+    t.datetime "estimated_start_date", null: false
+    t.datetime "actual_start_date"
+    t.datetime "estimated_end_date", null: false
+    t.datetime "actual_end_date"
     t.integer "creator_id"
     t.string "assignee_id"
     t.integer "reviewer_id"
