@@ -10,7 +10,6 @@ class IssuesController < ApplicationController
 
   # GET /issues
   def index
-    binding.pry
     @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page])
     @issues = FilteringParams.new(@issues, params).filter_params
     respond_to do |format|
