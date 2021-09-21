@@ -14,7 +14,6 @@ class ProjectsUsersController < ApplicationController
   # GET /projects/:sequence_num/projects_user/new
   def new
     @users = ProjectsUser.users_available_for_project(@current_company, @project)
-    binding.pry
     respond_to do |format|
       format.js
     end

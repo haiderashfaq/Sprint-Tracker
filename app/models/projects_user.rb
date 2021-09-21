@@ -32,7 +32,6 @@ class ProjectsUser < ApplicationRecord
   def self.users_available_for_project(current_company, project)
     users = current_company.users.joins("LEFT OUTER JOIN projects_users on users.id = projects_users.user_id and projects_users.project_id = #{project.id}")
     users.where(projects_users: { id: nil }).where.not(id: [project.manager_id, project.creator_id])
-    # current_company.users.left_outer_joins(:projects_users).where(projects_users: { id: nil }).where.not(projects_users: { project_id: project.id })
   end
 
   private
