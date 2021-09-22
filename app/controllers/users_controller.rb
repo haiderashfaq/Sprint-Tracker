@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
+  before_action :add_breadcrumbs, only: [:new, :edit, :index, :show]
 
   def index
     respond_to do |format|
@@ -69,5 +70,20 @@ class UsersController < ApplicationController
       :phone_num,
       :role_id
     )
+  end
+
+  def add_breadcrumbs
+    path = request.url.split('/')
+    path.drop(3).each do |route|
+      if route.to_i.zero?
+        if route != 'new' && route != 'edit'
+          add_breadcrumb route.titleize, :"#{route}_path"
+        else
+          add_breadcrumb route.titleize, :"#{route}_user_path"
+        end
+      else
+        add_breadcrumb @user.name, user_path(@user)
+      end
+    end
   end
 end

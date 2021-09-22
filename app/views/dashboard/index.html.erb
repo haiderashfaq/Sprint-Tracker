@@ -1,5 +1,5 @@
+<%= render partial: 'shared/breadcrumb' %>
 <div class="container">
-  <%= render partial: 'shared/breadcrumb' %>
   <p class="navbar-text float-right">
     <% if user_signed_in? %> Logged in as <strong><%= current_user.email %> </strong>.
       <%= link_to t('users.log_out'), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %> |
