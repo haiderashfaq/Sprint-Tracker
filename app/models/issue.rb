@@ -43,6 +43,10 @@ class Issue < ApplicationRecord
     time_logs.sum(:logged_time)
   end
 
+  def total_estimated_time
+    estimated_time
+  end
+
   def self.get_errors_of_collection(issues)
     errors = []
     issues.each do |issue|

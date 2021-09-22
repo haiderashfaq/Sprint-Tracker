@@ -30,24 +30,26 @@ class Project < ApplicationRecord
   validate_dates :start_date, :end_date
 
   def total_spent_time
-    issues.sum(:estimated_time)
+    if issues.any?
+      issues.sum(:estimated_time)
+    end
   end
 
   def total_logged_time
     TimeLog.joins(:issue).sum(:logged_time)
   end
 
-  def issues_logged_time
+  def total_spent_time
     total_time = 0
     if issues.any?
-      total_time = total_logged_time
+      total_time = TimeLog.joins(:issue).sum(:logged_time)
     end
   end
 
-  def issues_estimated_time
+  def total_estimated_time
     total_time = 0
     if issues.any?
-      total_time = total_spent_time
+      total_time = issues.sum(:estimated_time)
     end
   end
 

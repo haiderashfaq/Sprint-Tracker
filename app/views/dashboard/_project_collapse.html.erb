@@ -8,10 +8,10 @@
           <div class="card mt-4 dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
             <div class="card-body">
               <h6 class="card-title"><%= t('projects.project_label') + ' ' + counter.to_s %></h6>
-              <% total_logged_time = project.issues_logged_time %>
-              <% estimated_time = project.issues_estimated_time %>
+              <% total_logged_time = project.total_spent_time %>
+              <% estimated_time = project.total_estimated_time %>
               <% if total_logged_time.present? and estimated_time.present? %>
-                <% time_progression_ratio = project.time_progression(total_logged_time,estimated_time) %>
+                <% time_progression_ratio = project.time_progression %>
                 <%= render partial: "time_logs/progress", locals: { instance: project, time_progression_ratio: time_progression_ratio, total_logged_time: total_logged_time, width: "w-100", estimated_time: estimated_time} %>
               <% end %>
               <% if project.fetch_project_issues %>
@@ -23,7 +23,7 @@
             </div>
           </div>
         </div>
-        <% if project.fetch_sprint_issues.present? %>
+        <% if project.fetch_sprint_issues.any? %>
           <div class="col-sm-1 col-md-3 ms-4 pe-2">
             <div class="card mt-4 dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
               <div class="card-body">
