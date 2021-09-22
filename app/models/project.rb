@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
   include DateValidations
-  searchkick word_middle: [:name]
+  searchkick word_middle: %i[name], filterable: %i[company_id]
+  # merge_mappings: true, mappings: { properties: { company_id: { type: 'keyword' } } }
 
   before_destroy :check_for_sprints, :check_for_issues
 

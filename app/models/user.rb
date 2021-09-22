@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  searchkick word_middle: %i[name email]
+  searchkick word_middle: %i[name email], filterable: %i[company_id]
+  # , merge_mappings: true, mappings: { properties: { company_id: { type: 'keyword' } } }
 
   sequenceid :company, :users
   devise :database_authenticatable, :registerable,

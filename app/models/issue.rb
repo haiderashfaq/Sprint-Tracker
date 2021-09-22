@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Issue < ApplicationRecord
-  searchkick word_middle: %i[titile description]
+  searchkick word_middle: %i[titile description], filterable: %i[company_id]
+  # , merge_mappings: true, mappings: { properties: { company_id: { type: 'keyword' } } }
 
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed' }.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze

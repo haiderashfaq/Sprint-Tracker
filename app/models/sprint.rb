@@ -1,5 +1,6 @@
 class Sprint < ApplicationRecord
-  searchkick word_middle: %i[name description]
+  searchkick word_middle: %i[name description], filterable: %i[company_id]
+  # , merge_mappings: true, mappings: { properties: { company_id: { type: 'keyword' } } }
 
   belongs_to :company
   belongs_to :project
