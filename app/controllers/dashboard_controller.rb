@@ -13,9 +13,9 @@ class DashboardController < ApplicationController
   end
 
   def load_resources
-    @projects = Company.current_company.projects
-    @sprints = Sprint.all
-    @issues = Company.current_company.issues
+    @projects = @current_company.projects
+    @sprints = @current_company.sprints
+    @issues = @current_company.issues
   end
 
 end
