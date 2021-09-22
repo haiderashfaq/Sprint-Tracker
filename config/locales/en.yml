@@ -69,6 +69,7 @@ en:
     reviewer: 'Reviewer'
     creator: 'Creator'
     deletion_error: "Delete all issues before deleting project"
+    no_assignee: 'No user assigned'
   
 
   projects:
@@ -84,6 +85,7 @@ en:
     add: 'Add filter'
     filter_label: 'Filter'
     creator: 'Creator'
+    apply: 'Apply'
   
   sprints:
     label: 'Sprint'
@@ -135,6 +137,8 @@ en:
     name: "Name"
     email: "Email Address"
     role_id: "Role"
+    search: "search"
+    search_result: "Search Result"
     password: "Password"
     password_confirmation: "Password Confirmation"
     profile: "Profile"

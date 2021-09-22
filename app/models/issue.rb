@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Issue < ApplicationRecord
-  STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed' }.freeze
+  STATUS = { Open: 'Open', 'In Progress'.to_sym=> 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed' }.freeze
+  searchkick word_middle: %i[titile description]
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
   CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
@@ -25,8 +26,6 @@ class Issue < ApplicationRecord
   validate_dates :actual_start_date, :actual_end_date
   scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
 
-
-
   def total_time_spent
     time_logs.sum(:logged_time)
   end
@@ -35,7 +34,7 @@ class Issue < ApplicationRecord
     progress_ratio = [logged_time_sum, issue_estimated_time].min / [logged_time_sum, issue_estimated_time].max
     progress_ratio.to_f * 100
   end
-  
+
   def self.get_errors_of_collection(issues)
     errors = []
     issues.each do |issue|
@@ -44,11 +43,11 @@ class Issue < ApplicationRecord
     errors
   end
 
-   def assignee_name
+  def assignee_name
     if(assignee.present?)
       assignee.name
     else
-      "no user assigned"
+      I18n.t 'issues.no_assignee'
     end
   end
 end

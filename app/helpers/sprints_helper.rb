@@ -1,4 +1,7 @@
 module SprintsHelper
+
+  STATUS_COLOR = { PLANNING: 'primary', ACTIVE: 'danger', CLOSED: 'success' }.freeze
+
   def project_options_to_add_sprint(projects)
     projects.map { |project| [project.name, project.id] }
   end
@@ -11,11 +14,4 @@ module SprintsHelper
     sprints.map { |sprint| [sprint.name, sprint.sequence_num] }
   end
 
-  def sprints_badge_pill_selection(status)
-    case status
-    when Sprint::STATUS[:PLANNING] then 'primary'
-    when Sprint::STATUS[:ACTIVE] then 'danger'
-    when Sprint::STATUS[:CLOSED] then 'success'
-    end
-  end
 end

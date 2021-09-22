@@ -1,6 +1,10 @@
 # app/helpers/issues_helper
 
 module IssuesHelper
+  STATUS_COLOR = { Open: 'primary', 'In Progress'.to_sym => 'danger', Resolved: 'info', Closed: 'success' }.freeze
+  PRIORITY_COLOR = { Low: 'success', Medium: 'warning', High: 'danger' }.freeze
+  CATEGORY_COLOR = { Hotfix: 'warning', Feature: 'info' }.freeze
+
   def filter_select(form, params)
     if params[:project_id].present?
       filters = Issue::FILTER.except(:Project)
@@ -10,29 +14,32 @@ module IssuesHelper
     form.select t('filter.filter_label'), filters, { include_blank: true }, { class: 'js-select-field js-filter-field form-select form-select-lg' }
   end
 
-  def issue_badge_pill_selection(status)
-    case status
-    when Issue::STATUS[:Open] then 'primary'
-    when Issue::STATUS[:'In Progress'] then 'danger'
-    when Issue::STATUS[:Resolved] then 'info'
-    when Issue::STATUS[:Closed] then 'success'
-    end
+  def user_name(value)
+    value[0] = User.find_by(id: value[0].to_i).name
+    value[1] = User.find_by(id: value[1].to_i).name
+    value
   end
 
-  def issues_priority_pill_selection(priority)
-    case priority
-    when Issue::PRIORITY[:Low] then 'success'
-    when Issue::PRIORITY[:Medium] then 'warning'
-    when Issue::PRIORITY[:High] then 'danger'
-    end
+  def date_format(value)
+    value[0] = convert_to_date(value[0])
+    value[1] = convert_to_date(value[1])
+    value
   end
 
-   def badge_pill_selection(status)
-    case status
-      when Issue::STATUS[:Open] then 'primary'
-      when Issue::STATUS[:'In Progress'] then 'danger'
-      when Issue::STATUS[:Resolved] then 'info'
-      when Issue::STATUS[:Closed] then 'success'
-    end
+  def string_format(value)
+    value[0] = value[0].to_s
+    value[1] = value[1].to_s
+    value
+  end
+
+  def set_format(attribute, value)
+    value = user_name(value) if %w[creator_id reviewer_id assignee_id].include?(attribute)
+    value = date_format(value) if %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].include?(attribute)
+    value = string_format(value) unless %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].include?(attribute)
+    value
+  end
+
+  def convert_to_date(date)
+    date&.to_date&.to_s(:long)
   end
 end

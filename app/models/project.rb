@@ -1,5 +1,7 @@
 class Project < ApplicationRecord
-  #searchkick
+
+  include DateValidations
+  searchkick word_middle: [:name]
 
   before_destroy :check_for_sprints, :check_for_issues
 
@@ -8,25 +10,25 @@ class Project < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   belongs_to :active_sprint, class_name: 'Sprint', optional: true
 
-  validates :name, :manager, :creator, presence: true
-  validates :name, length: { maximum: 100, minimum: 4 }
-
   has_many :issues
   has_many :sprints
   has_many :projects_users
   has_many :issues
   has_many :users, through: :projects_users, dependent: :destroy
 
-  include DateValidations
   sequenceid :company, :projects
+  validates :name, :manager, :creator, presence: true
+  validates :name, length: { maximum: 100, minimum: 4 }
   validates :name, :manager_id, :creator_id, presence: true
   validates :name, length: { maximum: 100, minimum: 4 }
   validate_dates :start_date, :end_date
 
-  def self.get_sprints_and_issues(project)
-    sprints = project.sprints.includes(:issues).where(status: Sprint::STATUS[:PLANNING]).order(:start_date, :created_at)
-    issues = project.issues.where(sprint: nil)
-    [sprints, issues]
+  def pending_sprints
+    sprints.includes(:issues).where(status: Sprint::STATUS[:PLANNING]).order(:start_date, :created_at)
+  end
+
+  def backlog_issues
+    issues.where(sprint: nil)
   end
 
   private

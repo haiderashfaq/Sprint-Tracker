@@ -7,12 +7,9 @@
     <ul>
       <% audit[:audited_changes].each do |attribute, value| %>
         <li> 
-          <% if %w[creator_id reviewer_id assignee_id project_id].include?(attribute) %>
-            <% value[1] = User.find(value[1].to_i).name %>
-            <% value[0] = User.find(value[0].to_i).name %>
-          <% end %>
+          <% value = set_format(attribute, value) %>
           <b><%= attribute.titleize %></b>
-          updated from <I><%= value[0].to_s %></I> to <I><%= value[1].to_s %></I>
+          updated from <I><%= value[0] %></I> to <I><%= value[1] %></I>
         </li>
       <% end %>
     </ul>
