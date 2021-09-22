@@ -6,6 +6,7 @@ class Company < ApplicationRecord
   belongs_to :owner, class_name: "User", optional: true
   has_many :issues, dependent: :destroy
   has_many :projects
+  has_many :sprints
   validates :name, uniqueness: true
   validates :subdomain, uniqueness: true
 

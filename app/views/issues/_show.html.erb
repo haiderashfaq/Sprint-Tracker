@@ -1,6 +1,14 @@
 <div class="container">
   <div id="flash_messages"></div>
   <div id="issue_show">
+    <div class="row">
+      <div class="d-flex mt-4 mb-4">
+        <i class='bx bx-alarm'></i>
+        <% total_logged_time = issue.total_spent_time %>
+        <% time_progression_ratio = issue.time_progression %>
+        <%= render partial: "time_logs/progress", locals: { instance: issue, time_progression_ratio: time_progression_ratio, total_logged_time: total_logged_time, width:"w-100", estimated_time: issue.estimated_time} %>
+      </div>
+    </div>
     <div class="row gx-6">
       <div class="col-12 col-sm-6">
         <div class="row ">

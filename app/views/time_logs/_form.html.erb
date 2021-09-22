@@ -4,13 +4,11 @@
     <div class="modal-flash-messages"></div>
     <%= form_with model:([@issue, @time_log]), local:false  do |form| %>
       <div class="modal-body">
-        <% total_logged_time = Issue.time_logs_sum(@issue) %>
-        <% value = Issue.time_progression(total_logged_time,@issue.estimated_time) %>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: <%= value %>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%= value %></div>
-          <% if total_logged_time > @issue.estimated_time %>
-            <div class="progress-bar bg-danger" role="progressbar" style="width: <%=100- value %>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"><%= 100- value %></div>
-          <% end %>
+        <% total_logged_time = @issue.total_spent_time %>
+        <% time_progression_ratio = issue.time_progression %>
+        <div class="d-flex">
+          <i class='bx bx-alarm'></i>
+          <%= render partial: "progress", locals: { instance: @issue, time_progression_ratio: time_progression_ratio, total_logged_time: total_logged_time, width: "", estimated_time: issue.estimated_time} %>
         </div>
           <br>
          <div class="row g-3 align-items-center mb-3">

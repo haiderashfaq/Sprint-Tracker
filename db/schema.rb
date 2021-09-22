@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_20_143058) do
+ActiveRecord::Schema.define(version: 2021_09_21_132426) do
 
   create_table "audits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "auditable_id"
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_143058) do
     t.bigint "creator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "status"
+    t.string "status", default: "PLANNING"
     t.index ["company_id"], name: "index_sprints_on_company_id"
     t.index ["creator_id"], name: "index_sprints_on_creator_id"
     t.index ["project_id"], name: "index_sprints_on_project_id"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_143058) do
   end
 
   create_table "time_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.date "date"
+    t.datetime "date"
     t.decimal "logged_time", precision: 10, scale: 2, null: false
     t.text "work_description", null: false
     t.bigint "company_id", null: false

@@ -1,3 +1,4 @@
 <%= render partial: "issues/header", locals: {project: @project} %>
  <div class="contianer mb-3"><%= render :partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects} %></div>
+ 
 <%= render partial: "issues/table", locals: { issues: @issues} %>

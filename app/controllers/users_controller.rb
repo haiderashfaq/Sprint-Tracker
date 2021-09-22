@@ -55,6 +55,7 @@ class UsersController < ApplicationController
         format.html { redirect_to users_url, alert: t('shared.success.delete', resource_label: t('users.label')) }
       else
         flash.now[:alert] = t('shared.failure.delete', resource_label: t('users.label'))
+        flash.now[:error] = @user.errors.full_messages
         format.html { render :show }
       end
     end

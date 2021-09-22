@@ -6,6 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       build_resource(user_params)
       resource.company.owner = resource # resource will be an instance of User
       resource.role_id = User::ROLE_ID[:admin]
+      resource.skip_confirmation!
       resource.save!
     rescue ActiveRecord::RecordInvalid => e
       flash.now[:error] = e.record.errors.full_messages

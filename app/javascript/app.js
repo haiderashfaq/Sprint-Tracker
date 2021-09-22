@@ -33,6 +33,15 @@ $(document).ready(function() {
   });
   dateTimeFunc();
 
+  $('body').on('select2:open', '.js-select-field-single', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
+
+  $('body').on('select2:open', '.js-select-field', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
+
+
   $("#modal").on('shown.bs.modal', dateTimeFunc);
   $('#menu-btn').on('click', function() {
     $('#sidebar').toggleClass("active");
@@ -44,6 +53,13 @@ $(document).ready(function() {
     $("#" + select_container_id).addClass('show');
     $(".js-" + select_container_id + "-field").prop("disabled", false);
   });
+
+  if (window && window.localStorage.getItem('sidebar') === 'active') {
+      // if it active show it as active
+      $("#sidebar").addClass("active");
+  } else {
+      $("#sidebar").removeClass("active");
+  } 
 
 });
 
