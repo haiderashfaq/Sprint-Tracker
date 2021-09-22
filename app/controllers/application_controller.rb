@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     flash[:error] = exception.message
-    render file: 'app/views/errors/not_found.html.erb', layout: false, status: 404
+    raise ActionController::RoutingError, 'Not Found'
   end
 
   def set_tenant_id
