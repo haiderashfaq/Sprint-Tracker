@@ -43,10 +43,6 @@ class Issue < ApplicationRecord
     time_logs.sum(:logged_time)
   end
 
-  def remaining_progression_percentage(time_progression_ratio)
-    100 - time_progression_ratio
-  end
-
   def self.get_errors_of_collection(issues)
     errors = []
     issues.each do |issue|
