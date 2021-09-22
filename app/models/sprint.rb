@@ -1,4 +1,6 @@
 class Sprint < ApplicationRecord
+  searchkick word_middle: %i[name description]
+
   belongs_to :company
   belongs_to :project
   belongs_to :creator, class_name: 'User'

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Issue < ApplicationRecord
+  searchkick word_middle: %i[titile description]
+
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed' }.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
   CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
