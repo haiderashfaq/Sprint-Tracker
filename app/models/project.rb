@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
   include DateValidations
   include TimeProgressions
-  searchkick word_middle: [:name]
+  searchkick word_middle: %i[name], filterable: %i[company_id]
 
   before_destroy :check_for_sprints, :check_for_issues
 

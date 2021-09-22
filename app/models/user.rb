@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  searchkick word_middle: %i[name email]
+  searchkick word_middle: %i[name email], filterable: %i[company_id]
 
   sequenceid :company, :users
   devise :database_authenticatable, :registerable,
