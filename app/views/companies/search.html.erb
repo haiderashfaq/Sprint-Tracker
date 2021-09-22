@@ -1,56 +1,8 @@
 <div class="container pb-5">
   <h1><%= t('shared.search').titleize %></h1>
-  <div class="row">
-    <div class="col">
-      <% @results.each do |result| %>
-        <div class="card shadow-lg mb-3">
-          <div class="row">
-            <% if result.instance_of? Project  %>
-              <div class="col-3 p-5 bg-primary bg-gradient bg-opacity-75 d-flex justify-content-center align-items-center">
-                <small class="fs-5"><%= t('projects.project_label')  %></small>
-              </div>
-              <div class="col-9">
-                <h5 class="card-title pt-3"><%= link_to result.name, result %></h5>
-              </div>
-            <% elsif result.instance_of? Issue  %>
-              <div class="col-3 p-5 bg-danger bg-gradient bg-opacity-75 d-flex justify-content-center align-items-center">
-                <small class="fs-5"><%= t('issues.issue_label')  %></small>
-              </div>
-              <div class="col-9">
-                <h5 class="card-title pt-3"><%= link_to result.title, result %></h5>
-                <p class="card-text"><%= result.description %></p>
-              </div>
-            <% elsif result.instance_of? Sprint  %>
-              <div class="col-3 p-5 bg-info bg-gradient bg-opacity-75 d-flex justify-content-center align-items-center">
-                <small class="fs-5"><%= t('sprints.label')  %></small>
-              </div>
-              <div class="col-9">
-                <h5 class="card-title pt-3"><%= link_to result.name, result %></h5>
-                <p class="card-text"><%= result.description %></p>
-              </div>
-            <% elsif result.instance_of? User  %>
-              <div class="col-3 p-5 bg-success bg-gradient bg-opacity-75 d-flex justify-content-center align-items-center">
-                <small class="fs-5"><%= t('users.label').pluralize %></small>
-              </div>
-              <div class="col-9">
-                <h5 class="card-title pt-3"><%= link_to result.name, result %></h5>
-                <p class="card-text"><%= result.email %></p>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-      <%= will_paginate @results %>
-    </div>
-    <div class="col-2">
-      <div class="text-start">
-        <h5><%= pluralize(@results.total_count, t('shared.search_result'))  %>:</h5>
-        <hr />
-        <h6><%= pluralize(model_count_in_search_result(@results, "projects"), t('projects.project_label')) %></h6>
-        <h6><%= pluralize(model_count_in_search_result(@results, "sprints"), t('sprints.label')) %></h6>
-        <h6><%= pluralize(model_count_in_search_result(@results, "issues"), t('issues.issue_label')) %></h6>
-        <h6><%= pluralize(model_count_in_search_result(@results, "users"), t('users.label')) %></h6>
-      </div>
-    </div>
-  </div>
+  <% if @results.total_count == 0 %>
+    <%= render 'shared/no_resource_present', record: t('shared.failure.search', resource_label: params[:query])  %>
+  <% else %>
+    <%= render 'search_results', results: @results  %>
+  <% end %>
 </div>
