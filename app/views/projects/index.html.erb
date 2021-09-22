@@ -17,26 +17,30 @@
       <%= render partial: 'shared/no_resource_present', locals: { record: 'projects.project_label' } %>
     </div>
   <% else %>
-    <table class="table table-hover border-primary text-center" id="projects-datatable" data-source="<%= projects_path(format: :json) %>">
-      <thead class="bg-primary text-light">
-        <tr>
-          <th><%= t('shared.name') %></th>
-          <th><%= t('shared.start_date') %></th>
-          <th><%= t('shared.end_date') %></th>
-          <th><%= t('shared.manager') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @projects.each do |project| %>
+  <div class="card mt-4 dashboard-card-border">
+    <div class="card-body">
+      <table class="table table-hover border-primary text-center" id="projects-datatable" data-source="<%= projects_path(format: :json) %>">
+        <thead class="bg-primary text-light">
           <tr>
-            <td><%= link_to project.name, project %></td>
-            <td><%= project.start_date&.to_formatted_s(:long) %></td>
-            <td><%= project.end_date&.to_formatted_s(:long) %></td>
-            <td><%= project.manager.name %></td>
+            <th><%= t('shared.name') %></th>
+            <th><%= t('shared.start_date') %></th>
+            <th><%= t('shared.end_date') %></th>
+            <th><%= t('shared.manager') %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @projects.each do |project| %>
+            <tr>
+              <td><%= link_to project.name, project %></td>
+              <td><%= project.start_date&.to_formatted_s(:long) %></td>
+              <td><%= project.end_date&.to_formatted_s(:long) %></td>
+              <td><%= project.manager.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <% end %>
   <%= will_paginate @projects %>
 </div>

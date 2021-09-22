@@ -6,6 +6,7 @@ $('#modal .modal-flash-messages').prepend("<%= escape_javascript render partial:
   <% @issues.each do |issue| %>
     $("#issue_<%= issue.id %>").remove()
   <% end %>
+
   <% count = @issues[0].sprint.issues.count %>
   $("#sprint_<%= @sprint_id %> #no_of_issues").html("<%= "#{pluralize(count, t('issues.issue_label'))}" %>")
 <% end %>

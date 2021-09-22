@@ -7,6 +7,7 @@ class TimeLogsController < ApplicationController
     @time_logs = @time_logs.paginate(page: params[:page])
     respond_to do |format|
       format.js
+      format.html
     end
   end
 
@@ -31,11 +32,10 @@ class TimeLogsController < ApplicationController
     end
   end
 
-  # POST /time_logs or /time_logs.json
-  #redirect_to issue_time_logs_url,
+
+  # POST /time_logs
   def create
     @time_log = TimeLog.new(time_log_params)
-    @time_log.issue = Issue.find_by(sequence_num: params[:issue_id])
     @time_log.assignee_id = current_user.id
 
     respond_to do |format|

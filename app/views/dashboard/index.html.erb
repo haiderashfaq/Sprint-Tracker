@@ -11,3 +11,16 @@
     <% end %>
   </p>
 </div>
+<% if can? :manage, Project %>
+  <div class="dashboard-container">
+    <%= render partial: "navbar" %>
+    <%= render partial: "tab_content" %>
+  <% elsif can? :edit, Project%>
+    <%= render partial: "navbar" %>
+    <%= render partial: "tab_content_project_lead" %>
+  <% elsif can? :read, Project%>
+    <%= render partial: "navbar" %>
+    <%= render partial: "tab_content" %>
+  <% end %>
+</div>
+

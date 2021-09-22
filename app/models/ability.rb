@@ -10,6 +10,7 @@ class Ability
       admin_permissions_for_users(user)
       admin_permissions_for_sprint(user)
       admin_permissions_for_project(user)
+      admin_permissions_for_project(user)
       admin_permissions_for_issues(user)
       admin_permissions_for_projects_users(user)
       admin_permissions_for_time_logs(user)
@@ -54,6 +55,10 @@ class Ability
     can :manage, TimeLog, company_id: user.company_id
   end
 
+  def admin_permissions_for_time_logs(user)
+    can :manage, TimeLog, company_id: user.company_id
+  end
+
   def admin_permissions_for_sprint(user)
     can :manage, Sprint, company_id: user.company_id
   end
@@ -91,7 +96,11 @@ class Ability
   end
 
   def member_permissions_for_issues(user)
-    can :create, Issue, company_id: user.company_id
+    can %i[read fetch_resource_issues], Issue, company_id: user.company_id
+  end
+
+  def member_permissions_for_time_logs(user)
+    can :manage, TimeLog, user_id: user.id, company_id: user.company_id
   end
 
   def member_permissions_for_time_logs(user)

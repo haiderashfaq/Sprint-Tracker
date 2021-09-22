@@ -18,7 +18,6 @@ Rails.application.routes.draw do
       resources :projects_users
       resources :issues
     end
-
     resources :sprints do
       resources :issues
       member do
@@ -31,22 +30,27 @@ Rails.application.routes.draw do
     end
 
     resources :issues do
+      resources :time_logs
       collection do
         post 'add_issues_to_sprint'
+        get 'fetch_resource_issues', as: 'fetch_resource'
       end
     end
     resources :issues do
       resources :time_logs
     end
+    resources :dashboard
+
     resources :users do
     end
 
-    get '/history', to: 'issues#history'
-    resources :reports, only: :index do
+
+  	get '/history', to: 'issues#history'
+  	resources :reports, only: :index do
       collection do
         get 'sprint'
         get 'issues'
       end
     end
-  end
+	end
 end
