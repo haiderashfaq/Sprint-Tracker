@@ -43,7 +43,11 @@ Rails.application.routes.draw do
 
   	get '/history', to: 'issues#history'
   	resources :reports, only: :index
-  	get '/sprint/report', to: 'reports#sprint_report'
-  	get '/issue/report', to: 'reports#issue_report'
+  	resources :reports, only: :index do
+      collection do
+        get 'sprint'
+        get 'issues'
+      end
+    end
 	end
 end

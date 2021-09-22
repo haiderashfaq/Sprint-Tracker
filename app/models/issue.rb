@@ -2,11 +2,11 @@
 
 class Issue < ApplicationRecord
   STATUS = { Open: 'Open', 'In Progress'.to_sym=> 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed' }.freeze
-  searchkick word_middle: %i[titile description]
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
   CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
-
+  CLOSED = 'Closed'
+  searchkick word_middle: %i[titile description]
   include DateValidations
 
   belongs_to :company

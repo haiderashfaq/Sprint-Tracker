@@ -3,7 +3,7 @@
   <% if issue.assignee.present? %>
     <% assignee_name = link_to issue.assignee_name, user_path(issue.assignee.sequence_num) %>
   <% end %>
-  <td><span class="badge rounded-pill bg-<%= IssuesHelper::STATUS_COLOR[issue.status.to_sym] %>">
+  <td><span class="badge rounded-pill bg-<%= get_status_color(issue.status) %>">
     <%= issue.status %></span></td>
   <td><%= link_to issue.title, issue_path(issue) %></td>
   <td><%= assignee_name %> </td>

@@ -1,5 +1,0 @@
-$('#filter').html("<%= escape_javascript render(:partial => 'reports/sprint_filter',  :locals=>{ sprints: @sprints } ) %>");
-<% if @sprint.present? %>
-  $('#header').html("<%= escape_javascript render(:partial => 'reports/sprint_report_header',  :locals=>{ sprint_id: @sprint&.id } ) %>");
-<% end %>
-$('#sprint_report_table').html("<%= escape_javascript render(:partial => 'reports/sprint_report_table',  :locals=>{ sprint_report_attributes: @sprint_report_attributes } ) %>");

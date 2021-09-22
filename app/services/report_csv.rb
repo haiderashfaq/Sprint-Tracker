@@ -1,14 +1,14 @@
 class ReportCsv
-  def initialize(attributes, values)
+  def initialize(attributes, records)
     @attributes = attributes
-    @values = values
+    @records = records
   end
 
   def to_csv
     CSV.generate(headers: true) do |csv|
       csv << @attributes
-      @values.each do |report|
-        csv << @attributes.map { |attr| report.send(attr) }
+      @records.each do |record|
+        csv << @attributes.map { |attr| record.send(attr) }
       end
     end
   end
