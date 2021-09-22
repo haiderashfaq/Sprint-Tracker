@@ -7,9 +7,9 @@
     <ul>
       <% audit[:audited_changes].each do |attribute, value| %>
         <li> 
-          <% value = user_name(attribute, value) %>
+          <% value = set_format(attribute, value) %>
           <b><%= attribute.titleize %></b>
-          updated from <I><%= value[0].to_s %></I> to <I><%= value[1].to_s %></I>
+          updated from <I><%= value[0] %></I> to <I><%= value[1] %></I>
         </li>
       <% end %>
     </ul>

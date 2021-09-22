@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
 
   def sprint_report
     unless params[:sprint_id].nil?
-      @sprint = @sprints.find(params[:sprint_id])
+      @sprint = @sprints.find_by(id: params[:sprint_id])
       @sprint_report_attributes = @sprint.issues.left_outer_joins(:time_logs).group('issues.assignee_id').select("issues.*, sum(time_logs.logged_time) as total_time_spent, count(*) AS total_issues, count('Open') as open_issues, count('Resolved') as resolved_issues, sum(estimated_time) as total_estimated_time").paginate(page: params[:page])
     end
     respond_to do |format|
@@ -20,7 +20,7 @@ class ReportsController < ApplicationController
 
   def issue_report
     unless params[:sprint_id].nil?
-      @sprint = @sprints.find(params[:sprint_id])
+      @sprint = @sprints.find_by(id: params[:sprint_id])
       @issue_report_attributes = @sprint.issues.order("assignee_id DESC").select("issues.*").paginate(page: params[:page])
     end
     respond_to do |format|

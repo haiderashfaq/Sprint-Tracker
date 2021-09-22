@@ -23,7 +23,7 @@
         <% end %>
     </tbody>
   </table>
-  <%= will_paginate issues_report_attributes %>
+  <%= js_paginate issues_report_attributes %>
   <%= pie_chart issues_report_attributes&.unscope(:group)&.group(:status)&.count, colors: [ '#e34','#17f','#285','#1df' ] ,class: "mb-5" %>
     <% end %>
 </div>
