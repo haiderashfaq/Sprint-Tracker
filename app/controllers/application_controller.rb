@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
-    redirect_to root_url
+    render file: 'app/views/errors/access_denies.html.erb', layout: false, status: 401
   end
   rescue_from ActionController::UnknownFormat do |exception|
     flash[:error] = exception.message
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     flash[:error] = exception.message
-    render file: 'public/404.html', status: :not_found
+    render file: 'app/views/errors/not_found.html.erb', layout: false, status: 404
   end
 
   def set_tenant_id

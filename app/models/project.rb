@@ -23,10 +23,6 @@ class Project < ApplicationRecord
   has_many :users, through: :projects_users, dependent: :destroy
 
   sequenceid :company, :projects
-  validates :name, :manager, :creator, presence: true
-  validates :name, length: { maximum: 100, minimum: 4 }
-  validates :name, :manager_id, :creator_id, presence: true
-  validates :name, length: { maximum: 100, minimum: 4 }
   validate_dates :start_date, :end_date
 
   def total_spent_time
