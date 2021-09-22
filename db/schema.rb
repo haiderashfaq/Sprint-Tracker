@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_104336) do
+ActiveRecord::Schema.define(version: 2021_09_21_132426) do
 
   create_table "audits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "auditable_id"
@@ -42,6 +42,21 @@ ActiveRecord::Schema.define(version: 2021_09_16_104336) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["owner_id"], name: "index_companies_on_owner_id"
     t.index ["subdomain"], name: "index_companies_on_subdomain"
+  end
+
+  create_table "delayed_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "issues", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -131,7 +146,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_104336) do
     t.bigint "creator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "status"
+    t.string "status", default: "PLANNING"
     t.index ["company_id"], name: "index_sprints_on_company_id"
     t.index ["creator_id"], name: "index_sprints_on_creator_id"
     t.index ["project_id"], name: "index_sprints_on_project_id"
@@ -139,7 +154,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_104336) do
   end
 
   create_table "time_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.date "date"
+    t.datetime "date"
     t.decimal "logged_time", precision: 10, scale: 2, null: false
     t.text "work_description", null: false
     t.bigint "company_id", null: false

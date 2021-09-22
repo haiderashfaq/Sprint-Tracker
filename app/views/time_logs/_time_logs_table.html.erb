@@ -11,7 +11,7 @@
   </thead>   
   <tbody id="time_logs_datatable_body">
     <% time_logs.each do |time_log| %> 
-    <%= render 'time_logs_datatable_row', time_log: time_log, issue: time_log.issue %> 
+      <%= render 'time_logs_datatable_row', time_log: time_log, issue: time_log.issue %> 
     <% end %>   
   </tbody>
 </table>

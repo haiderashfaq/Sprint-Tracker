@@ -26,6 +26,18 @@ class Project < ApplicationRecord
   validates :name, length: { maximum: 100, minimum: 4 }
   validate_dates :start_date, :end_date
 
+  def total_spent_time
+    issues.sum(:estimated_time)
+  end
+
+  def total_logged_time
+    TimeLog.joins(:issue).sum(:logged_time)
+  end
+
+  def self.project_lead_fetch_sprints
+    @current_company.projects.where(manager: current_user)
+  end
+
   def sprints_and_issues
     sprints = self.sprints.includes(:issues).where(status: Sprint::STATUS[:PLANNING]).order(:start_date, :created_at)
     issues = self.issues.where(sprint: nil)

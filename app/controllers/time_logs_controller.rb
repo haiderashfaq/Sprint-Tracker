@@ -7,6 +7,7 @@ class TimeLogsController < ApplicationController
     @time_logs = @time_logs.paginate(page: params[:page])
     respond_to do |format|
       format.js
+      format.html
     end
   end
 
@@ -31,26 +32,18 @@ class TimeLogsController < ApplicationController
     end
   end
 
-  # POST /time_logs or /time_logs.json
-  #redirect_to issue_time_logs_url,
+  # POST /time_logs
   def create
-    if !DateTime.parse(params[:time_log][:date]).to_date.respond_to?(:strftime)
-      respond_to do |format|
-        format.js { flash.now[:error] = "Please enter a valid date" }
-      end
-    else
-      @time_log = TimeLog.new(time_log_params)
-      @time_log.issue = Issue.find_by(sequence_num: params[:issue_id])
-      @time_log.assignee_id = current_user.id
+    @time_log = TimeLog.new(time_log_params)
+    @time_log.assignee_id = current_user.id
 
-      respond_to do |format|
-        if @time_log.save
-          format.js { flash.now[:notice] = t('shared.success.create', resource_label: t('time_logs.label')) }
-        else
-          format.js do
-            flash.now[:error] = @time_log.errors.full_messages
-            flash.now[:error] << t('shared.failure.create', resource_label: t('time_logs.label'))
-          end
+    respond_to do |format|
+      if @time_log.save
+        format.js { flash.now[:notice] = t('shared.success.create', resource_label: t('time_logs.label')) }
+      else
+        format.js do
+          flash.now[:error] = @time_log.errors.full_messages
+          flash.now[:error] << t('shared.failure.create', resource_label: t('time_logs.label'))
         end
       end
     end
@@ -81,12 +74,7 @@ class TimeLogsController < ApplicationController
 
   private
 
-    def set_time_log
-      @time_log = TimeLog.find(params[:id])
-    end
-
-    def time_log_params
-      params.require(:time_log).permit(:name, :date, :logged_time, :work_description)
-    end
-
+  def time_log_params
+    params.require(:time_log).permit(:name, :date, :logged_time, :work_description)
+  end
 end

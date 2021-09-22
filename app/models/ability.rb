@@ -91,6 +91,6 @@ class Ability
   end
 
   def member_permissions_for_time_logs(user)
-    can :manage, TimeLog, id: user.id
+    can :manage, TimeLog, user_id: user.id, company_id: user.company_id
   end
 end

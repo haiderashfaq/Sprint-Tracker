@@ -27,8 +27,7 @@ class Issue < ApplicationRecord
   belongs_to :project, optional: true
   has_many :time_logs, dependent: :destroy
   belongs_to :project
-  has_many :time_logs, dependent: :destroy
-  scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
+  scope :filter_by_attribute, ->(column, value) { where column => value }
 
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
@@ -42,8 +41,12 @@ class Issue < ApplicationRecord
   end
 
   def self.time_progression(logged_time_sum, issue_estimated_time)
-    progress_ratio = [logged_time_sum, issue_estimated_time].min / [logged_time_sum, issue_estimated_time].max
+    progress_ratio = [logged_time_sum, issue_estimated_time].min / ([logged_time_sum, issue_estimated_time].max.nonzero? || 1)
     progress_ratio.to_f * 100
+  end
+
+  def remaining_progression_percentage(time_progression_ratio)
+    100 - time_progression_ratio
   end
 
   def self.get_errors_of_collection(issues)

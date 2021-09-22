@@ -2,20 +2,16 @@ class Dashboard
 
   def self.issues_estimated_time(project)
     total_time = 0
-    project.issues.each do |issue|
-      total_time += issue.estimated_time
+    if project.issues.any?
+      total_time = project.total_spent_time
     end
-    total_time
   end
 
   def self.issues_logged_time(project)
     total_time = 0
-    if project.active_sprint.present?
-      project.active_sprint.issues.each do |issue|
-        total_time += issue.total_spent_time
-      end
+    if project.issues.any?
+      total_time = project.total_logged_time
     end
-    total_time
   end
 
   def self.fetch_project_issues(project)
@@ -25,7 +21,7 @@ class Dashboard
   end
 
   def self.fetch_projects
-    Project.all
+    Company.current_company.projects
   end
 
   def self.fetch_sprints
@@ -33,17 +29,13 @@ class Dashboard
   end
 
   def self.fetch_issues
-    Issue.all
+    Company.current_company.issues
   end
 
   def self.fetch_sprint_issues(project)
     if project.active_sprint.present?
       project.active_sprint.issues
     end
-  end
-
-  def project_lead_fetch_sprints
-    Project.all.where(manager: current_user)
   end
 
 end

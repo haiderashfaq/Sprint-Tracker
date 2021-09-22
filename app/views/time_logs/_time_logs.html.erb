@@ -20,16 +20,15 @@
       <tbody>
        <% @time_logs.each do |time_log| %> 
         <tr>  
-        <td><%= time_log.assignee.name %></td> 
-        <td><%= time_log.logged_time %></td> 
-        <td><%= time_log.date%></td> 
-        <td><%= time_log.work_description%></td> 
-        <td><%= time_log.issue.title%></td> 
-        <td><%= link_to "", [:edit, time_log.issue, time_log], class: "bi bi-pencil-fill"  %>
-          <%= link_to "", [time_log.issue, time_log] ,method: :delete,
-                data: { confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
-        </td>
-
+          <td><%= time_log.assignee.name %></td> 
+          <td><%= time_log.logged_time %></td> 
+          <td><%= time_log.date%></td> 
+          <td><%= time_log.work_description%></td> 
+          <td><%= time_log.issue.title%></td> 
+          <td><%= link_to "", [:edit, time_log.issue, time_log], class: "bi bi-pencil-fill"  %>
+            <%= link_to "", [time_log.issue, time_log] ,method: :delete,
+                  data: { confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
+          </td>
         </tr> 
        <% end %>   
       </tbody>
