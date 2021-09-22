@@ -6,10 +6,10 @@ class UserMailer < ApplicationMailer
   #   en.user_mailer.alert.subject
   #
 
-  default from: EMAIL
+  default from: FLASH_INFO_EMAIL
 
-  def alert(user, issue, subdomain, current_user, subject)
-    @greeting = "Hi " + user.name
+  def issue_alert(user, issue, subdomain, current_user, subject)
+    @name = user.name
     @issue = issue
     @subdomain = subdomain
     @current_user = current_user

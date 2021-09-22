@@ -19,7 +19,7 @@ class Issue < ApplicationRecord
   validate_dates :actual_start_date, :actual_end_date
   scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
 
-  before_save :send_alert
+  after_save :send_alert
 
   belongs_to :company
   belongs_to :project
@@ -58,14 +58,13 @@ class Issue < ApplicationRecord
   end
 
   private
-  def send_alert
-    company = Company.current_company
-    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]) or company.users.where(role_id: User::ROLE_ID[:admin])
+  def issue_alert
+    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]).or(company.users.where(role_id: User::ROLE_ID[:admin]))
 
-    subject = "Issue Notification"
+    subject = I18n.t('issues.email_subject')
 
     users.each do |user|
-      UserMailer.delay.alert(user, self, Company.current_company.subdomain, Current.user, subject)
+      UserMailer.delay.issue_alert(user, self, Company.current_company.subdomain, Current.user, subject, changes)
     end
   end
 end
