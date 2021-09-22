@@ -24,10 +24,6 @@ class ApplicationController < ActionController::Base
     Company.current_company_id = nil
   end
 
-  def after_sign_in_path_for(resource)
-    root_path
-  end
-
   def current_company
     return if PUBLIC_SUBDOMAINS.include? request.subdomain
 

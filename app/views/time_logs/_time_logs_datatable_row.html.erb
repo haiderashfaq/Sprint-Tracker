@@ -1,0 +1,26 @@
+<tr id="time_log_<%= time_log.sequence_num %>">  
+  <td><%= time_log.assignee.name %></td> 
+  <td><%= time_log.logged_time %></td> 
+  <td class="col-2"><%= time_log&.date.to_formatted_s(:long) %></td> 
+  <td><%= time_log.work_description %></td> 
+  <td><%= time_log.issue.title %></td> 
+  <td>
+    <% if can? :edit, TimeLog => issue, timelog: { assignee: current_user } %>
+      <%= link_to ' ', [:edit, time_log.issue, time_log], remote: true, class:"bi bi-pencil-fill" %>
+    <% elsif can? %i[read create update destroy], Project %>
+      <%= link_to ' ', [:edit, time_log.issue, time_log], remote: true, class:"bi bi-pencil-fill" %>
+    <% elsif can? :manage, TimeLog  %>
+      <%= link_to ' ', [:edit, time_log.issue, time_log], remote: true, class:"bi bi-pencil-fill" %>
+    <% end %>
+    <% if can? :destroy, TimeLog => issue %>
+      <%= link_to "", [time_log.issue, time_log], remote: true ,method: :delete,
+      data: { confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
+    <% elsif can? %i[read create update destroy], Project %>
+      <%= link_to "", [time_log.issue, time_log], remote: true ,method: :delete,
+      data: { confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
+    <% elsif can? :manage, TimeLog  %>
+      <%= link_to "", [time_log.issue, time_log], remote: true ,method: :delete,
+      data: { confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
+    <% end %>
+  </td>
+</tr> 

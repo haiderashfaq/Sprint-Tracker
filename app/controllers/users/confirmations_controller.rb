@@ -4,7 +4,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   protected
 
   def after_confirmation_path_for(resource_name, resource)
-    return root_url if params[:confirmation_token].blank? || (resource = resource_class.find_by_confirmation_token(params[:confirmation_token])).blank?
+    return root_url if params[:confirmation_token].blank? || (resource = resource_class.find_by_confirmation_token(params[:confirmation_token])).blank? || resource.has_password?
 
     # Setting reset_password_token itself to reach reset password screen for the user
     resource = resource_class.find_by(confirmation_token: params[:confirmation_token])

@@ -1,0 +1,46 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header"></div>
+    <div class="modal-flash-messages"></div>
+    <%= form_with model:([@issue, @time_log]), local:false  do |form| %>
+      <div class="modal-body">
+        <% total_logged_time = @issue.total_spent_time %>
+        <% time_progression_ratio = issue.time_progression %>
+        <div class="d-flex">
+          <i class='bx bx-alarm'></i>
+          <%= render partial: "progress", locals: { instance: @issue, time_progression_ratio: time_progression_ratio, total_logged_time: total_logged_time, width: "", estimated_time: issue.estimated_time} %>
+        </div>
+          <br>
+         <div class="row g-3 align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-4 col-lg-2 asterick">
+            <%= form.label :log_time, class: 'col-form-label col-form-label-md' %>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6 asterick">
+            <%= form.text_field :logged_time,required: true, class: 'form-control form-control-md' %>
+          </div>
+        </div>
+        <div class="row g-3 align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-4 col-lg-2">
+            <%= form.label t('shared.start_date'), class: 'col-form-label col-form-label-md control-label' %>
+          </div>
+          <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+            <%= form.date_field :date, class: 'form-control form-control-md' %>
+          </div>
+        </div>
+        <div class="row g-3 align-items-center mb-3  asterick">
+          <div class="col-12 col-sm-4 col-md-4 col-lg-2 control-label">
+            <%= form.label :work_description, class: 'col-form-label col-form-label-md' %>
+          </div>
+          <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+            <%= form.text_area :work_description,  :cols => 40, :rows =>5, class: 'form-control form-control-md', required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= form.submit class: 'btn btn-primary fa fa-check', remote: true %>
+        <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
+      </div>
+    <% end %>
+  </div>
+</div>
+

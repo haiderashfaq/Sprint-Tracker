@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :reviewed_issues, class_name: 'Issue', foreign_key: 'reviewer_id', dependent: :nullify
   has_many :projects_users
   has_many :projects, through: :projects_users
+  has_many :time_logs, foreign_key: 'assignee_id', dependent: :nullify
 
   belongs_to :company
   accepts_nested_attributes_for :company
@@ -17,7 +18,8 @@ class User < ApplicationRecord
   validates_format_of :email, with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }, unless: -> { new_member }
   validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
-  validates :name, presence: true, length: { minimum: 2, maximum: 22 }
+  validates :name, presence: true, length: { minimum: 2, maximum: 40 }
+  before_destroy :check_dependent_resources?, prepend: true
 
   ROLE_ID = { admin: 1, member: 2 }.freeze
   validates :role_id, presence: true, inclusion: { in: ROLE_ID.values }
@@ -66,5 +68,20 @@ class User < ApplicationRecord
 
   def will_save_change_to_email?
     false
+  end
+
+  private
+
+  def check_dependent_resources?
+    if assigned_issues.any?
+      self.errors.add(:base, "Can't be destroyed because User is assigned an issue")
+      throw :abort
+    elsif reviewed_issues.any?
+      self.errors.add(:base, "Can't be destroyed because User is reviewing an issue")
+      throw :abort
+    elsif time_logs.any?
+      self.errors.add(:base, "Can't be destroyed because User is working on an issue")
+      throw :abort
+    end
   end
 end

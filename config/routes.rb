@@ -18,7 +18,6 @@ Rails.application.routes.draw do
       resources :projects_users
       resources :issues
     end
-
     resources :sprints do
       member do
         get 'start_sprint_info'
@@ -30,11 +29,13 @@ Rails.application.routes.draw do
     end
 
     resources :issues do
+      resources :time_logs
       collection do
         post 'add_issues_to_sprint'
+        get 'fetch_resource_issues', as: 'fetch_resource'
       end
     end
-
+    resources :dashboard
     resources :users do
     end
   end

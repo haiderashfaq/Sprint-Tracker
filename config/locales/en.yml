@@ -54,16 +54,21 @@ en:
     category: 'Category'
     priority: 'Priority'
     title: 'Title'
+    high: High
     create_issue: "Create Issue"
     actual_start_date: 'Actual Start Date'
     actual_end_date: 'Actual End Date'
     no_histoires: 'No Histories yet!'
     history_label: 'History'
+    created_issue: Created Issue
+    assigned_issue: Assigned Issue
+    reviewed_issue: Reviewed Issue
     add_issues: "Add Issues"
     completed: "Completed Issues"
     not_completed: "Issues Not Completed"
     unresolved_issues_msg: "Select where all unresolved issues should be moved"
     move: "Move Issue to:"
+
     issues_added_success: "Issues added Successfully to Sprint"
     assignee: 'Assignee'
     reviewer: 'Reviewer'
@@ -94,6 +99,7 @@ en:
     report: "Status Report"
     burndown_chart: "Burndown Chart"
     started: "Sprint Started Successfully"
+    sprint_deletion_error: "Sprint contains Issues. Cannot delete Sprint."
     
   users:
     label: 'User'
@@ -108,6 +114,12 @@ en:
   companies:
     company_label: 'Company'
     list_company_label: 'Your Companies'
+
+  time_logs:
+    label: 'Time log'
+    assignee: Assignee
+    date: Date
+    description: Description
     creator: "Created By"
     started_on: "Started On"
     starting_on: "Starting On"
@@ -158,6 +170,9 @@ en:
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
     select_resource: "Select %{resource_label}"
+    cancel: 'Cancel'
+    total: Total
+    completed: Completed
     no_resource_found: "No %{resource_label} Found"
     success:
       add: "%{resource_label} added Successfully"

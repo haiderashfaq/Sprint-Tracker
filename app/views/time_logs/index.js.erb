@@ -1,0 +1,6 @@
+$('#nav-time_logs').html("<%= escape_javascript render('time_logs_index', time_logs: @time_logs, issue: @issue) %>");
+<% if @time_logs.present? %>
+  $('#time_logs_datatable_space').html("<%= escape_javascript render('time_logs_table', issue: @issue, time_logs: @time_logs) %>");
+<% else %>
+  $('#time_logs_datatable_space').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: 'time_logs.label' }) %>");
+<% end %>
