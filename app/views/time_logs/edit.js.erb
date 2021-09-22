@@ -1,0 +1,3 @@
+$('#modal').html("<%= escape_javascript render('form', issue: @issue, time_log: @time_log) %>");
+$('#modal .modal-header').html("<h1><%= t('shared.edit_resource', resource_label: t('time_logs.label')) %></h1>");
+$('#modal').modal('show');

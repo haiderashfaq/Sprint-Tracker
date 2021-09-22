@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
   load_and_authorize_resource :issue, find_by: :sequence_num, through: :project, if: -> { params[:project_id].present? }
   load_and_authorize_resource :issue, find_by: :sequence_num, through: :current_company, if: -> { params[:project_id].blank? }
   before_action :set_creator, only: :create
-  before_action :fetch_required_data, only: [:new, :edit, :index]
+  before_action :fetch_required_data, only: [:new, :edit, :index, :fetch_resource_issues]
 
   # GET /issues
   def index
@@ -13,7 +13,6 @@ class IssuesController < ApplicationController
     respond_to do |format|
       format.js
       format.html
-      format.js
     end
   end
 
@@ -82,6 +81,23 @@ class IssuesController < ApplicationController
         format.js
         format.html { render :show }
       end
+    end
+  end
+
+
+  def fetch_resource_issues
+    if params[:assignee_id].present?
+      @issues = Issue.joins(:assignee).where(assignee_id: current_user.id)
+    elsif params[:creator_id].present?
+      @issues = Issue.joins(:creator).where(creator_id: current_user.id)
+    elsif params[:reviewer_id].present?
+      @issues = Issue.joins(:reviewer).where(reviewer_id: current_user.id)
+    else
+      @issues = Issue.joins(:assignee).where(assignee_id: current_user.id)
+    end
+    @issues = @issues.paginate(page: params[:page])
+    respond_to do |format|
+      format.js
     end
   end
 

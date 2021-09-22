@@ -42,10 +42,19 @@ $(document).ready(function() {
   $("#modal").on('shown.bs.modal', dateTimeFunc);
 
 
-  $('#menu-btn').on('click', function() {
-    $('#sidebar').toggleClass("active");
+  if (window && window.localStorage.getItem('sidebar') === 'active') {
+      // if it active show it as active
+      $("#sidebar").addClass("active");
+  } else {
+      $("#sidebar").removeClass("active");
+  } 
+
+
+ $("#menu-btn").click(function() {
+    $("#sidebar").toggleClass("active");
   });
 });
+
 
 var dateTimeFunc = function() {
   $(".js-flatpickr-datetime").flatpickr({

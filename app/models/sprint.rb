@@ -1,6 +1,5 @@
 class Sprint < ApplicationRecord
   searchkick word_middle: %i[name description], filterable: %i[company_id]
-  # , merge_mappings: true, mappings: { properties: { company_id: { type: 'keyword' } } }
 
   belongs_to :company
   belongs_to :project
@@ -17,6 +16,16 @@ class Sprint < ApplicationRecord
   validate_dates :start_date, :end_date
   validate_dates :estimated_start_date, :estimated_end_date
   validates :status, inclusion: { in: STATUS.values }
+
+  before_destroy :check_for_issues, prepend: true
+
+  def total_spent_time
+    issues.joins(:time_logs).sum(:logged_time)
+  end
+
+  def total_estimated_time
+    issues.sum(:estimated_time)
+  end
 
   def activate_sprint
     begin
@@ -55,7 +64,7 @@ class Sprint < ApplicationRecord
     begin
       transaction(requires_new: true) do
         issues.each do |issue|
-          Sprintreport.create!(sprint: self, issue: issue, status: (issue.status == Issue::STATUS['Resolved'] ? Sprintreport::STATUS[:CLOSED] : Sprintreport::STATUS[:IN_PROGRESS]))
+          Sprintreport.create!(sprint: self, issue: issue, status: (issue.status == Issue::STATUS[:'Closed'] ? Sprintreport::STATUS[:CLOSED] : Sprintreport::STATUS[:IN_PROGRESS]))
         end
       end
     rescue ActiveRecord::RecordInvalid => e
@@ -83,5 +92,14 @@ class Sprint < ApplicationRecord
     issues_resolved = issues.where(status: Issue::STATUS[:'Resolved'])
     issues_closed = issues.where(status: Issue::STATUS[:'Closed'])
     [issues_to_do, issues_in_progress, issues_resolved, issues_closed]
+  end
+
+  private
+
+  def check_for_issues
+    return unless issues.exist?
+
+    errors.add(:base, I18n.t('sprints.sprint_deletion_error'))
+    throw :abort
   end
 end
