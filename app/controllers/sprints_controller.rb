@@ -23,7 +23,6 @@ class SprintsController < ApplicationController
   # POST /projects/:sequence_num/sprints/new
   def create
     @sprint.creator = current_user
-    @sprint.status = "PLANNING"
     respond_to do |format|
       if @sprint.save
         format.js { flash.now[:notice] = t('shared.success.create', resource_label: t('sprints.label')) }
@@ -121,6 +120,6 @@ class SprintsController < ApplicationController
   private
 
   def sprint_params
-    params.require(:sprint).permit(:name, :description, :start_date, :end_date, :estimated_start_date, :estimated_end_date, :project_id, status: "PLANNING")
+    params.require(:sprint).permit(:name, :description, :start_date, :end_date, :estimated_start_date, :estimated_end_date, :project_id, status: Sprint::STATUS[:PLANNING])
   end
 end

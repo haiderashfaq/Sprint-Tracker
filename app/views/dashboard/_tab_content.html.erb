@@ -14,12 +14,12 @@
             <div class="card mt-4 dashboard-card-border">
               <div class="card-body">
                 <h6 class="card-title ms-2"><%= t('shared.total') + ' ' + t('sprints.label').pluralize %></h6>
-                <div class="text-7xl royal-blue"><%= Dashboard.fetch_sprints.count %>
+                <div class="text-7xl royal-blue"><%= @sprints.count %>
                 </div>
                 <div class="d-flex justify-content-center">
                   <div class="text-md me-1"><%= t('shared.completed') + ':' %>
                   </div>
-                  <h6><%= Dashboard.fetch_sprints.where(status: "CLOSED").count %></h6>
+                  <h6><%= @sprints.where(status: "CLOSED").count %></h6>
               </div>
             </div>
           </div>
@@ -28,7 +28,7 @@
           <div class="card mt-4 dashboard-card-border">
             <div class="card-body">
               <h6 class="card-title ms-2"><%= t('shared.total') + ' ' + t('projects.project_label').pluralize %></h6>
-              <div class="text-7xl medium-green"><%= Dashboard.fetch_projects.count %></div>
+              <div class="text-7xl medium-green"><%= @projects.count %></div>
               <div class="d-flex justify-content-center">
                 <div class="text-md me-1"><%= t('shared.closed') + ':'%></div>
                 <h6>0</h6>
@@ -40,10 +40,10 @@
           <div class="card mt-4 dashboard-card-border">
             <div class="card-body">
               <h6 class="card-title ms-2"><%= t('shared.total') + ' ' + t('issues.issue_label').pluralize %></h6>
-              <div class="text-7xl orange"><%= Dashboard.fetch_issues.count %></div>
+              <div class="text-7xl orange"><%= @issues.count %></div>
               <div class="d-flex justify-content-center">
                 <div class="text-md me-1"><%= t('shared.closed') + ':'%></div>
-                <h6><%= Dashboard.fetch_issues.where(status: "CLOSED").count %></h6>
+                <h6><%= @issues.where(status: "CLOSED").count %></h6>
               </div>
             </div>
           </div>
@@ -52,20 +52,19 @@
           <div class="card mt-4 dashboard-card-border">
             <div class="card-body">
               <h6 class="card-title ms-2"><%= t('shared.in_progress') + ' ' + t('issues.issue_label').pluralize %></h6>
-              <div class="text-7xl tomato"><%= Dashboard.fetch_issues.where(status: "In Progress").count %></div>
+              <div class="text-7xl tomato"><%= @issues.where(status: "In Progress").count %></div>
               <div class="d-flex justify-content-center">
                 <div class="text-md me-1"><%= t('issues.high') + ' ' + t('issues.priority') + ':'%></div>
-                <h6><%= Dashboard.fetch_issues.where(status: "In Progress").where(priority: "High").count %></h6>
-                </div>
+                <h6><%= @issues.where(status: "In Progress").where(priority: "High").count %></h6>
               </div>
             </div>
           </div>
         </div>
         <div class="sidebar-index bg-white mt-5 ps-0">
-          <h6 class="card-title ms-4 mt-2">Projects</h6>
+          <h6 class="card-title ms-4 mt-2"><%= t('projects.project_label').pluralize %></h6>
           <ul class="nav_list ps-0">
             <% counter = 0 %>
-            <% Dashboard.fetch_projects.each do |project| %>
+            <% @projects.each do |project| %>
               <%counter += 1 %>
               <li>
                 <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">

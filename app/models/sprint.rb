@@ -1,4 +1,6 @@
 class Sprint < ApplicationRecord
+  searchkick word_middle: %i[name description]
+
   belongs_to :company
   belongs_to :project
   belongs_to :creator, class_name: 'User'
@@ -95,7 +97,7 @@ class Sprint < ApplicationRecord
   private
 
   def check_for_issues
-    return unless issues.present?
+    return unless issues.exist?
 
     errors.add(:base, I18n.t('sprints.sprint_deletion_error'))
     throw :abort

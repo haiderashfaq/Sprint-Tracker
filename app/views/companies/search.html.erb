@@ -1,0 +1,8 @@
+<div class="container pb-5">
+  <h1><%= t('shared.search').titleize %></h1>
+  <% if @results.total_count == 0 %>
+    <%= render 'shared/no_resource_present', record: t('shared.failure.search', resource_label: params[:query])  %>
+  <% else %>
+    <%= render 'search_results', results: @results  %>
+  <% end %>
+</div>

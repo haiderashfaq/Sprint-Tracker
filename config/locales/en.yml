@@ -131,6 +131,8 @@ en:
     name: "Name"
     email: "Email Address"
     role_id: "Role"
+    search: "search"
+    search_result: "Search Result"
     password: "Password"
     password_confirmation: "Password Confirmation"
     profile: "Profile"
@@ -171,6 +173,7 @@ en:
     cancel: 'Cancel'
     total: Total
     completed: Completed
+    no_resource_found: "No %{resource_label} Found"
     success:
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"
@@ -182,7 +185,7 @@ en:
       create: "%{resource_label} Creation Failed"
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"
-
+      search: "Search Result for %{resource_label}"
 
   roles:
     admin: Admin
@@ -193,4 +196,3 @@ en:
     submit:
       create: "Create %{model}"
       update: "Update %{model}"
-      start_sprint: "Start %{model}"

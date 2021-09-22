@@ -30,7 +30,6 @@ module ApplicationHelper
   end
 
   def js_paginate(collection, params = {})
-    params.merge(renderer: RemoteLinkPaginationHelper::LinkRenderer) if request.format.js?
-    will_paginate(collection, params)
+    will_paginate collection, params.merge(renderer: WillPaginate::ActionView::LinkRenderer)
   end
 end

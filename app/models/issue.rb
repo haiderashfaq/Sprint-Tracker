@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class Issue < ApplicationRecord
+  searchkick word_middle: %i[titile description]
+
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed' }.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
   CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
 
   include DateValidations
+  include TimeProgressions
 
   sequenceid :company, :issues
   validates :title, length: { minimum: 4, maximum: 255 }
@@ -29,8 +32,7 @@ class Issue < ApplicationRecord
   belongs_to :project, optional: true
   has_many :time_logs, dependent: :destroy
   belongs_to :project
-  has_many :time_logs, dependent: :destroy
-  scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
+  scope :filter_by_attribute, ->(column, value) { where column => value }
 
   STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
   PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
@@ -43,9 +45,8 @@ class Issue < ApplicationRecord
     time_logs.sum(:logged_time)
   end
 
-  def self.time_progression(logged_time_sum, issue_estimated_time)
-    progress_ratio = [logged_time_sum, issue_estimated_time].min / [logged_time_sum, issue_estimated_time].max
-    progress_ratio.to_f * 100
+  def total_estimated_time
+    estimated_time
   end
 
   def self.get_errors_of_collection(issues)
