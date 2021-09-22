@@ -9,7 +9,5 @@ module SetCurrentUser
 
   def set_current_user
     Current.user = current_user
-  ensure
-      Company.user = nil
   end
 end

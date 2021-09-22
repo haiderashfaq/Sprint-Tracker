@@ -8,11 +8,12 @@ class UserMailer < ApplicationMailer
 
   default from: FLASH_INFO_EMAIL
 
-  def issue_alert(user, issue, subdomain, current_user, subject)
+  def issue_alerts(user, issue, subdomain, current_user, subject, changes)
     @name = user.name
     @issue = issue
     @subdomain = subdomain
     @current_user = current_user
+    @changes = changes
 
     mail to: user.email, subject: subject
   end
