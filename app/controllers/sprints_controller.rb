@@ -2,6 +2,7 @@ class SprintsController < ApplicationController
   load_and_authorize_resource :project, find_by: :sequence_num, if: -> { params[:project_id].present? }
   load_and_authorize_resource :sprint, through: :project, find_by: :sequence_num, if: -> { params[:project_id].present? }
   load_and_authorize_resource :sprint, find_by: :sequence_num, if: -> { params[:project_id].blank? }
+  before_action :add_breadcrumbs, only: [:index, :show]
 
   # GET /projects/:sequence_num/sprints
   def index
@@ -122,5 +123,18 @@ class SprintsController < ApplicationController
 
   def sprint_params
     params.require(:sprint).permit(:name, :description, :start_date, :end_date, :estimated_start_date, :estimated_end_date, :project_id)
+  end
+
+   def add_breadcrumbs
+    path = request.url.split('/')
+    path.drop(3).each do |route|
+      if params[:sprint_id].nil?
+        if route.to_i.zero?
+          add_breadcrumb route.titleize, :"#{route}_path"
+        else
+          add_breadcrumb @sprint.name, :sprint_path
+        end
+      end
+    end
   end
 end

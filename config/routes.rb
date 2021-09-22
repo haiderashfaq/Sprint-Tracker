@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
 
     resources :sprints do
-    	resources :issues
+      resources :issues
       member do
         get 'start_sprint_info'
         patch 'start_sprint'
@@ -41,9 +41,12 @@ Rails.application.routes.draw do
     resources :users do
     end
 
-  	get '/history', to: 'issues#history'
-  	resources :reports, only: :index
-  	get '/sprint/report', to: 'reports#sprint_report'
-  	get '/issue/report', to: 'reports#issue_report'
-	end
+    get '/history', to: 'issues#history'
+    resources :reports, only: :index do
+      collection do
+        get 'sprint'
+        get 'issues'
+      end
+    end
+  end
 end

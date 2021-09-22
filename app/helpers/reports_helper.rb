@@ -24,9 +24,9 @@ module ReportsHelper
 
   def csv_link
     if request&.referer&.split('/')&.include?('sprint')
-      sprint_report_path(format: :csv, sprint_id: params[:sprint_id])
+      sprint_reports_path(format: :csv, sprint_id: params[:sprint_id])
     else
-      issue_report_path(format: :csv, sprint_id: params[:sprint_id])
+      issues_reports_path(format: :csv, sprint_id: params[:sprint_id])
     end
   end
 
