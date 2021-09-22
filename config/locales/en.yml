@@ -177,6 +177,7 @@ en:
     create_new_resource: "Add New %{resource_label}"
     select_resource: "Select %{resource_label}"
     to_csv: 'Export CSV'
+    no_resource_found: "No %{resource_label} Found"
     success:
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"
@@ -188,7 +189,7 @@ en:
       create: "%{resource_label} Creation Failed"
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"
-
+      search: "Search Result for %{resource_label}"
 
   roles:
     admin: 'Admin'
@@ -199,4 +200,3 @@ en:
     submit:
       create: "Create %{model}"
       update: "Update %{model}"
-      start_sprint: "Start %{model}"
