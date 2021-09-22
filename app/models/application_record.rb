@@ -14,6 +14,8 @@ class ApplicationRecord < ActiveRecord::Base
       end
     end
 
+    return if ENV['DISABLE_TENANT'] == 'true'
+
     trace = TracePoint.new(:end) do |tp|
       if tp.self == subclass
         trace.disable
