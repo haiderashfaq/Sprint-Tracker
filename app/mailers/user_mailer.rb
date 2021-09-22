@@ -6,14 +6,14 @@ class UserMailer < ApplicationMailer
   #   en.user_mailer.alert.subject
   #
 
-  default from: "flash@info.com"
+  default from: EMAIL
 
-  def alert(user, issue, subdomain, current_user)
+  def alert(user, issue, subdomain, current_user, subject)
     @greeting = "Hi " + user.name
     @issue = issue
     @subdomain = subdomain
     @current_user = current_user
 
-    mail to: user.email, subject: "Issue Notification"
+    mail to: user.email, subject: subject
   end
 end

@@ -11,7 +11,9 @@
       <% audit[:audited_changes].each do |attribute, value| %>
         <li> 
           <b><%= attribute.titleize %></b>
-          updated from <I><%= value[0] %></I> to <I><%= value[1] %></I> 
+          <!-- Previous value at index 0 and updated at index 1 -->
+          updated from <I><%= value[0] %></I> to <I><%= value[1] %></I>
+
         </li>
       <% end %>
     </ul>
