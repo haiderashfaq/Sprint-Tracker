@@ -41,7 +41,7 @@ class Issue < ApplicationRecord
   scope :creator, ->(creator) { where creator: creator }
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
 
-  def total_time_spent
+  def total_spent_time
     time_logs.sum(:logged_time)
   end
 
