@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   include DateValidations
+  include TimeProgressions
   searchkick word_middle: [:name]
 
   before_destroy :check_for_sprints, :check_for_issues
@@ -36,6 +37,20 @@ class Project < ApplicationRecord
     TimeLog.joins(:issue).sum(:logged_time)
   end
 
+  def issues_logged_time
+    total_time = 0
+    if issues.any?
+      total_time = total_logged_time
+    end
+  end
+
+  def issues_estimated_time
+    total_time = 0
+    if issues.any?
+      total_time = total_spent_time
+    end
+  end
+
   def self.project_lead_fetch_sprints
     @current_company.projects.where(manager: current_user)
   end
@@ -52,7 +67,20 @@ class Project < ApplicationRecord
 
   def backlog_issues
     issues.where(sprint: nil)
+  end
 
+  def fetch_project_issues
+
+    # TO DO
+    if active_sprint.present?
+      active_sprint.issues
+    end
+  end
+
+  def fetch_sprint_issues
+    if active_sprint.present?
+      active_sprint.issues
+    end
   end
 
   private

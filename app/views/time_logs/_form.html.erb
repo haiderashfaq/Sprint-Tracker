@@ -5,7 +5,7 @@
     <%= form_with model:([@issue, @time_log]), local:false  do |form| %>
       <div class="modal-body">
         <% total_logged_time = @issue.total_spent_time %>
-        <% time_progression_ratio = Issue.time_progression(total_logged_time,@issue.estimated_time) %>
+        <% time_progression_ratio = issue.time_progression(total_logged_time,@issue.estimated_time) %>
         <div class="d-flex">
           <i class='bx bx-alarm'></i>
           <%= render partial: "progress", locals: { issue: @issue, time_progression_ratio: time_progression_ratio, total_logged_time: total_logged_time, width: ""} %>

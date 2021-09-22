@@ -9,6 +9,7 @@ class Issue < ApplicationRecord
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
 
   include DateValidations
+  include TimeProgressions
 
   sequenceid :company, :issues
   validates :title, length: { minimum: 4, maximum: 255 }
@@ -40,11 +41,6 @@ class Issue < ApplicationRecord
 
   def total_spent_time
     time_logs.sum(:logged_time)
-  end
-
-  def self.time_progression(logged_time_sum, issue_estimated_time)
-    progress_ratio = [logged_time_sum, issue_estimated_time].min / ([logged_time_sum, issue_estimated_time].max.nonzero? || 1)
-    progress_ratio.to_f * 100
   end
 
   def remaining_progression_percentage(time_progression_ratio)
