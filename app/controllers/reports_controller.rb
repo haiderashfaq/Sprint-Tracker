@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_action :load_data
+  before_action :add_breadcrumbs, only: [:index, :sprint_report]
   def index
     respond_to do |format|
       format.html
@@ -38,5 +39,17 @@ class ReportsController < ApplicationController
 
   def reports_param
     params.require(:issue).permit(:sprint_id)
+  end
+
+  def add_breadcrumbs
+    binding.pry
+    path = request.url.split('/')
+    path.drop(3).each do |route|
+    		if params[:sprint_id]
+    			add_breadcrumb route.titleize, sprint_path(@sprint)
+    		else
+      	add_breadcrumb route.titleize, :"#{route}_path"
+    	end
+    end
   end
 end
