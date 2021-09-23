@@ -17,7 +17,6 @@ class Issue < ApplicationRecord
   validates :title, :description, :status, :priority, presence: true
   validate_dates :estimated_start_date, :estimated_end_date
   validate_dates :actual_start_date, :actual_end_date
-  scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
 
   after_save :issue_alerts
 
