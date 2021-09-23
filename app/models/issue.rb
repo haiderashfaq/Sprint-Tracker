@@ -18,7 +18,7 @@ class Issue < ApplicationRecord
   validate_dates :estimated_start_date, :estimated_end_date
   validate_dates :actual_start_date, :actual_end_date
 
-  before_save :send_alert
+  after_save :issue_alerts
 
   belongs_to :company
   belongs_to :project
@@ -57,14 +57,15 @@ class Issue < ApplicationRecord
   end
 
   private
-  def send_alert
-    company = Company.current_company
-    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]) or company.users.where(role_id: User::ROLE_ID[:admin])
+  def issue_alerts
+    return if previous_changes.empty?
 
-    subject = "Issue Notification"
+    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]).or(company.users.where(role_id: User::ROLE_ID[:admin]))
+
+    subject = I18n.t('issues.email_subject')
 
     users.each do |user|
-      UserMailer.delay.alert(user, self, Company.current_company.subdomain, Current.user, subject)
+      UserMailer.delay.issue_alerts(user, self, Company.current_company.subdomain, Current.user, subject, previous_changes)
     end
   end
 end

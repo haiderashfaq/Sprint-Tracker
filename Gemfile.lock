@@ -277,7 +277,7 @@ DEPENDENCIES
   cancancan (= 3.3.0)
   capybara (>= 3.26)
   chartkick (= 4.0.5)
-  delayed_job_active_record
+  delayed_job_active_record (= 4.1.6)
   devise (= 4.8.0)
   faker (= 2.19.0)
   jbuilder (~> 2.7)
