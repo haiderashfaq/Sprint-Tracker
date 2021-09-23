@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+
   include DateValidations
   include TimeProgressions
   searchkick word_middle: %i[name], filterable: %i[company_id]
@@ -25,7 +26,7 @@ class Project < ApplicationRecord
   sequenceid :company, :projects
   validate_dates :start_date, :end_date
 
-  def total_spent_time
+  def total_time_spent
     if issues.any?
       issues.sum(:estimated_time)
     end
@@ -35,7 +36,7 @@ class Project < ApplicationRecord
     TimeLog.joins(:issue).sum(:logged_time)
   end
 
-  def total_spent_time
+  def total_time_spent
     total_time = 0
     if issues.any?
       total_time = TimeLog.joins(:issue).sum(:logged_time)

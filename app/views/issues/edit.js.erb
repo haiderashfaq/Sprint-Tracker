@@ -1,11 +1,9 @@
 $("#modal").html("<%= escape_javascript render('form', project: @issue.project, issue: @issue, projects: @projects, users: @users )%>");
 $("#modal").modal('show');
 
-$('#modal').on('shown.bs.modal', function(){
-  $(".js-select-field").select2({
-  	dropdownParent: $('#modal')
+var dateFunc = function() {
+  $(".js-flatpickr-date").flatpickr({
+    enableTime: false
   });
-  $('body').on('select2:open', '.js-select-field', () => {
-    document.querySelector('.select2-search__field').focus();
-  });  
-})
+}
+dateFunc();

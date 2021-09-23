@@ -3,13 +3,22 @@
 class Issue < ApplicationRecord
   searchkick word_middle: %i[titile description], filterable: %i[company_id]
 
-  STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed' }.freeze
-  PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
-  CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
+  STATUS = { open: 'Open', in_progress: 'In Progress', resolved: 'Resolved', closed: 'Closed' }.freeze
+  PRIORITY = { low: 'Low', medium: 'Medium', high: 'High' }.freeze
+  CATEGORY = { hotfix: 'Hotfix', feature: :Feature }.freeze
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
 
   include DateValidations
   include TimeProgressions
+
+  belongs_to :company
+  belongs_to :project, optional: true
+  belongs_to :sprint, optional: true
+  audited associated_with: :company
+  belongs_to :creator, class_name: 'User'
+  belongs_to :assignee, class_name: 'User', optional: true
+  belongs_to :reviewer, class_name: 'User', optional: true
+  has_many :time_logs, dependent: :destroy
 
   sequenceid :company, :issues
   validates :title, length: { minimum: 4, maximum: 255 }
@@ -17,35 +26,19 @@ class Issue < ApplicationRecord
   validates :title, :description, :status, :priority, presence: true
   validate_dates :estimated_start_date, :estimated_end_date
   validate_dates :actual_start_date, :actual_end_date
+  scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
+  scope :creator, ->(creator) { where creator: creator }
 
   after_save :issue_alerts
 
-  belongs_to :company
-  belongs_to :project
-  belongs_to :sprint, optional: true
   audited associated_with: :company
-  belongs_to :creator, class_name: 'User'
-  belongs_to :assignee, class_name: 'User', optional: true
-  belongs_to :reviewer, class_name: 'User', optional: true
-  belongs_to :sprint, optional: true
-  belongs_to :project, optional: true
-  has_many :time_logs, dependent: :destroy
-  belongs_to :project
-  scope :filter_by_attribute, ->(column, value) { where column => value }
 
-  STATUS = { Open: 'Open', 'In Progress': 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed'}.freeze
-  PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
-  CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
-
-  scope :creator, ->(creator) { where creator: creator }
-  FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
-
-  def total_spent_time
-    time_logs.sum(:logged_time)
+  def total_time_spent
+    time_logs.sum(:logged_time) || 0
   end
 
   def total_estimated_time
-    estimated_time
+    estimated_time || 0
   end
 
   def self.get_errors_of_collection(issues)
@@ -54,6 +47,13 @@ class Issue < ApplicationRecord
       errors.concat(issue.errors.full_messages)
     end
     errors
+  end
+
+  def self.users_name(ids)
+    user_name = []
+    user_name[0] = User.find_by(id: ids[0].to_i)&.name || I18n.t('shared.no_resource_found', resource_label: 'user')
+    user_name[1] = User.find_by(id: ids[1].to_i)&.name || I18n.t('shared.no_resource_found', resource_label: 'user')  
+    user_name
   end
 
   private

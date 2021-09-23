@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }, unless: -> { new_member }
   validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
   validates :name, presence: true, length: { minimum: 2, maximum: 40 }
+
   before_destroy :check_dependent_resources?, prepend: true
 
   ROLE_ID = { admin: 1, member: 2 }.freeze

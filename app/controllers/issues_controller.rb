@@ -1,14 +1,18 @@
 class IssuesController < ApplicationController
-
   load_and_authorize_resource :project, find_by: :sequence_num, through: :current_company, if: -> { params[:project_id].present? }
   load_and_authorize_resource :issue, find_by: :sequence_num, through: :project, if: -> { params[:project_id].present? }
+  load_and_authorize_resource :sprint, find_by: :sequence_num, if: -> { params[:sprint_id].present? }
+  load_and_authorize_resource :issue, find_by: :sequence_num, through: :sprint, if: -> { params[:sprint_id].present? }
   load_and_authorize_resource :issue, find_by: :sequence_num, through: :current_company, if: -> { params[:project_id].blank? }
+
   before_action :set_creator, only: :create
+
+  before_action :add_breadcrumbs, only: [:index, :show]
   before_action :fetch_required_data, only: [:new, :edit, :index, :fetch_resource_issues]
 
   # GET /issues
   def index
-    @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page])
+    @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page]).decorate
     @issues = FilteringParams.new(@issues, params).filter_params
     respond_to do |format|
       format.js
@@ -17,7 +21,7 @@ class IssuesController < ApplicationController
   end
 
   def history
-    @issue = @issues.find_by(sequence_num: params[:issue])
+    @issue = @issues.find_by(sequence_num: params[:issue]).decorate
     respond_to do |format|
       format.js
     end
@@ -25,6 +29,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/:sequence_num
   def show
+    add_breadcrumb @issue.title.titleize, issue_path
     respond_to do |format|
       format.html
       format.js
@@ -132,5 +137,9 @@ class IssuesController < ApplicationController
   def fetch_required_data
     @projects = @current_company.projects
     @users = @current_company.users
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb t('issues.issue_label').pluralize, issues_path
   end
 end

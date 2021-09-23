@@ -31,17 +31,17 @@
 
 en:
   sidebar:
-    dashboard: Dashboard
+    dashboard: 'Dashboard'
     # To do remove if unused
-    portfolio: Portfolio
-    setting: Setting
-    reports: Reports
+    portfolio: 'Portfolio'
+    setting: 'Setting'
+    reports: 'Reports'
 
   password:
-    label: Password
-    forgot_password: Forgot your password?
-    change_password: Change password
-    new_password: New password
+    label: 'Password'
+    forgot_password: 'Forgot your password?'
+    change_password: 'Change password'
+    new_password: 'New password'
   
   issues:
     issue_label: 'Issue'
@@ -75,6 +75,7 @@ en:
     reviewer: 'Reviewer'
     creator: 'Creator'
     deletion_error: "Delete all issues before deleting project"
+    no_assignee: 'No user assigned'
   
 
   projects:
@@ -90,6 +91,7 @@ en:
     add: 'Add filter'
     filter_label: 'Filter'
     creator: 'Creator'
+    apply: 'Apply'
   
   sprints:
     label: 'Sprint'
@@ -100,9 +102,11 @@ en:
     report: "Status Report"
     burndown_chart: "Burndown Chart"
     started: "Sprint Started Successfully"
+    name: 'Name'
     sprint_deletion_error: "Sprint contains Issues. Cannot delete Sprint."
     
   users:
+    user_label: 'User'
     label: 'User'
     log_in: "Log In"
     profile: "Profile"
@@ -118,6 +122,9 @@ en:
 
   time_logs:
     label: 'Time log'
+    assignee: 'Assignee'
+    date: 'Date'
+    description: 'Description'
     assignee: Assignee
     date: Date
     description: Description
@@ -127,6 +134,18 @@ en:
     ended_on: "Ended On"
     due_on: "Due On"
     project_id: "Project_id"
+
+  reports:
+    sprint_report: 'Sprint Report'
+    total_estimated_time: 'Total Estimated Time'
+    assigned_issues: 'Assigned Issues'
+    resolved_issues: 'Resolved Issues'
+    time_spent: 'Time Spent'
+    issues_report: 'Issues Report'
+    view_issues_report: 'View Issues Report'
+    view_sprint_report: 'View Sprint Report'
+    issues_report_description: Your sprint is made up of multiple issues. You can always see your sprint progress based on your issues here.
+    sprint_report_description: Agile projects are broken down into sprints or iterations — short, repeatable phases, typically one to four weeks long. The number and length of the sprints should be determined at the beginning of the project, and each sprint should result in a draft, prototype, or workable version of the final deliverable. Click here to view your sprint reports.
 
   shared:
     name: "Name"
@@ -171,10 +190,13 @@ en:
     edit_resource: "Edit %{resource_label}"
     create_new_resource: "Add New %{resource_label}"
     select_resource: "Select %{resource_label}"
+    to_csv: 'Export CSV'
     cancel: 'Cancel'
     total: Total
     completed: Completed
     no_resource_found: "No %{resource_label} Found"
+    new: 'New'
+    edit: 'Edit'
     success:
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"
@@ -189,9 +211,9 @@ en:
       search: "Search Result for %{resource_label}"
 
   roles:
-    admin: Admin
-    account_owner: Account Owner
-    member: Member
+    admin: 'Admin'
+    account_owner: 'Account Owner'
+    member: 'Member'
 
   helpers:        
     submit:

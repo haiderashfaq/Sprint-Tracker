@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_21_132426) do
+ActiveRecord::Schema.define(version: 2021_09_23_051841) do
 
   create_table "audits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "auditable_id"
@@ -62,15 +62,15 @@ ActiveRecord::Schema.define(version: 2021_09_21_132426) do
   create_table "issues", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.decimal "estimated_time", precision: 10, scale: 2, null: false
+    t.decimal "estimated_time", precision: 10, scale: 2
     t.string "status", null: false
     t.string "priority", null: false
     t.string "category", null: false
     t.bigint "company_id", null: false
-    t.date "estimated_start_date", null: false
-    t.date "actual_start_date"
-    t.date "estimated_end_date", null: false
-    t.date "actual_end_date"
+    t.datetime "estimated_start_date"
+    t.datetime "actual_start_date"
+    t.datetime "estimated_end_date"
+    t.datetime "actual_end_date"
     t.integer "creator_id"
     t.string "assignee_id"
     t.integer "reviewer_id"

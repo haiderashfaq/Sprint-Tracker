@@ -1,0 +1,21 @@
+<%= render partial: 'shared/breadcrumb' %>
+<div class="row mb-3">
+  <div class="card col border-dark bg-light me-5">
+    <div class="card-body">
+      <h5 class="card-title"><%= t('reports.issues_report') %></h5>
+      <p class="card-text"><%= t('reports.sprint_report_description') %></p>
+    </div>
+    <div class="d-flex justify-content-center mb-2">
+      <%= link_to t('reports.view_issues_report'),sprint_reports_path, class: "btn btn-primary stretched-link " %>
+    </div>
+  </div>
+  <div class="card col border-dark bg-light">
+    <div class="card-body">
+      <h5 class="card-title"><%= t('reports.sprint_report') %></h5>
+      <p class="card-text"><%= t('reports.issues_report_description') %></p>
+    </div>
+    <div class="d-flex justify-content-center mb-2">
+      <%= link_to t('reports.view_sprint_report'),issues_reports_path, class: "btn btn-primary stretched-link " %>
+    </div>
+  </div>
+</div>

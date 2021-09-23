@@ -64,7 +64,7 @@ class Sprint < ApplicationRecord
     begin
       transaction(requires_new: true) do
         issues.each do |issue|
-          Sprintreport.create!(sprint: self, issue: issue, status: (issue.status == Issue::STATUS[:'Closed'] ? Sprintreport::STATUS[:CLOSED] : Sprintreport::STATUS[:IN_PROGRESS]))
+          Sprintreport.create!(sprint: self, issue: issue, status: (issue.status == Issue::STATUS[:closed] ? Sprintreport::STATUS[:CLOSED] : Sprintreport::STATUS[:IN_PROGRESS]))
         end
       end
     rescue ActiveRecord::RecordInvalid => e
@@ -73,8 +73,8 @@ class Sprint < ApplicationRecord
   end
 
   def resolved_and_unresolved_issues
-    issues_unresolved = issues.where.not(status: Issue::STATUS[:'Closed'])
-    issues_resolved = issues.where(status: Issue::STATUS[:'Closed'])
+    issues_unresolved = issues.where.not(status: Issue::STATUS[:closed])
+    issues_resolved = issues.where(status: Issue::STATUS[:closed])
     [issues_unresolved, issues_resolved]
   end
 
@@ -87,10 +87,10 @@ class Sprint < ApplicationRecord
   end
 
   def categorized_issues
-    issues_to_do = issues.where(status: Issue::STATUS[:Open])
-    issues_in_progress = issues.where(status: Issue::STATUS[:'In Progress'])
-    issues_resolved = issues.where(status: Issue::STATUS[:'Resolved'])
-    issues_closed = issues.where(status: Issue::STATUS[:'Closed'])
+    issues_to_do = issues.where(status: Issue::STATUS[:open])
+    issues_in_progress = issues.where(status: Issue::STATUS[:in_progress])
+    issues_resolved = issues.where(status: Issue::STATUS[:resolved])
+    issues_closed = issues.where(status: Issue::STATUS[:closed])
     [issues_to_do, issues_in_progress, issues_resolved, issues_closed]
   end
 

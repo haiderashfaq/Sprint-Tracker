@@ -1,8 +1,7 @@
 <% if @project.nil? %>
-    $('#modal').html("<%= escape_javascript render('form', sprint: @sprint) %>");
+  $('#modal').html("<%= escape_javascript render('form', sprint: @sprint) %>");
 <% else %>
-    $('#modal').html("<%= escape_javascript render('form', project: @project, sprint: @sprint) %>");
+  $('#modal').html("<%= escape_javascript render('form', project: @project, sprint: @sprint) %>");
 <% end %>
-
 $('#modal .modal-header').html("<h1><%= t('shared.edit_resource', resource_label: t('sprints.label')) %></h1>");
 $('#modal').modal('show');

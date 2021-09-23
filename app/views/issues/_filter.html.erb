@@ -58,7 +58,7 @@
       </div>
       
       <div class="col-12 col-sm-8 col-md-6 col-lg-2", id="js-status">
-        <%= form.select :status, Issue::STATUS, { }, {disabled: true, class: "js-select-field js-status-field form-select form-select-lg js-status-field"} %>
+        <%= form.select :status, Issue::STATUS.invert, { }, {disabled: true, class: "js-select-field js-status-field form-select form-select-lg js-status-field"} %>
       </div>
       <div class="col-1">
          <%= link_to '', '#_', class: 'btn btn-close js-remove-filter' %>
@@ -70,7 +70,7 @@
         <%= form.label t('issues.priority'), class: 'col-form-label col-form-label-md' %>
       </div>
       <div class="col-12 col-sm-8 col-md-6 col-lg-2">
-        <%= form.select :priority, Issue::PRIORITY, { }, {disabled: true, class: 'js-select-field  form-select form-select-lg4  js-priority-field'}%>
+        <%= form.select :priority, Issue::PRIORITY, {}, {disabled: true, class: 'js-select-field  form-select form-select-lg4  js-priority-field'}%>
       </div>
       <div class="col-1">
         <%= link_to '', '#_', class: 'btn btn-close js-remove-filter'  %>

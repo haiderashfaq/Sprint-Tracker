@@ -1,0 +1,14 @@
+<div class = "contianer">
+  <%= form_with  local: false, action: form_action, method: :get, remote: true do |form| %>
+    <div class="row d-flex justify-content-end me-1">
+      <div class="col-3 col-sm-3 col-md-2 col-lg-1 control-label"><%= form.label t('sprints.label'), class: 'col-form-label col-form-label-md'  %>
+      </div>
+      <div class="col-9 col-md-4 col-lg-2">
+        <%= form.select :sprint_id, @sprints.map{ |sprint| [sprint.name, sprint.id] }, { include_blank: true }, { class: 'btn-primary js-select-field js-sprint-field form-select form-select-lg' } %>
+      </div>
+      <div class="col-1 collapse">
+        <%= form.submit t('filter.apply'), class: 'btn js btn-sprint-filter mt-4 px-4', remote: true %>
+      </div>
+    </div>
+  <% end %>
+</div>
