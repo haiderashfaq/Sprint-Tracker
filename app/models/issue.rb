@@ -33,13 +33,16 @@ class Issue < ApplicationRecord
 
   audited associated_with: :company
 
-
   def total_time_spent
+    time_logs.sum(:logged_time) || 0
+  end
+
+    def total_time_spent
     time_logs.sum(:logged_time)
   end
 
   def total_estimated_time
-    estimated_time
+    estimated_time || 0
   end
 
   def self.get_errors_of_collection(issues)
@@ -48,10 +51,6 @@ class Issue < ApplicationRecord
       errors.concat(issue.errors.full_messages)
     end
     errors
-  end
-
-  def assignee_name
-    assignee&.name || I18n.t('issues.no_assignee')
   end
 
   def self.users_name(ids)

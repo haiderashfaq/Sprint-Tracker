@@ -16,9 +16,9 @@
       <% @issues_resolved.each do |issue|%>
         <tr>
           <td><%= issue.title %></td>
-          <td><%= issue.status %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.category %></td>
+          <td><%= issue.status.camelize %></td>
+          <td><%= issue.priority.camelize %></td>
+          <td><%= issue.category.camelize %></td>
         </tr>
       <% end %>
     </tbody>
@@ -38,9 +38,9 @@
       <% @issues_unresolved.each do |issue|%>
         <tr>
           <td><%= issue.title %></td>
-          <td><%= issue.status %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.category %></td>
+          <td><%= issue.status.camelize %></td>
+          <td><%= issue.priority.camelize %></td>
+          <td><%= issue.category.camelize %></td>
         </tr>
       <% end %>
     </tbody>

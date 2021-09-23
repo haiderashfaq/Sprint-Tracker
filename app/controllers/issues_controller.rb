@@ -10,7 +10,7 @@ class IssuesController < ApplicationController
 
   # GET /issues
   def index
-    @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page])
+    @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page]).decorate
     @issues = FilteringParams.new(@issues, params).filter_params
     respond_to do |format|
       format.js
@@ -19,7 +19,7 @@ class IssuesController < ApplicationController
   end
 
   def history
-    @issue = @issues.find_by(sequence_num: params[:issue])
+    @issue = @issues.find_by(sequence_num: params[:issue]).decorate
     respond_to do |format|
       format.js
     end

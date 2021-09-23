@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  authorize_resource 
+  authorize_resource :current_user
   before_action :load_data
   def index
     respond_to do |format|
@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
   def sprint
     if params[:sprint_id].present?
       @sprint = fetch_sprint
-      @sprint_report_attributes = Report.sprint_report_data(@sprint)&.paginate(page: params[:page])
+      @sprint_report_attributes = Report.sprint_report_data(@sprint)&.paginate(page: params[:page]).decorate
     end
     respond_to do |format|
       format.html
@@ -22,7 +22,7 @@ class ReportsController < ApplicationController
   def issues
     if params[:sprint_id].present?
       @sprint = fetch_sprint
-      @issue_report_attributes = Report.issues_report_data(@sprint)&.paginate(page: params[:page])
+      @issue_report_attributes = Report.issues_report_data(@sprint)&.paginate(page: params[:page]).decorate
     end
     respond_to do |format|
       format.html

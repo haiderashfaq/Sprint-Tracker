@@ -9,7 +9,7 @@
 # #   Character.create(name: 'Luke', movie: movies.first)
 
 # >>>>>>> 5e3928fe934fe9932eee57eda8884bdffed98d0d
-# STATUS = { 1 => 'Open', 2 => "In Progress", 3 => 'Resolved', 4 => 'Closed'}.freeze
+# STATUS = { 1 => 'open', 2 => "in_rogress", 3 => 'Resolved', 4 => 'Closed'}.freeze
 
 # VALID_STATUSES = { 1 => 'Planning', 2 => 'Active', 3 => 'Closed'}.freeze
 

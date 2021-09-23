@@ -7,14 +7,20 @@ module ReportsHelper
   end
 
   def assignee_link(sprint_report)
-    if sprint_report.assignee.nil?
-      I18n.t 'issues.no_assignee'
-    else
-      link_to sprint_report.assignee_name, user_path(sprint_report.assignee)
-    end
+    return t('issues.no_assignee') if sprint_report.assignee.nil?
+    link_to sprint_report.assignee_name, user_path(sprint_report.assignee)
   end
 
   def get_progress_width(value)
     100 - value
   end
+
+  def sprint_csv_path
+    sprint_reports_path(format: :csv, sprint_id: params[:sprint_id])
+  end
+
+  def issues_csv_path
+    issues_reports_path(format: :csv, sprint_id: params[:sprint_id])
+  end
+
 end

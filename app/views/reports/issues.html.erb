@@ -2,7 +2,7 @@
 	<%= render(:partial => 'reports/sprint_filter',  :locals=>{sprints: @sprints, form_action: :issues} ) %>
 	<div id="header"></div>
 	<% if @sprint.present? %>
-		<%= render partial: 'reports/sprint_report_header',  :locals=>{ sprint_id: @sprint.id, action: :get_issue } %>
+		<%= render partial: 'reports/sprint_report_header',  :locals=>{ sprint_id: @sprint.id, action: :issues_csv } %>
 	<% end %>
   <%= render partial: "reports/issue_report_table", locals: { issues_report_attributes: @issue_report_attributes } %>
 </div>

@@ -4,16 +4,16 @@
     <% assignee_name = link_to issue.assignee_name, user_path(issue.assignee.sequence_num) %>
   <% end %>
   <td><span class="badge rounded-pill bg-<%= get_status_color(issue.status) %>">
-    <%= issue.status %></span></td>
+    <%= issue.status.camelize %></span></td>
   <td><%= link_to issue.title, issue_path(issue) %></td>
   <td><%= assignee_name %> </td>
-  <td><%= issue.priority %></td>
-  <td><%= issue.category %></td>
+  <td><%= issue.priority.camelize %></td>
+  <td><%= issue.category.camelize %></td>
   <td>
-    <% if can? :update, issue %>
+    <% if can? :edit, Issue %>
       <%= link_to '', edit_issue_path(issue), { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'bi bi-pencil' } %>
     <% end %>
-    <% if can? :destroy, issue %>
+    <% if can? :destroy, Issue %>
       <%= link_to '', issue_path(issue), remote: true , method: :delete, data: {confirm: t('shared.confirmation') }, class: "bi bi-trash" %>
     <% end %>
   </td>

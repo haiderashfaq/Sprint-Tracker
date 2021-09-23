@@ -10,7 +10,6 @@ class Ability
       admin_permissions_for_users(user)
       admin_permissions_for_sprint(user)
       admin_permissions_for_project(user)
-      admin_permissions_for_project(user)
       admin_permissions_for_issues(user)
       admin_permissions_for_projects_users(user)
       admin_permissions_for_time_logs(user)
@@ -84,11 +83,11 @@ class Ability
   end
 
   def creator_permissions_for_issues(user)
-    can %i[read update destroy], Issue, creator: user, company_id: user.company_id
+    can %i[edit update destroy history], Issue, creator: user, company_id: user.company_id
   end
 
   def reviewer_permissions_for_issues(user)
-    can [:read, :create], Issue, reviewer: user, company_id: user.company_id
+    can [:read], Issue, reviewer: user, company_id: user.company_id
   end
 
   def assignee_permissions_for_issues(user)
@@ -96,7 +95,7 @@ class Ability
   end
 
   def member_permissions_for_issues(user)
-    can %i[read fetch_resource_issues], Issue, company_id: user.company_id
+    can %i[read create fetch_resource_issues], Issue, company_id: user.company_id
   end
 
   def member_permissions_for_time_logs(user)
