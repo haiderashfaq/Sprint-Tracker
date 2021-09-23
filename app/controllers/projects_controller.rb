@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
   load_resource :issues, find_by: :sequence_num, through: :project
-
-  # GET /projects
+  before_action :add_breadcrumbs, only: [:new, :edit, :index, :show]
+  # GET /projectsr
   def index
     @projects = @projects.includes(:issues).paginate(page: params[:page])
     respond_to do |format|
@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
+    add_breadcrumb t('shared.new'), new_project_path
     respond_to do |format|
       format.html
     end
@@ -34,6 +35,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num/edit
   def edit
+    add_breadcrumb t('shared.edit'), edit_project_path
     respond_to do |format|
       format.html
     end
@@ -55,6 +57,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:sequence_num
   def show
+    add_breadcrumb @project.name, project_path
     respond_to do |format|
       format.js
       format.html
@@ -99,5 +102,9 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :start_date, :end_date, :manager_id)
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb t('projects.project_label').pluralize, projects_path
   end
 end

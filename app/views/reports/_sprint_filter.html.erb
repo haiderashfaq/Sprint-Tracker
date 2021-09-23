@@ -6,8 +6,8 @@
       <div class="col-9 col-md-4 col-lg-2">
         <%= form.select :sprint_id, @sprints.map{ |sprint| [sprint.name, sprint.id] }, { include_blank: true }, { class: 'btn-primary js-select-field js-sprint-field form-select form-select-lg' } %>
       </div>
-      <div class="col-1 btn-filter collapse">
-        <%= form.submit t('filter.apply'), class: 'btn btn-sprint-filter mt-4 px-4', remote: true %>
+      <div class="col-1 collapse">
+        <%= form.submit t('filter.apply'), class: 'btn js btn-sprint-filter mt-4 px-4', remote: true %>
       </div>
     </div>
   <% end %>
