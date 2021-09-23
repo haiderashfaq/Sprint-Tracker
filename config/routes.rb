@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         get 'complete_sprint_info'
         post 'complete_sprint'
         get 'report'
+        get 'issues'
       end
     end
 

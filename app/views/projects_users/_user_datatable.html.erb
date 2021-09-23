@@ -1,13 +1,18 @@
-<table class="table table-hover border-primary text-center" id="projects_users_datatable">
-  <thead class="bg-primary text-light">
-    <tr>
-      <th><%= t('shared.name') %></th>
-      <th><%= t('shared.actions') %></th>
-    </tr>
-  </thead>
-  <tbody id="projects_users_datatable_body">
-    <% projects_users.each do |projects_user| %>
-      <%= render 'user_datatable_row', project: project, projects_user: projects_user %>
-    <% end %>
-  </tbody>
-</table>
+<div class="card dashboard-card-border">
+  <div class="card-body">
+    <table class="table table-hover border-primary text-center" id="projects_users_datatable">
+      <thead class="bg-primary text-light">
+        <tr>
+          <th><%= t('shared.name') %></th>
+          <th><%= t('shared.actions') %></th>
+        </tr>
+      </thead>
+      <tbody id="projects_users_datatable_body">
+        <% projects_users.each do |projects_user| %>
+          <%= render 'user_datatable_row', project: project, projects_user: projects_user %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= js_paginate projects_users %>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <% if @time_log.errors.blank? %>
   $('#time_log_<%= @time_log.sequence_num %>').remove();
   if ($("#time_log_datatable_body tr").length == 0) {
-    $('#time_log_datatable_space').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: 'time_logs.label' }) %>");
+    $('#time_log_datatable_space').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: t('time_logs.label') }) %>");
   }
 <% end %>
 $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");

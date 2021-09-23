@@ -3,7 +3,8 @@
   <td><span class="badge rounded-pill bg-<%= issue_badge_pill_selection(issue.status) %>">
       <%= issue.status %></span></td>
   <td><%= link_to issue.title, issue_path(issue) %></td>
-  <td><%= issue.priority %></td>
+  <td><span class="badge rounded-pill bg-<%= issues_priority_pill_selection(issue.priority) %>">
+      <%= issue.priority %></span></td>
   <td><%= issue.category %></td>
   <td>
     <% if can? :update, issue %>

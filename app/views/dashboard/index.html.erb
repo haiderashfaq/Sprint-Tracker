@@ -2,12 +2,11 @@
   <div class="dashboard-container">
     <%= render partial: "navbar" %>
     <%= render partial: "tab_content" %>
-  <% elsif can? :edit, Project%>
+  <% elsif can? :edit, Project && @projects.exists?%>
     <%= render partial: "navbar" %>
     <%= render partial: "tab_content_project_lead" %>
-  <% elsif can? :read, Project%>
+  <% elsif can? :read, Project %>
     <%= render partial: "navbar" %>
     <%= render partial: "tab_content" %>
   <% end %>
 </div>
-

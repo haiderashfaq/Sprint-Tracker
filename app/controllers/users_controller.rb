@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
 
   def index
+    @users = @users.paginate(page: params[:page])
     respond_to do |format|
       format.html
       format.json { render json: UserDatatable.new(params) }

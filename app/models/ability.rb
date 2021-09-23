@@ -61,17 +61,17 @@ class Ability
 
   def member_permissions_for_projects_users(user)
     can %i[read create update destroy], ProjectsUser, project: { manager: user }
-    can :read, ProjectsUser, projects_users: { user: user }
+    can :read, ProjectsUser, user: user
   end
 
   def member_permissions_for_project(user)
-    can %i[read update], Project, manager: user, company_id: user.company_id
-    can :read, Project, projects_users: { user: user }
+    can %i[read update backlog active_sprint], Project, manager: user, company_id: user.company_id
+    can %i[read backlog active_sprint], Project, projects_users: { user: user }
   end
 
   def member_permissions_for_sprint(user)
-    can %i[read create update destroy start_sprint start_sprint_info complete_sprint complete_sprint_info], Sprint, project: { manager: user }
-    can :read, Sprint, project: { projects_users: user }
+    can :manage, Sprint, project: { manager: user }
+    can :read, Sprint, project: { projects_users: { user_id: user.id } }
   end
 
   def creator_permissions_for_issues(user)
@@ -87,6 +87,7 @@ class Ability
   end
 
   def member_permissions_for_issues(user)
+    can :manage, Issue, project: { manager: user }
     can %i[read fetch_resource_issues], Issue, company_id: user.company_id
   end
 

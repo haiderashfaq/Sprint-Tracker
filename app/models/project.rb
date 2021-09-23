@@ -13,20 +13,16 @@ class Project < ApplicationRecord
   # validate :start_date_before_end_date
   before_destroy :check_for_sprints, :check_for_issues
 
-  validates :name, :manager, :creator, presence: true
-  validates :name, length: { maximum: 100, minimum: 4 }
-
   has_many :issues
   has_many :sprints
   has_many :projects_users
-  has_many :issues
   has_many :users, through: :projects_users, dependent: :destroy
 
   sequenceid :company, :projects
   validates :name, :manager, :creator, presence: true
   validates :name, length: { maximum: 100, minimum: 4 }
-  validates :name, :manager_id, :creator_id, presence: true
-  validates :name, length: { maximum: 100, minimum: 4 }
+  validate_datetime :start_date
+  validate_datetime :end_date
   validate_dates :start_date, :end_date
 
   def total_spent_time

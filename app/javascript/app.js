@@ -39,18 +39,21 @@ $(document).ready(function() {
 
 
   dateTimeFunc();
-  $("#modal").on('shown.bs.modal', dateTimeFunc);
+  $("#modal").on('shown.bs.modal', function() {
+    dateTimeFunc();
+    select2_field_js();
+  });
 
 
   if (window && window.localStorage.getItem('sidebar') === 'active') {
-      // if it active show it as active
-      $("#sidebar").addClass("active");
+    // if it active show it as active
+    $("#sidebar").addClass("active");
   } else {
-      $("#sidebar").removeClass("active");
-  } 
+    $("#sidebar").removeClass("active");
+  }
 
 
- $("#menu-btn").click(function() {
+  $("#menu-btn").click(function() {
     $("#sidebar").toggleClass("active");
   });
 });
@@ -60,4 +63,8 @@ var dateTimeFunc = function() {
   $(".js-flatpickr-datetime").flatpickr({
     enableTime: true
   });
+}
+
+var select2_field_js = function() {
+  $(".js-select-field-single").select2({});
 }
