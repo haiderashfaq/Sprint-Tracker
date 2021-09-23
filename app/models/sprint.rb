@@ -19,7 +19,7 @@ class Sprint < ApplicationRecord
 
   before_destroy :check_for_issues, prepend: true
 
-  def total_spent_time
+  def total_time_spent
     issues.joins(:time_logs).sum(:logged_time)
   end
 

@@ -34,6 +34,8 @@ gem 'cancancan', '= 3.3.0'
 gem 'audited', '= 5.0'
 # gem to create charts and graphs
 gem 'chartkick', '=4.0.5'
+# use delayed job to send emails using a background job
+gem 'delayed_job_active_record', '=4.1.6'
 # gem to search in global context
 gem 'searchkick', '=4.6.0'
 
