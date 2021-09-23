@@ -140,7 +140,11 @@ en:
     assigned_issues: 'Assigned Issues'
     resolved_issues: 'Resolved Issues'
     time_spent: 'Time Spent'
-    issue_report: 'Issue Report'
+    issues_report: 'Issues Report'
+    view_issues_report: 'View Issues Report'
+    view_sprint_report: 'View Sprint Report'
+    issues_report_description: Your sprint is made up of multiple issues. You can always see your sprint progress based on your issues here.
+    sprint_report_description: Agile projects are broken down into sprints or iterations — short, repeatable phases, typically one to four weeks long. The number and length of the sprints should be determined at the beginning of the project, and each sprint should result in a draft, prototype, or workable version of the final deliverable. Click here to view your sprint reports.
 
   shared:
     name: "Name"

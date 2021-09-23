@@ -26,13 +26,6 @@ module IssuesHelper
     form.select t('filter.filter_label'), filters, { include_blank: true }, { class: 'js-select-field js-filter-field form-select form-select-lg' }
   end
 
-  def get_user_name(value)
-    user_name = []
-    user_name[0] = User.find_by(id: value[0].to_i).name if User.find_by(id: value[0].to_i).present?
-    user_name[1] = User.find_by(id: value[1].to_i).name if User.find_by(id: value[1].to_i).present?
-    user_name
-  end
-
   def date_format(value)
     date = []
     date[0] = convert_to_date(value[0])
@@ -48,7 +41,7 @@ module IssuesHelper
   end
 
   def set_format(attribute, value)
-    value = get_user_name(value) if %w[creator_id reviewer_id assignee_id].include?(attribute)
+    value = Issue.users_name(value) if %w[creator_id reviewer_id assignee_id].include?(attribute)
     value = date_format(value) if %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].include?(attribute)
     value = string_format(value) unless %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].include?(attribute)
     value

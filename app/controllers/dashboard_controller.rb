@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    add_breadcrumb 'Dashboard', :dashboard_index_url
+    add_breadcrumb t('shared.dashboard'), :dashboard_index_url
     load_resources
     respond_to do |format|
       format.html

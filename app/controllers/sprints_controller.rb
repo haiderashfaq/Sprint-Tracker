@@ -53,6 +53,7 @@ class SprintsController < ApplicationController
 
   # GET /projects/:sequence_num/sprints/:sequence_num
   def show
+    add_breadcrumb @sprint.name.titleize, sprint_path
     respond_to do |format|
       format.js
       format.html
@@ -124,16 +125,7 @@ class SprintsController < ApplicationController
     params.require(:sprint).permit(:name, :description, :start_date, :end_date, :estimated_start_date, :estimated_end_date, :project_id, status: Sprint::STATUS[:PLANNING])
   end
 
-   def add_breadcrumbs
-    path = request.url.split('/')
-    path.drop(3).each do |route|
-      if params[:sprint_id].nil?
-        if route.to_i.zero?
-          add_breadcrumb route.titleize, :"#{route}_path"
-        else
-          add_breadcrumb @sprint.name, :sprint_path
-        end
-      end
-    end
+  def add_breadcrumbs
+    add_breadcrumb t('sprints.label').pluralize, sprints_path
   end
 end

@@ -50,10 +50,13 @@ class Issue < ApplicationRecord
   end
 
   def assignee_name
-    if(assignee.present?)
-      assignee.name
-    else
-      I18n.t 'issues.no_assignee'
-    end
+    assignee&.name || I18n.t('issues.no_assignee')
+  end
+
+  def self.users_name(ids)
+    user_name = []
+    user_name[0] = User.find_by(id: ids[0].to_i)&.name || I18n.t('shared.no_resource_found', resource_label: 'user')
+    user_name[1] = User.find_by(id: ids[1].to_i)&.name || I18n.t('shared.no_resource_found', resource_label: 'user')  
+    user_name
   end
 end
