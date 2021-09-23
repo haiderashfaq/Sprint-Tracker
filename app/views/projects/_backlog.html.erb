@@ -54,9 +54,9 @@
                 <tr id="issue_<%= issue.id %>">
                   <td><%= check_box_tag "issue_#{issue.id}", issue.id, false, class:"issue-check-box" %></td>
                   <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
-                  <td><%= issue.status %></td>
-                  <td><%= issue.priority %></td>
-                  <td><%= issue.category %></td>
+                  <td><span class="badge rounded-pill bg-<%= issue_badge_pill_selection(issue.status) %>"><%= issue.status %></span></td>
+                  <td><span class="badge rounded-pill bg-<%= issues_priority_pill_selection(issue.priority) %>"><%= issue.priority %></span></td>
+                  <td><span class="badge rounded-pill bg-<%= issues_category_pill_selection(issue.category) %>"><%= issue.category %></span></td>
                 </tr>
               <% end %>
             </tbody>

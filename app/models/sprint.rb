@@ -51,7 +51,7 @@ class Sprint < ApplicationRecord
   def complete_sprint(issues, issues_dest_id)
     begin
       transaction do
-        generate_report
+        generate_report unless Sprintreport.find_by(sprint_id: id)
         issues.each do |issue|
           Sprintreport.find_by(sprint: self, issue: issue).update(status: Sprintreport::STATUS[:MOVED], moved_to_id: issues_dest_id)
         end
@@ -83,10 +83,9 @@ class Sprint < ApplicationRecord
   end
 
   def report_content
-    issues_unresolved = sprintreport.where.not(status: Sprintreport::STATUS[:CLOSED]).pluck(:issue_id)
-    issues_resolved = sprintreport.where(status: Sprintreport::STATUS[:CLOSED]).pluck(:issue_id)
-    issues_unresolved = Issue.where(id: issues_unresolved)
-    issues_resolved = Issue.where(id: issues_resolved)
+    generate_report unless Sprintreport.find_by(sprint_id: id)
+    issues_unresolved = sprintreport.where.not(status: Sprintreport::STATUS[:CLOSED])
+    issues_resolved = sprintreport.where(status: Sprintreport::STATUS[:CLOSED])
     [issues_resolved, issues_unresolved]
   end
 

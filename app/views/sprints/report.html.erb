@@ -2,52 +2,5 @@
   <h1><%= @sprint.name %></h1>
   <h3><%= t('sprints.report') %></h3>
   <hr />
-  <h6><%= t('issues.completed') %></h6>
-  <table class="table text-center my-3" %>
-    <thead class="fw-bold">
-      <tr>
-        <th><%= t('issues.title') %></th>
-        <th><%= t('issues.status') %></th>
-        <th><%= t('issues.priority') %></th>
-        <th><%= t('issues.category') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @issues_resolved.each do |issue|%>
-        <tr>
-          <td><%= issue.title %></td>
-          <td><%= issue.status %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.category %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <hr />
-  <h6><%= t('issues.not_completed') %></h6>
-  <table class="table text-center my-3" %>
-    <thead class="fw-bold">
-      <tr>
-        <th><%= t('issues.title') %></th>
-        <th><%= t('issues.status') %></th>
-        <th><%= t('issues.priority') %></th>
-        <th><%= t('issues.category') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @issues_unresolved.each do |issue|%>
-        <tr>
-          <td><%= issue.title %></td>
-          <td><%= issue.status %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.category %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <hr />
-  <h6><%= t('sprints.burndown_chart') %></h6>
-  <%= line_chart [
-    { name: t('shared.est_end_date'), data: @issues_resolved.group(:estimated_end_date).count }, 
-    { name: t('shared.end_date'), data: @issues_resolved.group(:actual_end_date).count }] %>
 </div>
+<%= render 'report', sprints: @sprints, issues_resolved: @issues_resolved, issues_unresolved: @issues_unresolved %>

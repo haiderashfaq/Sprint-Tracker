@@ -26,4 +26,11 @@ module IssuesHelper
     when Issue::PRIORITY[:High] then 'danger'
     end
   end
+
+  def issues_category_pill_selection(category)
+    case category
+    when Issue::CATEGORY[:Feature] then 'success'
+    when Issue::CATEGORY[:Hotfix] then 'danger'
+    end
+  end
 end

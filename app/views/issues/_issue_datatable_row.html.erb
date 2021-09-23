@@ -5,7 +5,8 @@
   <td><%= link_to issue.title, issue_path(issue) %></td>
   <td><span class="badge rounded-pill bg-<%= issues_priority_pill_selection(issue.priority) %>">
       <%= issue.priority %></span></td>
-  <td><%= issue.category %></td>
+  <td><span class="badge rounded-pill bg-<%= issues_category_pill_selection(issue.category) %>">
+      <%= issue.category %></span></td>
   <td>
     <% if can? :update, issue %>
       <%= link_to '', edit_issue_path(issue), { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'bi bi-pencil' } %>

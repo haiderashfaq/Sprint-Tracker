@@ -7,4 +7,5 @@ class Sprintreport < ApplicationRecord
   STATUS = { IN_PROGRESS: IN_PROGRESS, CLOSED: CLOSED, MOVED: MOVED }.freeze
   validates :status, inclusion: { in: STATUS.values }
   validates_uniqueness_of :sprint_id, { scope: :issue_id }
+
 end

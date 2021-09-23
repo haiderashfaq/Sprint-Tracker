@@ -114,6 +114,7 @@ class SprintsController < ApplicationController
     @issues_resolved, @issues_unresolved = @sprint.report_content
     respond_to do |format|
       format.html
+      format.js
     end
   end
 

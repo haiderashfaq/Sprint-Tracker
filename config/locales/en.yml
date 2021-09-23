@@ -69,6 +69,7 @@ en:
     not_completed: "Issues Not Completed"
     unresolved_issues_msg: "Select where all unresolved issues should be moved"
     move: "Move Issue to:"
+    moved: "Moved To"
 
     issues_added_success: "Issues added Successfully to Sprint"
     assignee: 'Assignee'
