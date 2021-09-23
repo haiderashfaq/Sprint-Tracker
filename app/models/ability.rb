@@ -14,7 +14,7 @@ class Ability
       admin_permissions_for_issues(user)
       admin_permissions_for_projects_users(user)
       admin_permissions_for_time_logs(user)
-      admin_permissions_for_reports(user)
+      admin_permissions_for_reports
     elsif user.member?
       member_permsisions_for_users(user)
       member_permissions_for_issues(user)
@@ -28,8 +28,8 @@ class Ability
     end
   end
 
-  def admin_permissions_for_reports(user)
-    can :manage, Report, company_id: user.company_id
+  def admin_permissions_for_reports
+    can :manage, :report
   end
 
   def admin_permissions_for_users(user)
@@ -88,7 +88,7 @@ class Ability
   end
 
   def reviewer_permissions_for_issues(user)
-    can [:read], Issue, reviewer: user, company_id: user.company_id
+    can [:read, :create], Issue, reviewer: user, company_id: user.company_id
   end
 
   def assignee_permissions_for_issues(user)

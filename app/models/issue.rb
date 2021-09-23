@@ -3,11 +3,10 @@
 class Issue < ApplicationRecord
   searchkick word_middle: %i[titile description], filterable: %i[company_id]
 
-  STATUS = { Open: 'Open', 'In Progress'.to_sym=> 'In Progress', 'Resolved': 'Resolved', 'Closed': 'Closed' }.freeze
-  PRIORITY = { Low: 'Low', Medium: 'Medium', High: 'High' }.freeze
-  CATEGORY = { Hotfix: 'Hotfix', Feature: :Feature }.freeze
+  STATUS = { open: 'Open', in_progress: 'In Progress', resolved: 'Resolved', closed: 'Closed' }.freeze
+  PRIORITY = { low: 'Low', medium: 'Medium', high: 'High' }.freeze
+  CATEGORY = { hotfix: 'Hotfix', feature: :Feature }.freeze
   FILTER = { Assignee: 'assignee', Creator: 'creator', Project: 'project', Status: 'status', Category: 'category', Priority: 'priority', Reviewer: 'reviewer' }.freeze
-  CLOSED = 'Closed'
 
   include DateValidations
   include TimeProgressions
@@ -35,7 +34,7 @@ class Issue < ApplicationRecord
   audited associated_with: :company
 
 
-  def total_spent_time
+  def total_time_spent
     time_logs.sum(:logged_time)
   end
 
@@ -51,13 +50,15 @@ class Issue < ApplicationRecord
     errors
   end
 
-
   def assignee_name
-    if(assignee.present?)
-      assignee.name
-    else
-      I18n.t 'issues.no_assignee'
-    end
+    assignee&.name || I18n.t('issues.no_assignee')
+  end
+
+  def self.users_name(ids)
+    user_name = []
+    user_name[0] = User.find_by(id: ids[0].to_i)&.name || I18n.t('shared.no_resource_found', resource_label: 'user')
+    user_name[1] = User.find_by(id: ids[1].to_i)&.name || I18n.t('shared.no_resource_found', resource_label: 'user')  
+    user_name
   end
 
   private

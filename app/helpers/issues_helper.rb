@@ -3,17 +3,17 @@
 module IssuesHelper
 
   def get_status_color(status)
-    status_color = { Open: 'primary', 'In Progress'.to_sym => 'danger', Resolved: 'info', Closed: 'success' }
+    status_color = { open: 'primary', in_progress: 'danger', resolved: 'info', closed: 'success' }
     status_color[status.to_sym]
   end
 
   def get_priority_color(priority)
-    priority_color = { Low: 'success', Medium: 'warning', High: 'danger' }
+    priority_color = { low: 'success', medium: 'warning', high: 'danger' }
     priority_color[priority.to_sym]
   end
 
   def get_category_color(category)
-    category_color = { Hotfix: 'warning', Feature: 'info' }
+    category_color = { hotfix: 'warning', feature: 'info' }
     category_color[category.to_sym]
   end
 

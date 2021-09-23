@@ -87,10 +87,10 @@ class Sprint < ApplicationRecord
   end
 
   def categorized_issues
-    issues_to_do = issues.where(status: Issue::STATUS[:Open])
-    issues_in_progress = issues.where(status: Issue::STATUS[:'In Progress'])
-    issues_resolved = issues.where(status: Issue::STATUS[:'Resolved'])
-    issues_closed = issues.where(status: Issue::STATUS[:'Closed'])
+    issues_to_do = issues.where(status: Issue::STATUS[:open])
+    issues_in_progress = issues.where(status: Issue::STATUS[:in_progress])
+    issues_resolved = issues.where(status: Issue::STATUS[:resolved])
+    issues_closed = issues.where(status: Issue::STATUS[:closed])
     [issues_to_do, issues_in_progress, issues_resolved, issues_closed]
   end
 

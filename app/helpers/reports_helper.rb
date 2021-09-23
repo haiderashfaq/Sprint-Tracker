@@ -14,14 +14,6 @@ module ReportsHelper
     end
   end
 
-  def get_sprint_path
-    sprint_reports_path(format: :csv, sprint_id: params[:sprint_id])
-  end
-
-  def get_issue_path
-    issues_reports_path(format: :csv, sprint_id: params[:sprint_id])
-  end
-
   def get_progress_width(value)
     100 - value
   end
