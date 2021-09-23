@@ -62,12 +62,10 @@ class Project < ApplicationRecord
   end
 
   def backlog_issues
-    issues.where(sprint: nil)
+    issues.where(sprint_id: nil)
   end
 
   def fetch_project_issues
-
-    # TO DO
     if active_sprint.present?
       active_sprint.issues
     end

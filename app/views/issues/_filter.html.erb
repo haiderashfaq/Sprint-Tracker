@@ -1,5 +1,5 @@
 <div class="container mb-3">
-  <%= form_with  local: false, action: "index", method: :get do |form| %>
+  <%= form_with  local: false, action: form_action, method: :get do |form| %>
     <div class="row d-flex justify-content-end me-1">
       <div class="col-3 col-sm-3 col-md-2 col-lg-1 control-label"><%= form.label t('filter.filter_label'), class: 'col-form-label col-form-label-md'  %>
       </div>
