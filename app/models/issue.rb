@@ -44,6 +44,10 @@ class Issue < ApplicationRecord
     time_logs.sum(:logged_time)
   end
 
+   def assignee_name
+    assignee&.name || I18n.t('issues.no_assignee')
+   end
+
   def total_estimated_time
     @issues&.sum(estimated_time) || estimated_time
   end

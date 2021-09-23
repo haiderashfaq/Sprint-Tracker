@@ -56,7 +56,7 @@ $(document).ready(function() {
   dateTimeFunc();
   $("#modal").on('shown.bs.modal', function() {
     dateTimeFunc();
-    select2_field_js();e
+    select2_field_js();
   });
 
    $(document).on('select2:select', ".js-filter-field", function(e) {
