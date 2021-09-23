@@ -20,6 +20,8 @@ class Issue < ApplicationRecord
   sequenceid :company, :issues
   audited associated_with: :company
 
+  after_save :issue_alerts
+
   scope :creator, ->(creator) { where creator: creator }
   scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
   scope :filter_by_attribute, ->(column, value) { where column => value }
@@ -47,5 +49,18 @@ class Issue < ApplicationRecord
       errors.concat(issue.errors.full_messages)
     end
     errors
+  end
+
+  private
+  def issue_alerts
+    return if previous_changes.empty?
+
+    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]).or(company.users.where(role_id: User::ROLE_ID[:admin]))
+
+    subject = I18n.t('issues.email_subject')
+
+    users.each do |user|
+      UserMailer.delay.issue_alerts(user, self, Company.current_company.subdomain, Current.user, subject, previous_changes)
+    end
   end
 end

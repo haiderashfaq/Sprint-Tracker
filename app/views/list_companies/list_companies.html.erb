@@ -16,9 +16,7 @@
               <% @companies.each do |company| %>
                 <div class="card w-100 text-center" style="width: 18rem;">
                   <div class="card-body">
-                    <%= form.label company.name %>
-                    <br>
-                    <%= link_to "Go to link",  new_user_session_url(subdomain: company.subdomain), {class: 'btn btn-primary'}%>
+                    <%= link_to company.name,  new_user_session_url(subdomain: company.subdomain), {class: 'btn btn-primary w-50'}%>
                   </div>
                 </div>
               <% end %>
