@@ -1,0 +1,1 @@
+$('#nav-issues').html("<%= escape_javascript render('issues', sprint: @sprint, issues_to_do: @issues_to_do, issues_in_progress: @issues_in_progress, issues_resolved: @issues_resolved, issues_closed: @issues_closed )%>")

@@ -1,24 +1,26 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-xl-10 col-lg-12 col-md-9">
+	  <div class="col-xl-10 col-lg-12 col-md-9">
       <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
           <div class="d-flex justify-content-center">
-            <%= image_tag("logo.png", width: 30) %>
+            <%= image_tag "logo.png" , class: 'logo'%>
             <h1 class="ms-3 h4 text-dark mt-2 ">Company List</h1>
           </div>
           <%= form_with url: list_companies_url do |form| %>
             <% if @companies.empty? %>
               <div class="container text-center">
-                <%= render partial: 'Shared/no_resource_present', locals: { record: t('users.user_label') } %>
+                <%= render partial: 'shared/no_resource_present', locals: { record: t('users.user_label') } %>
               </div>
             <% else %>
               <% @companies.each do |company| %>
                 <div class="card w-100 text-center" style="width: 18rem;">
                   <div class="card-body">
-                    <%= link_to company.name,  new_user_session_url(subdomain: company.subdomain), {class: 'btn btn-primary w-50'}%>
+                    <%= form.label company.name %>
+                    <br>
+                    <%= link_to "Go to link",  new_user_session_url(subdomain: company.subdomain), {class: 'btn btn-primary'}%>
                   </div>
-                </div>
+                </div>    
               <% end %>
             <% end %>
           <% end %>
@@ -26,4 +28,4 @@
       </div>
     </div>
   </div>
-  <div>
+<div>

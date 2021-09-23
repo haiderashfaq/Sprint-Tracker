@@ -1,5 +1,5 @@
 <% if @project.nil? %>
-  $('#modal').html("<%= escape_javascript render('form', sprint: @sprint) %>");
+  $('#modal').html("<%= escape_javascript render('form', sprint: @sprint, projects: @projects) %>");
 <% else %>
   $('#modal').html("<%= escape_javascript render('form', project: @project, sprint: @sprint) %>");
 <% end %>

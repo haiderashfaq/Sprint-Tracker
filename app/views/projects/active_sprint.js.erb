@@ -1,5 +1,5 @@
 <% if @active_sprint.nil? %>
-  $('#nav-active-sprint').html("<p class='d-flex justify-content-center my-3'><%= escape_javascript (t('projects.active_sprint_absent')) %> <%= escape_javascript (link_to t('projects.backlog'), backlog_project_path, data: { remote: true } ,id: "backlog_redirect") %></p>");
+  $('#nav-active-sprint').html("<p class='d-flex justify-content-center my-3'><%= escape_javascript t('projects.active_sprint_absent') %> <%= escape_javascript(link_to t('projects.backlog'), backlog_project_path, data: { remote: true }, id: "backlog_redirect") %></p>");
   $('#backlog_redirect').on('click', function(event){
     event.preventDefault();
     $('#nav-backlog-tab').tab('show');

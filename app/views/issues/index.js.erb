@@ -1,23 +1,31 @@
 <% if (Issue::FILTER.values & params.keys).empty? %>
   $('#header').html("<%= escape_javascript render(:partial => 'issues/header',  :locals=>{projects: @projects,project:@project, issue: @issue} ) %>");
-  $('#filter').html("<%= escape_javascript render(:partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects} ) %>");
+  $('#filter').html("<%= escape_javascript render(:partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects, form_action: "index" } ) %>");
   var data = $('form').serialize();
-    if (!data.includes('&'))
-    {
-      $('.btn-filter').hide();
-    }
+  if (!data.includes('&'))
+  {
+    $('.btn-apply-filter').hide();
+  }
 <% end %>
 
 $('#issues-table').html("<%= escape_javascript render(:partial => 'issues/table',  :locals=>{ issues: @issues} ) %>");
 $('.js-select-field').select2({
   width: 200
 });
-$(document).on('select2:select',".js-select-field", function (e){
-  var select_container_id = e.params.data["id"];
-  $('.btn-filter').show();
-  $("#"+select_container_id).addClass('show');
-  $( ".js-"+select_container_id+"-field").prop( "disabled", false );
-});
+
+ $('.btn-remove-filter').hide();
+
+ $('body').on('select2:open', '.js-filter-field', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
+$(document).on('select2:select', ".js-filter-field", function(e) {
+    var select_container_id = e.params.data["id"];
+    $('.btn-apply-filter').show();
+    $("#" + select_container_id).addClass('show');
+    $(".js-" + select_container_id + "-field").prop("disabled", false);
+    $('.btn-apply-filter').show();
+    $('.btn-remove-filter').hide();
+  });
 
 $('body').on('select2:open', '.js-select-field', () => {
   document.querySelector('.select2-search__field').focus();
@@ -29,4 +37,12 @@ $('.js-remove-filter').on('click', function(e){
   var className = ".js-"+parent+"-field"
   $(id).hide();
   $(className).prop( "disabled", true );
+  var data = $('form').serialize();
+  console.log(data);
+  console.log(data.match(/&/g).length);
+  if (data.match(/&/g).length < 2)
+  {
+    $('.btn-apply-filter').hide();
+    $('.btn-remove-filter').show();
+  }
 });

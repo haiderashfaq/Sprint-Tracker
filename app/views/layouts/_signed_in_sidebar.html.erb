@@ -20,16 +20,16 @@
       <li>
         <a href='<%= users_url %>'>
           <i class='bx bx-user'></i>
-          <span class="links-name"><%= t('users.label') %></span>
+          <span class="links-name"><%= t('users.label').pluralize %></span>
         </a>
-        <span class="tooltip"><%= t('users.label') %></span>
+        <span class="tooltip"><%= t('users.label').pluralize %></span>
       </li>
       <li>
         <a href='<%= projects_url %>'>
           <i class="bi bi-journal-richtext"></i>
-          <span class="links-name"><%= t('projects.project_label') %></span>
+          <span class="links-name"><%= t('projects.project_label').pluralize %></span>
         </a>
-        <span class="tooltip"><%= t('projects.project_label') %></span>
+        <span class="tooltip"><%= t('projects.project_label').pluralize %></span>
       </li>
       <li>
         <a href='<%= issues_url %>'>
@@ -42,15 +42,18 @@
         <a href= '#'>
           <i class='bx bxl-c-plus-plus'></i>
           <span class="links-name"><%= t('sidebar.portfolio') %></span>
+        <a href='<%= sprints_url %>'>
+          <i class="bx bx-run"></i>
+          <span class="links-name"><%= t('sprints.label').pluralize %></span>
         </a>
-        <span class="tooltip"><%= t('sidebar.portfolio') %></span>
+        <span class="tooltip"><%= t('sprints.label').pluralize %></span>
       </li>
       <li>
-        <a href='#'>
-          <i class='bx bx-cog'></i>
-          <span class="links-name"><%= t('sidebar.setting') %></span>
+        <a href='<%= issues_url %>'>
+          <i class="bi bi-card-checklist"></i>
+          <span class="links-name"><%= t('issues.issue_label').pluralize %></span>
         </a>
-        <span class="tooltip"><%= t('sidebar.setting') %></span>
+        <span class="tooltip"><%= t('issues.issue_label').pluralize %></span>
       </li>
       <li>
         <a href='<%= reports_path %>'>
@@ -65,7 +68,7 @@
         <div class="profile-details">
           <div class="name-job">
             <div class="name">
-              <%= current_user.name.capitalize %>
+              <%= link_to current_user.name.capitalize, current_user %>
             </div>
             <div class="job">
               <%= current_user.role_name %>
@@ -79,9 +82,7 @@
   <div class="home-content">
     <%= render partial: 'layouts/signed_in_navbar' %>
     <%= render partial: 'shared/flash_messages' %>
-    <div class="container">
-      <%= yield %>
-      <div id="flash_messages"></div>
-    </div>
+    <div id="flash_messages"></div>
+    <%= yield %>
   </div>
 </div>

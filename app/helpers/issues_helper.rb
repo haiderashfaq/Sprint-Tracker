@@ -3,8 +3,12 @@
 module IssuesHelper
 
   def get_status_color(status)
-    status_color = { open: 'primary', in_progress: 'danger', resolved: 'info', closed: 'success' }
+    status_color = { open: 'primary', in_progress: 'warning', resolved: 'info', closed: 'success' }
     status_color[status.to_sym]
+  end
+
+  def assignee_name(issue)
+    issue&.assignee&.name || I18n.t('issues.no_assignee')
   end
 
   def get_priority_color(priority)
@@ -25,4 +29,9 @@ module IssuesHelper
     end
     form.select t('filter.filter_label'), filters, { include_blank: true }, { class: 'js-select-field js-filter-field form-select form-select-lg' }
   end
+
+  def convert_to_date(date)
+    date&.to_date&.to_s(:long)
+  end
+
 end

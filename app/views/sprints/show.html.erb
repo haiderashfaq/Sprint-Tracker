@@ -22,7 +22,7 @@
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <%= link_to t('shared.details').pluralize(), @sprint, class: 'nav-link active', id: "nav-sprints-tab", data: {bs_toggle: "tab", bs_target: "#nav-sprints"}, type: "button", role: 'tab', aria_controls: "nav-sprints", aria_selected: false %>
-      <%= link_to t('issues.issues_label').pluralize(), sprint_issues_url(@sprint), remote: true, class: 'nav-link', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues", aria_selected: false %>
+      <%= link_to t('issues.issues_label').pluralize(), issues_sprint_url, class: 'nav-link', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues", remote: true}, type: "button", role: 'tab', aria_controls: "nav-issues", aria_selected: false %>
     </div>
   </nav>
   <div class="tab-content" id="tab-tabContent">
