@@ -27,8 +27,10 @@ class Issue < ApplicationRecord
   validates :title, :description, :status, :priority, presence: true
   validate_dates :estimated_start_date, :estimated_end_date
   validate_dates :actual_start_date, :actual_end_date
+  scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
   scope :creator, ->(creator) { where creator: creator }
-  scope :filter_by_attribute, ->(column, value) { where column => value }
+
+  after_save :issue_alerts
 
   audited associated_with: :company
 
@@ -49,11 +51,25 @@ class Issue < ApplicationRecord
     errors
   end
 
+
   def assignee_name
     if(assignee.present?)
       assignee.name
     else
       I18n.t 'issues.no_assignee'
+    end
+  end
+
+  private
+  def issue_alerts
+    return if previous_changes.empty?
+
+    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]).or(company.users.where(role_id: User::ROLE_ID[:admin]))
+
+    subject = I18n.t('issues.email_subject')
+
+    users.each do |user|
+      UserMailer.delay.issue_alerts(user, self, Company.current_company.subdomain, Current.user, subject, previous_changes)
     end
   end
 end
