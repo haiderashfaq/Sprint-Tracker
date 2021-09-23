@@ -13,7 +13,7 @@ module IssuesHelper
   end
 
   def get_category_color(category)
-    category_color = { hotfix: 'warning', feature: 'info' }
+    category_color = { hotfix: 'primary', feature: 'info' }
     category_color[category.to_sym]
   end
 
@@ -24,9 +24,5 @@ module IssuesHelper
       filters = Issue::FILTER
     end
     form.select t('filter.filter_label'), filters, { include_blank: true }, { class: 'js-select-field js-filter-field form-select form-select-lg' }
-  end
-
-  def convert_to_date(date)
-    date&.to_date&.to_s(:long)
   end
 end

@@ -18,7 +18,6 @@
       </div>
       <% else %>
         <% issues_report_attributes.each do |issue_report| %>
-          <% issue_report %>
           <%= render partial: "issue_report_datatable_row", locals: { issue_report: issue_report} %>
         <% end %>
     </tbody>

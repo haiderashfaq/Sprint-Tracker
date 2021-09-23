@@ -9,14 +9,18 @@
           <th><%= t('issues.assignee') %></th>
           <th><%= t('issues.priority') %></th>
           <th><%= t('issues.category') %></th>
-          <th><%= t('shared.actions') %></th>
+          <% if can? :edit, Issue %> 
+            <th><%= t('shared.actions') %></th>
+          <% end %>
         </tr>
       </thead>
       <tbody id="issues_datatable_body">
         <% if issues.empty? %>
-        <div class="container text-center">
-          <tr id="no-resource"><td colspan="6"><%= render partial: 'shared/no_resource_present', locals: { record: 'issues.issue_label' } %></td></tr>
-        </div>
+          <div class="container text-center">
+            <tr id="no-resource">
+              <td colspan="6"><%= render partial: 'shared/no_resource_present', locals: { record: 'issues.issue_label' } %></td>
+            </tr>
+          </div>
         <% else %>
           <% issues.each do |issue| %>
             <%= render '/issues/issue_datatable_row', issue: issue %>

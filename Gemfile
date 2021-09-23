@@ -40,6 +40,9 @@ gem 'delayed_job_active_record', '=4.1.6'
 gem 'searchkick', '=4.6.0'
 # gem to add run time functions
 gem 'draper', '=4.0.2'
+# gem to display path
+gem 'breadcrumbs_on_rails', '=4.1.0'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

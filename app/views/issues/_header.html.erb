@@ -2,7 +2,7 @@
   <div id= "header">
     <div class="row mt-3">
       <div class="col-9 col-lg-9 d-flex justify-content-start">
-        <h1><%= t('issues.issue_label') %></h1>
+        <h1><%= t('issues.issue_label').pluralize %></h1>
       </div>
       <div id="header", class="col-3 align-items-right">
         <% if params[:project_id].present? %>

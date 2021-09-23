@@ -37,10 +37,6 @@ class Issue < ApplicationRecord
     time_logs.sum(:logged_time) || 0
   end
 
-    def total_time_spent
-    time_logs.sum(:logged_time)
-  end
-
   def total_estimated_time
     estimated_time || 0
   end

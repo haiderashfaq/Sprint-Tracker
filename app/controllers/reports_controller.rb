@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
   authorize_resource :current_user
   before_action :load_data
+  before_action :add_breadcrumbs
   def index
     respond_to do |format|
       format.html
@@ -8,6 +9,7 @@ class ReportsController < ApplicationController
   end
 
   def sprint
+    add_breadcrumb t('sprints.label'), sprint_reports_path
     if params[:sprint_id].present?
       @sprint = fetch_sprint
       @sprint_report_attributes = Report.sprint_report_data(@sprint)&.paginate(page: params[:page]).decorate
@@ -20,6 +22,7 @@ class ReportsController < ApplicationController
   end
 
   def issues
+    add_breadcrumb t('issues.issue_label'), issues_reports_path
     if params[:sprint_id].present?
       @sprint = fetch_sprint
       @issue_report_attributes = Report.issues_report_data(@sprint)&.paginate(page: params[:page]).decorate
@@ -44,5 +47,9 @@ class ReportsController < ApplicationController
 
   def fetch_sprint
     @sprints.find_by(id: params[:sprint_id])
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb 'Reports', reports_path
   end
 end

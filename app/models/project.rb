@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+
   include DateValidations
   include TimeProgressions
   searchkick word_middle: %i[name], filterable: %i[company_id]
