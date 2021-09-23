@@ -49,7 +49,6 @@ class Issue < ApplicationRecord
     errors
   end
 
-
   def assignee_name
     if(assignee.present?)
       assignee.name

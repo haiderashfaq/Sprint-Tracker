@@ -190,6 +190,8 @@ en:
     total: Total
     completed: Completed
     no_resource_found: "No %{resource_label} Found"
+    new: 'New'
+    edit: 'Edit'
     success:
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"

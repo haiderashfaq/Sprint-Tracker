@@ -10,12 +10,14 @@ class UsersController < ApplicationController
   end
 
   def show
+    add_breadcrumb @user.name, user_path
     respond_to do |format|
       format.html
     end
   end
 
   def new
+    add_breadcrumb t('shared.new'), new_user_path
     respond_to do |format|
       format.html
     end
@@ -34,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    add_breadcrumb t('shared.edit'), edit_user_path
     respond_to do |format|
       format.html
     end
@@ -74,17 +77,6 @@ class UsersController < ApplicationController
   end
 
   def add_breadcrumbs
-    path = request.url.split('/')
-    path.drop(3).each do |route|
-      if route.to_i.zero?
-        if route != 'new' && route != 'edit'
-          add_breadcrumb route.titleize, :"#{route}_path"
-        else
-          add_breadcrumb route.titleize, :"#{route}_user_path"
-        end
-      else
-        add_breadcrumb @user.name, user_path(@user)
-      end
-    end
+    add_breadcrumb t('users.label'), users_path
   end
 end

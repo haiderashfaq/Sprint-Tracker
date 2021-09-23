@@ -29,6 +29,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/:sequence_num
   def show
+    add_breadcrumb @issue.title.titleize, issue_path
     respond_to do |format|
       format.html
       format.js
@@ -139,15 +140,6 @@ class IssuesController < ApplicationController
   end
 
   def add_breadcrumbs
-    path = request.url.split('/')
-    path.drop(3).each do |route|
-      if params[:project_id].nil?
-        if route.to_i.zero?
-          add_breadcrumb route.titleize, :"#{route}_path"
-        else
-          add_breadcrumb @issue.title, :issue_path
-        end
-      end
-    end
+    add_breadcrumb t('issues.issue_label').pluralize, issues_path
   end
 end
