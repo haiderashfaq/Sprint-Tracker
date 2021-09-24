@@ -2,9 +2,9 @@
   $('#header').html("<%= escape_javascript render(:partial => 'issues/header',  :locals=>{projects: @projects,project:@project, issue: @issue} ) %>");
   $('#filter').html("<%= escape_javascript render(:partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects, form_action: "index" } ) %>");
   var data = $('form').serialize();
-  if (!data.includes('&'))
+  if (data.match(/&/g).length < 2)
   {
-    $('.btn-apply-filter').hide();
+    $('.btn-remove-filter').hide();
   }
 <% end %>
 
@@ -13,33 +13,28 @@ $('.js-select-field').select2({
   width: 200
 });
 
- $('.btn-remove-filter').hide();
-
  $('body').on('select2:open', '.js-filter-field', () => {
     document.querySelector('.select2-search__field').focus();
-  });
-$(document).on('select2:select', ".js-filter-field", function(e) {
-    var select_container_id = e.params.data["id"];
-    $('.btn-apply-filter').show();
-    $("#" + select_container_id).addClass('show');
-    $(".js-" + select_container_id + "-field").prop("disabled", false);
-    $('.btn-apply-filter').show();
-    $('.btn-remove-filter').hide();
   });
 
 $('body').on('select2:open', '.js-select-field', () => {
   document.querySelector('.select2-search__field').focus();
+});
+
+$(document).on('select2:select', ".js-filter-field", function(e) {
+  var select_container_id = e.params.data["id"];
+  $("#" + select_container_id).addClass('show');
+  $(".js-" + select_container_id + "-field").prop("disabled", false);
+  $('.btn-apply-filter').show();
 });
 $('.js-remove-filter').on('click', function(e){
   e.preventDefault();
   var parent = this.parentNode.parentNode.id;
   var id ="#"+parent
   var className = ".js-"+parent+"-field"
-  $(id).hide();
+  $(id).removeClass('show');
   $(className).prop( "disabled", true );
   var data = $('form').serialize();
-  console.log(data);
-  console.log(data.match(/&/g).length);
   if (data.match(/&/g).length < 2)
   {
     $('.btn-apply-filter').hide();
