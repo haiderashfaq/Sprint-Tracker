@@ -112,7 +112,14 @@ $bg-breadcrumbs-color:  #caced1;
 }
 
 .breadcrumb {
-  background-color: $bg-breadcrumbs-color;
-}
+  border-bottom: 1px solid $bg-breadcrumbs-color;
 
+  * {
+    font-size: 15px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
 

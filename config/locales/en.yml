@@ -117,6 +117,7 @@ en:
     duplicate_error: "User already exists"
     no_user_error: "User with id: %{id} doesn't exists"
     project_user_destroy_error: "User is assignee or reviewer of an Issue"
+    self_role_id_change_error: "Cannot change self role"
 
   companies:
     company_label: 'Company'

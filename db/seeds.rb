@@ -15,16 +15,20 @@ VALID_STATUSES = { 1 => 'PLANNING' }.freeze
 #                 { name: '7Vals', subdomain: '7vals', owner_id: nil }])
 # Company.current_company_id = 1
 
-# owner = User.create!(email: 'haider@gmail.com', password: '123456', role_id: 1, phone_num: "123456789", name: "haider")
+# owner = User.new(email: 'haider@gmail.com', password: '123456', role_id: 1, phone_num: "123456789", name: "haider")
+# owner.skip_confirmation!
+# owner.save!
 # Company.current_company.update(owner: owner)
 
-# (0..50).each do |i|
-#   val = Faker::Company.name
-#   company = Company.create!(name: val, subdomain: val, owner_id: nil)
-#   company.update(owner: owner)
-#   c = Company.unscoped.all
-#   user = User.create!(email: "haider#{i}@8vals.com", password: '123456', role_id: 2, phone_num: "1233456#{i}}", name: Faker::Name.name, company: c[rand(0..i)])
-# end
+(0..50).each do |i|
+  val = Faker::Company.name
+  company = Company.create!(name: val, subdomain: val, owner_id: nil)
+  company.update(owner: owner)
+  c = Company.unscoped.all
+  user = User.new(email: "haider#{i}@8vals.com", password: '123456', role_id: 2, phone_num: "1233456#{i}}", name: Faker::Name.name, company: c[rand(0..i)])
+  user.skip_confirmation!
+  user.save!
+end
 
 # (1..300).each do |i|
 #   company = rand(1..50)

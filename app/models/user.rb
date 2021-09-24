@@ -18,6 +18,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :company
 
+  validate :change_self_role
   validates :email, presence: true, uniqueness: { scope: :company_id }
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }, unless: -> { new_member }
   validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
@@ -86,5 +87,11 @@ class User < ApplicationRecord
       self.errors.add(:base, "Can't be destroyed because User is working on an issue")
       throw :abort
     end
+  end
+
+  def change_self_role
+    return if Current.user.id != id || changes[:role_id].blank?
+
+    errors.add :base, I18n.t('users.self_role_id_change_error')
   end
 end
