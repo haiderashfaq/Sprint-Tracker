@@ -8,7 +8,7 @@
           <div class="card mt-4 dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
             <div class="card-body">
               <h6 class="card-title"><%= t('projects.project_label') + ' ' + counter.to_s %></h6>
-              <% total_logged_time = project.total_spent_time %>
+              <% total_logged_time = project.total_time_spent %>
               <% estimated_time = project.total_estimated_time %>
               <% if total_logged_time.present? and estimated_time.present? %>
                 <% time_progression_ratio = project.time_progression %>

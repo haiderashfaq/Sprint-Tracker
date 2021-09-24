@@ -2,10 +2,11 @@ class SprintsController < ApplicationController
   load_and_authorize_resource :project, find_by: :sequence_num, if: -> { params[:project_id].present? }
   load_and_authorize_resource :sprint, through: :project, find_by: :sequence_num, if: -> { params[:project_id].present? }
   load_and_authorize_resource :sprint, find_by: :sequence_num, if: -> { params[:project_id].blank? }
+  before_action :add_breadcrumbs, only: [:index, :show]
 
   # GET /projects/:sequence_num/sprints
   def index
-    @sprints = @sprints&.paginate(page: params[:page])
+    @sprints = @sprints.paginate(page: params[:page])
     respond_to do |format|
       format.js
       format.html
@@ -52,6 +53,7 @@ class SprintsController < ApplicationController
 
   # GET /projects/:sequence_num/sprints/:sequence_num
   def show
+    add_breadcrumb @sprint.name.titleize, sprint_path
     respond_to do |format|
       format.js
       format.html
@@ -118,17 +120,13 @@ class SprintsController < ApplicationController
     end
   end
 
-  # GET sprints/:sequence_num/issues
-  def issues
-    @issues_to_do, @issues_in_progress, @issues_resolved, @issues_closed = @sprint.categorized_issues
-    respond_to do |format|
-      format.js
-    end
-  end
-
   private
 
   def sprint_params
     params.require(:sprint).permit(:name, :description, :start_date, :end_date, :estimated_start_date, :estimated_end_date, :project_id, status: Sprint::STATUS[:PLANNING])
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb t('sprints.label').pluralize, sprints_path
   end
 end

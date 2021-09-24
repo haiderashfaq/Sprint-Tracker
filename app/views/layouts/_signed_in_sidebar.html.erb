@@ -11,7 +11,7 @@
     </div>
     <ul class="nav_list ps-0">
       <li>
-        <a href='<%= dashboard_index_url %>'>
+        <a href='<%= root_url %>'>
           <i class='bx bx-grid-alt'></i>
           <span class="links-name"><%= t('sidebar.dashboard') %></span>
         </a>
@@ -36,7 +36,6 @@
           <i class="bx bx-run"></i>
           <span class="links-name"><%= t('sprints.label').pluralize %></span>
         </a>
-        <span class="tooltip"><%= t('sprints.label').pluralize %></span>
       </li>
       <li>
         <a href='<%= issues_url %>'>
@@ -46,7 +45,7 @@
         <span class="tooltip"><%= t('issues.issue_label').pluralize %></span>
       </li>
       <li>
-        <a href='#'>
+        <a href='<%= reports_path %>'>
           <i class='bx bxs-report'></i>
           <span class="links-name"><%= t('sidebar.reports') %></span>
         </a>
@@ -73,6 +72,8 @@
     <%= render partial: 'layouts/signed_in_navbar' %>
     <%= render partial: 'shared/flash_messages' %>
     <div id="flash_messages"></div>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </div>
 </div>

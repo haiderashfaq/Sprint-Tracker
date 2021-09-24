@@ -1,6 +1,21 @@
 # app/helpers/issues_helper
 
 module IssuesHelper
+  def get_status_color(status)
+    status_color = { open: 'primary', in_progress: 'danger', resolved: 'info', closed: 'success' }
+    status_color[status.to_sym]
+  end
+
+  def get_priority_color(priority)
+    priority_color = { low: 'success', medium: 'warning', high: 'danger' }
+    priority_color[priority.to_sym]
+  end
+
+  def get_category_color(category)
+    category_color = { hotfix: 'danger', feature: 'success' }
+    category_color[category.to_sym]
+  end
+
   def filter_select(form, params)
     if params[:project_id].present?
       filters = Issue::FILTER.except(:Project)
@@ -10,27 +25,7 @@ module IssuesHelper
     form.select t('filter.filter_label'), filters, { include_blank: true }, { class: 'js-select-field js-filter-field form-select form-select-lg' }
   end
 
-  def issue_badge_pill_selection(status)
-    case status
-    when Issue::STATUS[:Open] then 'primary'
-    when Issue::STATUS[:'In Progress'] then 'danger'
-    when Issue::STATUS[:Resolved] then 'info'
-    when Issue::STATUS[:Closed] then 'success'
-    end
-  end
-
-  def issues_priority_pill_selection(priority)
-    case priority
-    when Issue::PRIORITY[:Low] then 'success'
-    when Issue::PRIORITY[:Medium] then 'warning'
-    when Issue::PRIORITY[:High] then 'danger'
-    end
-  end
-
-  def issues_category_pill_selection(category)
-    case category
-    when Issue::CATEGORY[:Feature] then 'success'
-    when Issue::CATEGORY[:Hotfix] then 'danger'
-    end
+  def convert_to_date(date)
+    date&.to_date&.to_s(:long)
   end
 end

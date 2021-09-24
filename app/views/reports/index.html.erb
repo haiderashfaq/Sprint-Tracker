@@ -1,0 +1,23 @@
+<%= render partial: 'shared/breadcrumb' %>
+<div class="container">
+  <div class="row gap-3 mb-3">
+    <div class="col card bg-light shadow-lg dashboard-card-border">
+      <h3 class="card-header text-center"><%= t('reports.issues_report') %></h3>
+      <div class="card-body">
+        <p class="card-text"><%= t('reports.sprint_report_description') %></p>
+      </div>
+      <div class="card-footer d-flex justify-content-center">
+        <%= link_to t('reports.view_issues_report'),sprint_reports_path, class: "btn btn-primary stretched-link " %>
+      </div>
+    </div>
+    <div class="col card bg-light shadow-lg dashboard-card-border">
+      <h3 class="card-header text-center"><%= t('reports.sprint_report') %></h3>
+      <div class="card-body">
+        <p class="card-text"><%= t('reports.issues_report_description') %></p>
+      </div>
+      <div class="card-footer d-flex justify-content-center">
+        <%= link_to t('reports.view_sprint_report'),issues_reports_path, class: "btn btn-primary stretched-link " %>
+      </div>
+    </div>
+  </div>
+</div>

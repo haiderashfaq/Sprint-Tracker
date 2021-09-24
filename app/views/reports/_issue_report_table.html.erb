@@ -1,0 +1,30 @@
+<div class="container">
+  <table class="table table-hover border-primary text-center js-datatable" id="issue_report_table">
+    <thead class="text-light bg-primary">
+      <tr>
+        <th><%= t('issues.status') %></th>
+        <th><%= t('issues.title') %></th>
+        <th><%= t('issues.assignee') %></th>
+        <th><%= t('issues.priority') %></th>
+        <th><%= t('issues.category') %></th>
+        <th><%= t('issues.estimated_time') %></th>
+        <th><%= t('issues.time_spent') %></th>
+      </tr>
+    </thead>
+    <tbody id="reports_datatable_body">
+      <% if issues_report_attributes.nil? %>
+        <div class="container text-center">
+          <tr id="no-resource">
+            <td colspan="7"><%= render partial: 'shared/no_resource_present', locals: { record: t('reports.issue_report') } %></td>
+          </tr>
+        </div>
+      <% else %>
+        <% issues_report_attributes.each do |issue_report| %>
+          <%= render partial: "issue_report_datatable_row", locals: { issue_report: issue_report} %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= js_paginate issues_report_attributes %>
+    <%= pie_chart issues_report_attributes&.unscope(:group)&.group(:status)&.count, colors: [ '#e34','#17f','#285','#1df' ] ,class: "mb-5" %>
+  <% end %>
+</div>

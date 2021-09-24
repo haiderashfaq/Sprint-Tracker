@@ -1,4 +1,5 @@
 <div class="container mt-3">
+  <%= render partial: 'shared/breadcrumb' %>
   <div class="row d-flex">
     <div class="col-10 justify-content-start">
       <h1><%= t('users.member_label').pluralize %></h1>
@@ -12,7 +13,7 @@
   <br/>
   <div class="card mt-4 dashboard-card-border">
     <div class="card-body">
-      <table class="table table-hover text-center" id="users-datatable" data-source="<%= users_path(format: :json) %>">
+      <table class="table table-hover text-center js-datatable" id="users-datatable" data-source="<%= users_path(format: :json) %>">
         <thead class="bg-primary text-light">
           <tr>
             <th>Name</th>

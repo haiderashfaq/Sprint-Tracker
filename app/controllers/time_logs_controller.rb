@@ -32,6 +32,7 @@ class TimeLogsController < ApplicationController
     end
   end
 
+
   # POST /time_logs
   def create
     @time_log = TimeLog.new(time_log_params)

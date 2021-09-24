@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource find_by: :sequence_num, through: :current_company
+  before_action :add_breadcrumbs, only: [:new, :edit, :index, :show]
 
   def index
     @users = @users.paginate(page: params[:page])
@@ -10,12 +11,14 @@ class UsersController < ApplicationController
   end
 
   def show
+    add_breadcrumb @user.name, user_path
     respond_to do |format|
       format.html
     end
   end
 
   def new
+    add_breadcrumb t('shared.new'), new_user_path
     respond_to do |format|
       format.html
     end
@@ -34,6 +37,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    add_breadcrumb t('shared.edit'), edit_user_path
     respond_to do |format|
       format.html
     end
@@ -71,5 +75,9 @@ class UsersController < ApplicationController
       :phone_num,
       :role_id
     )
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb t('users.label'), users_path
   end
 end

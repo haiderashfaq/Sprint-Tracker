@@ -13,6 +13,7 @@ $hover-color: #000033;
 $a-border-color: #6f42c1;
 $secondary-color: #999999;
 $disable-border-color: #dddddd;
+$bg-breadcrumbs-color:  #caced1;
 
 .progress {width: 64%;}
 
@@ -109,3 +110,9 @@ $disable-border-color: #dddddd;
 .show{
   display: flex;
 }
+
+.breadcrumb {
+  background-color: $bg-breadcrumbs-color;
+}
+
+

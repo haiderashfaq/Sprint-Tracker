@@ -23,12 +23,12 @@
           <%= form.text_area :description, cols: 40, rows: 5, class: 'form-control form-control-md', required: true %>
         </div>
       </div>
-      <div class="row mb-3 asterick">
+      <div class="row mb-3">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
           <%= form.label t('issues.estimated_time'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.text_field :estimated_time, class: 'form-control form-control-md',required: true %>
+          <%= form.text_field :estimated_time, class: 'form-control form-control-md'%>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -36,7 +36,7 @@
           <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :status, Issue::STATUS , { required: true }, {class: "js-select-form-field form-select form-select-lg"} %>
+          <%= form.select :status, Issue::STATUS.invert, { }, {required: true , class: "js-select-form-field form-select form-select-lg"} %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -44,7 +44,7 @@
           <%= form.label t('issues.priority'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :priority, Issue::PRIORITY, { required: true }, {class: 'js-select-form-field form-select form-select-lg4'} %>
+          <%= form.select :priority, Issue::PRIORITY.invert, {}, { required: true, class: 'js-select-form-field form-select form-select-lg4'} %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -52,39 +52,39 @@
           <%= form.label t('issues.category'), class: 'col-form-label col-form-label-md'  %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :category, Issue::CATEGORY, { required: true }, {class: "js-select-form-field form-select form-select-lg"} %>
+          <%= form.select :category, Issue::CATEGORY.invert, { }, {required: true, class: "js-select-form-field form-select form-select-lg"} %>
         </div>
       </div>
-      <div class="row g-3 align-items-center mb-3 asterick">
+      <div class="row g-3 align-items-center mb-3">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
           <%= form.label t('issues.estimated_start_date'), class: 'col-form-label col-form-label-md ' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :estimated_start_date, class: 'form-control form-control-md js-flatpickr-datetime',required: true %>
+          <%= form.date_field :estimated_start_date, class: 'form-control form-control-md js-flatpickr-date'%>
         </div>
       </div>
-      <div class="row mb-3 asterick">
+      <div class="row mb-3">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 d-flex justify-content-start control-label">
           <%= form.label t('issues.estimated_end_date'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-datetime' ,required: true %>
+          <%= form.date_field :estimated_end_date, class: 'form-control form-control-md js-flatpickr-date'  %>
         </div>
       </div>
-      <div class="row g-3 align-items-center mb-3 asterick">
+      <div class="row g-3 align-items-center mb-3">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 control-label">
           <%= form.label t('issues.actual_start_date'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :actual_start_date, class: 'form-control form-control-md js-flatpickr-datetime'%>
+          <%= form.date_field :actual_start_date, class: 'form-control form-control-md js-flatpickr-date'%>
         </div>
       </div>
-      <div class="row mb-3 asterick">
+      <div class="row mb-3">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 d-flex justify-content-start control-label">
           <%= form.label t('issues.actual_end_date'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.date_field :actual_end_date, class: 'form-control form-control-md js-flatpickr-datetime'  %>
+          <%= form.date_field :actual_end_date, class: 'form-control form-control-md js-flatpickr-date'  %>
         </div>
       </div>
       <div class="row g-3  mb-3 asterick">
@@ -93,9 +93,9 @@
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
           <% if project.nil? %>
-          <%= form.select :project_id, projects.map{|project| [project.name, project.id] } , { required: true }, {class: "js-select-form-field form-select form-select-lg"}  %>
+          <%= form.select :project_id, projects.map{ |project| [project.name, project.id] } , {}, { required: true, class: "js-select-form-field form-select form-select-lg"}  %>
           <% else %>
-          <%= form.select :project_name, [project.id,project.name],{ required: true, selected: [project.id, project.name]}, {class: "js-select-form-field form-select form-select-lg",disabled: true}%>
+          <%= form.select :project_name, [project.id,project.name],{ required: true, selected: [project.id, project.name] }, { required: true, class: "js-select-form-field form-select form-select-lg",disabled: true }%>
           <% end %>
         </div>
       </div>
@@ -104,7 +104,7 @@
           <%= form.label t('issues.reviewer'), class: 'col-form-label col-form-label-md'  %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :reviewer_id, users.map{|user| [user.name, user.id] } ,{}, {class: "js-select-form-field form-select form-select-lg"}  %>
+          <%= form.select :reviewer_id, users.map{ |user| [user.name, user.id] } ,{ include_blank: true }, {class: "js-select-form-field form-select form-select-lg"}  %>
         </div>
       </div>
       <div class="row g-3  mb-3">
@@ -112,7 +112,7 @@
           <%= form.label t('issues.assignee'), class: 'col-form-label col-form-label-md'  %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :assignee_id, users.map{|user| [user.name, user.id] } ,{}, {class: "js-select-form-field form-select form-select-lg"}  %>
+          <%= form.select :assignee_id, users.map{ |user| [user.name, user.id] } ,{ include_blank: true }, { class: "js-select-form-field form-select form-select-lg" }  %>
         </div>
       </div>
       <div class="modal-footer">

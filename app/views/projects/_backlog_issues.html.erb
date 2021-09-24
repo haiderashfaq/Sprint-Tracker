@@ -1,0 +1,33 @@
+<% if issues.blank? %>
+  <div class="d-flex justify-content-center">
+    <%= render partial: 'shared/no_resource_present', locals: { record: t('issues.issue_label') } %>
+  </div>
+<% else %>
+  <%= submit_tag t('issues.add_issues'), data: { remote: true }, class: "btn btn-primary add-issues mb-3", disabled: true %>
+  <div class="card dashboard-card-border">
+    <div class="card-body">
+      <table class="table table-hover border-primary text-center my-3 js-datatable" id="issues-datatable" data-source="<%= issues_path(format: :json) %>">
+        <thead class="text-light bg-primary">
+          <tr>
+            <th><%= check_box_tag "check all" %></th>
+            <th><%= t('issues.title') %></th>
+            <th><%= t('issues.status') %></th>
+            <th><%= t('issues.priority') %></th>
+            <th><%= t('issues.category') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% issues.each do |issue| %>
+            <tr id="issue_<%= issue.id %>">
+              <td><%= check_box_tag "issue_#{issue.id}", issue.id, false, class:"issue-check-box" %></td>
+              <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
+              <td><span class="badge rounded-pill bg-<%= get_status_color(issue.status) %>"><%= issue.status.camelize %></span></td>
+              <td><span class="badge rounded-pill bg-<%= get_priority_color(issue.priority) %>"><%= issue.priority.camelize %></span></td>
+              <td><span class="badge rounded-pill bg-<%= get_category_color(issue.category) %>"><%= issue.category.camelize %></span></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

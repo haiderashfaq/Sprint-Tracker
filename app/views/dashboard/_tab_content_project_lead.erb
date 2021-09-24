@@ -2,7 +2,7 @@
   <div class="tab-pane fade show active" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
     <% @issues= Issue.joins(:assignee) %>
     <% @issues= @issues.paginate(page: params[:page]) %>
-    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @issues, chart_id: 'assignee_issues' } %>
+    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @assigned_issues, chart_id: 'assignee_issues' } %>
   </div>
   <div class="tab-pane fade" id="nav-creator" role="tabpanel" aria-labelledby="nav-creator-tab"></div>
   <div class="tab-pane fade" id="nav-reviewer" role="tabpanel" aria-labelledby="nav-reviewer-tab"></div>

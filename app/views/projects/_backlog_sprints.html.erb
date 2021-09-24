@@ -1,0 +1,27 @@
+<div class="container mt-3">
+  <div class="mb-3 d-flex justify-content-between">
+    <h5><%= t('sprints.label').pluralize %></h5>
+    <%= link_to "", "#", class: 'bi bi-caret-down-fill', id: "sprint_dropdown" %>
+  </div>
+  <div id="sprints_table" class="collapse">
+    <table class="table table-borderless table-striped my-3" id="inactive-sprints">
+      <tbody>
+        <% sprints.each_with_index do |sprint, index| %>
+          <tr id="sprint_<%=sprint.sequence_num%>">
+            <td>
+              <b><%= link_to sprint.name, sprint %></b>
+              <small class="fs-6 fw-lighter" id="no_of_issues">
+                <%= pluralize(sprint.issues.size, t('issues.issue_label')) %>
+              </small>
+            </td>
+            <td class="text-end">
+              <% if project.active_sprint.nil? %>
+                <%= link_to t('sprints.start'), start_sprint_info_sprint_path(sprint), data: { remote: true, method: :get }, class: "btn btn-outline-primary"+( index == 0? "" : " disabled"), style: ( index == 0 ? {} : { "pointer-events:" => :none} ) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

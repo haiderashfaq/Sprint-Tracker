@@ -1,5 +1,11 @@
 <% if @sprints.any? %>
-  $('#nav-backlog').html('<%= escape_javascript (render "backlog", project: @project, sprints: @sprints, issues: @issues) %>');
+  $('#nav-backlog #backlog_sprints').html("<%= escape_javascript (render "backlog_sprints", project: @project, sprints: @sprints) %>")
+  $('#nav-backlog #backlog_issues #backlog_issues_content').html("<%= escape_javascript (render "backlog_issues", project: @project, sprints: @sprints, issues: @issues) %>")
+
+  <% if (Issue::FILTER.values & params.keys).empty?  %>
+    $('#nav-backlog #backlog_issues #filter').html("<%= escape_javascript (render(:partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects, form_action: "backlog"})) %>")
+  <% end %>
+
 
   $('.add-issues').on('click', function() {
     $('#modal').html('<%= escape_javascript (render "sprints/select_sprint", sprints: @sprints) %>');
@@ -40,16 +46,34 @@
     $('.issue_ids').val(issue_ids);
     $(".add-issues").prop("disabled", true);
   });
-
-  $('body').on('click', '#sprint_dropdown', function() {
-    $('#sprints_table').toggleClass("collapse");
-    $('#sprint_dropdown').toggleClass('bi-caret-down-fill bi-caret-up-fill');
-  });
-
-  $('body').on('click', '#issue_dropdown', function() {
-    $('#issues_table').toggleClass("collapse")
-    $('#issue_dropdown').toggleClass('bi-caret-down-fill bi-caret-up-fill');
-  });
 <% else %>
   $('#nav-backlog').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: t('sprints.label') }) %>");
 <% end %>
+$('.js-select-field').select2({
+  width: 200
+});
+$(document).on('select2:select',".js-select-field", function (e){
+  var select_container_id = e.params.data["id"];
+  $('.btn-apply-filter').show();
+  $('.btn-remove-filter').hide();
+  $("#"+select_container_id).addClass('show');
+  $( ".js-"+select_container_id+"-field").prop( "disabled", false );
+});
+
+$('body').on('select2:open', '.js-select-field', () => {
+  document.querySelector('.select2-search__field').focus();
+});
+$('.js-remove-filter').on('click', function(e){
+  e.preventDefault();
+  var parent = this.parentNode.parentNode.id;
+  var id ="#"+parent
+  var className = ".js-"+parent+"-field"
+  $(id).hide();
+  $(className).prop( "disabled", true );
+  var data = $('form').serialize();
+   if (data.match(/&/g).length < 2)
+  {
+    $('.btn-apply-filter').hide();
+    $('.btn-remove-filter').show();
+  }
+});

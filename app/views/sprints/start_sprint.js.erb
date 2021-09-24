@@ -3,7 +3,7 @@
 <% else %>
   $('#modal').modal('hide');
   $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
-  $.get(window.location.href + "/active_sprint.js");
+  $.get(window.location.origin + window.location.pathname + "/active_sprint.js");
   $("#nav-active-sprint-tab").tab('show');
   $("#sprint_<%= @sprint.id %>").remove();
 <% end %>

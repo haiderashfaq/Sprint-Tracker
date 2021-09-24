@@ -1,23 +1,28 @@
+<%= render partial: 'shared/breadcrumb' %>
 <%= render partial: "issues/show_header", locals: { issue: @issue } %>
 <div class="container">
   <ul class="nav nav-tabs bg-gray" id="issue" role="tablist">
     <li class="nav-item active" role="presentation">
      <%= link_to t('issues.issue_label'), issue_path, remote: true, class: 'nav-link active', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues",aria_selected: true  %>
     </li>
+    <% if can? :history, Issue%>
+      <li class="nav-item" role="presentation">
+        <%= link_to t('issues.history_label'), history_path(issue: @issue), remote: true, class: 'nav-link', id: "nav-history-tab", data: {bs_toggle: "tab", bs_target: "#nav-history"}, type: "button", role: 'tab', aria_controls: "nav-history" ,aria_selected: true %>
+      </li>
+    <% end %>
     <li class="nav-item" role="presentation">
-      <%= link_to t('issues.history_label'), history_path(issue: @issue), remote: true, class: 'nav-link', id: "nav-history-tab", data: {bs_toggle: "tab", bs_target: "#nav-history"}, type: "button", role: 'tab', aria_controls: "nav-history" ,aria_selected: true %>
-    </li>
-    <li class="nav-item" role="presentation">
-      <%= link_to t('time_logs.label').pluralize(), [@issue, :time_logs], class: 'nav-link', id: "nav-time_logs-tab", data: { bs_toggle: "tab", bs_target: "#nav-time_logs", remote: true }, type: "button", role: 'tab', aria_controls: "nav-time_logs", aria_selected: false %>
+      <%= link_to t('time_logs.label').pluralize(), [@issue, :time_logs], remote: true, class: 'nav-link', id: "nav-time_logs-tab", data: { bs_toggle: "tab", bs_target: "#nav-time_logs" }, type: "button", role: 'tab', aria_controls: "nav-time_logs", aria_selected: false %>
     </li>
   </ul>
   <div class="tab-content" id="issue_content">
     <div class="tab-pane fade show active" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
       <%= render partial: "show", locals: { issue: @issue } %>
     </div>
-    <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
-      <div id="history"></div>
-    </div>
+    <% if can? :history, Issue%>
+      <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
+        <div id="history"></div>
+      </div>
+    <% end %>
     <div class="tab-pane fade" id="nav-time_logs" role="tabpanel" aria-labelledby="nav-time_logs-tab"></div>
   </div>
 </div>
