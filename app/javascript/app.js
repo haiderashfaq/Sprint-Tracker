@@ -88,7 +88,9 @@ window.addEventListener("ajax:success", (event) =>{
       dropdownParent: $('#modal')
     }); 
   });
-
+  $('body').on('select2:open', '.js-select-form-field', () => {
+    document.querySelector('.select2-search__field').focus();
+  }); 
 });
 var select2_field_js = function() {
   $(".js-select-field-single").select2({});
