@@ -6,7 +6,7 @@ module Audited
       PaginatingDecorator
     end
 
-    def get_audits
+    def load_users
       includes(:user)
     end
 
@@ -19,8 +19,8 @@ module Audited
     end
 
     private
-    def get_user_name(value)
-      User.find_by(id: value.to_i).name if User.find_by(id: value.to_i).present?
+    def get_user_name(id)
+      User.find_by(id: id).name if User.find_by(id: id).present?
     end
 
     def date_format(value)
@@ -35,8 +35,8 @@ module Audited
       value.to_s
     end
 
-    def get_sprint_name(value)
-      Sprint.find_by(id: value.to_i)&.name || I18n.t('issues.no_sprint')
+    def get_sprint_name(id)
+      Sprint.find_by(id: id)&.name || I18n.t('issues.no_sprint')
     end
 
     def set_format(attribute, value)

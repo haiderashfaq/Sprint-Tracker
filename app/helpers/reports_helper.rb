@@ -8,7 +8,7 @@ module ReportsHelper
 
   def assignee_link(sprint_report)
     return t('issues.no_assignee') if sprint_report.assignee.nil?
-    link_to assignee_name(sprint_report), user_path(sprint_report.assignee)
+    link_to sprint_report.assignee_name, user_path(sprint_report.assignee)
   end
 
   def get_progress_width(value)
