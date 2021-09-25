@@ -3,6 +3,7 @@
   <td><span class="badge rounded-pill bg-<%= sprints_badge_pill_selection(sprint.status) %>">
       <%= sprint.status %></span></td>
   <td><%= link_to sprint.name, sprint %></td>
+  <td><%= link_to sprint.project.name, sprint.project %></td>
   <td><%= sprint.creator.name %></td>
   <td><%= sprint.start_date&.to_formatted_s(:long) %></td>
   <td><%= sprint.end_date&.to_formatted_s(:long) %></td>
