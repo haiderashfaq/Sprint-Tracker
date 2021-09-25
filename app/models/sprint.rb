@@ -107,7 +107,7 @@ class Sprint < ApplicationRecord
   private
 
   def check_for_issues
-    return unless issues.exist?
+    return if issues.blank?
 
     errors.add(:base, I18n.t('sprints.sprint_deletion_error'))
     throw :abort

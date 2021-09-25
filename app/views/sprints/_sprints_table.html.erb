@@ -20,7 +20,7 @@
             <% if params[:project_id].nil? %>
               <%= render 'sprint_datatable_row', sprint: sprint %>
             <% else %>
-              <tr>
+              <tr id="sprint_table_row">
                 <%= render 'sprint_datatable_row', sprint: sprint, project: project %>
               </tr>
             <% end %>

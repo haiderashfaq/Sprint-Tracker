@@ -4,20 +4,26 @@
     <span id="sprint_dopdown_icon" class="bi bi-caret-down-fill"></span>
   </a>
   <div id="sprints_table" class="collapse">
-    <table class="table table-borderless table-striped my-3" id="inactive-sprints">
+    <table class="table table-borderless my-3" id="inactive-sprints">
       <tbody>
         <% sprints.each_with_index do |sprint, index| %>
           <tr id="sprint_<%=sprint.sequence_num%>">
             <td>
-              <b><%= link_to sprint.name, sprint %></b>
-              <small class="fs-6 fw-lighter" id="no_of_issues">
-                <%= pluralize(sprint.issues.size, t('issues.issue_label')) %>
-              </small>
-            </td>
-            <td class="text-end">
-              <% if project.active_sprint.nil? %>
-                <%= link_to t('sprints.start'), start_sprint_info_sprint_path(sprint), data: { remote: true, method: :get }, class: "btn btn-outline-primary"+( index == 0? "" : " disabled"), style: ( index == 0 ? {} : { "pointer-events:" => :none} ) %>
-              <% end %>
+              <div class="card shadow-lg dashboard-card-border">
+                <div class="card-body d-flex justify-content-between">
+                  <div>
+                    <b><%= link_to sprint.name, sprint %></b>
+                    <small class="fs-6 fw-lighter" id="no_of_issues">
+                      <%= pluralize(sprint.issues.size, t('issues.issue_label')) %>
+                    </small>
+                  </div>
+                  <div>
+                    <% if project.active_sprint.nil? %>
+                      <%= link_to t('sprints.start'), start_sprint_info_sprint_path(sprint), data: { remote: true, method: :get }, class: "btn btn-outline-primary"+( index == 0? "" : " disabled"), style: ( index == 0 ? {} : { "pointer-events:" => :none} ) %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         <% end %>

@@ -1,12 +1,12 @@
 <%= render partial: 'shared/breadcrumb' %>
 <div class="container mt-3">
-  <div class="row d-flex">
-    <div class="col justify-content-between">
+  <div class="d-flex justify-content-between">
+    <div>
       <h1><%= t('projects.project_label').pluralize() %></h1>
     </div>
     <% if can? :create, Project %>
-      <div class="col-2 justify-content-end">
-        <a role='button' class="btn btn-primary w-100 bi bi-plus" href= "<%= new_project_path %>"> <%= t('shared.create_new_resource', resource_label: t('projects.project_label')) %></a>
+      <div >
+        <a role='button' class="btn btn-primary bi bi-plus" href= "<%= new_project_path %>"> <%= t('shared.create_new_resource', resource_label: t('projects.project_label')) %></a>
       </div>
     <% end %>
   </div>
