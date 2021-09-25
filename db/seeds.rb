@@ -20,17 +20,21 @@ VALID_STATUSES = { 1 => 'PLANNING' }.freeze
 # owner.save!
 # Company.current_company.update(owner: owner)
 
-(0..50).each do |i|
-  val = Faker::Company.name
-  company = Company.create!(name: val, subdomain: val, owner_id: nil)
-  company.update(owner: owner)
-  c = Company.unscoped.all
-  user = User.new(email: "haider#{i}@8vals.com", password: '123456', role_id: 2, phone_num: "1233456#{i}}", name: Faker::Name.name, company: c[rand(0..i)])
-  user.skip_confirmation!
-  user.save!
-end
+# (0..50).each do |i|
+#   val = Faker::Company.name
+#   company = Company.create!(name: val, subdomain: val, owner_id: nil)
+#   company.update(owner: owner)
+# end
 
-# (1..300).each do |i|
+# Company.unscoped.all.each do |c|
+#   (1..20).each do |i|
+#     user = User.new(email: "haider#{i}@8vals.com", password: '123456', role_id: 2, phone_num: "1233456#{i}}", name: Faker::Name.name, company: c)
+#     user.skip_confirmation!
+#     user.save!
+#   end
+# end
+
+# (1..500).each do |i|
 #   company = rand(1..50)
 #   Company.current_company_id = company
 #   u = User.all
@@ -39,174 +43,174 @@ end
 #   end
 # end
 
-# (0..5000).each do |i|
-#   company = rand(0..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       issue = Issue.create!(title: Faker::Company.name, description: Faker::Quote.matz, estimated_time: "100.00", status: STATUS[rand(1..3)], priority: PRIORITY[rand(1..3)], category: CATEGORY[rand(1..2)], actual_start_date: rand(1..15).days.ago, actual_end_date: rand(-15..0).days.ago, estimated_start_date: rand(1..15).days.ago, estimated_end_date: rand(-15..0).days.ago,  creator: user, assignee_id: u[rand(1..u.count)-1].id, reviewer_id: u[rand(1..u.count)-1].id, project: p[rand(1..p.count)-1])
+(0..5000).each do |i|
+  company = rand(0..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      issue = Issue.create!(title: Faker::Company.name, description: Faker::Quote.matz, estimated_time: "100.00", status: STATUS[rand(1..3)], priority: PRIORITY[rand(1..3)], category: CATEGORY[rand(1..2)], actual_start_date: rand(1..15).days.ago, actual_end_date: rand(-15..0).days.ago, estimated_start_date: rand(1..15).days.ago, estimated_end_date: rand(-15..0).days.ago,  creator: user, assignee_id: u[rand(1..u.count)-1].id, reviewer_id: u[rand(1..u.count)-1].id, project: p[rand(1..p.count)-1])
 
-#       (0..rand(1..10)).each do |i|
-#         user = u[rand(1..u.count)-1]
-#         TimeLog.create!(date: rand(1..15).days.ago, logged_time: Faker::Number.between(from: 1.0, to: 100.0).round(2) , work_description: Faker::Quote.matz, assignee: user, issue:issue)
-#       end
-#       # pu = ProjectsUser.new(project: p[rand(1..p.count)-1], user: u[rand(1..u.count)-1])
-#       # pu.save(validate: false)
-#     end
-#   end
-# end
+      (0..rand(1..10)).each do |i|
+        user = u[rand(1..u.count)-1]
+        TimeLog.create!(date: rand(1..15).days.ago, logged_time: Faker::Number.between(from: 1.0, to: 100.0).round(2) , work_description: Faker::Quote.matz, assignee: user, issue:issue)
+      end
+      # pu = ProjectsUser.new(project: p[rand(1..p.count)-1], user: u[rand(1..u.count)-1])
+      # pu.save(validate: false)
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
 
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(1..15).days.ago,
-#                      end_date: rand(-15..0).days.ago, estimated_start_date: rand(1..15).days.ago, estimated_end_date: rand(-15..0).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(1..15).days.ago,
+                     end_date: rand(-15..0).days.ago, estimated_start_date: rand(1..15).days.ago, estimated_end_date: rand(-15..0).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
 
-#   unless p.blank?
-#     unless user.blank? and u.blank?
-#       user = u[rand(1..u.count)-1]
-#       user = u[rand(1..u.count)]
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-15..0).days.ago,
-#                      end_date: rand(-30..-16).days.ago, estimated_start_date: rand(-15..0).days.ago, estimated_end_date: rand(-30..-16).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+  unless p.blank?
+    unless user.blank? and u.blank?
+      user = u[rand(1..u.count)-1]
+      user = u[rand(1..u.count)]
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-15..0).days.ago,
+                     end_date: rand(-30..-16).days.ago, estimated_start_date: rand(-15..0).days.ago, estimated_end_date: rand(-30..-16).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-29..-16).days.ago,
-#                      end_date: rand(-45..-30).days.ago, estimated_start_date: rand(-29..-16).days.ago, estimated_end_date: rand(-45..-30).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-29..-16).days.ago,
+                     end_date: rand(-45..-30).days.ago, estimated_start_date: rand(-29..-16).days.ago, estimated_end_date: rand(-45..-30).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-44..-29).days.ago,
-#                      end_date: rand(-60..-45).days.ago, estimated_start_date: rand(-44..-29).days.ago, estimated_end_date: rand(-60..-45).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-44..-29).days.ago,
+                     end_date: rand(-60..-45).days.ago, estimated_start_date: rand(-44..-29).days.ago, estimated_end_date: rand(-60..-45).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-59..-44).days.ago,
-#                      end_date: rand(-75..-60).days.ago, estimated_start_date: rand(-59..-44).days.ago, estimated_end_date: rand(-75..-60).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-59..-44).days.ago,
+                     end_date: rand(-75..-60).days.ago, estimated_start_date: rand(-59..-44).days.ago, estimated_end_date: rand(-75..-60).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-74..-59).days.ago,
-#                      end_date: rand(-90..-75).days.ago, estimated_start_date: rand(-74..-59).days.ago, estimated_end_date: rand(-90..-75).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(-74..-59).days.ago,
+                     end_date: rand(-90..-75).days.ago, estimated_start_date: rand(-74..-59).days.ago, estimated_end_date: rand(-90..-75).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(30..44).days.ago,
-#                      end_date: rand(15..29).days.ago, estimated_start_date: rand(30..44).days.ago, estimated_end_date: rand(15..29).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(30..44).days.ago,
+                     end_date: rand(15..29).days.ago, estimated_start_date: rand(30..44).days.ago, estimated_end_date: rand(15..29).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(60..74).days.ago,
-#                      end_date: rand(45..59).days.ago, estimated_start_date: rand(60..74).days.ago, estimated_end_date: rand(45..59).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(60..74).days.ago,
+                     end_date: rand(45..59).days.ago, estimated_start_date: rand(60..74).days.ago, estimated_end_date: rand(45..59).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(90..104).days.ago,
-#                      end_date: rand(75..89).days.ago, estimated_start_date: rand(90..104).days.ago, estimated_end_date: rand(75..89).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(90..104).days.ago,
+                     end_date: rand(75..89).days.ago, estimated_start_date: rand(90..104).days.ago, estimated_end_date: rand(75..89).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end
 
-# (0..1000).each do |i|
-#   company = rand(1..50)
-#   Company.current_company_id = company
-#   u = User.all
-#   p = Project.all
-#   unless p.blank?
-#     user = u[rand(1..u.count)-1]
-#     unless user.blank? and u.blank?
-#       Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(120..134).days.ago,
-#                      end_date: rand(105..119).days.ago, estimated_start_date: rand(120..134).days.ago, estimated_end_date: rand(105..119).days.ago,
-#                      project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
-#     end
-#   end
-# end
+(0..1000).each do |i|
+  company = rand(1..50)
+  Company.current_company_id = company
+  u = User.all
+  p = Project.all
+  unless p.blank?
+    user = u[rand(1..u.count)-1]
+    unless user.blank? and u.blank?
+      Sprint.create!(name: Faker::Company.name, description: Faker::Quote.matz, start_date: rand(120..134).days.ago,
+                     end_date: rand(105..119).days.ago, estimated_start_date: rand(120..134).days.ago, estimated_end_date: rand(105..119).days.ago,
+                     project: p[rand(1..p.count) -1], creator: user, status: VALID_STATUSES[1])
+    end
+  end
+end

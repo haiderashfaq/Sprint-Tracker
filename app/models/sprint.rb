@@ -8,7 +8,7 @@ class Sprint < ApplicationRecord
   sequenceid :company, :sprints
 
   has_many :issues
-  has_many :sprintreport
+  has_many :sprint_report_items, class_name: 'Sprintreport'
 
   STATUS = { PLANNING: 'PLANNING', ACTIVE: 'ACTIVE', CLOSED: 'CLOSED' }.freeze
 
@@ -35,8 +35,8 @@ class Sprint < ApplicationRecord
     begin
       transaction do
         if project.active_sprint.nil?
-          if project.update(active_sprint: self)
-            update(status: Sprint::STATUS[:ACTIVE])
+          if project.update!(active_sprint: self)
+            update!(status: Sprint::STATUS[:ACTIVE])
           end
         else
           errors.add :project, I18n.t('sprints.active_sprint_exists')
@@ -45,13 +45,14 @@ class Sprint < ApplicationRecord
       end
     rescue ActiveRecord::RecordInvalid => e
       errors.add :base, e.record.errors.full_messages
+      false
     end
   end
 
   def complete_sprint(issues, issues_dest_id)
     begin
       transaction do
-        generate_report unless Sprintreport.find_by(sprint_id: id)
+        generate_report
         issues.each do |issue|
           Sprintreport.find_by(sprint: self, issue: issue).update(status: Sprintreport::STATUS[:MOVED], moved_to_id: issues_dest_id)
         end
@@ -61,18 +62,24 @@ class Sprint < ApplicationRecord
       end
     rescue ActiveRecord::RecordInvalid => e
       errors.add :base, e.record.errors.full_messages
+      false
     end
   end
 
   def generate_report
+    return if sprint_report_items.presence
+
     begin
       transaction(requires_new: true) do
+        sprintreport_objects = []
         issues.each do |issue|
-          Sprintreport.create!(sprint: self, issue: issue, status: (issue.status == Issue::STATUS.invert['Closed'] ? Sprintreport::STATUS[:CLOSED] : Sprintreport::STATUS[:IN_PROGRESS]))
+          sprintreport_objects << { sprint_id: id, issue_id: issue.id, status: (issue.status == Issue::STATUS.key('Closed') ? Sprintreport::STATUS[:CLOSED] : Sprintreport::STATUS[:IN_PROGRESS]) }
         end
+        Sprintreport.create!(sprintreport_objects)
       end
     rescue ActiveRecord::RecordInvalid => e
       errors.add :base, e.record.errors.full_messages
+      false
     end
   end
 
@@ -83,18 +90,18 @@ class Sprint < ApplicationRecord
   end
 
   def report_content
-    generate_report unless Sprintreport.find_by(sprint_id: id)
-    issues_unresolved = sprintreport.includes(:issue).where.not(status: Sprintreport::STATUS[:CLOSED])
-    issues_resolved = sprintreport.includes(:issue).where(status: Sprintreport::STATUS[:CLOSED])
+    generate_report
+    issues_unresolved = sprint_report_items.includes(:issue).unresolved_issues
+    issues_resolved = sprint_report_items.includes(:issue).closed_issues
     [issues_resolved, issues_unresolved]
   end
 
   def categorized_issues
-    issues_to_do = issues.where(status: Issue::STATUS.invert['Open'])
-    issues_in_progress = issues.where(status: Issue::STATUS.invert['In Progress'])
-    issues_resolved = issues.where(status: Issue::STATUS.invert['Resolved'])
-    issues_closed = issues.where(status: Issue::STATUS.invert['Closed'])
-    [issues_to_do, issues_in_progress, issues_resolved, issues_closed]
+    issues_to_do = issues.open
+    issues_in_progress = issues.in_progress
+    issues_resolved = issues.resolved
+    issues_closed = issues.closed
+    { to_do: issues_to_do, in_progress: issues_in_progress, resolved: issues_resolved, closed: issues_closed }
   end
 
   private

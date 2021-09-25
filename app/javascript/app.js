@@ -77,11 +77,11 @@ window.addEventListener("ajax:success", (event) => {
 
   $('body').off('click', '#sprint_dropdown').on('click', '#sprint_dropdown', function() {
     $('#sprints_table').toggleClass("collapse");
-    $('#sprint_dropdown').toggleClass('bi-caret-down-fill bi-caret-up-fill');
+    $('#sprint_dopdown_icon').toggleClass('bi-caret-down-fill bi-caret-up-fill');
   });
 
   $('body').off('click', '#issue_dropdown').on('click', '#issue_dropdown', function() {
     $('#issues_table').toggleClass("collapse")
-    $('#issue_dropdown').toggleClass('bi-caret-down-fill bi-caret-up-fill');
+    $('#issue_dopdown_icon').toggleClass('bi-caret-down-fill bi-caret-up-fill');
   });
 });

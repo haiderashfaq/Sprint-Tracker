@@ -28,10 +28,10 @@ class Issue < ApplicationRecord
   validate_datetime :actual_start_date
   validate_datetime :estimated_end_date
   validate_datetime :estimated_start_date
-  validates :status, inclusion: { in: STATUS.keys }
   validate_dates :actual_start_date, :actual_end_date
-  validates :priority, inclusion: { in: PRIORITY.keys }
-  validates :category, inclusion: { in: CATEGORY.keys }
+  validates :status, inclusion: { in: STATUS.keys.map(&:to_s) }
+  validates :priority, inclusion: { in: PRIORITY.keys.map(&:to_s) }
+  validates :category, inclusion: { in: CATEGORY.keys.map(&:to_s) }
   validate_dates :estimated_start_date, :estimated_end_date
   validates :title, length: { minimum: 4, maximum: 255 }
   validates :description, length: { minimum: 6, maximum: 5000 }
@@ -39,8 +39,13 @@ class Issue < ApplicationRecord
   validates :estimated_time, length: { maximum: 100 }, numericality: { greater_than: 0 }
 
   scope :creator, ->(creator) { where creator: creator }
-  scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
+  # scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
   scope :filter_by_attribute, ->(column, value) { where column => value }
+  scope :open, -> { where(status: STATUS.key('Open')) }
+  scope :closed, -> { where(status: STATUS.key('Closed')) }
+  scope :resolved, -> { where(status: STATUS.key('Resolved')) }
+  scope :in_progress, -> { where(status: STATUS.key('In Progress')) }
+  scope :high_priority, -> { where(priority: PRIORITY[:high]) }
 
   def total_time_spent
     time_logs.sum(:logged_time) || 0
@@ -66,14 +71,15 @@ class Issue < ApplicationRecord
   end
 
   def self.issues_left_unresolved_ideally(sprint, date)
-    sprint.issues.where("estimated_end_date > ?", date).or(sprint.issues.where(estimated_end_date: nil)).where.not(status: Issue::STATUS.invert['Closed']).size
+    sprint.issues.where("estimated_end_date > ?", date).or(sprint.issues.where(estimated_end_date: nil)).where.not(status: STATUS.key('Closed')).size
   end
 
   def self.issues_left_unresolved_actually(sprint, date)
-    sprint.issues.where("actual_end_date > ?", date).or(sprint.issues.where(actual_end_date: nil)).where.not(status: Issue::STATUS.invert['Closed']).size
+    sprint.issues.where("actual_end_date > ?", date).or(sprint.issues.where(actual_end_date: nil)).where.not(status: STATUS.key('Closed')).size
   end
 
   private
+
   def issue_alerts
     return if previous_changes.empty?
 

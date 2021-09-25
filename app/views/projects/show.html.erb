@@ -48,10 +48,10 @@
       <div id="backlog_sprints"></div>
       <div id="backlog_issues">
         <div class="container mt-3">
-          <div class="mb-3 d-flex justify-content-between">
+          <a class="mb-3 d-flex justify-content-between" id="issue_dropdown" href="#">
             <h5><%= t('issues.issue_label').pluralize %></h5>
-            <%= link_to "", "#", class: 'bi bi-caret-down-fill', id: "issue_dropdown" %>
-          </div>
+            <span id="issue_dopdown_icon" class="bi bi-caret-down-fill"></span>
+          </a>
           <div id="issues_table" class="collapse">
             <div id="filter"></div>
             <div id="backlog_issues_content"></div>

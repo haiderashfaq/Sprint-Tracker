@@ -1,6 +1,6 @@
 <div class="container mb-3">
   <div class="mt-5">
-    <div class="card shadow-lg">
+    <div class="card shadow-lg dashboard-card-border">
       <div class="card-body">
         <div>
           <%= pie_chart issues.group(:status).count, colors: [ '#e34','#17f','#285','#1df' ], id: chart_id %>
@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  <div class="card mt-4 dashboard-card-border">
+  <div class="card mt-4 dashboard-card-border shadow-lg">
     <div class="card-body">
       <table class="table table-hover border-primary text-center js-datatable" id="issues_datatable">
         <thead class="text-light bg-primary">

@@ -1,24 +1,8 @@
 <div class="tab-content" id="tab-tabContent">
-  <div class="tab-pane fade show active" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
-    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @assigned_issues, chart_id: 'assignee_issues' } %>
-  </div>
-  <div class="tab-pane fade" id="nav-creator" role="tabpanel" aria-labelledby="nav-creator-tab"></div>
-  <div class="tab-pane fade" id="nav-reviewer" role="tabpanel" aria-labelledby="nav-reviewer-tab"></div>
   <% if can? :manage, Project %>
-    <div class="tab-pane fade" id="multiCollapse4" role="tabpanel" aria-labelledby="multiCollapse4">
+    <div class="tab-pane fade show active" id="multiCollapse4" role="tabpanel" aria-labelledby="multiCollapse4">
       <div class="container my-3">
-        <div class="row">
-          <div class="col">
-            <div class="card dashboard-card-border">
-              <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('sprints.label').pluralize %></h6>
-              <div class="card-body">
-                <div class="text-7xl royal-blue"><%= @sprints.size %></div>
-              </div>
-              <div class="card-footer text-center">
-                <h6><%= t('shared.completed') + ': ' %><%= @sprints.where(status: Sprint::STATUS[:CLOSED]).size %></h6>
-              </div>
-            </div>
-          </div>
+        <div class="row g-2">
           <div class="col">
             <div class="card dashboard-card-border">
               <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('projects.project_label').pluralize %></h6>
@@ -32,12 +16,23 @@
           </div>
           <div class="col">
             <div class="card dashboard-card-border">
-              <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('issues.issue_label').pluralize %></h6>
+              <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('sprints.label').pluralize %></h6>
               <div class="card-body">
-                <div class="text-7xl orange"><%= @issues.size %></div>
+                <div class="text-7xl royal-blue"><%= @total_sprints %></div>
               </div>
               <div class="card-footer text-center">
-                <h6><%= t('shared.closed') + ': '%><%= @issues.where(status: Issue::STATUS.invert['Closed']).size %></h6>
+                <h6><%= t('shared.completed') + ': ' %><%= @closed_sprints %></h6>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card dashboard-card-border">
+              <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('issues.issue_label').pluralize %></h6>
+              <div class="card-body">
+                <div class="text-7xl orange"><%= @total_issues %></div>
+              </div>
+              <div class="card-footer text-center">
+                <h6><%= t('shared.closed') + ': '%><%= @closed_issues %></h6>
               </div>
             </div>
           </div>
@@ -45,31 +40,31 @@
             <div class="card dashboard-card-border">
               <h6 class="card-header text-center"><%= t('shared.in_progress') + ' ' + t('issues.issue_label').pluralize %></h6>
               <div class="card-body">
-                <div class="text-7xl tomato"><%= @issues.where(status: Issue::STATUS.invert['In Progress']).size %></div>
+                <div class="text-7xl tomato"><%= @in_progress_issues %></div>
               </div>
               <div class="card-footer text-center">
-                <h6><%= t('issues.high') + ' ' + t('issues.priority') + ': ' %><%= @issues.where(status: Issue::STATUS.invert['In Progress'], priority: Issue::PRIORITY[:high]).size %></h6>
+                <h6><%= t('issues.high') + ' ' + t('issues.priority') + ': ' %><%= @in_progress_and_high_priority_issues %></h6>
               </div>
             </div>
           </div>
         </div>
         <div class="row mt-3">
-          <div class="col-2">
+          <div class="col-3">
             <div class="card dashboard-card-border">
               <h6 class="card-header"><%= t('projects.project_label').pluralize %></h6>
               <div class="card-body">
-                <ul>
-                  <% counter = 0 %>
-                  <% @projects.each do |project| %>
-                    <%counter += 1 %>
-                    <div class="my-1">
-                      <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">
+                <% counter = 0 %>
+                <% @projects.each do |project| %>
+                  <%counter += 1 %>
+                  <div class="my-1 text-start">
+                    <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">
+                      <span class="btn">
                         <i class="bi bi-journal-richtext"></i>
-                        <span class="btn"><%= t('projects.project_label') + ' ' + counter.to_s %></span>
-                      </a>
-                    </div>
-                  <% end%>
-                </ul>
+                        <%= project.name %>
+                      </span>
+                    </a>
+                  </div>
+                <% end%>
               </div>
             </div>
           </div>
@@ -80,4 +75,9 @@
       <% end %>
     </div>
   </div>
+  <div class="tab-pane fade <%= (can? :manage, Project) ? '' : 'show active' %>" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
+    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @assigned_issues, chart_id: 'assignee_issues' } %>
+  </div>
+  <div class="tab-pane fade" id="nav-creator" role="tabpanel" aria-labelledby="nav-creator-tab"></div>
+  <div class="tab-pane fade" id="nav-reviewer" role="tabpanel" aria-labelledby="nav-reviewer-tab"></div>
 </div>

@@ -1,49 +1,47 @@
 <% counter = 0 %>
 <% @projects.each do |project| %>
-  <div class="container">
-    <div class="row gap-1 mb-3">
-      <%counter += 1 %>
-      <div class="col-8 card dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
-        <h6 class="card-header"><%= t('projects.project_label') + ' ' + counter.to_s %></h6>
-        <div class="card-body">
-          <% if project.fetch_project_issues %>
-            <%= line_chart [
+  <div class="row gap-1 mb-3">
+    <%counter += 1 %>
+    <div class="col-8 card dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
+      <h6 class="card-header"><%= t('projects.project_label') + ' ' + counter.to_s %></h6>
+      <div class="card-body">
+        <% if project.fetch_project_issues %>
+          <%= line_chart [
                 { name: t('shared.est_end_date'), data: project.fetch_project_issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_ideally(issue.sprint, issue.estimated_end_date)] } },
                 { name: t('shared.end_date'), data: project.fetch_project_issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_actually(issue.sprint, issue.estimated_end_date)] } }
                 ], points: false, empty: "No Data available", xtitle: "Time", ytitle: "Issues Unresolved Count" %>
-          <% end %>
-        </div>
-        <div class="card-footer">
-          <% total_logged_time = project.total_time_spent %>
-          <% estimated_time = project.total_estimated_time %>
-          <% if total_logged_time.present? and estimated_time.present? %>
-            <% time_progression_ratio = project.time_progression %>
-            <%= render partial: "time_logs/progress", locals: { instance: project, time_progression_ratio: time_progression_ratio, total_logged_time: total_logged_time, width: "w-100", estimated_time: estimated_time} %>
-          <% end %>
-        </div>
-      </div>
-      <div class="col">
-        <% if project.fetch_sprint_issues.present? %>
-          <div class="row card dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
-            <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('issues.issues_label') %></h6>
-            <div class="card-body">
-              <div class="text-7xl orange"><%= project.fetch_sprint_issues.size %></div>
-            </div>
-            <div class="card-footer text-center">
-              <h6><%= t('shared.closed') + ':'%><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['Closed']).size %></h6>
-            </div>
-          </div>
-          <div class="row card dashboard-card-border mt-2 collapse multi-collapse" id="multiCollapseExample<%= counter %>">
-            <h6 class="card-header text-center"><%= t('shared.in_progress') + ' ' + t('issues.issues_label') %></h6>
-            <div class="card-body">
-              <div class="text-7xl tomato"><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['In Progress']).size %></div>
-            </div>
-            <div class="card-footer text-center">
-              <h6><%= t('issues.high') + ' ' + t('issues.priority') + ': '%><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['In Progress'], priority: Issue::PRIORITY[:high]).count %></h6>
-            </div>
-          </div>
         <% end %>
       </div>
+      <div class="card-footer">
+        <% total_logged_time = project.total_time_spent %>
+        <% estimated_time = project.total_estimated_time %>
+        <% if total_logged_time.present? and estimated_time.present? %>
+          <% time_progression_ratio = project.time_progression %>
+          <%= render partial: "time_logs/progress", locals: { instance: project, time_progression_ratio: time_progression_ratio, total_logged_time: total_logged_time, width: "w-100", estimated_time: estimated_time} %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col">
+      <% if project.fetch_sprint_issues.present? %>
+        <div class="row card dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
+          <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('issues.issues_label') %></h6>
+          <div class="card-body">
+            <div class="text-7xl orange"><%= project.fetch_sprint_issues.size %></div>
+          </div>
+          <div class="card-footer text-center">
+            <h6><%= t('shared.closed') + ':'%><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['Closed']).size %></h6>
+          </div>
+        </div>
+        <div class="row card dashboard-card-border mt-2 collapse multi-collapse" id="multiCollapseExample<%= counter %>">
+          <h6 class="card-header text-center"><%= t('shared.in_progress') + ' ' + t('issues.issues_label') %></h6>
+          <div class="card-body">
+            <div class="text-7xl tomato"><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['In Progress']).size %></div>
+          </div>
+          <div class="card-footer text-center">
+            <h6><%= t('issues.high') + ' ' + t('issues.priority') + ': '%><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['In Progress'], priority: Issue::PRIORITY[:high]).count %></h6>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>

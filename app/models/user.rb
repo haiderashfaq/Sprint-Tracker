@@ -90,7 +90,7 @@ class User < ApplicationRecord
   end
 
   def change_self_role
-    return if Current.user.id != id || changes[:role_id].blank?
+    return if Current.user.nil? || Current.user.id != id || changes[:role_id].blank?
 
     errors.add :base, I18n.t('users.self_role_id_change_error')
   end
