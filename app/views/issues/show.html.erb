@@ -5,7 +5,7 @@
     <li class="nav-item active" role="presentation">
      <%= link_to t('issues.issue_label'), issue_path, remote: true, class: 'nav-link active', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues",aria_selected: true  %>
     </li>
-     <% if can? :read, Comment %>
+      <% if can? :index, Comment%>
       <li class="nav-item" role="presentation">
         <%= link_to t('comments.label').pluralize, issue_comments_path(issue_id: @issue.id),locals:{commentable_type: @issue, commentable_id: @issue.id}, remote: true, class: 'nav-link', id: "nav-comment-tab", data: {bs_toggle: "tab", bs_target: "#nav-comment"}, type: "button", role: 'tab', aria_controls: "nav-comment" ,aria_selected: false %>
       </li>
@@ -23,10 +23,10 @@
     <div class="tab-pane fade show active" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
       <%= render partial: "show", locals: { issue: @issue } %>
     </div>
-    <% if can? :read?, Comment%>
+    <% if can? :index, Comment%>
       <div class="tab-pane fade" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
-        <div id="comments"></div>
         <div id="new_comment"></div>
+        <div id="comments"></div>
       </div>
     <% end %>
     <% if can? :history, Issue%>

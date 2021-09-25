@@ -1,0 +1,4 @@
+<% if @comment.errors.blank? %>
+  $('#comment_<%= @comment.id %>').remove();
+<% end %>
+$('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages'%>");

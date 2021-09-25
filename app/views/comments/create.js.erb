@@ -1,1 +1,2 @@
-$('#comments').append("<%= escape_javascript render(:partial => 'comments/comment',  :locals=>{ comment: @comment} ) %>");
+$('#comments').append("<%= escape_javascript render(:partial => 'comments/comment',  :locals=>{ comment: @comment, commentable: @commentable} ) %>");
+$('#new_comment').html("<%= escape_javascript render(:partial => 'comments/form',  :locals=>{ commentable: @commentable} ) %>");

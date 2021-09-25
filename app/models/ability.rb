@@ -25,6 +25,8 @@ class Ability
       reviewer_permissions_for_issues(user)
       assignee_permissions_for_issues(user)
       member_permissions_for_time_logs(user)
+      creator_permissions_for_comments(user)
+      member_permission_for_comments(user)
     end
   end
 
@@ -110,6 +112,14 @@ class Ability
 
   def admin_permissions_for_comments(user)
     can :manage, Comment, company_id: user.company_id
+  end
+
+   def creator_permissions_for_comments(user)
+    can [:edit, :destroy], Comment, commenter: user, company_id: user.company_id
+  end
+
+  def member_permission_for_comments(user)
+    can [:new, :create, :index, :read], Comment, company_id: user.company_id
   end
 
 end

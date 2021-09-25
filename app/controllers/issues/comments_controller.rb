@@ -3,7 +3,6 @@ class Issues::CommentsController < CommentsController
 
   private
   def set_commentable
-    binding.pry
     @commentable = Issue.find_by(id: params[:issue_id])
   end
 end
