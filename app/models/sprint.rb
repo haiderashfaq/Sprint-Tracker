@@ -1,18 +1,22 @@
 class Sprint < ApplicationRecord
   searchkick word_middle: %i[name description], filterable: %i[company_id]
+  include DateValidations
 
   belongs_to :company
   belongs_to :project
   belongs_to :creator, class_name: 'User'
-  sequenceid :project, :sprints
+  sequenceid :company, :sprints
 
   has_many :issues
   has_many :sprintreport
 
-  include DateValidations
   STATUS = { PLANNING: 'PLANNING', ACTIVE: 'ACTIVE', CLOSED: 'CLOSED' }.freeze
 
   validates :name, :project_id, :start_date, :end_date, :creator_id, presence: true
+  validate_datetime :start_date
+  validate_datetime :end_date
+  validate_datetime :estimated_start_date
+  validate_datetime :estimated_end_date
   validate_dates :start_date, :end_date
   validate_dates :estimated_start_date, :estimated_end_date
   validates :status, inclusion: { in: STATUS.values }

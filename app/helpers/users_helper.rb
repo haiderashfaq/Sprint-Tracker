@@ -15,4 +15,12 @@ module UsersHelper
       'Member'
     end
   end
+
+  def show_avatar(user)
+    if user.image?
+      image_tag(user.image_url, class: 'avatar-circle')
+    else
+      render partial: 'shared/avatar'
+    end
+  end
 end

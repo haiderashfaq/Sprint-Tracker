@@ -2,6 +2,14 @@ module Audited
   class AuditDecorator < Draper::Decorator
     delegate_all
 
+    def self.collection_decorator_class
+      PaginatingDecorator
+    end
+
+    def get_audits
+      includes(:user)
+    end
+
     def previous_value(attribute, value)
       set_format(attribute, value)
     end
@@ -27,10 +35,15 @@ module Audited
       value.to_s
     end
 
+    def get_sprint_name(value)
+      Sprint.find_by(id: value.to_i)&.name || I18n.t('issues.no_sprint')
+    end
+
     def set_format(attribute, value)
       value = get_user_name(value) if %w[creator_id reviewer_id assignee_id].include?(attribute)
       value = date_format(value) if %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].include?(attribute)
       value = string_format(value) unless %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].include?(attribute)
+      value = get_sprint_name(value) if 'sprint_id' == attribute
       value
     end
   end

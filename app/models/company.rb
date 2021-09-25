@@ -7,6 +7,7 @@ class Company < ApplicationRecord
   has_many :issues, dependent: :destroy
   has_many :projects
   has_many :sprints
+  has_many :comments
   validates :name, uniqueness: true
   validates :subdomain, uniqueness: true
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_23_051841) do
+ActiveRecord::Schema.define(version: 2021_09_24_062347) do
 
   create_table "audits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "auditable_id"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(version: 2021_09_23_051841) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "description"
+    t.bigint "commentable_id"
+    t.string "commentable_type"
+    t.bigint "commenter_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["commenter_id"], name: "index_comments_on_commenter_id"
+    t.index ["company_id"], name: "index_comments_on_company_id"
   end
 
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -193,6 +206,8 @@ ActiveRecord::Schema.define(version: 2021_09_23_051841) do
     t.index ["sequence_num", "company_id"], name: "index_users_on_sequence_num_and_company_id", unique: true
   end
 
+  add_foreign_key "comments", "companies"
+  add_foreign_key "comments", "users", column: "commenter_id"
   add_foreign_key "companies", "users", column: "owner_id"
   add_foreign_key "issues", "projects"
   add_foreign_key "projects", "companies"

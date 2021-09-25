@@ -1,0 +1,8 @@
+<% if @comment.errors.present? %>
+  $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% else %>
+  $('#formCloseBtn').click();
+  $('#comment_<%= @comment.id %>').replaceWith("<%= escape_javascript render partial: 'comments/comment', locals: {comment: @comment, commentable: @commentable} %>");
+  $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% end %>
+

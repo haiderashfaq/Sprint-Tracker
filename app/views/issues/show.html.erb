@@ -5,9 +5,14 @@
     <li class="nav-item active" role="presentation">
      <%= link_to t('issues.issue_label'), issue_path, remote: true, class: 'nav-link active', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues",aria_selected: true  %>
     </li>
+      <% if can? :index, Comment%>
+      <li class="nav-item" role="presentation">
+        <%= link_to t('comments.label').pluralize, issue_comments_path(issue_id: @issue.id),locals:{commentable_type: @issue, commentable_id: @issue.id}, remote: true, class: 'nav-link', id: "nav-comment-tab", data: {bs_toggle: "tab", bs_target: "#nav-comment"}, type: "button", role: 'tab', aria_controls: "nav-comment" ,aria_selected: false %>
+      </li>
+    <% end %>
     <% if can? :history, Issue%>
       <li class="nav-item" role="presentation">
-        <%= link_to t('issues.history_label'), history_path(issue: @issue), remote: true, class: 'nav-link', id: "nav-history-tab", data: {bs_toggle: "tab", bs_target: "#nav-history"}, type: "button", role: 'tab', aria_controls: "nav-history" ,aria_selected: true %>
+        <%= link_to t('issues.history_label'), history_path(issue: @issue), remote: true, class: 'nav-link', id: "nav-history-tab", data: {bs_toggle: "tab", bs_target: "#nav-history"}, type: "button", role: 'tab', aria_controls: "nav-history" ,aria_selected: false %>
       </li>
     <% end %>
     <li class="nav-item" role="presentation">
@@ -18,6 +23,12 @@
     <div class="tab-pane fade show active" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
       <%= render partial: "show", locals: { issue: @issue } %>
     </div>
+    <% if can? :index, Comment%>
+      <div class="tab-pane fade" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+        <div id="new_comment"></div>
+        <div id="comments"></div>
+      </div>
+    <% end %>
     <% if can? :history, Issue%>
       <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
         <div id="history"></div>
@@ -25,4 +36,5 @@
     <% end %>
     <div class="tab-pane fade" id="nav-time_logs" role="tabpanel" aria-labelledby="nav-time_logs-tab"></div>
   </div>
+
 </div>

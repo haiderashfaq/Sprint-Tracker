@@ -1,0 +1,7 @@
+<div class="contianer", id="comments">
+	<div class="row mb-2">
+		<% comments.each do |comment| %>
+			<%= render partial: 'comments/comment', locals: {comment: comment, commentable: commentable} %>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+<div class="modal-dialog modal-lg", id="modal">
+  <div class="modal-content">
+    <div class="modal-header text-center"></div>
+    <div class= "col-12 modal-title text-center">
+      <h2><%= t('shared.edit_resource', resource_label: t('comments.label')) %></h2>
+    </div>
+    <div class="modal-flash-messages"></div>
+    <div class="container modal-body">
+      <%= form_with model: [commentable, comment], local: false do |form| %>
+      <div class="row mb-3 ">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-10">
+          <%= form.text_area :description, cols: 50, rows: 5, class: 'form-control form-control-md', required: true, value: comment.description %>
+        </div>
+      </div>
+      <%= form.submit class: 'btn btn-primary fa fa-check', remote: true %>
+      <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
+      <% end %>
+    </div>
+  </div>
+</div>

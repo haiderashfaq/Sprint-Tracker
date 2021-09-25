@@ -14,7 +14,7 @@
     <tbody id="reports_datatable_body">
       <% if issues_report_attributes.nil? %>
       <div class="container text-center">
-        <tr id="no-resource"><td colspan="7"><%= render partial: 'shared/no_resource_present', locals: { record: t('reports.issue_report') } %></td></tr>
+        <tr id="no-resource"><td colspan="7"><%= render partial: 'shared/no_resource_present', locals: { record: t('reports.issues_report') } %></td></tr>
       </div>
       <% else %>
         <% issues_report_attributes.each do |issue_report| %>
@@ -24,5 +24,5 @@
   </table>
   <%= js_paginate issues_report_attributes %>
   <%= pie_chart issues_report_attributes&.unscope(:group)&.group(:status)&.count, colors: [ '#e34','#17f','#285','#1df' ] ,class: "mb-5" %>
-    <% end %>
+      <% end %>
 </div>

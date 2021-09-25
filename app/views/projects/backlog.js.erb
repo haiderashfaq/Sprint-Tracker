@@ -38,8 +38,16 @@
       }
     });
     $('.issue_ids').val(issue_ids);
-    // TO DO, fix checkall bug
+    $(".add-issues").prop("disabled", true);
+  });
+
+  $('body').on('click', '#sprint_dropdown', function() {
+    $('#sprints_table').toggleClass("collapse");
+  });
+
+  $('body').on('click', '#issue_dropdown', function() {
+    $('#issues_table').toggleClass("collapse");
   });
 <% else %>
-  $('#nav-backlog').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: 'sprints.label' }) %>");
+  $('#nav-backlog').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: t('sprints.label') }) %>");
 <% end %>

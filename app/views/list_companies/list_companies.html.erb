@@ -10,17 +10,15 @@
           <%= form_with url: list_companies_url do |form| %>
             <% if @companies.empty? %>
               <div class="container text-center">
-                <%= render partial: 'Shared/no_resource_present', locals: { record: 'users.user_label' } %>
+                <%= render partial: 'Shared/no_resource_present', locals: { record: t('users.user_label') } %>
               </div>
             <% else %>
               <% @companies.each do |company| %>
                 <div class="card w-100 text-center" style="width: 18rem;">
                   <div class="card-body">
-                    <%= form.label company.name %>
-                    <br>
-                    <%= link_to "Go to link",  new_user_session_url(subdomain: company.subdomain), {class: 'btn btn-primary'}%>
+                    <%= link_to company.name,  new_user_session_url(subdomain: company.subdomain), {class: 'btn btn-primary w-50'}%>
                   </div>
-                </div>    
+                </div>
               <% end %>
             <% end %>
           <% end %>
@@ -28,4 +26,4 @@
       </div>
     </div>
   </div>
-<div>
+  <div>

@@ -1,6 +1,6 @@
 $white-color: #fff;
 $blue-color: #0062cc;
-$sidebar-background-color: #0f172a;
+$sidebar-background-color: #6f42c1;
 $profile-background-color: #1d1b31;
 $black-color: #11101d;
 $border-gray-color: #b4b4b4;
@@ -64,19 +64,6 @@ html {
 
 .dashboard-card-border{
   border-radius: 1rem!important;
-}
-.nav-tabs{
-  .nav-item{
-    .nav-link-settings{
-      border-radius: 1rem!important;
-      color: $slate-gray-color;
-    }
-    .active{
-      background-color: #dde2e8;
-      color: $black-color;
-    }
-  }
-
 }
 
 .home_container{

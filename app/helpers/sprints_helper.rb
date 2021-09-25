@@ -1,6 +1,6 @@
 module SprintsHelper
   def project_options_to_add_sprint(projects)
-    projects.map { |project| [project.name, project.id] }
+    projects.map { |project| [project.name, project.sequence_num] }
   end
 
   def complete_sprint_drop_down_options(project)

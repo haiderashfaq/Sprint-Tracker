@@ -9,5 +9,7 @@ module SetCurrentUser
 
   def set_current_user
     Current.user = current_user
+  ensure
+    Current.user = nil
   end
 end
