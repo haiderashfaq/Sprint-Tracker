@@ -1,0 +1,10 @@
+<div id = "new_comment", class="container mt-3">
+  <%= form_with model: [commentable, Comment.new], local: false do |form| %>
+    <div class="row mb-3 ">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+        <%= form.text_area :description, cols: 40, rows: 5, class: 'form-control form-control-md', required: true, placeholder: "Add a Comment" %>
+      </div>
+    </div>
+    <%= form.submit class: 'btn btn-primary fa fa-check', remote: true %>
+  <% end %>
+</div>

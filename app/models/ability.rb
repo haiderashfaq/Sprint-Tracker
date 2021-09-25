@@ -14,6 +14,7 @@ class Ability
       admin_permissions_for_projects_users(user)
       admin_permissions_for_time_logs(user)
       admin_permissions_for_reports
+      admin_permissions_for_comments(user)
     elsif user.member?
       member_permsisions_for_users(user)
       member_permissions_for_issues(user)
@@ -106,4 +107,9 @@ class Ability
   def member_permissions_for_time_logs(user)
     can :manage, TimeLog, id: user.id, company_id: user.company_id
   end
+
+  def admin_permissions_for_comments(user)
+    can :manage, Comment, company_id: user.company_id
+  end
+
 end

@@ -1,0 +1,10 @@
+<div class="contianer", id="comments">
+	<% binding.pry %>
+	<% comments.each do |comment| %>
+		<%= render partial: 'comments/comment', locals: {comment: comment} %>
+	<% end %>
+	<% if can? :edit, Comment %>
+	<% end %>
+	<% if can? :destroy, Comment %>
+	<% end %>
+</div>

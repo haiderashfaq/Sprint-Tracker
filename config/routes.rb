@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     end
     resources :issues do
       resources :time_logs
+      resources :comments, module: :issues
     end
     resources :dashboard
 

@@ -70,13 +70,14 @@ en:
     unresolved_issues_msg: "Select where all unresolved issues should be moved"
     move: "Move Issue to:"
     no_sprint: "No Sprint"
-
     issues_added_success: "Issues added Successfully to Sprint"
     assignee: 'Assignee'
     reviewer: 'Reviewer'
     creator: 'Creator'
     deletion_error: "Delete all issues before deleting project"
     no_assignee: 'No user assigned'
+  comments: 
+    label: 'Comment'
   
 
   projects:
@@ -85,7 +86,7 @@ en:
     deletion_error: "Delete all sprints before deleting project"
     backlog: "Backlog"
     active_sprint: "Active Sprint"
-    active_sprint_absent: 'No Active Sprint Found. Start in'
+    active_sprint_absent: 'No active sprint present. Start in  '
     manager_as_member_error: 'Cannot add Manager/Creator as member'
 
   filter:
@@ -109,7 +110,6 @@ en:
   users:
     user_label: 'User'
     label: 'User'
-    member_label: 'Member'
     log_in: "Log In"
     profile: "Profile"
     log_out: "Log Out"
@@ -211,7 +211,6 @@ en:
       update: "%{resource_label} Updation Failed"
       delete: "%{resource_label} Deletion Failed"
       search: "Search Result for %{resource_label}"
-      invalid_date: "Invalid %{resource_label}"
 
   roles:
     admin: 'Admin'

@@ -19,6 +19,7 @@ class Issue < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   belongs_to :reviewer, class_name: 'User', optional: true
   has_many :time_logs, dependent: :destroy
+  has_many :comments, as: :commentable
 
   sequenceid :company, :issues
 
