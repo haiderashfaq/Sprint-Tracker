@@ -1,23 +1,39 @@
-<table class="table table-hover border-primary text-center" id="sprints_datatable">
-  <thead class="bg-primary text-light">
-    <tr>
-      <th><%= t('shared.status') %></th>
-      <th><%= t('shared.name') %></th>
-      <th><%= t('shared.creator') %></th>
-      <th><%= t('shared.start_date') %></th>
-      <th><%= t('shared.end_date') %></th>
-      <th><%= t('shared.est_start_date') %></th>
-      <th><%= t('shared.est_end_date') %></th>
-      <th><%= t('shared.actions') %></th>
-    </tr>
-  </thead>
-  <tbody id="sprints_datatable_body">
-    <% sprints.each do |sprint| %>
-      <% if params[:project_id].nil? %>
-        <%= render 'sprint_datatable_row', sprint: sprint %>
-      <% else %>
-        <%= render 'sprint_datatable_row', sprint: sprint, project: project %>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+<div class="card dashboard-card-border mb-3 shadow-lg">
+  <div class="card-body">
+    <table class="table table-hover border-primary text-center js-datatable" id="sprints_datatable">
+      <thead class="bg-primary text-light">
+        <tr>
+          <th><%= t('shared.status') %></th>
+          <th><%= t('shared.name') %></th>
+          <th><%= t('projects.project_label') %></th>
+          <th><%= t('shared.creator') %></th>
+          <th><%= t('shared.start_date') %></th>
+          <th><%= t('shared.end_date') %></th>
+          <th><%= t('shared.est_start_date') %></th>
+          <th><%= t('shared.est_end_date') %></th>
+          <th><%= t('shared.actions') %></th>
+        </tr>
+      </thead>
+      <tbody id="sprints_datatable_body">
+        <% if sprints.any? %>
+          <% sprints.each do |sprint| %>
+            <% if params[:project_id].nil? %>
+              <%= render 'sprint_datatable_row', sprint: sprint %>
+            <% else %>
+              <tr id="sprint_table_row">
+                <%= render 'sprint_datatable_row', sprint: sprint, project: project %>
+              </tr>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div class="container text-center">
+            <tr id="no-resource">
+              <td colspan="8"><%= render partial: 'shared/no_resource_present', locals: { record: t('sprints.label').pluralize } %></td>
+            </tr>
+          </div>
+        <% end %>
+      </tbody>
+    </table>
+    <%= js_paginate sprints %>
+  </div>
+</div>

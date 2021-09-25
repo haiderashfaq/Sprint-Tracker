@@ -3,7 +3,7 @@
     <div class="row d-flex justify-content-end">
       <div class="col-2">
         <% if can? :create, TimeLog => issue %>
-          <%= link_to t('shared.create_new_resource', resource_label: t('time_logs.label')), new_issue_time_log_path, remote: true, class:"btn btn-primary w-100 fa fa-plus" %>
+          <%= link_to t('shared.create_new_resource', resource_label: t('time_logs.label')), new_issue_time_log_path, remote: true, class:"btn btn-primary w-100 bi bi-plus" %>
         <% end %>
       </div>
     </div>
@@ -12,4 +12,3 @@
 <div class="container mt-3">
   <div class="text-center" id="time_logs_datatable_space"></div>
 </div>
-<%= will_paginate time_logs %>

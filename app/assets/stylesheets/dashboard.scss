@@ -1,6 +1,6 @@
 $white-color: #fff;
 $blue-color: #0062cc;
-$sidebar-background-color: #0f172a;
+$sidebar-background-color: #6f42c1;
 $profile-background-color: #1d1b31;
 $black-color: #11101d;
 $border-gray-color: #b4b4b4;
@@ -64,19 +64,6 @@ html {
 
 .dashboard-card-border{
   border-radius: 1rem!important;
-}
-.nav-tabs{
-  .nav-item{
-    .nav-link-settings{
-      border-radius: 1rem!important;
-      color: $slate-gray-color;
-    }
-    .active{
-      background-color: #dde2e8;
-      color: $black-color;
-    }
-  }
-
 }
 
 .home_container{
@@ -372,59 +359,6 @@ html {
   border-top: 1px solid $border-gray-color;
   box-shadow: 0 1px 15px 0 rgba(0,0,0,0.2);
   background-color: $white-color;
-}
-
-.sidebar-index{
-  position: absolute;
-  top: 310px;
-  width: 11rem;
-  padding: 6px 14px;
-  transition: all 0.5s ease;
-  border-radius: 12px;
-
-
-  ul{
-    margin-top: 20px;
-    li{
-      position: relative;
-      height: 50px;
-      width: 100%;
-      margin: 0 5px;
-      list-style: none;
-      line-height: 50px;
-      
-      a{
-        color: $black-color;
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        transition: all 0.4s ease;
-        border-radius: 12px;
-
-        i{
-          height: 50px;
-          min-width: 50px;
-          border-radius: 12px;
-          line-height: 50px;
-          text-align: center;
-          whitespace: no-wrap;
-        }
-
-        .links-name{
-          font-size: 15px;
-          font-weight: 400;
-          white-space: nowrap;
-          pointer-events: none;
-          transition: 0.4s;
-        }
-
-        &:hover{
-          color: $black-color;
-          background-color: #dde2e8;
-        }
-      }
-    }
-  }
 }
 
 .top-override{

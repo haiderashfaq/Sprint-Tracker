@@ -22,6 +22,7 @@
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <%= link_to t('shared.details').pluralize(), @sprint, class: 'nav-link active', id: "nav-sprints-tab", data: {bs_toggle: "tab", bs_target: "#nav-sprints"}, type: "button", role: 'tab', aria_controls: "nav-sprints", aria_selected: false %>
+      <%= link_to t('sprints.report'), report_sprint_url, class: 'nav-link', id: "nav-report-tab", data: {bs_toggle: "tab", bs_target: "#nav-report", remote: true}, type: "button", role: 'tab', aria_controls: "nav-report", aria_selected: false %>
       <%= link_to t('issues.issues_label').pluralize(), sprint_issues_url(@sprint), remote: true, class: 'nav-link', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues", aria_selected: false %>
     </div>
   </nav>
@@ -29,13 +30,14 @@
     <div class="tab-pane fade show active" id="nav-sprints" role="tabpanel" aria-labelledby="nav-sprints-tab">
       <%= render 'details', sprint: @sprint %>
     </div>
+    <div class="tab-pane fade" id="nav-report" role="tabpanel" aria-labelledby="nav-report-tab"></div>
     <div class="tab-pane fade" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
       <div class="container">
         <div id="header" ></div>
         <% if (Issue::FILTER.keys & params.keys).empty? %>
           <div id="filter"></div>
         <% end %>
-          <div id="issues-table"></div>
+        <div id="issues-table"></div>
       </div>
     </div>
   </div>

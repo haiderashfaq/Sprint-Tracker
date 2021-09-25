@@ -1,18 +1,22 @@
 class Sprint < ApplicationRecord
   searchkick word_middle: %i[name description], filterable: %i[company_id]
+  include DateValidations
 
   belongs_to :company
   belongs_to :project
   belongs_to :creator, class_name: 'User'
-  sequenceid :project, :sprints
+  sequenceid :company, :sprints
 
   has_many :issues
-  has_many :sprintreport
+  has_many :sprint_report_items, class_name: 'Sprintreport'
 
-  include DateValidations
   STATUS = { PLANNING: 'PLANNING', ACTIVE: 'ACTIVE', CLOSED: 'CLOSED' }.freeze
 
   validates :name, :project_id, :start_date, :end_date, :creator_id, presence: true
+  validate_datetime :start_date
+  validate_datetime :end_date
+  validate_datetime :estimated_start_date
+  validate_datetime :estimated_end_date
   validate_dates :start_date, :end_date
   validate_dates :estimated_start_date, :estimated_end_date
   validates :status, inclusion: { in: STATUS.values }
@@ -31,8 +35,8 @@ class Sprint < ApplicationRecord
     begin
       transaction do
         if project.active_sprint.nil?
-          if project.update(active_sprint: self)
-            update(status: Sprint::STATUS[:ACTIVE])
+          if project.update!(active_sprint: self)
+            update!(status: Sprint::STATUS[:ACTIVE])
           end
         else
           errors.add :project, I18n.t('sprints.active_sprint_exists')
@@ -41,6 +45,7 @@ class Sprint < ApplicationRecord
       end
     rescue ActiveRecord::RecordInvalid => e
       errors.add :base, e.record.errors.full_messages
+      false
     end
   end
 
@@ -57,47 +62,52 @@ class Sprint < ApplicationRecord
       end
     rescue ActiveRecord::RecordInvalid => e
       errors.add :base, e.record.errors.full_messages
+      false
     end
   end
 
   def generate_report
+    return if sprint_report_items.presence
+
     begin
       transaction(requires_new: true) do
+        sprintreport_objects = []
         issues.each do |issue|
-          Sprintreport.create!(sprint: self, issue: issue, status: (issue.status == Issue::STATUS[:closed] ? Sprintreport::STATUS[:CLOSED] : Sprintreport::STATUS[:IN_PROGRESS]))
+          sprintreport_objects << { sprint_id: id, issue_id: issue.id, status: (issue.status == Issue::STATUS.key('Closed') ? Sprintreport::STATUS[:CLOSED] : Sprintreport::STATUS[:IN_PROGRESS]) }
         end
+        Sprintreport.create!(sprintreport_objects)
       end
     rescue ActiveRecord::RecordInvalid => e
       errors.add :base, e.record.errors.full_messages
+      false
     end
   end
 
   def resolved_and_unresolved_issues
-    issues_unresolved = issues.where.not(status: Issue::STATUS[:closed])
-    issues_resolved = issues.where(status: Issue::STATUS[:closed])
+    issues_unresolved = issues.where.not(status: Issue::STATUS.invert['Closed'])
+    issues_resolved = issues.where(status: Issue::STATUS.invert['Closed'])
     [issues_unresolved, issues_resolved]
   end
 
   def report_content
-    issues_unresolved = sprintreport.where.not(status: Sprintreport::STATUS[:CLOSED]).pluck(:issue_id)
-    issues_resolved = sprintreport.where(status: Sprintreport::STATUS[:CLOSED]).pluck(:issue_id)
-    issues_unresolved = Issue.where(id: issues_unresolved)
-    issues_resolved = Issue.where(id: issues_resolved)
+    generate_report
+    issues_unresolved = sprint_report_items.includes(:issue).unresolved_issues
+    issues_resolved = sprint_report_items.includes(:issue).closed_issues
     [issues_resolved, issues_unresolved]
   end
 
   def categorized_issues
-    issues_to_do = issues.where(status: Issue::STATUS[:open])
-    issues_in_progress = issues.where(status: Issue::STATUS[:in_progress])
-    issues_resolved = issues.where(status: Issue::STATUS[:resolved])
-    issues_closed = issues.where(status: Issue::STATUS[:closed])
-    [issues_to_do, issues_in_progress, issues_resolved, issues_closed]
+    issues_to_do = issues.open
+    issues_in_progress = issues.in_progress
+    issues_resolved = issues.resolved
+    issues_closed = issues.closed
+    { to_do: issues_to_do, in_progress: issues_in_progress, resolved: issues_resolved, closed: issues_closed }
   end
 
   private
 
   def check_for_issues
-    return unless issues.exist?
+    return if issues.blank?
 
     errors.add(:base, I18n.t('sprints.sprint_deletion_error'))
     throw :abort

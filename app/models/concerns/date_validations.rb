@@ -13,6 +13,15 @@ module DateValidations
           end
         end
       end
+
+      def validate_datetime(date_column)
+        validate do
+          date = public_send date_column
+          unless (date.is_a? ActiveSupport::TimeWithZone) || date.nil? || (date.is_a? DateTime)
+            errors.add date_column, I18n.t('shared.failure.invalid_date', resource_label: date.to_s.humanize)
+          end
+        end
+      end
     end
   end
 end

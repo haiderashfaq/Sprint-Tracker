@@ -2,7 +2,7 @@
   <div class="tab-pane fade show active" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
     <% @issues= Issue.joins(:assignee) %>
     <% @issues= @issues.paginate(page: params[:page]) %>
-    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @issues, chart_id: 'assignee_issues' } %>
+    <%= render partial: "issues/dashboard_issue_table", locals: { issues: @assigned_issues, chart_id: 'assignee_issues' } %>
   </div>
   <div class="tab-pane fade" id="nav-creator" role="tabpanel" aria-labelledby="nav-creator-tab"></div>
   <div class="tab-pane fade" id="nav-reviewer" role="tabpanel" aria-labelledby="nav-reviewer-tab"></div>
@@ -12,7 +12,7 @@
           <h6 class="card-title ms-4 mt-2">Projects</h6>
           <ul class="nav_list ps-0">
             <% counter = 0 %>
-            <% Dashboard.fetch_projects.each do |project| %>
+            <% @projects.each do |project| %>
               <%counter += 1 %>
               <li>
                 <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">

@@ -2,12 +2,7 @@
   $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% else %>
   $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
-
-  if ($("#sprints_datatable").length == 0){
-    $("#sprints_datatable_space").html("<%= escape_javascript render('sprints_table', sprints: [@sprint], project: @project) %>")
-  }
-  else{
-    $('#sprints_datatable_body').append("<%= escape_javascript render 'sprint_datatable_row', sprint: @sprint, project: @project %>");
-  }
-  $('#formCloseBtn').click();
+  $('#modal').modal('hide');
+  $.get(window.location.origin + window.location.pathname + "/sprints.js");
+  $('#nav-sprints-tab').tab('show');
 <% end %>

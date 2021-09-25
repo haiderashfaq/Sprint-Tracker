@@ -1,7 +1,5 @@
 <% if @sprint.errors.blank? %>
-  $('#sprint_<%= @sprint.sequence_num %>').remove();
-  if ($("#sprints_datatable_body tr").length == 0) {
-    $('#sprints_datatable_space').html("<%= escape_javascript (render partial: 'shared/no_resource_present', locals: { record: 'sprints.label' }) %>");
-  }
+  $.get(window.location.origin + window.location.pathname + "/sprints.js");
+  $('#nav-sprints-tab').tab('show');
 <% end %>
 $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");

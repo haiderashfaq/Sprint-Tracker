@@ -1,14 +1,16 @@
 <tr id="issue_<%= issue.sequence_num %>">
   <div id="issues_datatable_space"></div>
   <% if issue.assignee.present? %>
-    <% assignee_name = link_to issue.assignee_name, user_path(issue.assignee.sequence_num) %>
+    <% assignee_name = link_to issue.assignee.name, user_path(issue.assignee.sequence_num) %>
   <% end %>
   <td><span class="badge rounded-pill bg-<%= get_status_color(issue.status) %>">
-    <%= issue.status.camelize %></span></td>
+      <%= issue.status.camelize %></span></td>
   <td><%= link_to issue.title, issue_path(issue) %></td>
   <td><%= assignee_name %> </td>
-  <td><%= issue.priority.camelize %></td>
-  <td><%= issue.category.camelize %></td>
+  <td><span class="badge rounded-pill bg-<%= get_priority_color(issue.priority) %>">
+      <%= issue.priority.camelize %></span></td>
+  <td><span class="badge rounded-pill bg-<%= get_category_color(issue.category) %>">
+      <%= issue.category.camelize %></span></td>
   <td>
     <% if can? :edit, Issue %>
       <%= link_to '', edit_issue_path(issue), { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'bi bi-pencil' } %>

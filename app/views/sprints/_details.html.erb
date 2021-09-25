@@ -1,5 +1,13 @@
 <div class="container pt-3">
-  <div class="row mb-3">
+  <div class="row">
+    <div class="col-3 ">
+      <p><strong><%= t('projects.project_label') %>:</strong></p>
+    </div>
+    <div class="col-3">
+      <p><%= link_to sprint.project.name, sprint.project %></p>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-3 ">
       <p><strong><%= t('shared.creator') %>:</strong></p>
     </div>

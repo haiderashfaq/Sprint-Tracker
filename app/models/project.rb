@@ -11,19 +11,17 @@ class Project < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   belongs_to :active_sprint, class_name: 'Sprint', optional: true
 
-  # validate :start_date_before_end_date
-  before_destroy :check_for_sprints, :check_for_issues
-
-  validates :name, :manager, :creator, presence: true
-  validates :name, length: { maximum: 100, minimum: 4 }
-
   has_many :issues
   has_many :sprints
-  has_many :projects_users
-  has_many :issues
+  has_many :projects_users, dependent: :destroy
   has_many :users, through: :projects_users, dependent: :destroy
 
   sequenceid :company, :projects
+
+  validates :name, :manager, :creator, presence: true
+  validates :name, length: { maximum: 100, minimum: 4 }
+  validate_datetime :start_date
+  validate_datetime :end_date
   validate_dates :start_date, :end_date
 
   def total_time_spent
@@ -65,12 +63,10 @@ class Project < ApplicationRecord
   end
 
   def backlog_issues
-    issues.where(sprint: nil)
+    issues.where(sprint_id: nil)
   end
 
   def fetch_project_issues
-
-    # TO DO
     if active_sprint.present?
       active_sprint.issues
     end

@@ -13,7 +13,7 @@ class IssuesController < ApplicationController
   # GET /issues
   def index
     @issues = @issues.includes(:creator, :reviewer, :project, :assignee).paginate(page: params[:page]).decorate
-    @issues = FilteringParams.new(@issues, params).filter_params
+    @issues = FilteringParams.new(@issues, params).apply_filters
     respond_to do |format|
       format.js
       format.html
@@ -92,13 +92,13 @@ class IssuesController < ApplicationController
 
   def fetch_resource_issues
     if params[:assignee_id].present?
-      @issues = Issue.joins(:assignee).where(assignee_id: current_user.id)
+      @issues = @current_company.issues.accessible_by(current_ability).where(assignee_id: current_user.id)
     elsif params[:creator_id].present?
-      @issues = Issue.joins(:creator).where(creator_id: current_user.id)
+      @issues = @current_company.issues.accessible_by(current_ability).where(creator_id: current_user.id)
     elsif params[:reviewer_id].present?
-      @issues = Issue.joins(:reviewer).where(reviewer_id: current_user.id)
+      @issues = @current_company.issues.accessible_by(current_ability).where(reviewer_id: current_user.id)
     else
-      @issues = Issue.joins(:assignee).where(assignee_id: current_user.id)
+      @issues = @current_company.issues.accessible_by(current_ability).where(assignee_id: current_user.id)
     end
     @issues = @issues.paginate(page: params[:page])
     respond_to do |format|
@@ -110,13 +110,14 @@ class IssuesController < ApplicationController
   def add_issues_to_sprint
     issue_ids = params[:issue_ids].split(',')
     @issues = Issue.where(id: issue_ids)
-    @sprint_id = params[:sprint_id]
+    @sprint = Sprint.find_by(sequence_num: params[:sprint_id])
 
     respond_to do |format|
-      if @issues.update(sprint_id: @sprint_id)
+      if @sprint.errors.blank? && @issues.update(sprint: @sprint)
         format.js { flash.now[:notice] = t('issues.issues_added_success') }
       else
         @errors = Issue.get_errors_of_collection(@issues)
+        @errors.concat @sprint.errors.full_messages
         format.js { flash.now[:error] = @errors }
       end
     end

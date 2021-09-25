@@ -4,7 +4,7 @@ class FilteringParams
     @params = params
   end
 
-  def filter_params
+  def apply_filters
     if slice_params.present?
       slice_params&.each do |key, value|
         if key != 'project_id' && value.present?

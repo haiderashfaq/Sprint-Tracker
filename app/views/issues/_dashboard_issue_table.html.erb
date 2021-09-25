@@ -1,32 +1,41 @@
-<div class="m-5">
-  <%= pie_chart issues.group(:status).count, colors: [ '#e34','#17f','#285','#1df' ], id: chart_id %>
-</div>
-<div class="card mt-4 dashboard-card-border">
-  <div class="card-body">
-    <table class="table table-hover border-primary text-center" id="issues_datatable">
-      <thead class="text-light bg-primary">
-        <tr>
-          <th><%= t('issues.title') %></th>
-          <th><%= t('issues.status') %></th>
-          <th><%= t('issues.priority') %></th>
-          <th><%= t('issues.category') %></th>
-          <th><%= t('shared.actions') %></th>
-        </tr>
-      </thead>
-      <tbody id="issues_datatable_body">
-        <% if issues.empty? %>
-        <div class="container text-center">
-          <tr id="no-resource"><td colspan="5"><%= render partial: 'shared/no_resource_present', locals: { record: 'issues.issue_label' } %></td></tr>
+<div class="container mb-3">
+  <div class="mt-5">
+    <div class="card shadow-lg dashboard-card-border">
+      <div class="card-body">
+        <div>
+          <%= pie_chart issues.group(:status).count, colors: [ '#e34','#17f','#285','#1df' ], id: chart_id %>
         </div>
-        <% else %>
-          <% issues.each do |issue| %>
-            <%= render 'issues/issue_datatable_row', issue:issue %>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-4 dashboard-card-border shadow-lg">
+    <div class="card-body">
+      <table class="table table-hover border-primary text-center js-datatable" id="issues_datatable">
+        <thead class="text-light bg-primary">
+          <tr>
+            <th><%= t('issues.status') %></th>
+            <th><%= t('issues.title') %></th>
+            <th><%= t('issues.assignee') %></th>
+            <th><%= t('issues.priority') %></th>
+            <th><%= t('issues.category') %></th>
+            <th><%= t('shared.actions') %></th>
+          </tr>
+        </thead>
+        <tbody id="issues_datatable_body">
+          <% if issues.empty? %>
+            <div class="container text-center">
+              <tr id="no-resource">
+                <td colspan="5"><%= render partial: 'shared/no_resource_present', locals: { record: t('issues.issue_label') } %></td>
+              </tr>
+            </div>
+          <% else %>
+            <% issues.each do |issue| %>
+              <%= render 'issues/issue_datatable_row', issue:issue %>
+            <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <%= js_paginate issues %>
+    </div>
   </div>
 </div>
-
-<%= js_paginate issues %>
-

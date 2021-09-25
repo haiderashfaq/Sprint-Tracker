@@ -7,10 +7,10 @@
     <%= form_with model: sprint_path_value, url: form_action, local: false do |form| %>
       <div class="modal-body">
         <div class="row mb-3">
-          <div class="col-4">
-            <%= form.label t('shared.name') %>
+          <div class="col-4 asterick">
+            <%= form.label t('shared.name'), class: "control-label" %>
           </div>
-          <div class="col-8">
+          <div class="col-8 asterick">
             <%= form.text_field :name, class: 'form-control form-control-md' %>
           </div>
         </div>
@@ -24,8 +24,8 @@
         </div>
         <% if local_assigns[:project].nil? and params[:action] == "new" %>
           <div class="row mb-3">
-            <div class="col-4">
-              <%= form.label t('projects.project_label'), class: 'col-form-label col-form-label-md control-label' %>
+            <div class="col-4 asterick">
+              <%= form.label t('projects.project_label'), class: 'col-form-label col-form-label-md control-label control-label' %>
             </div>
             <div class="col-8">
               <%= form.select :project_id, project_options_to_add_sprint(projects), { required: true }, { class: "form-select form-select-md js-select-field-single" } %>
@@ -33,15 +33,15 @@
           </div>
         <% end %>
         <div class="row mb-3">
-          <div class="col-4">
-            <%= form.label t('shared.start_date') %>
+          <div class="col-4 asterick">
+            <%= form.label t('shared.start_date'), class: 'col-form-label col-form-label-md control-label' %>
           </div>
           <div class="col-8">
             <%= form.datetime_field :start_date, class: 'form-control form-control-md js-flatpickr-datetime' %>
           </div>
         </div>
         <div class="row mb-3">
-          <div class="col-4">
+          <div class="col-4 asterick">
             <%= form.label t('shared.end_date'), class: 'col-form-label col-form-label-md control-label' %>
           </div>
           <div class="col-8">

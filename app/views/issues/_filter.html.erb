@@ -1,5 +1,5 @@
 <div class="container mb-3">
-  <%= form_with  local: false, action: "index", method: :get do |form| %>
+  <%= form_with  local: false, action: form_action, method: :get do |form| %>
     <div class="row d-flex justify-content-end me-1">
       <div class="col-3 col-sm-3 col-md-2 col-lg-1 control-label"><%= form.label t('filter.filter_label'), class: 'col-form-label col-form-label-md'  %>
       </div>
@@ -44,7 +44,6 @@
       <div class="col-12 col-sm-4 col-md-4 col-lg-1  justify-content-start control-label">
         <%= form.label t('projects.project_label'), class: 'col-form-label col-form-label-md' %>
       </div>
-      
       <div class="col-12 col-sm-8 col-md-6 col-lg-2", id="js-project">
         <%= form.select :project_id, projects.map{|project| [project.name, project.sequence_num] }, {}, { disabled: true, class: "js-select-field js-project-field form-select form-select-lg" }%>
       </div>
@@ -56,13 +55,11 @@
       <div class="col-12 col-sm-4 col-md-4 col-lg-1  justify-content-start control-label">
         <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
       </div>
-      
       <div class="col-12 col-sm-8 col-md-6 col-lg-2", id="js-status">
         <%= form.select :status, Issue::STATUS.invert, { }, {disabled: true, class: "js-select-field js-status-field form-select form-select-lg js-status-field"} %>
       </div>
       <div class="col-1">
-         <%= link_to '', '#_', class: 'btn btn-close js-remove-filter' %>
-        
+        <%= link_to '', '#_', class: 'btn btn-close js-remove-filter' %>
       </div>
     </div>
     <div class="row  collapse", id="priority">
@@ -87,8 +84,11 @@
         <%= link_to '', '#_', class: 'btn btn-close js-remove-filter'  %>
       </div>
     </div>
-    <div class="col-1 btn-filter collapse">
+    <div class="col-1 btn-apply-filter collapse">
       <%= form.submit 'Apply', class: 'btn btn btn-outline-primary mt-4 px-4', remote: true %>
+    </div>
+    <div class="col-1 btn-remove-filter collapse">
+      <%= form.submit 'Remove Filter', class: 'btn btn btn-outline-primary mt-4 px-4', remote: true %>
     </div>
   <% end %>
 </div>

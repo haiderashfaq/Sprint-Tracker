@@ -1,16 +1,16 @@
 <div class="container">
   <div id= "header">
-    <div class="row mt-3">
-      <div class="col-9 col-lg-9 d-flex justify-content-start">
+    <div class="mt-3 d-flex justify-content-between">
+      <div>
         <h1><%= t('issues.issue_label').pluralize %></h1>
       </div>
-      <div id="header", class="col-3 align-items-right">
+      <div id="header", class="align-items-right">
         <% if params[:project_id].present? %>
           <% project_params = {project_id: params[:project_id], project: project} %>
         <% else %>
           <% project_params = {} %>
         <% end %>
-        <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path(project_params) ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn fa fa-plus btn-primary w-100 some-button'} %>
+        <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path(project_params) ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn bi bi-plus btn-primary some-button'} %>
       </div>
     </div>
   </div>

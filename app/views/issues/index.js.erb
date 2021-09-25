@@ -1,6 +1,6 @@
 <% if (Issue::FILTER.values & params.keys).empty? %>
   $('#header').html("<%= escape_javascript render(:partial => 'issues/header',  :locals=>{projects: @projects,project:@project, issue: @issue} ) %>");
-  $('#filter').html("<%= escape_javascript render(:partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects} ) %>");
+  $('#filter').html("<%= escape_javascript render(:partial => 'issues/filter',  :locals=>{issues: @issues, users: @users, projects: @projects, form_action: "index" } ) %>");
   var data = $('form').serialize();
     if (!data.includes('&'))
     {

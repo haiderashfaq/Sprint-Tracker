@@ -1,0 +1,6 @@
+$primary: #6f42c1;
+$custom-colors: (
+  "primary": $primary
+);
+@import "bootstrap/scss/bootstrap";
+$theme-colors: map-merge($theme-colors, $custom-colors);

@@ -1,0 +1,74 @@
+<div class="container my-3">
+  <div class="card dashboard-card-border">
+    <h3 class="card-header text-center"><%= t('sprints.burndown_chart') %></h3>
+    <div class="card-body">
+      <% binding.pry %>
+      <%= line_chart [
+        {name: "Issues Unresolved Ideally", data: sprint.issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_ideally(sprint, issue.estimated_end_date)] }},
+        {name: "Issue Unresolved Actually", data: sprint.issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_actually(sprint, issue.estimated_end_date)] }}
+        ], id: "sprint_summary_chart", empty: "No Issues in this sprint", download: true, points: false, xtitle: "Date", ytitle: "Number of Issues Unresolved" %>
+    </div>
+  </div>
+  <hr />
+  <div class="card dashboard-card-border shadow-lg">
+    <h3 class="card-header text-center"><%= t('issues.completed') %></h3>
+    <div class="card-body">
+      <table class="table text-center my-3 js-datatable" %>
+        <thead class="bg-primary text-light fw-bold">
+          <tr>
+            <th><%= t('issues.title') %></th>
+            <th><%= t('issues.status') %></th>
+            <th><%= t('issues.priority') %></th>
+            <th><%= t('issues.category') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% issues_resolved.each do |resolved_issue|%>
+            <tr>
+              <td><%= resolved_issue.issue.title %></td>
+              <td><span class="badge rounded-pill bg-<%= get_status_color(resolved_issue.issue.status) %>">
+                  <%= resolved_issue.issue.status %></span></td>
+              <td><span class="badge rounded-pill bg-<%= get_priority_color(resolved_issue.issue.priority) %>">
+                  <%= resolved_issue.issue.priority %></span></td>
+              <td><span class="badge rounded-pill bg-<%= get_category_color(resolved_issue.issue.category) %>">
+                  <%= resolved_issue.issue.category %></span></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <div class="card dashboard-card-border">
+    <h3 class="card-header text-center"><%= t('issues.not_completed') %></h3>
+    <div class="card-body">
+      <table class="table text-center my-3 js-datatable" %>
+        <thead class="bg-primary text-light fw-bold">
+          <tr>
+            <th><%= t('issues.title') %></th>
+            <th><%= t('issues.status') %></th>
+            <th><%= t('issues.priority') %></th>
+            <th><%= t('issues.category') %></th>
+            <th><%= t('issues.moved') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% issues_unresolved.each do |unresolved_issue|%>
+            <tr>
+              <td><%= unresolved_issue.issue.title %></td>
+              <td><span class="badge rounded-pill bg-<%= get_status_color(unresolved_issue.issue.status) %>">
+                  <%= unresolved_issue.issue.status %></span></td>
+              <td><span class="badge rounded-pill bg-<%= get_priority_color(unresolved_issue.issue.priority) %>">
+                  <%= unresolved_issue.issue.priority %></span></td>
+              <td><span class="badge rounded-pill bg-<%= get_category_color(unresolved_issue.issue.category) %>">
+                  <%= unresolved_issue.issue.category %></span></td>
+              <td>
+                <%= unresolved_issue.moved_to.nil? ? sprint.project.active_sprint.nil? ? t('projects.backlog') : "" : unresolved_issue.moved_to.name %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

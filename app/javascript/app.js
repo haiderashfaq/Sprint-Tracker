@@ -1,6 +1,6 @@
 require('select2')
 $(document).ready(function() {
-  $('#issues-datatable').dataTable({
+  $('.js-datatable').dataTable({
     "paging": false,
     "searching": false,
     "info": false
@@ -28,26 +28,22 @@ $(document).ready(function() {
     $('#no-resource').remove();
     $('.btn-sprint-filter').click();
   });
-   $('.js-sprint-field').select2({
+  $('.js-sprint-field').select2({
     width: 200
   });
+
+
   dateTimeFunc();
-
-  $('body').on('select2:open', '.js-select-field-single', () => {
-    document.querySelector('.select2-search__field').focus();
+  $("#modal").on('shown.bs.modal', function() {
+    dateTimeFunc();
+    select2_field_js();
   });
 
-  $('body').on('select2:open', '.js-select-field', () => {
-    document.querySelector('.select2-search__field').focus();
-  });
-
-
-  $("#modal").on('shown.bs.modal', dateTimeFunc);
   $('#menu-btn').on('click', function() {
     $('#sidebar').toggleClass("active");
   });
 
-   $(document).on('select2:select', ".js-select-field", function(e) {
+  $(document).on('select2:select', ".js-select-field", function(e) {
     var select_container_id = e.params.data["id"];
     $('.btn-filter').show();
     $("#" + select_container_id).addClass('show');
@@ -55,12 +51,11 @@ $(document).ready(function() {
   });
 
   if (window && window.localStorage.getItem('sidebar') === 'active') {
-      // if it active show it as active
-      $("#sidebar").addClass("active");
+    // if it active show it as active
+    $("#sidebar").addClass("active");
   } else {
-      $("#sidebar").removeClass("active");
-  } 
-
+    $("#sidebar").removeClass("active");
+  }
 });
 
 var dateTimeFunc = function() {
@@ -69,17 +64,24 @@ var dateTimeFunc = function() {
   });
 }
 
-window.addEventListener("ajax:success", (event) =>{
-  $('#modal').on('shown.bs.modal', function(){
+var select2_field_js = function() {
+  $(".js-select-field-single").select2({});
+}
+
+window.addEventListener("ajax:success", (event) => {
+  $('#modal').on('shown.bs.modal', function() {
     $(".js-select-form-field").select2({
       dropdownParent: $('#modal')
     });
-    $('body').on('select2:open', '.js-select-form-field', () => {
-      document.querySelector('.select2-search__field').focus();
-    });  
-  });
-   $('body').on('select2:open', '.js-select-field', () => {
-    document.querySelector('.select2-search__field').focus();
   });
 
+  $('body').off('click', '#sprint_dropdown').on('click', '#sprint_dropdown', function() {
+    $('#sprints_table').toggleClass("collapse");
+    $('#sprint_dopdown_icon').toggleClass('bi-caret-down-fill bi-caret-up-fill');
+  });
+
+  $('body').off('click', '#issue_dropdown').on('click', '#issue_dropdown', function() {
+    $('#issues_table').toggleClass("collapse")
+    $('#issue_dopdown_icon').toggleClass('bi-caret-down-fill bi-caret-up-fill');
+  });
 });

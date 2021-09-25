@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'dashboard#home'
+  root to: 'dashboard#index'
   get '/list_companies', to: 'list_companies#list_companies'
   post '/list_companies', to: 'list_companies#list_companies'
   get '/history', to: 'issues#history'
@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get '/500', to: 'errors#internal_server'
   get '/401', to: 'errors#access_denied'
   get '/422', to: 'errors#unprocessable'
-
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations' }, path: 'accounts', path_names: { sign_up: 'new' }
 
@@ -48,7 +47,6 @@ Rails.application.routes.draw do
 
     resources :users do
     end
-
 
   	get '/history', to: 'issues#history'
   	resources :reports, only: :index do
