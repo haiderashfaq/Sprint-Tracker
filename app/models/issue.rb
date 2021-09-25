@@ -29,7 +29,7 @@ class Issue < ApplicationRecord
   validate_datetime :actual_start_date
   validate_datetime :estimated_end_date
   validate_datetime :estimated_start_date
-  validates :estimated_time, length: { maximum: 100 }, numericality: { greater_than: 0 }
+  validates :estimated_time, length: { maximum: 100 }, numericality: { greater_than: 0, allow_blank: true}
   validate_dates :estimated_start_date, :estimated_end_date
   validate_dates :actual_start_date, :actual_end_date
   scope :filter_by_attribute, ->(column, value) { where column => value }
@@ -41,7 +41,7 @@ class Issue < ApplicationRecord
   after_save :issue_alerts
 
   def total_time_spent
-    time_logs.sum(:logged_time)
+    time_logs&.sum(:logged_time) || 0
   end
 
    def assignee_name
@@ -49,7 +49,7 @@ class Issue < ApplicationRecord
    end
 
   def total_estimated_time
-    @issues&.sum(estimated_time) || estimated_time
+    @issues&.sum(estimated_time) || estimated_time.to_i
   end
 
   def self.get_errors_of_collection(issues)

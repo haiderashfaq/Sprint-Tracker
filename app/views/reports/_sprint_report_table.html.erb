@@ -10,11 +10,7 @@
       </tr>
     </thead>
     <tbody id="reports_datatable_body">
-      <% if sprint_report_attributes.nil? %>
-        <div class="container text-center">
-          <tr id="no-resource"><td colspan="5"><%= render partial: 'shared/no_resource_present', locals: { record: t('reports.sprint_report') } %></td></tr>
-        </div>
-      <% else %>
+      <% if sprint_report_attributes.present? %>
         <% sprint_report_attributes.each do |sprint_report| %>
           <%= render partial: "sprint_report_datatable_row", locals: { sprint_report: sprint_report} %>
           <tr>
@@ -29,7 +25,11 @@
           </tr>
           <% end %>
         <%= js_paginate sprint_report_attributes %>
-        <% end %>
+      <% else %>
+        <div class="container text-center">
+          <tr id="no-resource"><td colspan="5"><%= render partial: 'shared/no_resource_present', locals: { record: t('reports.sprint_report') } %></td></tr>
+        </div>
+      <% end %>
     </tbody>
   </table>
 </div>

@@ -6,4 +6,3 @@
   $('#issue_show').replaceWith("<%= escape_javascript render(:partial => 'issues/show',  :locals=>{ issue: @issue} ) %>");
   $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% end %>
-
