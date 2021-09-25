@@ -13,7 +13,6 @@ class ReportsController < ApplicationController
     if params[:sprint_id].present?
       @sprint = fetch_sprint
       @sprint_report_attributes = Report.sprint_report_data(@sprint)&.paginate(page: params[:page])
-      binding.pry
     end
     respond_to do |format|
       format.html
