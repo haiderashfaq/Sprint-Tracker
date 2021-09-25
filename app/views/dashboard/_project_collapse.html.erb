@@ -2,7 +2,7 @@
 <% @projects.each do |project| %>
   <div class="row gap-1 mb-3">
     <%counter += 1 %>
-    <div class="col-8 card dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
+    <div class="col-8 card dashboard-card-border shadow-lg collapse multi-collapse" id="multiCollapseExample<%= counter %>">
       <h6 class="card-header"><%= t('projects.project_label') + ' ' + counter.to_s %></h6>
       <div class="card-body">
         <% if project.fetch_project_issues %>
@@ -23,7 +23,7 @@
     </div>
     <div class="col">
       <% if project.fetch_sprint_issues.present? %>
-        <div class="row card dashboard-card-border collapse multi-collapse" id="multiCollapseExample<%= counter %>">
+        <div class="row card dashboard-card-border shadow-lg collapse multi-collapse" id="multiCollapseExample<%= counter %>">
           <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('issues.issues_label') %></h6>
           <div class="card-body">
             <div class="text-7xl orange"><%= project.fetch_sprint_issues.size %></div>
@@ -32,7 +32,7 @@
             <h6><%= t('shared.closed') + ':'%><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['Closed']).size %></h6>
           </div>
         </div>
-        <div class="row card dashboard-card-border mt-2 collapse multi-collapse" id="multiCollapseExample<%= counter %>">
+        <div class="row card dashboard-card-border shadow-lg mt-2 collapse multi-collapse" id="multiCollapseExample<%= counter %>">
           <h6 class="card-header text-center"><%= t('shared.in_progress') + ' ' + t('issues.issues_label') %></h6>
           <div class="card-body">
             <div class="text-7xl tomato"><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['In Progress']).size %></div>

@@ -4,7 +4,7 @@
       <div class="container my-3">
         <div class="row g-2">
           <div class="col">
-            <div class="card dashboard-card-border">
+            <div class="card dashboard-card-border shadow-lg">
               <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('projects.project_label').pluralize %></h6>
               <div class="card-body">
                 <div class="text-7xl medium-green"><%= @projects.size %></div>
@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card dashboard-card-border">
+            <div class="card dashboard-card-border shadow-lg">
               <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('sprints.label').pluralize %></h6>
               <div class="card-body">
                 <div class="text-7xl royal-blue"><%= @total_sprints %></div>
@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card dashboard-card-border">
+            <div class="card dashboard-card-border shadow-lg">
               <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('issues.issue_label').pluralize %></h6>
               <div class="card-body">
                 <div class="text-7xl orange"><%= @total_issues %></div>
@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card dashboard-card-border">
+            <div class="card dashboard-card-border shadow-lg">
               <h6 class="card-header text-center"><%= t('shared.in_progress') + ' ' + t('issues.issue_label').pluralize %></h6>
               <div class="card-body">
                 <div class="text-7xl tomato"><%= @in_progress_issues %></div>
@@ -50,7 +50,7 @@
         </div>
         <div class="row mt-3">
           <div class="col-3">
-            <div class="card dashboard-card-border">
+            <div class="card dashboard-card-border shadow-lg">
               <h6 class="card-header"><%= t('projects.project_label').pluralize %></h6>
               <div class="card-body">
                 <% counter = 0 %>
