@@ -106,6 +106,20 @@ class IssuesController < ApplicationController
     end
   end
 
+  def add_watcher
+    @issue = @current_company.issues.find_by(id: params.dig(:issue_id, :issue_id))
+    watcher = @current_company.watchers.where(issue: @issue).where(user: current_user)
+    respond_to do |format|
+      if watcher.empty?
+      Watcher.create!(user: current_user, issue: @issue)
+      format.js { flash.now[:notice] = t('issues.watcher_added_success') }
+      else
+        watcher[0].destroy
+        format.js { flash.now[:notice] = t('issues.watcher_removed_success') }
+      end
+    end
+  end
+
   # POST issues/add_issues
   def add_issues_to_sprint
     issue_ids = params[:issue_ids].split(',')

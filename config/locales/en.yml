@@ -70,7 +70,9 @@ en:
     unresolved_issues_msg: "Select where all unresolved issues should be moved"
     move: "Move Issue to:"
     moved: "Moved To"
-
+    watcher: "Watch"
+    watcher_added_success: "Watching Issue"
+    watcher_removed_success: "Unwatching Issue"
     issues_added_success: "Issues added Successfully to Sprint"
     assignee: 'Assignee'
     reviewer: 'Reviewer'

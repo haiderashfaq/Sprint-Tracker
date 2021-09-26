@@ -8,8 +8,12 @@ class DashboardController < ApplicationController
   end
 
   def home
-    respond_to do |format|
-      format.html
+    if user_signed_in?
+      redirect_to dashboard_index_url
+    else
+      respond_to do |format|
+        format.html
+      end
     end
   end
 

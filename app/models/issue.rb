@@ -20,6 +20,7 @@ class Issue < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   belongs_to :reviewer, class_name: 'User', optional: true
   has_many :time_logs, dependent: :destroy
+  has_many :users, through: :watchers
 
   sequenceid :company, :issues
   audited associated_with: :company
@@ -83,7 +84,12 @@ class Issue < ApplicationRecord
   def issue_alerts
     return if previous_changes.empty?
 
-    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]).or(company.users.where(role_id: User::ROLE_ID[:admin]))
+    watcher = Watcher.all.where(issue: self).pluck(:user_id)
+    send_to_users = [reviewer_id, assignee_id, creator_id, project.manager_id]
+    send_to_users.concat watcher
+    binding.pry
+
+    users = company.users.where(id: send_to_users).or(company.users.where(role_id: User::ROLE_ID[:admin]))
 
     subject = I18n.t('issues.email_subject')
 

@@ -9,6 +9,7 @@ class UserMailer < ApplicationMailer
   default from: FLASH_INFO_EMAIL
 
   def issue_alerts(user, issue, subdomain, current_user, subject, changes)
+    return if current_user.nil?
     @name = user.name
     @issue = issue
     @subdomain = subdomain

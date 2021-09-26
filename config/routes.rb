@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'dashboard#index'
+  root to: 'dashboard#home'
   get '/list_companies', to: 'list_companies#list_companies'
   post '/list_companies', to: 'list_companies#list_companies'
   get '/history', to: 'issues#history'
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       collection do
         post 'add_issues_to_sprint'
         get 'fetch_resource_issues', as: 'fetch_resource'
+        get 'add_watcher'
       end
     end
     resources :issues do
