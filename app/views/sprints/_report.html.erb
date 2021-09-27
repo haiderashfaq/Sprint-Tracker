@@ -2,9 +2,10 @@
   <div class="card dashboard-card-border">
     <h3 class="card-header text-center"><%= t('sprints.burndown_chart') %></h3>
     <div class="card-body">
+      <% binding.pry %>
       <%= line_chart [
-        {name: "Issues Unresolved Ideally", data: sprint.issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_ideally(sprint, issue.estimated_end_date)] }},
-        {name: "Issue Unresolved Actually", data: sprint.issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_actually(sprint, issue.estimated_end_date)] }}
+        {name: "Issues Unresolved Ideally", data: sprint.sprint_report_issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_ideally(sprint, issue.estimated_end_date)] }},
+        {name: "Issue Unresolved Actually", data: sprint.sprint_report_issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_actually(sprint, issue.estimated_end_date)] }}
         ], id: "sprint_summary_chart", empty: "No Issues in this sprint", download: true, points: false, xtitle: "Date", ytitle: "Number of Issues Unresolved" %>
     </div>
   </div>

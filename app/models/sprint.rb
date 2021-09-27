@@ -10,6 +10,7 @@ class Sprint < ApplicationRecord
   has_many :issues
   has_many :sprint_report_items, class_name: 'Sprintreport', dependent: :destroy
   has_many :documents, as: :attachable, dependent: :destroy
+  has_many :sprint_report_issues, through: :sprint_report_items, source: :issue
 
   STATUS = { PLANNING: 'PLANNING', ACTIVE: 'ACTIVE', CLOSED: 'CLOSED' }.freeze
 
