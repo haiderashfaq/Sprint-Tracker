@@ -30,10 +30,24 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  dashboard:
+    description: The #1 software development tool used by agile teams
+    compliment_one: The best software teams utilise speed like the Flash. 
+    complimenet_two: Flash Software is built for every member of your software team to plan,<br>
+          track, and be efficient in work.
+    plan: Plan
+    plan_compliment:  Create user stories and issues, plan sprints, and distribute tasks across your software team.
+    track: Track
+    track_compliment: Prioritize and discuss your team’s work in full context with complete visibility.
+    why_agile: Why agile?
+    agile_compiliment: Agile helps you save money.
+    product: Deliever Your Products Faster
+    product_compliment: Beat your competition by organizing your work 
+    workflow: Create a workflow
+    copyright: Copyright © 2021 Flash
+
   sidebar:
     dashboard: 'Dashboard'
-    # To do remove if unused
-    portfolio: 'Portfolio'
     setting: 'Setting'
     reports: 'Reports'
 
@@ -70,9 +84,10 @@ en:
     unresolved_issues_msg: "Select where all unresolved issues should be moved"
     move: "Move Issue to:"
     moved: "Moved To"
-    watcher: "Watch"
-    watcher_added_success: "Watching Issue"
-    watcher_removed_success: "Unwatching Issue"
+    watch: "Watch"
+    watcher: "Watcher"
+    watcher_added_success: "Watcher successfully added."
+    watcher_removed_success: "Watcher successfully removed."
     issues_added_success: "Issues added Successfully to Sprint"
     assignee: 'Assignee'
     reviewer: 'Reviewer'

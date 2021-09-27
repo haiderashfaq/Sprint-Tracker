@@ -10,7 +10,6 @@ class Company < ApplicationRecord
   has_many :watchers
   validates :name, uniqueness: true
   validates :subdomain, uniqueness: true
-  validates_format_of :subdomain, with: /\A([a-z0-9])*+\z/i
 
   def self.current_company_id=(id)
     Thread.current[:company_id] = id

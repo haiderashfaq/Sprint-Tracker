@@ -85,11 +85,10 @@ class Issue < ApplicationRecord
     return if previous_changes.empty?
 
     watcher = Watcher.all.where(issue: self).pluck(:user_id)
-    send_to_users = [reviewer_id, assignee_id, creator_id, project.manager_id]
-    send_to_users.concat watcher
-    binding.pry
+    alert_receivers = [reviewer_id, assignee_id, creator_id, project.manager_id]
+    alert_receivers.concat watcher
 
-    users = company.users.where(id: send_to_users).or(company.users.where(role_id: User::ROLE_ID[:admin]))
+    users = company.users.where(id: alert_receivers).or(company.users.where(role_id: User::ROLE_ID[:admin]))
 
     subject = I18n.t('issues.email_subject')
 

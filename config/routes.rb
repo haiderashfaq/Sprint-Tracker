@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       collection do
         post 'add_issues_to_sprint'
         get 'fetch_resource_issues', as: 'fetch_resource'
-        get 'add_watcher'
+        get 'add_remove_watcher'
       end
     end
     resources :issues do
