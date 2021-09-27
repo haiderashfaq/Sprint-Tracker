@@ -6,10 +6,6 @@ module Audited
       PaginatingDecorator
     end
 
-    def load_users
-      includes(:user)
-    end
-
     def previous_value(attribute, value)
       set_format(attribute, value)
     end
@@ -20,7 +16,7 @@ module Audited
 
     private
     def get_user_name(id)
-      User.find_by(id: id).name if User.find_by(id: id).present?
+      User.find_by(id: id)&.name
     end
 
     def date_format(value)
@@ -42,7 +38,7 @@ module Audited
     def set_format(attribute, value)
       value = get_user_name(value) if %w[creator_id reviewer_id assignee_id].include?(attribute)
       value = date_format(value) if %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].include?(attribute)
-      value = string_format(value) unless %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].include?(attribute)
+      value = string_format(value) if %w[estimated_start_date estimated_end_date actual_start_date actual_end_date].exlude?(attribute)   
       value = get_sprint_name(value) if 'sprint_id' == attribute
       value
     end
