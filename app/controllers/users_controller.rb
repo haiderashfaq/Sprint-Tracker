@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :add_breadcrumbs, only: [:new, :edit, :index, :show]
 
   def index
-    @users = @users.paginate(page: params[:page])
+    @users = @users.paginate(per_page: RECORDS_PER_PAGE, page: params[:page])
     respond_to do |format|
       format.html
       format.json { render json: UserDatatable.new(params) }

@@ -1,12 +1,12 @@
 <div class="container mt-3">
   <%= render partial: 'shared/breadcrumb' %>
-  <div class="row d-flex">
-    <div class="col-10 justify-content-start">
+  <div class="d-flex justify-content-between">
+    <div>
       <h1><%= t('users.member_label').pluralize %></h1>
     </div>
     <% if can? :create, User %>
-      <div class="col-2 justify-content-end">
-        <a role='button' class="btn btn-primary w-100 bi bi-plus" href="/users/new"> Add New User</a>
+      <div>
+        <a role='button' class="btn btn-primary bi bi-plus" href="/users/new"><%= t('shared.create_new_resource', resource_label: t('users.label')) %></a>
       </div>
     <%end%>
   </div>
@@ -16,10 +16,10 @@
       <table class="table table-hover text-center js-datatable" id="users-datatable" data-source="<%= users_path(format: :json) %>">
         <thead class="bg-primary text-light">
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
+            <th><%= t('shared.name') %></th>
+            <th><%= t('shared.email') %></th>
+            <th><%= t('shared.role') %></th>
+            <th><%= t('shared.actions') %></th>
           </tr>
         </thead>
         <tbody>
