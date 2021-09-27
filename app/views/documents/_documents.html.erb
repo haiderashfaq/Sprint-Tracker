@@ -22,7 +22,7 @@
                 <td><%= link_to document.file_file_name, document.file.url %></td>
                 <td><%= document.file.content_type %></td>
                 <td>
-                  <%= link_to '', [:download, attachable, document], class: 'bi bi-download mx-1' %>
+                  <%= link_to '', document.file.url, class: 'bi bi-download mx-1' %>
                   <% if can? :destroy, document %>
                     <%= link_to "", [attachable, document], method: :delete, remote: true, data: { confirm: t('shared.confirmation') }, class: "bi bi-trash mx-1" %>
                   <% end %>

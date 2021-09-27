@@ -24,11 +24,7 @@ Rails.application.routes.draw do
     end
     resources :sprints do
       resources :issues
-      resources :documents, except: %i[edit update] do
-        member do
-          get 'download'
-        end
-      end
+      resources :documents, except: %i[edit update]
       member do
         get 'start_sprint_info'
         patch 'start_sprint'
@@ -40,11 +36,7 @@ Rails.application.routes.draw do
 
     resources :issues do
       resources :time_logs
-      resources :documents, except: %i[edit update] do
-        member do
-          get 'download'
-        end
-      end
+      resources :documents, except: %i[edit update]
       collection do
         post 'add_issues_to_sprint'
         get 'fetch_resource_issues', as: 'fetch_resource'

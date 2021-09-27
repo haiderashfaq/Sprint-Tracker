@@ -107,7 +107,6 @@ class Ability
   end
 
   def member_permissions_for_documents(user)
-    can :manage, Document, attachable: { project_id: { manager_id: user.id } }, company_id: user.company_id
-    can %i[read download], Document, company_id: user.company_id
+    can %i[read create], Document, company_id: user.company_id
   end
 end

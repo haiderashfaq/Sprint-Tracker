@@ -35,10 +35,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def download
-    send_file(@document.file.path, filename: @document.file_file_name, type: @document.file.content_type)
-  end
-
   private
 
   def document_params
