@@ -76,12 +76,12 @@ html {
 
 .login-button {
   transition-duration: 0.4s;
-  background-color: $blue-color;
-  color: $white-color;
+  background-color: $white-color;
+  color: bg-primary;
 
   &:hover{
-    background-color: $white-color;
-    color: $blue-color;
+    background-color: $sidebar-background-color;
+    color: $white-color;
   }
 }
 
@@ -371,4 +371,8 @@ html {
 
 .width-95{
   width:95%;
+}
+
+.dashboard-home-footer{
+  background-color: $white-smoke-color;
 }

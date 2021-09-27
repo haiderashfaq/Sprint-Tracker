@@ -56,9 +56,9 @@
                 <% counter = 0 %>
                 <% @projects.each do |project| %>
                   <%counter += 1 %>
-                  <div class="my-1 text-start">
+                  <div class="my-1">
                     <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">
-                      <span class="btn">
+                      <span class="btn text-start">
                         <i class="bi bi-journal-richtext"></i>
                         <%= project.name %>
                       </span>

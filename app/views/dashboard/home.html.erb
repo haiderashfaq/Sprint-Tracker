@@ -3,7 +3,7 @@
   <div class="container-fluid h-30">
     <div class="row d-flex p-5 ms-5">
       <div class="col-md-5 padding-5 col-lg-4">
-        <h1 class="heading"> The #1 software development tool used by agile teams </h1>
+        <h1 class="heading"><%= t('dashboard.description') %> </h1>
       </div>
       <div class="col-md-7">
         <%= image_tag("home_background.jpg", class: "w-100 h-75") %>
@@ -13,11 +13,49 @@
   <div class="container-fluid">
     <div class="row ps-5">
       <div class="d-flex justify-content-center ps-5">
-        <h2 class="heading"> The best software teams utilise speed like the Flash. </h2>
+        <h2 class="heading"><%= t('dashboard.complement_one') %> </h2>
       </div>
       <div class="d-flex justify-content-center pe-5">
-        <p>Flash Software is built for every member of your software team to plan,<br>
-          track, and be efficient in work.</p>
+        <p><%= t('dashboard.complement_two') %></p>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-7">
+        <%= image_tag("dashboard-screenshot.png", class: "w-100 h-100") %>
+      </div>
+      <div class="col-md-5 padding-5 col-lg-4 text-center">
+        <h3 class="heading"> <%= t('dashboard.plan') %> </h3>
+        <div class="mt-5"><p><%= t('dashboard.plan_compliment') %> </p></div>
+        <h3 class="heading text-center mt-5"> <%= t('dashboard.track') %> </h3> 
+        <div class="mt-5"><p> <%= t('dashboard.track_compliment') %> </p></div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-5 padding-5 col-lg-4 text-center">
+        <h3 class="heading"> <%= t('dashboard.why_agile') %> </h3>
+        <div class="mt-5"><p> <%= t('dashboard.agile_compliment') %> </p></div>
+        <h3 class="heading text-center mt-5"> <%= t('dashboard.product') %> </h3> 
+        <div class="mt-5"><p> <%= t('dashboard.product_compliment') %> </p></div>
+      </div>
+      <div class="col-md-7">
+        <%= image_tag("agile.png", class: "w-100 h-100") %>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="d-flex justify-content-center ps-5">
+      <h1> <%= t('dashboard.workflow') %> </h1>
+    </div>
+    <div class="row">
+      <%= image_tag("issue-status.png") %>
+    </div>
+  </div>
+</div>
+  <div class="container-fluid mt-5 dashboard-home-footer">
+    <div class="row"><hr></div>
+    <div class="row">
+      <div class="d-flex justify-content-center ps-5">
+        <p> <%= t('dashboard.copyright') %></p>
       </div>
     </div>
   </div>

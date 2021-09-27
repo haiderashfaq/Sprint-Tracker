@@ -28,7 +28,7 @@ end
 
 Company.unscoped.all.each do |c|
   (1..20).each do |i|
-    user = User.new(email: "haider#{i}@8vals.com", password: '123456', role_id: 2, phone_num: "1233456#{i}}", name: Faker::Name.name, company: c)
+    user = User.new(email: "haider#{i}@8vals.com", password: '123456', role_id: 2, phone_num: "1233456#{i}", name: Faker::Name.name, company: c)
     user.skip_confirmation!
     user.save!
   end
