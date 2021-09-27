@@ -1,4 +1,4 @@
-<% if @errors %>
+<% if @errors.present? %>
   $('#modal .modal-flash-messages').prepend("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
 <% else %>
   $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
