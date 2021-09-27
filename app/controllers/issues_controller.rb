@@ -120,22 +120,22 @@ class IssuesController < ApplicationController
         success = watcher.destroy
       end
 
-      respond_to do |format|
-        if create_true
-          if success
-            format.js { flash.now[:notice] = t('issues.watcher_added_success') }
-          else
-            flash.now[:error] = @issue.errors.full_messages
-            format.js
-          end
+      if create_true
+        if success
+          flash.now[:notice] = t('issues.watcher_added_success')
         else
-          if success
-            format.js { flash.now[:notice] = t('issues.watcher_removed_success') }
-          else
-            flash.now[:error] = t('shared.failure.delete', resource_label: t('issues.watcher'))
-            format.js
-          end
+          flash.now[:error] = watcher.errors.full_messages
         end
+      else
+        if success
+          flash.now[:notice] = t('issues.watcher_removed_success')
+        else
+          flash.now[:error] = watcher.errors.full_messages
+        end
+      end
+
+      respond_to do |format|
+        format.js
       end
     end
   end
