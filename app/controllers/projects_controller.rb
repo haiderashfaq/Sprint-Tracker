@@ -82,6 +82,9 @@ class ProjectsController < ApplicationController
   def backlog
     @sprints = @project.pending_sprints
     @issues = @project.backlog_issues
+    @projects = [@project]
+    @users = @current_company.users
+    @issues = FilteringParams.new(@issues, params).apply_filters
     respond_to do |format|
       format.js
     end
@@ -91,7 +94,7 @@ class ProjectsController < ApplicationController
   def active_sprint
     @active_sprint = @project.active_sprint
     unless @active_sprint.nil?
-      @issues_to_do, @issues_in_progress, @issues_resolved, @issues_closed = @active_sprint.categorized_issues
+      @issues = @active_sprint.categorized_issues
     end
     respond_to do |format|
       format.js

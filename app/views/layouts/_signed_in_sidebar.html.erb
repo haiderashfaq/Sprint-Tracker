@@ -11,7 +11,7 @@
     </div>
     <ul class="nav_list ps-0">
       <li>
-        <a href='#'>
+        <a href='<%= root_url %>'>
           <i class='bx bx-grid-alt'></i>
           <span class="links-name"><%= t('sidebar.dashboard') %></span>
         </a>
@@ -32,16 +32,6 @@
         <span class="tooltip"><%= t('projects.project_label').pluralize %></span>
       </li>
       <li>
-        <a href='<%= issues_url %>'>
-          <i class="bi bi-card-checklist"></i>
-          <span class="links-name"><%= t('issues.issue_label') %></span>
-        </a>
-        <span class="tooltip"><%= t('issues.issue_label') %></span>
-      </li>
-      <li>
-        <a href= '#'>
-          <i class='bx bxl-c-plus-plus'></i>
-          <span class="links-name"><%= t('sidebar.portfolio') %></span>
         <a href='<%= sprints_url %>'>
           <i class="bx bx-run"></i>
           <span class="links-name"><%= t('sprints.label').pluralize %></span>

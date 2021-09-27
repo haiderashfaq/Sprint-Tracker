@@ -5,5 +5,5 @@
     $('#nav-backlog-tab').tab('show');
   });
 <% else %>
-  $('#nav-active-sprint').html("<%= escape_javascript render('active_sprint', sprint: @active_sprint, issues_to_do: @issues_to_do, issues_in_progress: @issues_in_progress, issues_resolved: @issues_resolved, issues_closed: @issues_closed )%>")
+  $('#nav-active-sprint').html("<%= escape_javascript render('active_sprint', sprint: @active_sprint, issues_to_do: @issues[:to_do], issues_in_progress: @issues[:in_progress], issues_resolved: @issues[:resolved], issues_closed: @issues[:closed] )%>")
 <% end %>

@@ -361,59 +361,6 @@ html {
   background-color: $white-color;
 }
 
-.sidebar-index{
-  position: absolute;
-  top: 310px;
-  width: 11rem;
-  padding: 6px 14px;
-  transition: all 0.5s ease;
-  border-radius: 12px;
-
-
-  ul{
-    margin-top: 20px;
-    li{
-      position: relative;
-      height: 50px;
-      width: 100%;
-      margin: 0 5px;
-      list-style: none;
-      line-height: 50px;
-      
-      a{
-        color: $black-color;
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        transition: all 0.4s ease;
-        border-radius: 12px;
-
-        i{
-          height: 50px;
-          min-width: 50px;
-          border-radius: 12px;
-          line-height: 50px;
-          text-align: center;
-          whitespace: no-wrap;
-        }
-
-        .links-name{
-          font-size: 15px;
-          font-weight: 400;
-          white-space: nowrap;
-          pointer-events: none;
-          transition: 0.4s;
-        }
-
-        &:hover{
-          color: $black-color;
-          background-color: #dde2e8;
-        }
-      }
-    }
-  }
-}
-
 .top-override{
   top:120px;
 }

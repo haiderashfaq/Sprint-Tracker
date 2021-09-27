@@ -34,8 +34,9 @@ class Ability
   def admin_permissions_for_users(user)
     can :manage, User
     unless user.account_owner?
-      cannot %i[edit update destroy], User, id: user.company.owner_id
+      cannot %i[edit update], User, id: user.company.owner_id
     end
+    cannot %i[destroy], User, id: user.company.owner_id
   end
 
   def admin_permissions_for_projects_users(user)
@@ -47,11 +48,7 @@ class Ability
   end
 
   def admin_permissions_for_project(user)
-    can %i[update read create destroy backlog active_sprint], Project, company_id: user.company_id
-  end
-
-  def admin_permissions_for_time_logs(user)
-    can :manage, TimeLog, company_id: user.company_id
+    can :manage, Project, company_id: user.company_id
   end
 
   def admin_permissions_for_time_logs(user)
@@ -68,7 +65,7 @@ class Ability
   end
 
   def member_permissions_for_projects_users(user)
-    can %i[read create update destroy], ProjectsUser, project: { manager: user }
+    can %i[read create update destroy], ProjectsUser, project: { manager_id: user.id }
     can :read, ProjectsUser, user: user
   end
 
@@ -78,8 +75,8 @@ class Ability
   end
 
   def member_permissions_for_sprint(user)
-    can :manage, Sprint, project: { manager: user }
-    can :read, Sprint, project: { projects_users: { user_id: user.id } }
+    can :manage, Sprint, project: { manager: user }, company_id: user.company_id
+    can :read, Sprint, project: { projects_users: { user_id: user.id } }, company_id: user.company_id
   end
 
   def creator_permissions_for_issues(user)
@@ -101,9 +98,5 @@ class Ability
 
   def member_permissions_for_time_logs(user)
     can :manage, TimeLog, user_id: user.id, company_id: user.company_id
-  end
-
-  def member_permissions_for_time_logs(user)
-    can :manage, TimeLog, id: user.id, company_id: user.company_id
   end
 end

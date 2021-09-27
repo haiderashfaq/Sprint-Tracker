@@ -24,6 +24,7 @@ class ProjectsUsersController < ApplicationController
     user_ids = projects_user_params[:user_id].reject(&:blank?)
 
     @projects_users, errors = ProjectsUser.add_projects_users(@project, user_ids)
+    @projects_users = @projects_users.paginate(page: params[:page])
     respond_to do |format|
       if errors.blank?
         format.js { flash.now[:notice] = t('shared.success.add', resource_label: t('users.label').pluralize) }

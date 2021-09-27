@@ -1,13 +1,16 @@
 <div class="container">
   <div class="mt-3 d-flex justify-content-between">
     <h3>
-      <%= sprint.name %>
+      <%= link_to sprint.name, sprint %>
     </h3>
     <%= link_to(t('sprints.complete'), complete_sprint_info_sprint_path(sprint), data: { remote: true, method: :get }, class: "btn btn-outline-primary") %>
   </div>
   <div class="row my-3">
     <div class="col card dashboard-card-border shadow-lg mx-1">
-      <h6 class="card-header"><%= t('shared.to_do').capitalize %><small class="px-1"><%= issues_to_do.size %></small></h6>
+      <h6 class="card-header d-flex justify-content-between">
+        <span><%= t('shared.to_do').capitalize %></span>
+        <span class="badge rounded-pill bg-primary"><%= issues_to_do.size %></span>
+      </h6>
       <div class="card-body">
         <% issues_to_do.each do |issue| %>
           <div class="card shadow-lg my-3">
@@ -18,13 +21,19 @@
               <div class="card-subtitle badge bg-<%= get_priority_color(issue.priority) %> mb-2 ">
                 <%= issue.priority %>
               </div>
+              <div class="card-subtitle badge bg-<%= get_category_color(issue.category) %> mb-2 ">
+                <%= issue.category %>
+              </div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
     <div class="col card dashboard-card-border shadow-lg mx-1">
-      <h6 class="card-header"><%= t('shared.in_progress').capitalize %><small class="px-1"><%= issues_in_progress.size %></small></h6>
+      <h6 class="card-header d-flex justify-content-between">
+        <span><%= t('shared.in_progress').capitalize %></span>
+        <span class="badge rounded-pill bg-primary"><%= issues_in_progress.size %></span>
+      </h6>
       <div class="card-body">
         <% issues_in_progress.each do |issue| %>
           <div class="card shadow-lg my-3">
@@ -35,13 +44,19 @@
               <div class="card-subtitle badge bg-<%= get_priority_color(issue.priority) %> mb-2 ">
                 <%= issue.priority %>
               </div>
+              <div class="card-subtitle badge bg-<%= get_category_color(issue.category) %> mb-2 ">
+                <%= issue.category %>
+              </div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
     <div class="col card dashboard-card-border shadow-lg mx-1">
-      <h6 class="card-header"><%= t('shared.resolved').capitalize %><small class="px-1"><%= issues_resolved.size %></small></h6>
+      <h6 class="card-header d-flex justify-content-between">
+        <span><%= t('shared.resolved').capitalize %></span>
+        <span class="badge rounded-pill bg-primary"><%= issues_resolved.size %></span>
+      </h6>
       <div class="card-body">
         <% issues_resolved.each do |issue| %>
           <div class="card shadow-lg my-3">
@@ -52,13 +67,19 @@
               <div class="card-subtitle badge bg-<%= get_priority_color(issue.priority) %> mb-2 ">
                 <%= issue.priority %>
               </div>
+              <div class="card-subtitle badge bg-<%= get_category_color(issue.category) %> mb-2 ">
+                <%= issue.category %>
+              </div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
     <div class="col card dashboard-card-border shadow-lg mx-1">
-      <h6 class="card-header"><%= t('shared.closed').capitalize %><small class="px-1"><%= issues_closed.size %></small></h6>
+      <h6 class="card-header d-flex justify-content-between">
+        <span><%= t('shared.closed').capitalize %></span>
+        <span class="badge rounded-pill bg-primary"><%= issues_closed.size %></span>
+      </h6>
       <div class="card-body">
         <% issues_closed.each do |issue| %>
           <div class="card shadow-lg my-3">
@@ -68,6 +89,9 @@
               </div>
               <div class="card-subtitle badge bg-<%= get_priority_color(issue.priority) %> mb-2 ">
                 <%= issue.priority %>
+              </div>
+              <div class="card-subtitle badge bg-<%= get_category_color(issue.category) %> mb-2 ">
+                <%= issue.category %>
               </div>
             </div>
           </div>

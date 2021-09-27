@@ -1,7 +1,6 @@
 # app/helpers/issues_helper
 
 module IssuesHelper
-
   def get_status_color(status)
     status_color = { open: 'primary', in_progress: 'warning', resolved: 'info', closed: 'success' }
     status_color[status.to_sym]
@@ -13,7 +12,7 @@ module IssuesHelper
   end
 
   def get_category_color(category)
-    category_color = { hotfix: 'primary', feature: 'info' }
+    category_color = { hotfix: 'danger', feature: 'success' }
     category_color[category.to_sym]
   end
 
@@ -29,5 +28,4 @@ module IssuesHelper
   def convert_to_date(date)
     date&.to_date&.to_s(:long)
   end
-
 end

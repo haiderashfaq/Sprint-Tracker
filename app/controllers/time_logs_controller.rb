@@ -35,9 +35,10 @@ class TimeLogsController < ApplicationController
 
   # POST /time_logs
   def create
-    @time_log = TimeLog.new(time_log_params)
+
+    #@time_log = TimeLog.new(time_log_params)
     @time_log.assignee_id = current_user.id
-    @time_log.issue_id = @issue.id
+    #@time_log.issue_id = @issue.id
 
     respond_to do |format|
       if @time_log.save

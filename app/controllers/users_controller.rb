@@ -31,7 +31,8 @@ class UsersController < ApplicationController
 
         format.html { redirect_to @user, notice: t('shared.success.create', resource_label: t('users.label')) }
       else
-        format.html { render :new, alert: t('shared.failure.create', resource_label: t('users.label')) }
+        flash.now[:error] = @user.errors.full_messages
+        format.html { render :new }
       end
     end
   end
@@ -44,11 +45,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user.new_member = true if @user.has_password?
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: t('shared.success.update', resource_label: t('users.label')) }
       else
-        flash.now[:alert] = t('shared.failure.update', resource_label: t('users.label'))
+        flash.now[:error] = @user.errors.full_messages
         format.html { render :edit }
       end
     end
@@ -59,7 +61,6 @@ class UsersController < ApplicationController
       if @user.destroy
         format.html { redirect_to users_url, alert: t('shared.success.delete', resource_label: t('users.label')) }
       else
-        flash.now[:alert] = t('shared.failure.delete', resource_label: t('users.label'))
         flash.now[:error] = @user.errors.full_messages
         format.html { render :show }
       end

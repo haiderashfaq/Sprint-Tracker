@@ -13,7 +13,7 @@ class Project < ApplicationRecord
 
   has_many :issues
   has_many :sprints
-  has_many :projects_users
+  has_many :projects_users, dependent: :destroy
   has_many :users, through: :projects_users, dependent: :destroy
 
   sequenceid :company, :projects

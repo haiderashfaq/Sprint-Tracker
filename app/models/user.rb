@@ -5,22 +5,25 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
 
+  before_destroy :check_dependent_resources?, prepend: true
+
+  belongs_to :company
+
   has_many :assigned_issues, class_name: 'Issue', foreign_key: 'assignee_id', dependent: :nullify
   has_many :created_issues, class_name: 'Issue', foreign_key: 'creator_id', dependent: :nullify
   has_many :reviewed_issues, class_name: 'Issue', foreign_key: 'reviewer_id', dependent: :nullify
-  has_many :projects_users
+  has_many :projects_users, dependent: :nullify
   has_many :projects, through: :projects_users
   has_many :time_logs, foreign_key: 'assignee_id', dependent: :nullify
 
-  belongs_to :company
   accepts_nested_attributes_for :company
+
+  validate :change_self_role
   validates :email, presence: true, uniqueness: { scope: :company_id }
-  validates_format_of :email, with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }, unless: -> { new_member }
   validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
   validates :name, presence: true, length: { minimum: 2, maximum: 40 }
-
-  before_destroy :check_dependent_resources?, prepend: true
+  validates_format_of :email, with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   ROLE_ID = { admin: 1, member: 2 }.freeze
   validates :role_id, presence: true, inclusion: { in: ROLE_ID.values }
@@ -84,5 +87,11 @@ class User < ApplicationRecord
       self.errors.add(:base, "Can't be destroyed because User is working on an issue")
       throw :abort
     end
+  end
+
+  def change_self_role
+    return if Current.user.nil? || Current.user.id != id || changes[:role_id].blank?
+
+    errors.add :base, I18n.t('users.self_role_id_change_error')
   end
 end
