@@ -8,7 +8,8 @@ class Sprint < ApplicationRecord
   sequenceid :company, :sprints
 
   has_many :issues
-  has_many :sprint_report_items, class_name: 'Sprintreport'
+  has_many :sprint_report_items, class_name: 'Sprintreport', dependent: :destroy
+  has_many :documents, as: :attachable, dependent: :destroy
 
   STATUS = { PLANNING: 'PLANNING', ACTIVE: 'ACTIVE', CLOSED: 'CLOSED' }.freeze
 

@@ -1,0 +1,35 @@
+<% new_document_path = params[:sprint_id].nil? ? new_issue_document_url(attachable) : new_sprint_document_url(attachable)  %>
+<div class="container mt-3">
+  <div class="d-flex justify-content-end">
+    <%= link_to t('shared.create_new_resource', resource_label: t('documents.label')), new_document_path, remote: true, class:"btn btn-primary bi bi-plus" %>
+  </div>
+  <% if documents.blank? %>
+    <%= render partial: 'shared/no_resource_present', locals: { record: t('documents.label').pluralize } %>
+  <% else %>
+    <div class="card mt-4 dashboard-card-border shadow-lg">
+      <div class="card-body">
+        <table class="table table-hover border-primary text-center js-datatable my-3" id="inactive-sprints">
+          <thead class="bg-primary text-light">
+            <tr>
+              <th><%= t('documents.name') %></th>
+              <th><%= t('documents.type') %></th>
+              <th><%= t('shared.actions') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% documents.each do |document| %>
+              <tr>
+                <td><%= link_to document.file_file_name, [:download, attachable, document] %></td>
+                <td><%= document.file.content_type %></td>
+                <td>
+                  <%= link_to '', [:download, attachable, document], class: 'bi bi-download mx-1' %>
+                  <%= link_to "", [attachable, document], method: :delete, remote: true, data: { confirm: t('shared.confirmation') }, class: "bi bi-trash mx-1" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,22 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header"></div>
+    <div class="modal-flash-messages"></div>
+    <%= form_with model: [@attachable, @document], local: false do |form| %>
+      <div class="modal-body">
+        <div class="row mb-3">
+          <div class="col-4 asterick">
+            <%= form.label t('documents.choose_file').upcase, class: "control-label" %>
+          </div>
+          <div class="col-8 asterick">
+            <%= form.file_field :file, class: 'form-control form-control-md' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= form.submit t('shared.create_new_resource', resource_label: t('documents.label')), data: { remote: true }, class: 'btn btn-primary bi bi-check' %>
+          <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

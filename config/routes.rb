@@ -13,47 +13,57 @@ Rails.application.routes.draw do
   constraints(subdomain: /^(?!www\Z)(\w+)/) do
     get '/companies/search', to: 'companies#search'
 
-    resources :projects do
-      member do
-        get 'backlog'
-        get 'active_sprint'
-      end
-      resources :sprints
-      resources :projects_users
-      resources :issues
-    end
-    resources :sprints do
-      resources :issues
-      member do
-        get 'start_sprint_info'
-        patch 'start_sprint'
-        get 'complete_sprint_info'
-        post 'complete_sprint'
-        get 'report'
-      end
-    end
+              resources :projects do
+                member do
+                  get 'backlog'
+                  get 'active_sprint'
+                end
+                resources :sprints
+                resources :projects_users
+                resources :issues
+              end
+              resources :sprints do
+                resources :issues
+                resources :documents, except: %i[edit update] do
+                  member do
+                    get 'download'
+                  end
+                end
+                member do
+                  get 'start_sprint_info'
+                  patch 'start_sprint'
+                  get 'complete_sprint_info'
+                  post 'complete_sprint'
+                  get 'report'
+                end
+              end
 
-    resources :issues do
-      resources :time_logs
-      collection do
-        post 'add_issues_to_sprint'
-        get 'fetch_resource_issues', as: 'fetch_resource'
-      end
-    end
-    resources :issues do
-      resources :time_logs
-    end
-    resources :dashboard
+              resources :issues do
+                resources :time_logs
+                resources :documents, except: %i[edit update] do
+                  member do
+                    get 'download'
+                  end
+                end
+                collection do
+                  post 'add_issues_to_sprint'
+                  get 'fetch_resource_issues', as: 'fetch_resource'
+                end
+              end
+              resources :issues do
+                resources :time_logs
+              end
+              resources :dashboard
 
-    resources :users do
-    end
+              resources :users do
+              end
 
-  	get '/history', to: 'issues#history'
-  	resources :reports, only: :index do
-      collection do
-        get 'sprint'
-        get 'issues'
-      end
-    end
-	end
-end
+              get '/history', to: 'issues#history'
+              resources :reports, only: :index do
+                collection do
+                  get 'sprint'
+                  get 'issues'
+                end
+              end
+              end
+              end
