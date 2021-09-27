@@ -204,6 +204,7 @@ en:
     success:
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"
+      add: "%{resource_label} Added Successfully"
       create: "%{resource_label} Created Successfully"
       update: "%{resource_label} Updated Successfully"
       delete: "%{resource_label} Deleted Successfully"
@@ -219,6 +220,12 @@ en:
     admin: 'Admin'
     account_owner: 'Account Owner'
     member: 'Member'
+
+  documents:
+    label: "Document"
+    choose_file: 'Select File to Add'
+    name: "Document Name"
+    type: "Document Type"
 
   helpers:        
     submit:

@@ -3,7 +3,7 @@
 <div class="container">
   <ul class="nav nav-tabs bg-gray" id="issue" role="tablist">
     <li class="nav-item active" role="presentation">
-     <%= link_to t('issues.issue_label'), issue_path, remote: true, class: 'nav-link active', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues",aria_selected: true  %>
+      <%= link_to t('issues.issue_label'), issue_path, remote: true, class: 'nav-link active', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues",aria_selected: true  %>
     </li>
     <% if can? :history, Issue%>
       <li class="nav-item" role="presentation">
@@ -12,6 +12,9 @@
     <% end %>
     <li class="nav-item" role="presentation">
       <%= link_to t('time_logs.label').pluralize(), [@issue, :time_logs], remote: true, class: 'nav-link', id: "nav-time_logs-tab", data: { bs_toggle: "tab", bs_target: "#nav-time_logs" }, type: "button", role: 'tab', aria_controls: "nav-time_logs", aria_selected: false %>
+    </li>
+    <li class="nav-item" role="presentation">
+      <%= link_to t('documents.label').pluralize(), issue_documents_url(@issue), remote: true, class: 'nav-link', id: "nav-documents-tab", data: {bs_toggle: "tab", bs_target: "#nav_documents"}, type: "button", role: 'tab', aria_controls: "nav-documents", aria_selected: false %>
     </li>
   </ul>
   <div class="tab-content" id="issue_content">
@@ -24,5 +27,6 @@
       </div>
     <% end %>
     <div class="tab-pane fade" id="nav-time_logs" role="tabpanel" aria-labelledby="nav-time_logs-tab"></div>
+    <div class="tab-pane fade" id="nav_documents" role="tabpanel" aria-labelledby="nav-documents-tab"></div>
   </div>
 </div>

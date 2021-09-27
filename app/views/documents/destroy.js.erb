@@ -1,0 +1,5 @@
+<% if @document.errors.blank? %>
+  $.get(window.location.origin + window.location.pathname + "/documents.js");
+  $('#nav_documents').tab('show');
+<% end %>
+$('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
