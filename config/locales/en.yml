@@ -30,10 +30,24 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  dashboard:
+    description: The #1 software development tool used by agile teams
+    compliment_one: The best software teams utilise speed like the Flash. 
+    complimenet_two: Flash Software is built for every member of your software team to plan,<br>
+          track, and be efficient in work.
+    plan: Plan
+    plan_compliment:  Create user stories and issues, plan sprints, and distribute tasks across your software team.
+    track: Track
+    track_compliment: Prioritize and discuss your team’s work in full context with complete visibility.
+    why_agile: Why agile?
+    agile_compiliment: Agile helps you save money.
+    product: Deliever Your Products Faster
+    product_compliment: Beat your competition by organizing your work 
+    workflow: Create a workflow
+    copyright: Copyright © 2021 Flash
+
   sidebar:
     dashboard: 'Dashboard'
-    # To do remove if unused
-    portfolio: 'Portfolio'
     setting: 'Setting'
     reports: 'Reports'
 
@@ -46,6 +60,7 @@ en:
   issues:
     issue_label: 'Issue'
     issues_label: 'Issues'
+    not_found: 'Not Found'
     description: 'Description'
     estimated_time: 'Estimated Time'
     estimated_start_date: 'Estimated Start Date'
@@ -71,6 +86,10 @@ en:
     move: "Move Issue to:"
     no_sprint: "No Sprint"
     moved: "Moved To"
+    watch: "Watch"
+    watcher: "Watcher"
+    watcher_added_success: "Watcher successfully added."
+    watcher_removed_success: "Watcher successfully removed."
     issues_added_success: "Issues added Successfully to Sprint"
     assignee: 'Assignee'
     reviewer: 'Reviewer'
@@ -204,6 +223,7 @@ en:
     success:
       add: "%{resource_label} added Successfully"
       fetched: "%{resource_label} Retrieved Successfully"
+      add: "%{resource_label} Added Successfully"
       create: "%{resource_label} Created Successfully"
       update: "%{resource_label} Updated Successfully"
       delete: "%{resource_label} Deleted Successfully"
@@ -219,6 +239,12 @@ en:
     admin: 'Admin'
     account_owner: 'Account Owner'
     member: 'Member'
+
+  documents:
+    label: "Document"
+    choose_file: 'Select File to Add'
+    name: "Document Name"
+    type: "Document Type"
 
   helpers:        
     submit:

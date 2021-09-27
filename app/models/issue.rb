@@ -20,6 +20,9 @@ class Issue < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   belongs_to :reviewer, class_name: 'User', optional: true
   has_many :time_logs, dependent: :destroy
+  has_many :watchers
+  has_many :watching_users, source: :user, through: :watchers
+  has_many :documents, as: :attachable, dependent: :destroy
 
   sequenceid :company, :issues
   validates :title, length: { minimum: 4, maximum: 255 }
@@ -77,11 +80,11 @@ class Issue < ApplicationRecord
   end
 
   def self.issues_left_unresolved_ideally(sprint, date)
-    sprint.issues.where("estimated_end_date > ?", date).or(sprint.issues.where(estimated_end_date: nil)).where.not(status: STATUS.key('Closed')).size
+    sprint.sprint_report_issues.where("estimated_end_date > ?", date).or(sprint.issues.where(estimated_end_date: nil)).where.not(status: STATUS.key('Closed')).size
   end
 
   def self.issues_left_unresolved_actually(sprint, date)
-    sprint.issues.where("actual_end_date > ?", date).or(sprint.issues.where(actual_end_date: nil)).where.not(status: STATUS.key('Closed')).size
+    sprint.sprint_report_issues.where("actual_end_date > ?", date).or(sprint.issues.where(actual_end_date: nil)).where.not(status: STATUS.key('Closed')).size
   end
 
   private
@@ -89,7 +92,11 @@ class Issue < ApplicationRecord
   def issue_alerts
     return if previous_changes.empty?
 
-    users = company.users.where(id: [reviewer_id, assignee_id, creator_id, project.manager_id]).or(company.users.where(role_id: User::ROLE_ID[:admin]))
+    watcher = watchers.pluck(:user_id)
+    alert_receivers = [reviewer_id, assignee_id, creator_id, project.manager_id]
+    alert_receivers.concat watcher
+
+    users = company.users.where(id: alert_receivers).or(company.users.where(role_id: User::ROLE_ID[:admin]))
 
     subject = I18n.t('issues.email_subject')
 

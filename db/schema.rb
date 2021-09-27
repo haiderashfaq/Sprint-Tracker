@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_27_075550) do
+ActiveRecord::Schema.define(version: 2021_09_26_192423) do
 
   create_table "audits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "auditable_id"
@@ -27,12 +27,24 @@ ActiveRecord::Schema.define(version: 2021_09_27_075550) do
     t.string "remote_address"
     t.string "request_uuid"
     t.datetime "created_at"
-    t.bigint "company_id", null: false
     t.index ["associated_type", "associated_id"], name: "associated_index"
     t.index ["auditable_type", "auditable_id", "version"], name: "auditable_index"
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "description"
+    t.bigint "commentable_id"
+    t.string "commentable_type"
+    t.bigint "commenter_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["commenter_id"], name: "index_comments_on_commenter_id"
+    t.index ["company_id"], name: "index_comments_on_company_id"
   end
 
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -58,6 +70,20 @@ ActiveRecord::Schema.define(version: 2021_09_27_075550) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "documents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "file_file_name", null: false
+    t.string "file_content_type", null: false
+    t.integer "file_file_size", null: false
+    t.datetime "file_updated_at", null: false
+    t.string "attachable_type", null: false
+    t.bigint "attachable_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["attachable_type", "attachable_id"], name: "index_documents_on_attachable"
+    t.index ["company_id"], name: "index_documents_on_company_id"
   end
 
   create_table "issues", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -194,6 +220,19 @@ ActiveRecord::Schema.define(version: 2021_09_27_075550) do
     t.index ["sequence_num", "company_id"], name: "index_users_on_sequence_num_and_company_id", unique: true
   end
 
+  create_table "watchers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "issue_id"
+    t.bigint "company_id", null: false
+    t.index ["company_id"], name: "index_watchers_on_company_id"
+    t.index ["issue_id"], name: "index_watchers_on_issue_id"
+    t.index ["user_id"], name: "index_watchers_on_user_id"
+  end
+
+  add_foreign_key "comments", "companies"
+  add_foreign_key "comments", "users", column: "commenter_id"
   add_foreign_key "companies", "users", column: "owner_id"
   add_foreign_key "issues", "projects"
   add_foreign_key "projects", "companies"
@@ -210,4 +249,5 @@ ActiveRecord::Schema.define(version: 2021_09_27_075550) do
   add_foreign_key "time_logs", "issues"
   add_foreign_key "time_logs", "users", column: "assignee_id"
   add_foreign_key "users", "companies"
+  add_foreign_key "watchers", "companies"
 end

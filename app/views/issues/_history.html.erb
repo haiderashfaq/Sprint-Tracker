@@ -1,6 +1,6 @@
 <div class="container">
   <br/><br/>
-  <% issue.includes(:user).audits.decorate.drop(1).each do |audit| %>
+  <% issue.audits.includes(:user).decorate.drop(1).each do |audit| %>
     <%= link_to audit.user&.name, user_path(audit.user&.sequence_num) %> 
     <%= distance_of_time_in_words(audit.created_at, Time.zone.now) %> ago
     <hr class="mt-1"/>

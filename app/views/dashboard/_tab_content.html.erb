@@ -56,9 +56,9 @@
                 <% counter = 0 %>
                 <% @projects.each do |project| %>
                   <%counter += 1 %>
-                  <div class="my-1 text-start">
+                  <div class="my-1">
                     <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">
-                      <span class="btn">
+                      <span class="btn text-start">
                         <i class="bi bi-journal-richtext"></i>
                         <%= project.name %>
                       </span>
@@ -75,7 +75,7 @@
       <% end %>
     </div>
   </div>
-  <div class="tab-pane fade <%= (can? :manage, Project) ? '' : 'show active' %>" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
+  <div class="tab-pane fade%>" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
     <%= render partial: "issues/dashboard_issue_table", locals: { issues: @assigned_issues, chart_id: 'assignee_issues' } %>
   </div>
   <div class="tab-pane fade" id="nav-creator" role="tabpanel" aria-labelledby="nav-creator-tab"></div>

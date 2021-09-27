@@ -19,10 +19,17 @@ $(document).ready(function() {
     width: 200
   });
 
-   $('body').on('select2:open', '.js-sprint-field', () => {
-      document.querySelector('.select2-search__field').focus();
-    });
+  $('body').on('select2:open', '.js-sprint-field', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
 
+  $('.js-select-field').select2({
+  width: 200
+  });
+
+  $('body').on('select2:open', '.js-select-field', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
 
   dateTimeFunc();
   $("#modal").on('shown.bs.modal', function() {

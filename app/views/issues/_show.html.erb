@@ -141,6 +141,18 @@
             </div>
           </div>
         </div>
+        <div class="col-12 col-sm-6">
+          <div class="row ">
+            <div class="col-12 col-sm-5 col-md-5 col-lg-4 pr-3 pr-md-0 fw-bold">
+              <%= t('projects.project_label') %>:
+            </div>
+            <div class="col-12 col-sm-7 col-md-7 col-lg-8">
+              <div class="col-4 justify-content-end">
+                <%= link_to t('issues.watch'), add_remove_watcher_issues_url(issue_id: @issue.id ), remote:true , class: "btn btn-primary w-100 bi bi-pencil" %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

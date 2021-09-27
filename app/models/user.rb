@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :projects_users, dependent: :nullify
   has_many :projects, through: :projects_users
   has_many :time_logs, foreign_key: 'assignee_id', dependent: :nullify
+  has_many :watchers
+  has_many :issues, through: :watchers
 
   accepts_nested_attributes_for :company
 
@@ -24,7 +26,6 @@ class User < ApplicationRecord
   validates :phone_num, presence: true, length: { minimum: 6, maximum: 15 }
   validates :name, presence: true, length: { minimum: 2, maximum: 40 }
   validates_format_of :email, with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates_format_of :phone_num, with: /\A\+?\d{7}\d*\z/
 
   ROLE_ID = { admin: 1, member: 2 }.freeze
   validates :role_id, presence: true, inclusion: { in: ROLE_ID.values }
