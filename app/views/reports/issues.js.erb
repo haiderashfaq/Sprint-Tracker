@@ -1,6 +1,5 @@
 $('#filter').html("<%= escape_javascript render(:partial => 'reports/sprint_filter',  :locals=>{ sprints: @sprints, form_action: :issues } ) %>");
-<% if @sprint.present? %>
-	$('#no-resource').remove();
+<% if @sprint&.issues&.present? %>
 	$('#header').html("<%= escape_javascript render(:partial => 'reports/sprint_report_header',  :locals=>{ sprint_id: @sprint&.id, action: :issues_csv} ) %>");
-	$('#issue_report_table').html("<%= escape_javascript render(:partial => 'issue_report_table',  :locals=>{ issues_report_attributes: @issue_report_attributes } ) %>");
 <% end %>
+$('#issue_report_table').html("<%= escape_javascript render(:partial => 'issue_report_table',  :locals=>{ issues_report_data: @issue_report_data } ) %>");

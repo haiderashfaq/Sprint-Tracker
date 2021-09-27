@@ -86,20 +86,20 @@ class Ability
   end
 
   def creator_permissions_for_issues(user)
-    can %i[edit update destroy history], Issue, creator: user, company_id: user.company_id
+    can %i[read edit update destroy history], Issue, creator: user, company_id: user.company_id
   end
 
   def reviewer_permissions_for_issues(user)
-    can [:read], Issue, reviewer: user, company_id: user.company_id
+    can [:read, :history], Issue, reviewer: user, company_id: user.company_id
   end
 
   def assignee_permissions_for_issues(user)
-    can %i[read update], Issue, creator: user, company_id: user.company_id
+    can %i[read update history], Issue, creator: user, company_id: user.company_id
   end
 
   def member_permissions_for_issues(user)
     can :manage, Issue, project: { manager: user }
-    can %i[read create fetch_resource_issues], Issue, company_id: user.company_id
+    can %i[read create history fetch_resource_issues], Issue, company_id: user.company_id
   end
 
   def member_permissions_for_time_logs(user)

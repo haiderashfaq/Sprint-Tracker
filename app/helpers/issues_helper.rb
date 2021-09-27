@@ -2,7 +2,7 @@
 
 module IssuesHelper
   def get_status_color(status)
-    status_color = { open: 'primary', in_progress: 'danger', resolved: 'info', closed: 'success' }
+    status_color = { open: 'primary', in_progress: 'warning', resolved: 'info', closed: 'success' }
     status_color[status.to_sym]
   end
 

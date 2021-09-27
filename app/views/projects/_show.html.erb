@@ -4,13 +4,13 @@
       <h1><%= project.name %></h1>
     </div>
     <div class="col-2 justify-content-end">
-      <%= link_to t('shared.edit'), edit_project_path(project), class: "btn btn-primary w-100 fa fa-pencil" %>
+      <%= link_to t('shared.edit'), edit_project_path(project), class: "btn btn-primary w-100 bi bi-pencil" %>
     </div>
     <% if can? :delete, Project %>
       <div class="col-2 justify-content-end">
         <%= link_to t('shared.delete'), project_path(project),
                 method: :delete,
-                data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 fa fa-trash" %>
+                data: { confirm: t('shared.confirmation') }, class: "btn btn-danger w-100 bi bi-trash" %>
       </div>
     <% end %>
   </div>

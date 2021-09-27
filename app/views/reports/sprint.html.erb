@@ -5,5 +5,5 @@
   <% if @sprint.present? %>
     <%= render partial: 'reports/sprint_report_header',  :locals=>{ sprint_id: @sprint.id, action: :get_sprint } %>
   <% end %>
-  <%= render partial: "reports/sprint_report_table", locals: { sprint_report_attributes: @sprint_report_attributes } %>
+  <%= render partial: "reports/sprint_report_table", locals: { sprint_report_data: @sprint_report_data } %>
 </div>

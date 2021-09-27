@@ -84,6 +84,7 @@ en:
     not_completed: "Issues Not Completed"
     unresolved_issues_msg: "Select where all unresolved issues should be moved"
     move: "Move Issue to:"
+    no_sprint: "No Sprint"
     moved: "Moved To"
     watch: "Watch"
     watcher: "Watcher"

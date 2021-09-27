@@ -1,7 +1,7 @@
 <tr id="issue_<%= issue.sequence_num %>">
   <div id="issues_datatable_space"></div>
   <% if issue.assignee.present? %>
-    <% assignee_name = link_to issue.assignee.name, user_path(issue.assignee.sequence_num) %>
+    <% assignee_name = link_to issue.assignee_name, user_path(issue.assignee.sequence_num) %>
   <% end %>
   <td><span class="badge rounded-pill bg-<%= get_status_color(issue.status) %>">
       <%= issue.status.camelize %></span></td>

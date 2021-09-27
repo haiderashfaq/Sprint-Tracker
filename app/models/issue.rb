@@ -14,7 +14,7 @@ class Issue < ApplicationRecord
   after_save :issue_alerts
 
   belongs_to :company
-  belongs_to :project, optional: true
+  belongs_to :project
   belongs_to :sprint, optional: true
   belongs_to :creator, class_name: 'User'
   belongs_to :assignee, class_name: 'User', optional: true
@@ -25,33 +25,39 @@ class Issue < ApplicationRecord
   has_many :documents, as: :attachable, dependent: :destroy
 
   sequenceid :company, :issues
+  validates :title, length: { minimum: 4, maximum: 255 }
+  validates :description, length: { minimum: 6, maximum: 5000 }
+  validates :title, :description, :status, :priority, presence: true
   audited associated_with: :company
 
   validate_datetime :actual_end_date
   validate_datetime :actual_start_date
   validate_datetime :estimated_end_date
   validate_datetime :estimated_start_date
-  validate_dates :actual_start_date, :actual_end_date
-  validates :status, inclusion: { in: STATUS.keys.map(&:to_s) }
-  validates :priority, inclusion: { in: PRIORITY.keys.map(&:to_s) }
-  validates :category, inclusion: { in: CATEGORY.keys.map(&:to_s) }
+
+  validates :estimated_time, length: { maximum: 100 }, numericality: { greater_than: 0, allow_blank: true}
   validate_dates :estimated_start_date, :estimated_end_date
-  validates :title, length: { minimum: 4, maximum: 255 }
-  validates :description, length: { minimum: 6, maximum: 5000 }
-  validates :title, :description, :status, :priority, presence: true
-  validates :estimated_time, length: { maximum: 100 }, numericality: { greater_than: 0 }
+  validate_dates :actual_start_date, :actual_end_date
 
   scope :creator, ->(creator) { where creator: creator }
-  # scope :filter_by_attribute, ->(key, value) { where "#{key}": value }
   scope :filter_by_attribute, ->(column, value) { where column => value }
   scope :open, -> { where(status: STATUS.key('Open')) }
   scope :closed, -> { where(status: STATUS.key('Closed')) }
   scope :resolved, -> { where(status: STATUS.key('Resolved')) }
   scope :in_progress, -> { where(status: STATUS.key('In Progress')) }
   scope :high_priority, -> { where(priority: PRIORITY[:high]) }
+  sequenceid :company, :issues
+  audited associated_with: :company
+
+  after_save :issue_alerts
+
 
   def total_time_spent
-    time_logs.sum(:logged_time) || 0
+    time_logs&.sum(:logged_time) || 0
+  end
+
+  def assignee_name
+    assignee&.name || I18n.t('issues.no_assignee')
   end
 
   def total_estimated_time

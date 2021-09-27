@@ -12,12 +12,12 @@ class ReportsController < ApplicationController
     add_breadcrumb t('sprints.label'), sprint_reports_path
     if params[:sprint_id].present?
       @sprint = fetch_sprint
-      @sprint_report_attributes = Report.sprint_report_data(@sprint)&.paginate(page: params[:page]).decorate
+      @sprint_report_data = Report.sprint_report_data(@sprint)&.paginate(page: params[:page])
     end
     respond_to do |format|
       format.html
       format.js
-      format.csv { send_data ReportCsv.new(Report::SPRINT_HEADERS, @sprint_report_attributes).to_csv, type: 'text/csv;', filename: report_filename('sprint') }
+      format.csv { send_data ReportCsv.new(Report::SPRINT_HEADERS, @sprint_report_data).to_csv, type: 'text/csv;', filename: report_filename('sprint') }
     end
   end
 
@@ -25,12 +25,12 @@ class ReportsController < ApplicationController
     add_breadcrumb t('issues.issue_label'), issues_reports_path
     if params[:sprint_id].present?
       @sprint = fetch_sprint
-      @issue_report_attributes = Report.issues_report_data(@sprint)&.paginate(page: params[:page]).decorate
+      @issue_report_data = Report.issues_report_data(@sprint)&.paginate(page: params[:page])
     end
     respond_to do |format|
       format.html
       format.js
-      format.csv { send_data ReportCsv.new(Report::ISSUE_HEADERS, @issue_report_attributes).to_csv, type: 'text/csv;', filename: report_filename('issues') }
+      format.csv { send_data ReportCsv.new(Report::ISSUE_HEADERS, @issue_report_data).to_csv, type: 'text/csv;', filename: report_filename('issues') }
     end
   end
 
