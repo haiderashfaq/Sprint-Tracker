@@ -1,0 +1,8 @@
+<% if @document.errors.present? %>
+  $('#modal .modal-flash-messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+<% else %>
+  $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#modal').modal('hide');
+  $.get(window.location.origin + window.location.pathname + "/documents.js");
+  $('#nav_documents').tab('show');
+<% end %>
