@@ -13,6 +13,7 @@ class Ability
       admin_permissions_for_issues(user)
       admin_permissions_for_projects_users(user)
       admin_permissions_for_time_logs(user)
+      admin_permissions_for_documents(user)
       admin_permissions_for_reports
     elsif user.member?
       member_permsisions_for_users(user)
@@ -24,6 +25,7 @@ class Ability
       reviewer_permissions_for_issues(user)
       assignee_permissions_for_issues(user)
       member_permissions_for_time_logs(user)
+      member_permissions_for_documents(user)
     end
   end
 
@@ -57,6 +59,10 @@ class Ability
 
   def admin_permissions_for_sprint(user)
     can :manage, Sprint, company_id: user.company_id
+  end
+
+  def admin_permissions_for_documents(user)
+    can :manage, Document, company_id: user.company_id
   end
 
   # member permissions
@@ -98,5 +104,9 @@ class Ability
 
   def member_permissions_for_time_logs(user)
     can :manage, TimeLog, user_id: user.id, company_id: user.company_id
+  end
+
+  def member_permissions_for_documents(user)
+    can %i[read create], Document, company_id: user.company_id
   end
 end

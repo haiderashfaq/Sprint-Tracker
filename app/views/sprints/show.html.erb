@@ -24,6 +24,7 @@
       <%= link_to t('shared.details').pluralize(), @sprint, class: 'nav-link active', id: "nav-sprints-tab", data: {bs_toggle: "tab", bs_target: "#nav-sprints"}, type: "button", role: 'tab', aria_controls: "nav-sprints", aria_selected: false %>
       <%= link_to t('sprints.report'), report_sprint_url, class: 'nav-link', id: "nav-report-tab", data: {bs_toggle: "tab", bs_target: "#nav-report", remote: true}, type: "button", role: 'tab', aria_controls: "nav-report", aria_selected: false %>
       <%= link_to t('issues.issues_label').pluralize(), sprint_issues_url(@sprint), remote: true, class: 'nav-link', id: "nav-issues-tab", data: {bs_toggle: "tab", bs_target: "#nav-issues"}, type: "button", role: 'tab', aria_controls: "nav-issues", aria_selected: false %>
+      <%= link_to t('documents.label').pluralize(), sprint_documents_url(@sprint), remote: true, class: 'nav-link', id: "nav-documents-tab", data: {bs_toggle: "tab", bs_target: "#nav_documents"}, type: "button", role: 'tab', aria_controls: "nav-documents", aria_selected: false %>
     </div>
   </nav>
   <div class="tab-content" id="tab-tabContent">
@@ -40,5 +41,6 @@
         <div id="issues-table"></div>
       </div>
     </div>
+    <div class="tab-pane fade" id="nav_documents" role="tabpanel" aria-labelledby="nav-documents-tab"></div>
   </div>
 </div>
