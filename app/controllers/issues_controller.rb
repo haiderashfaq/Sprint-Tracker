@@ -109,7 +109,7 @@ class IssuesController < ApplicationController
   def add_remove_watcher
     @issue = @current_company.issues.find_by(id: params.dig(:issue_id, :issue_id))
     if @issue.nil?
-      flash.now[:error] = "Issue not found"
+      flash.now[:error] = t('issues.issue_label') + t('issues.not_found')
     end
     watcher = @current_company.watchers.where(issue: @issue).where(user: current_user)
     create_true = watcher.empty?

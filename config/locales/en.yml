@@ -60,6 +60,7 @@ en:
   issues:
     issue_label: 'Issue'
     issues_label: 'Issues'
+    not_found: 'Not Found'
     description: 'Description'
     estimated_time: 'Estimated Time'
     estimated_start_date: 'Estimated Start Date'
