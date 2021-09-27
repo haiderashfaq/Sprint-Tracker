@@ -10,13 +10,13 @@
       </tr>
     </thead>
     <tbody id="reports_datatable_body">
-      <% if sprint_report_attributes.present? %>
-        <% sprint_report_attributes.each do |sprint_report| %>
+      <% if sprint_report_data.present? %>
+        <% sprint_report_data.each do |sprint_report| %>
           <%= render partial: "sprint_report_datatable_row", locals: { sprint_report: sprint_report} %>
           <tr>
             <td colspan="5">
               <% total_estimated_time = sprint_report.total_estimated_time %>
-              <% total_time_spent = sprint_report.total_time_spent %>
+              <% total_time_spent = sprint_report.total_time_logged %>
               <% time_progression_ratio = sprint_report.time_progression %>
               <% if total_estimated_time.present? and total_time_spent.present? %>
                 <%= render partial: "time_logs/progress", locals: { instance: sprint_report, time_progression_ratio: time_progression_ratio, total_logged_time: total_time_spent, width: "w-100", estimated_time: total_estimated_time} %>
@@ -24,7 +24,7 @@
             </td>
           </tr>
           <% end %>
-        <%= js_paginate sprint_report_attributes %>
+        <%= js_paginate sprint_report_data %>
       <% else %>
         <div class="container text-center">
           <tr id="no-resource"><td colspan="5"><%= render partial: 'shared/no_resource_present', locals: { record: t('reports.sprint_report') } %></td></tr>

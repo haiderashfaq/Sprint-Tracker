@@ -2,4 +2,4 @@ $('#filter').html("<%= escape_javascript render(:partial => 'reports/sprint_filt
 <% if @sprint.present? %>
   $('#header').html("<%= escape_javascript render(:partial => 'reports/sprint_report_header',  :locals=>{ sprint_id: @sprint&.id, action: :sprint_csv } ) %>");
 <% end %>
-$('#sprint_report_table').html("<%= escape_javascript render(:partial => 'reports/sprint_report_table',  :locals=>{ sprint_report_attributes: @sprint_report_attributes } ) %>");
+$('#sprint_report_table').html("<%= escape_javascript render(:partial => 'reports/sprint_report_table',  :locals=>{ sprint_report_data: @sprint_report_data } ) %>");

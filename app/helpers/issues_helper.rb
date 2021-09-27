@@ -7,10 +7,6 @@ module IssuesHelper
     status_color[status.to_sym]
   end
 
-  def assignee_name(issue)
-    issue&.assignee&.name || I18n.t('issues.no_assignee')
-  end
-
   def get_priority_color(priority)
     priority_color = { low: 'success', medium: 'warning', high: 'danger' }
     priority_color[priority.to_sym]

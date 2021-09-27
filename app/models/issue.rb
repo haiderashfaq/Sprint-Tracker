@@ -49,7 +49,7 @@ class Issue < ApplicationRecord
    end
 
   def total_estimated_time
-    @issues&.sum(estimated_time) || estimated_time.to_i
+    estimated_time || 0
   end
 
   def self.get_errors_of_collection(issues)

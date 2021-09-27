@@ -77,7 +77,7 @@ class Sprint < ApplicationRecord
   end
 
   def resolved_and_unresolved_issues
-    issues_unresolved = issues.where.not(status: Issue::STATUS[:closed])
+    issues_unresolved = issues.where.not(status: Issue::STATUS.invert['Closed'])
     issues_resolved = issues.where(status: Issue::STATUS[:closed])
     [issues_unresolved, issues_resolved]
   end
