@@ -22,6 +22,7 @@ class Issue < ApplicationRecord
   has_many :time_logs, dependent: :destroy
   has_many :watchers
   has_many :watching_users, source: :user, through: :watchers
+  has_many :documents, as: :attachable, dependent: :destroy
 
   sequenceid :company, :issues
   audited associated_with: :company
@@ -73,11 +74,11 @@ class Issue < ApplicationRecord
   end
 
   def self.issues_left_unresolved_ideally(sprint, date)
-    sprint.issues.where("estimated_end_date > ?", date).or(sprint.issues.where(estimated_end_date: nil)).where.not(status: STATUS.key('Closed')).size
+    sprint.sprint_report_issues.where("estimated_end_date > ?", date).or(sprint.issues.where(estimated_end_date: nil)).where.not(status: STATUS.key('Closed')).size
   end
 
   def self.issues_left_unresolved_actually(sprint, date)
-    sprint.issues.where("actual_end_date > ?", date).or(sprint.issues.where(actual_end_date: nil)).where.not(status: STATUS.key('Closed')).size
+    sprint.sprint_report_issues.where("actual_end_date > ?", date).or(sprint.issues.where(actual_end_date: nil)).where.not(status: STATUS.key('Closed')).size
   end
 
   private
