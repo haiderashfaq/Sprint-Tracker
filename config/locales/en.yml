@@ -160,6 +160,7 @@ en:
     password_confirmation: "Password Confirmation"
     profile: "Profile"
     phone_num: "Phone Number"
+    phone_placeholder: "(minimum 7 digits)"
     start_date: "Start Date"
     edit: 'Edit'
     back: 'Back'
