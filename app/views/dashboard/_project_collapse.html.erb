@@ -6,9 +6,10 @@
       <h6 class="card-header"><%= t('projects.project_label') + ' ' + counter.to_s %></h6>
       <div class="card-body">
         <% if project.fetch_project_issues %>
+        <% project.active_sprint.generate_report %>
           <%= line_chart [
-                { name: t('shared.est_end_date'), data: project.fetch_project_issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_ideally(issue.sprint, issue.estimated_end_date)] } },
-                { name: t('shared.end_date'), data: project.fetch_project_issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_actually(issue.sprint, issue.estimated_end_date)] } }
+                { name: t('shared.est_end_date'), data: project.active_sprint.sprint_report_issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_ideally(issue.sprint, issue.estimated_end_date)] } },
+                { name: t('shared.end_date'), data: project.active_sprint.sprint_report_issues.group(:estimated_end_date).order(:estimated_end_date).map { |issue| [issue.estimated_end_date, Issue.issues_left_unresolved_actually(issue.sprint, issue.estimated_end_date)] } }
                 ], points: false, empty: "No Data available", xtitle: "Time", ytitle: "Issues Unresolved Count" %>
         <% end %>
       </div>

@@ -1,6 +1,6 @@
 <div class="container">
   <ul class="nav nav-tabs bg-gray" id="issue" role="tablist">
-    <% if (can? :edit, Project) && @projects.exists? %>
+    <% if (can? :edit, Project) %>
       <li class="nav-item" role="presentation">
         <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#multiCollapse4" role="button" aria-expanded="false" aria-controls="multiCollapse4">Report</a>
       </li>

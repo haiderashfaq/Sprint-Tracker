@@ -1,5 +1,5 @@
 <div class="tab-content" id="tab-tabContent">
-  <div class="tab-pane fade show active" id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
+  <div class="tab-pane fade " id="nav-assignee" role="tabpanel" aria-labelledby="nav-assignee-tab">
     <% @issues= Issue.joins(:assignee) %>
     <% @issues= @issues.paginate(page: params[:page]) %>
     <%= render partial: "issues/dashboard_issue_table", locals: { issues: @assigned_issues, chart_id: 'assignee_issues' } %>
@@ -7,26 +7,34 @@
   <div class="tab-pane fade" id="nav-creator" role="tabpanel" aria-labelledby="nav-creator-tab"></div>
   <div class="tab-pane fade" id="nav-reviewer" role="tabpanel" aria-labelledby="nav-reviewer-tab"></div>
   <% if can? :edit, Project, company_id: current_user.company_id %>
-    <div class="tab-pane fade" id="multiCollapse4" role="tabpanel" aria-labelledby="multiCollapse4">
-        <div class="sidebar-index top-override bg-white mt-5 ms-5 ps-0">
-          <h6 class="card-title ms-4 mt-2">Projects</h6>
-          <ul class="nav_list ps-0">
-            <% counter = 0 %>
-            <% @projects.each do |project| %>
-              <%counter += 1 %>
-              <li>
-                <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">
-                  <i class="bi bi-journal-richtext"></i>
-                  <span class="links-name"><%= t('projects.project_label') + ' ' + counter.to_s %></span>
-                </a>
-                <span class="tooltip"><%= t('projects.project_label') + ' ' + counter.to_s %></span>
-              </li>
-            <% end%>
-          </ul>
-        </div>
+    <div class="tab-pane fade show active" id="multiCollapse4" role="tabpanel" aria-labelledby="multiCollapse4">
+              <div class="row mt-3">
+          <div class="col-3">
+
+
+          <div class="card dashboard-card-border shadow-lg">
+              <h6 class="card-header"><%= t('projects.project_label').pluralize %></h6>
+              <div class="card-body">
+                <% counter = 0 %>
+                <% @projects.each do |project| %>
+                  <%counter += 1 %>
+                  <div class="my-1">
+                    <a data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%= counter %>" aria-expanded="false" aria-controls="multiCollapseExample<%= counter %>">
+                      <span class="btn text-start">
+                        <i class="bi bi-journal-richtext"></i>
+                        <%= project.name %>
+                      </span>
+                    </a>
+                  </div>
+                <% end%>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            
         <%= render partial: "project_collapse" %>
+          </div>
       <% end %>
       </div>
     </div>
   </div>
-</div>

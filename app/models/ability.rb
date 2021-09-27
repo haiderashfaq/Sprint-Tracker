@@ -76,8 +76,8 @@ class Ability
   end
 
   def member_permissions_for_project(user)
-    can %i[read update backlog active_sprint], Project, manager: user, company_id: user.company_id
-    can %i[read backlog active_sprint], Project, projects_users: { user: user }
+    can %i[read update backlog active_sprint], Project, manager_id: user.id, company_id: user.company_id
+    can %i[read backlog active_sprint], Project, projects_users: { user_id: user.id }
   end
 
   def member_permissions_for_sprint(user)
