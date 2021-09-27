@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :projects_users, dependent: :nullify
   has_many :projects, through: :projects_users
   has_many :time_logs, foreign_key: 'assignee_id', dependent: :nullify
+  has_many :watchers
   has_many :issues, through: :watchers
 
   accepts_nested_attributes_for :company

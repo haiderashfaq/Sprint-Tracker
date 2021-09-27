@@ -20,7 +20,8 @@ class Issue < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   belongs_to :reviewer, class_name: 'User', optional: true
   has_many :time_logs, dependent: :destroy
-  has_many :users, through: :watchers
+  has_many :watchers
+  has_many :watching_users, source: :user, through: :watchers
 
   sequenceid :company, :issues
   audited associated_with: :company
