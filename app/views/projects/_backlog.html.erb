@@ -1,0 +1,40 @@
+<div class="container mt-3">
+  <div class="mb-3 d-flex justify-content-between">
+    <h5><%= t('issues.issue_label').pluralize %></h5>
+    <%= link_to "", "#", class: 'bi bi-caret-down-fill', id: "issue_dropdown" %>
+  </div>
+  <div id="issues_table" class="collapse">
+    <% if issues.blank? %>
+      <div class="d-flex justify-content-center">
+        <% render partial: 'shared/no_resource_present', locals: { record: t('issues.issue_label') } %>
+      </div>
+    <% else %>
+      <%= submit_tag t('issues.add_issues'), data: { remote: true }, class: "btn btn-primary add-issues mb-3", disabled: true %>
+      <div class="card dashboard-card-border">
+        <div class="card-body">
+          <table class="table table-hover border-primary text-center my-3" id="issues-datatable" data-source="<%= issues_path(format: :json) %>">
+            <thead class="text-light bg-primary">
+              <tr>
+                <th><%= check_box_tag "check all" %></th>
+                <th><%= t('issues.title') %></th>
+                <th><%= t('issues.status') %></th>
+                <th><%= t('issues.priority') %></th>
+                <th><%= t('issues.category') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% issues.each do |issue| %>
+              <tr id="issue_<%= issue.id %>">
+                <td><%= check_box_tag "issue_#{issue.id}", issue.id, false, class:"issue-check-box" %></td>
+                <td><%= link_to issue.title, issue_path(issue.sequence_num) %></td>
+                <td><%= issue.status.camelize %></td>
+                <td><%= issue.priority.camelize %></td>
+                <td><%= issue.category.camelize %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

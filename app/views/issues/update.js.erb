@@ -5,5 +5,6 @@
   $('#issue_<%= @issue.sequence_num %>').replaceWith("<%= escape_javascript render 'issue_datatable_row', issue: @issue %>");
   $('#issue_show').replaceWith("<%= escape_javascript render(:partial => 'issues/show',  :locals=>{ issue: @issue} ) %>");
   $('#flash_messages').html("<%= escape_javascript render partial: 'shared/flash_messages', flash: flash %>");
+  $('#history').html("<%= escape_javascript render partial: "history", locals: { issue: @issue } %>");
 <% end %>
 

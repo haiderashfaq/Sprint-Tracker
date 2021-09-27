@@ -28,7 +28,7 @@
           <%= form.label t('issues.estimated_time'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.text_field :estimated_time, class: 'form-control form-control-md'%>
+          <%= form.number_field :estimated_time, include_blank: true, class: 'form-control form-control-md', placeholder: "Hours"%>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -36,7 +36,7 @@
           <%= form.label t('issues.status'), class: 'col-form-label col-form-label-md' %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :status, Issue::STATUS.invert, { }, {required: true , class: "js-select-form-field form-select form-select-lg"} %>
+          <%= form.select :status, Issue::STATUS.invert, {}, {required: true , class: "js-select-form-field form-select form-select-lg"} %>
         </div>
       </div>
       <div class="row mb-3 asterick">
@@ -52,7 +52,7 @@
           <%= form.label t('issues.category'), class: 'col-form-label col-form-label-md'  %>
         </div>
         <div class="col-12 col-sm-8 col-md-6 col-lg-8">
-          <%= form.select :category, Issue::CATEGORY.invert, { }, {required: true, class: "js-select-form-field form-select form-select-lg"} %>
+          <%= form.select :category, Issue::CATEGORY.invert, {}, {required: true, class: "js-select-form-field form-select form-select-lg"} %>
         </div>
       </div>
       <div class="row g-3 align-items-center mb-3">
@@ -116,7 +116,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= form.submit class: 'btn btn-primary fa fa-check', remote: true %>
+        <%= form.submit class: 'btn btn-primary', remote: true %>
         <button type="button" class="btn btn-secondary" id="formCloseBtn" data-bs-dismiss="modal"><%= t('shared.cancel') %></button>
       </div>
       <% end %>

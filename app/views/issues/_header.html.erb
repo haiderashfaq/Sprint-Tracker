@@ -10,7 +10,7 @@
         <% else %>
           <% project_params = {} %>
         <% end %>
-        <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path(project_params) ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn bi bi-plus btn-primary some-button'} %>
+        <%= link_to t('shared.create_new_resource', resource_label: t('issues.issue_label')), new_issue_path(project_params) ,{ remote: true, action: :new, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn bi bi-plus btn-primary w-100 some-button'} %>
       </div>
     </div>
   </div>
