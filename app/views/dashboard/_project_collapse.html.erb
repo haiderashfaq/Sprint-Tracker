@@ -23,7 +23,7 @@
     </div>
     <div class="col">
       <% if project.fetch_sprint_issues.present? %>
-        <div class="row card dashboard-card-border shadow-lg collapse multi-collapse" id="multiCollapseExample<%= counter %>">
+        <div class="row card dashboard-card-border shadow-lg collapse multi-collapse me-1" id="multiCollapseExample<%= counter %>">
           <h6 class="card-header text-center"><%= t('shared.total') + ' ' + t('issues.issues_label') %></h6>
           <div class="card-body">
             <div class="text-7xl orange"><%= project.fetch_sprint_issues.size %></div>
@@ -32,7 +32,7 @@
             <h6><%= t('shared.closed') + ':'%><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['Closed']).size %></h6>
           </div>
         </div>
-        <div class="row card dashboard-card-border shadow-lg mt-2 collapse multi-collapse" id="multiCollapseExample<%= counter %>">
+        <div class="row card dashboard-card-border shadow-lg mt-2 collapse multi-collapse me-1" id="multiCollapseExample<%= counter %>">
           <h6 class="card-header text-center"><%= t('shared.in_progress') + ' ' + t('issues.issues_label') %></h6>
           <div class="card-body">
             <div class="text-7xl tomato"><%= project.fetch_sprint_issues.where(status: Issue::STATUS.invert['In Progress']).size %></div>
