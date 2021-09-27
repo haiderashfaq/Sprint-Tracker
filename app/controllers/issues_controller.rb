@@ -107,23 +107,34 @@ class IssuesController < ApplicationController
   end
 
   def add_remove_watcher
-    @issue = @current_company.issues.find_by(id: params.dig(:issue_id, :issue_id))
+    @issue = @current_company.issues.find_by(id: params.dig(:issue_id))
+    success = false
     if @issue.nil?
       flash.now[:error] = t('issues.issue_label') + t('issues.not_found')
-    end
-    watcher = @current_company.watchers.where(issue: @issue).where(user: current_user)
-    create_true = watcher.empty?
-    respond_to do |format|
+    else
+      watcher = @current_company.watchers.where(issue: @issue).find_by(user_id: current_user.id)
+      create_true = watcher.blank?
       if create_true
-        Watcher.create!(user: current_user, issue: @issue)
-        format.js { flash.now[:notice] = t('issues.watcher_added_success') }
+        success = Watcher.create!(user: current_user, issue: @issue)
       else
-        if watcher[0].destroy
-          format.js { flash.now[:notice] = t('issues.watcher_removed_success') }
-          format.html { redirect_to issues_url }
+        success = watcher.destroy
+      end
+
+      respond_to do |format|
+        if create_true
+          if success
+            format.js { flash.now[:notice] = t('issues.watcher_added_success') }
+          else
+            flash.now[:error] = @issue.errors.full_messages
+            format.js
+          end
         else
-          flash.now[:error] = t('shared.failure.delete', resource_label: t('issues.watcher'))
-          format.js
+          if success
+            format.js { flash.now[:notice] = t('issues.watcher_removed_success') }
+          else
+            flash.now[:error] = t('shared.failure.delete', resource_label: t('issues.watcher'))
+            format.js
+          end
         end
       end
     end

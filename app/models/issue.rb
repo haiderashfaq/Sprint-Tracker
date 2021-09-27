@@ -85,7 +85,7 @@ class Issue < ApplicationRecord
   def issue_alerts
     return if previous_changes.empty?
 
-    watcher = Watcher.all.where(issue: self).pluck(:user_id)
+    watcher = watchers.pluck(:user_id)
     alert_receivers = [reviewer_id, assignee_id, creator_id, project.manager_id]
     alert_receivers.concat watcher
 

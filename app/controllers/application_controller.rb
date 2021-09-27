@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include SetCurrentUser
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = exception.message
+    flash.now[:error] = exception.message
     render template: 'errors/access_denied', layout: false, status: 401
   end
   rescue_from ActionController::UnknownFormat do |exception|
